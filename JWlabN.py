@@ -1069,7 +1069,7 @@ def secret_room_1():
 			
 			print "The passageway is short and leads to a secret room!"
 			
-			if !first_time_secret_room:
+			if not first_time_secret_room:
 				print "You're standing in the secret room you hung out in earlier."
 				time.sleep(2)
 				print "You remember the good times you had, then you turn around"
