@@ -28,7 +28,7 @@ loot_lvl_7_9 = ['Sword', 'Duffel Bag', 'Oak Staff', 'Power Mitts',
 'Intricate Medallion'] 
 
 enemies_lvl_1_3 = ['Slime', 'Gnoll', 'Wolf', 'Bat', 'Goblin', 'Cat', 'Flannel Bag',
-	'Glowing Top Hat', 'Pair of Round Spectacles']
+'Glowing Top Hat', 'Pair of Round Spectacles']
 
 enemies_lvl_4_6 = ['Large Slime', 'Pack of Gnolls', 'Alpha Wolf', 'Ancient Bat', 
 'Desperate Goblin', 'Mountain Cat', 'Self Closing Flannel Bag',
@@ -84,9 +84,12 @@ def player_check():
 		Current Hit Points: %d""" % (player_name, player_class, player_str,
 		player_dex, player_int, player_hp, player_hp_dmg)
 		print " "
+	
 	elif "nvent" in choice:
+	
 		if satchel_contents == []:
 			print "Your satchel has a capacity of %d and is empty!" % satchel
+		
 		else:
 			print """Here is your current inventory:\n
 			Satchel Capacity: %d
@@ -94,6 +97,7 @@ def player_check():
 			Satchel Contents:
 			%d %s""" % (satchel, satchel_used, satchel_contents[1], satchel_contents[0])
 			print " "
+	
 	else:
 		print "I'm not sure what you're looking for."
 
@@ -104,9 +108,11 @@ def equip(): #incomplete
 	if player_class == "Wizard":
 		print "What would you like to equip, good %s?" % player_class
 		answer = raw_input(prompt)
+	
 	elif player_class == "Ninja":
 		print "What would you like to equip, dear %s?" % player_class
 		answer = raw_input(prompt)
+	
 	else:
 		print "What would you like to equip, hybrid %s?" % player_class
 		answer = raw_input(prompt) 
@@ -124,10 +130,12 @@ def print_enemies_full():
 	for i in range(len(enemies_lvl_1_3)):
 		print enemies_lvl_1_3[i]
 	print '\n'
+	
 	print "Enemies for Adventurers, Level 4 - 6: "
 	for i in range(len(enemies_lvl_4_6)):
 		print enemies_lvl_4_6[i]
 	print '\n'
+	
 	print "Enemies for Adventurers, Level 7 - 9: "
 	for i in range(len(enemies_lvl_7_9)):
 		print enemies_lvl_7_9[i]
@@ -146,6 +154,7 @@ def battle(enemy, enemy_name):
 			
 	
 	if enemy[3] > player_dex:
+		
 		while player_hp_dmg > 0 and enemy_hp > 0:
 			
 			print "The %s attacks first!" % enemy_name
@@ -155,39 +164,53 @@ def battle(enemy, enemy_name):
 			precision = randint(1, 100)
 		
 			if precision >= 90:
+		
 				if precision == 100:
 					result = "Unreal Critical Precision!" 
 					enemy_attack += 3
+				
 				else: 
 					result = "Critical Precision!" 
 					enemy_attack += 2
+			
 			elif 75 < precision < 90:
 				result = "Precision hit!" 
 				enemy_attack += 1
+			
 			elif 30 < precision < 76:
 				result = "Hit!"
+			
 			elif 10 < precision < 31:
 				result = "Weak hit!"
 				enemy_attack -+ 1
+			
 			elif 1 < precision <= 10:
+			
 				if precision == 2:
 					result = "Glancing blow." 
 					enemy_attack -= 3
+				
 				elif precision == 1:
 					result = "Missed!"
 					enemy_attack = 0
+				
 				else:
 					result = "Contact."
 					enemy_attack -= 2
+			
 			else:
 				result = "This shouldn't ever print."
 				
 			print result
+			
 			if enemy_attack < 0:
 				enemy_attack = 0
+			
 			print "The %s strikes you for: %d damage!" % (enemy_name, enemy_attack)
 			time.sleep(2)
+			
 			player_hp_dmg -= enemy_attack
+			
 			print "You now have %s hit points.\n" % player_hp_dmg
 			
 			if player_hp_dmg <= 0:
@@ -216,51 +239,68 @@ def battle(enemy, enemy_name):
 			player_attack = x + y + j
 			
 			balance = randint(1, 3)
+			
 			if balance == 1:
 				print "Perfectly balanced attack."
+			
 			elif balance == 2:
 				print "Well balanced attack"
 				player_attack = player_attack / 2
+			
 			elif balance == 3:
 				print "Off balance attack"
 				player_attack = player_attack / 3
+			
 			else:
 				print "This should not ever print. Ever."
 			
 			precision = randint(1, 100)
 			
 			if precision >= 90:
+			
 				if precision == 100:
 					result = "Unreal Critical Precision!" 
 					player_attack += 3
+				
 				else: 
 					result = "Critical Precision!" 
 					player_attack += 2
+			
 			elif 75 < precision < 90:
 				result = "Precision hit!" 
 				player_attack += 1
+			
 			elif 30 < precision < 76:
 				result = "Hit!"
+			
 			elif 10 < precision < 31:
 				result = "Weak hit!"
 				player_attack -+ 1
+			
 			elif 1 < precision <= 10:
+			
 				if precision == 2:
 					result = "Glancing blow." 
 					player_attack -= 3
+				
 				elif precision == 1:
 					result = "Miss!"
 					player_attack = 0
+				
 				else:
 					result = "Contact."
 					player_attack -= 2
+			
 			else:
 				result = "This shouldn't ever print."
 				
 			print result
+			
 			print "You strike the %s for: %d damage!" % (enemy_name, player_attack)
 			time.sleep(2)
+			
 			enemy_hp -= player_attack
+			
 			print "The %s now has %d hit points.\n" % (enemy_name, enemy_hp)
 			time.sleep(2)
 			
@@ -451,64 +491,93 @@ def enemy_encounter():
 		#Enemy form: (hp, max_attack, gives_xp, dex)
 		if x == 0:
 			enemy = (6, 4, 3, 1) #slime 14
+		
 		elif x == 1:
 			enemy = (6, 5, 4, 5) #gnoll 20
+		
 		elif x == 2:
 			enemy = (6, 6, 5, 6) #wolf 23
+		
 		elif x == 3: 
 			enemy = (4, 4, 5, 10) #bat 23
+		
 		elif x == 4:
 			enemy = (6, 5, 5, 6) #goblin 22
+		
 		elif x == 5:
 			enemy = (3, 3, 3, 8) #cat 17
+		
 		elif x == 6:
 			enemy = (6, 3, 3, 1) #flannel_bag 13
+		
 		elif x == 7:
 			enemy = (10, 2, 5, 2) #glowing_top_hat 19
+		
 		else:
 			enemy = (5, 3, 2, 2) #round_spectacles() 12
+	
 	elif 3 < player_lvl <= 6:
 		enemy = enemies_lvl_4_6[x]
 		enemy_name = enemy
+		
 		if x == 0:
 			enemy = (9, 7, 6, 2) #lg_slime 24
+		
 		elif x == 1:
 			enemy = (10, 10, 10, 8) #gnoll_pack 38
+		
 		elif x == 2:
 			enemy = (9, 9, 7, 7) #alpha_wolf 32
+		
 		elif x == 3: 
 			enemy = (6, 10, 8, 12) #ancient_bat 36
+		
 		elif x == 4:
 			enemy = (4, 12, 6, 6) #desperate_goblin 28
+		
 		elif x == 5:
 			enemy = (6, 6, 6, 10) #mountain_cat 28
+		
 		elif x == 6:
 			enemy = (5, 10, 6, 3) #self_closing_flannel_bag 24
+		
 		elif x == 7:
 			enemy = (10, 8, 6, 2) #glowing_top_hat_w_cane 26
+		
 		else:
 			enemy = (6, 8, 5, 3) #jagged_contacts 22
+	
 	elif 6 < player_lvl <= 9:
 		enemy = enemies_lvl_7_9[x]
 		enemy_name = enemy
+	
 		if x == 0:
 			enemy = (12, 15, 12, 8) #shiny_mist 47
+		
 		elif x == 1:
 			enemy = (13, 2, 10, 18) #floor_of_marbles 43
+		
 		elif x == 2:
 			enemy = (8, 14, 9, 5) #shrieking_box 36
+		
 		elif x == 3: 
 			enemy = (12, 12, 12, 5) #wall_of_bats 41
+		
 		elif x == 4:
 			enemy = (18, 5, 9, 3) #competetive_eater 35
+		
 		elif x == 5:
 			enemy = (10, 15, 14, 1) #donald_trump 40
+		
 		elif x == 6:
 			enemy = (15, 18, 14, 4) #mary_poppins_bag_of_horrors 51
+		
 		elif x == 7:
 			enemy = (12, 13, 14, 11) #badass_3_suit_hat_cane 50
+		
 		else:
 			enemy = (1, 20, 15, 20) #eye_candy 56
+	
 	else:
 		return "Did not work!"
 	
@@ -528,12 +597,16 @@ def enemy_encounter():
 		print " "
 	
 	if "ight" in choice: 
+	
 		print "You and the %s fight!" % enemy_name
 		battle(enemy, enemy_name)
+	
 	else: 
+	
 		if enemy[3] > player_dex:
 			dead("""Wow, you're slow. As you turn around and expose your neck,
 			the %s attacks and it kills ya.""" % enemy_name) 
+		
 		else:
 			print "Because of your superior quickness, you escape." 
 
@@ -542,32 +615,39 @@ def level_up():
 	global player_lvl, player_xp_cap, player_str, player_dex, player_int, player_hp
 	global player_hp_dmg
 	
-	print "You've leveled up! Congrats, that's awesome!" 
+	print "You've leveled up! Congrats, that's awesome!\n" 
 	time.sleep(4)
+	
 	print """These are your old stats:
 	Level: %d
 	Strength: %d
 	Dexterity: %d
 	Intelligence: %d
 	Hit Points: %d""" % (player_lvl, player_str, player_dex, player_int, player_hp)
+	
 	player_lvl += 1
 	player_xp_cap *= 2
 	player_xp = player_xp_cap
+	
 	if player_class == "Wizard":
 		player_str += randint(0, 1)
 		player_dex += randint(0, 1)
 		player_int += randint(1, 4)
+	
 	elif player_class == "Ninja":
 		player_str += randint(1, 2)
 		player_dex += randint(1, 3)
 		player_int += randint(0, 1)
+	
 	else:
 		player_str += randint(0, 2)
 		player_dex += randint(0, 3)
 		player_int += randint(0, 2)
+	
 	player_hp += randint(2, 5)
 	player_hp_dmg = player_hp
 	time.sleep(3)
+	
 	print """These are your new stats: 
 	Level: %d
 	Strength: %d
@@ -584,12 +664,13 @@ def start():
 	
 	print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 	print "\n\n\t\tLabryinth of the Lost Sons\n\n\n"
+	
 	time.sleep(2)
 	print "Thanks for playing.\n"
 	print "At any time type 'player' to see your stats or inventory."
-	
 	print "\n\n\n"
 	time.sleep(2)
+	
 	print """You awaken. It feels like you shouldn't be here or you're lost. 
 	It's a strange feeling. You get up and look around you. You see barren 
 	fields and a grey sky.\n"""
@@ -639,6 +720,7 @@ def start():
 			print "'Best luck in there!'"
 			came_from = "South"
 			first_intersection()
+		
 		else:
 			dead("The old woman rises up in a fury and one-punch kills you.")
 	
@@ -674,17 +756,20 @@ def start():
 			print "Good luck!'"
 			came_from = "South"
 			first_intersection()
+		
 		elif "Ye" in decision:
 			print "Oh, I knew I could trust you."
 			print "Send them back safely!"
 			came_from = "South"
 			first_intersection()
+		
 		elif "YE" in decision:
 			print "My hero!! Oh, I love a man that does what's right."
 			print "I look forward to seeing you all real soon."
 			print "Good luck now, ya hear?" 
 			came_from = "South"
 			first_intersection()
+		
 		else: 
 			print "'I curse you then! May death be upon your door!'\n\n\n.\n..\n..."
 			print "You walk awkwardly past the woman and into the labrynth."
@@ -711,6 +796,7 @@ def start():
 			print "'Best luck in there, you mysterious %s'" % player_class
 			came_from = "South"
 			first_intersection()
+		
 		else:
 			dead("The old woman starts to sing and\nsuddenly your head explodes.")
 
@@ -752,8 +838,10 @@ def build_character():
 		player_str = 1
 		player_dex = 2
 		player_int = 6
+	
 	elif "2" in choice:
 		player_class = "Ninja"
+	
 	else:
 		player_class = "Wizard/Ninja"
 		player_str = 3
@@ -795,12 +883,13 @@ def first_intersection():
 	
 	if "est" in choice:
 		print "You go West and come to an elbow leading North."
+		time.sleep(2)
 		print """You follow the elbow and are in a corridor that smells like dust 
 		and decay."""
 		chance = randint(1, 100)
 		if chance <= 50:
 			enemy_encounter()
-		time.sleep(3)
+		time.sleep(2)
 		print "As you walk you see a 6 inch bookcase on your left."
 		print "There is a Red Book, a Green Book, and a Blue Book."
 		print "Do you move on or do you inspect a book?"
@@ -822,8 +911,10 @@ def first_intersection():
 			if chance <= 60:
 				enemy_encounter()
 			second_intersection()
+		
 		elif "inspect" in choice2:
 			secret_room_1()
+		
 		else: 
 			print "I wish I was human! Then I could understand you!"
 			dead("A wave of sound comes and crushes your skull.")
@@ -888,6 +979,7 @@ def secret_room_1():
 		
 		if "orth" in choice:
 			second_intersection()
+		
 		else:
 			first_intersection()
 						
@@ -913,6 +1005,7 @@ def secret_room_1():
 		if "orth" in choice:
 			print "You go North."
 			second_intersection()
+		
 		else:
 			print "You go South."
 			first_intersection()
@@ -939,6 +1032,29 @@ def secret_room_1():
 			came_from = "West"
 			
 			print "The passageway is short and leads to a secret room!"
+			
+			if !first_time_secret_room:
+				print "You're standing in the secret room you hung out in earlier."
+				print "You remember the good times you had, then you turn around"
+				print "and leave the room because there's nothing in there anymore." 
+				print "Do you go North or South?"
+				choice1 = raw_input(prompt)
+				print " "
+				
+				while choice1 == "player":
+					player_check()
+					print "Do you go North or South?"
+					choice1 = raw_input(prompt)
+					print " "
+						
+				if "orth" in choice1:
+					print "North you go!"
+					second_intersection()
+				
+				else: 
+					print "South it is!"
+					first_intersection()
+			
 			while first_time_secret_room:
 				first_time_secret_room = False
 				enemy_encounter()
@@ -947,12 +1063,16 @@ def secret_room_1():
 				of light highlighting a sweet looking chocolate danish on a narrow 
 				pedestal.\n"""
 				time.sleep(3)
+				
 				print "\nYou examine it closely.\n"
 				time.sleep(3)
+				
 				print "You don't want to put it in your satchel (messy!)."
 				time.sleep(3)
+				
 				print "And it smells so good! You must eat it or leave it."
 				time.sleep(2)
+				
 				print "Eat it or leave it?"
 				choice5 = raw_input(prompt)
 				print " "
@@ -967,6 +1087,7 @@ def secret_room_1():
 				if "eat" in choice5:
 					print "You've never tasted anything so delicious and fresh!"
 					if player_class == "Wizard":
+						
 						player_int += 1
 						print "The danish expands your brain by five percent."
 						print "Your intelligence has grown by one. It is now %d." % player_int
@@ -985,11 +1106,13 @@ def secret_room_1():
 						if "orth" in choice1:
 							print "North you go!"
 							second_intersection()
+						
 						else: 
 							print "South it is!"
 							first_intersection()
 							
 					elif player_class == "Ninja":
+						
 						player_dex += 1
 						print "The danish hones your muscles and heightens your quickness."
 						print "Your dexterity has grown by one. It is now %d." % player_dex
@@ -1008,10 +1131,12 @@ def secret_room_1():
 						if "orth" in choice1:
 							print "North you go!"
 							second_intersection()
+						
 						else: 
 							print "South it is!"
 							first_intersection()	
 					else:
+						
 						player_str += 1
 						print "Suddenly you flex and feel more power."
 						print "Your strength has grown by one. It is now %d." % player_str
@@ -1030,6 +1155,7 @@ def secret_room_1():
 						if "orth" in choice1:
 							print "North you go!"
 							second_intersection()
+						
 						else: 
 							print "South it is!"
 							first_intersection()
@@ -1051,29 +1177,10 @@ def secret_room_1():
 					if "orth" in choice1:
 						print "North you go!"
 						second_intersection()
+					
 					else: 
 						print "South it is!"
 						first_intersection()
-			 
-			print "You're standing in the secret room you hung out in earlier."
-			print "You remember the good times you had, then you turn around"
-			print "and leave the room because there's nothing in there anymore." 
-			print "Do you go North or South?"
-			choice1 = raw_input(prompt)
-			print " "
-				
-			while choice1 == "player":
-				player_check()
-				print "Do you go North or South?"
-				choice1 = raw_input(prompt)
-				print " "
-						
-			if "orth" in choice1:
-				print "North you go!"
-				second_intersection()
-			else: 
-				print "South it is!"
-				first_intersection()
 			 	
 		elif "no" in choice4:
 			print """Yeah, who in their right mind would go in there!? It's probably 
@@ -1094,6 +1201,7 @@ def secret_room_1():
 			if "orth" in choice2:
 				print "You go North."
 				second_intersection()
+			
 			else:
 				print "You go South."
 				first_intersection()
@@ -1133,6 +1241,7 @@ def second_intersection():
 		if chance <= 50:
 			enemy_encounter()
 		first_intersection()
+	
 	elif "ast" in choice:
 		print "You move East"
 		came_from = "West"
@@ -1140,6 +1249,7 @@ def second_intersection():
 		if chance <= 50:
 			enemy_encounter()
 		third_intersection()
+	
 	elif "est" in choice:
 		print "You go West and come to an elbow leading South."
 		time.sleep(2)
