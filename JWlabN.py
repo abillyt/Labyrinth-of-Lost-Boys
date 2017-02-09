@@ -1414,7 +1414,7 @@ def third_intersection():
 	elif "ast" in choice:
 		print "You head East... and the hallway turns slightly."
 		time.sleep(1)
-		print "Following the turn you head up stone stairs. 
+		print "Following the turn you head up stone stairs."
 		time.sleep(1)
 		print "Upon reaching the top, a great chamber comes into view!"
 		came_from = "Southwest"
