@@ -1747,7 +1747,7 @@ def fifth_intersection():
 	global came_from
 	
 	print "You are at an intersection that branches West and East."
-	print "There is a branch to the South that is a short dead-end."
+	print "There is a branch to the South whose end is visible."
 	print "Do you go East or West or South?
 	print "You came from the %s." % came_from
 	
