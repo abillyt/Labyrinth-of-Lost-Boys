@@ -1748,7 +1748,7 @@ def fifth_intersection():
 	
 	print "You are at an intersection that branches West and East."
 	print "There is a branch to the South whose end is visible."
-	print "Do you go East or West or South?
+	print "Do you go East or West or South?"
 	print "You came from the %s." % came_from
 	
 	print "Which way do you go?"
@@ -1794,7 +1794,7 @@ def fifth_intersection():
 			
 			fifth_intersection()
 		
-		elif "omethin" in to_do:
+		# elif "omethin" in to_do:
 			
 	else:
 		print "You head West and..."
