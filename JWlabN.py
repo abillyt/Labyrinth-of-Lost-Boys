@@ -204,7 +204,7 @@ def battle(enemy, enemy_name):
 	enemy_hp = enemy[0]
 	enemy_attack = 0
 	player_attack = 0
-	v = time.sleep(0.25)
+	v = time.sleep(0.5)
 		
 	if enemy[3] > player_dex:
 		
@@ -278,7 +278,7 @@ def battle(enemy, enemy_name):
 				dead("The %s has defeated you!" % enemy_name)
 			
 			time.sleep(2)
-			print "\nNow it's your turn to attack!"
+			print "\nNow it's your turn to attack!\n"
 			time.sleep(2)
 			
 			# First attack algorithm:
@@ -1069,7 +1069,7 @@ def first_intersection():
 				enemy_encounter()
 			second_intersection()
 		
-		elif "inspect" in choice2:
+		elif "nsp" in choice2:
 			secret_room_1()
 		
 		else: 
@@ -1123,9 +1123,9 @@ def secret_room_1():
 	if "1" in choice3:
 		
 		print """
-		You take the Red Book off the shelf and read the title; 
+		You take the Red Book off the shelf and read the title;\n
 		'Making Friends with Blood Pacts' 
-		by 'Glungoral the Witty' 
+		by 'Glungoral the Witty' \n
 		You flip through the book, finding it boorish. You put the book back and
 		can now decide to go North or South in the corridor."""
 		came_from = "West"
@@ -1149,9 +1149,9 @@ def secret_room_1():
 						
 	elif "2" in choice3:
 		print """
-		You take the Green book off the shelf and read the title; 
+		You take the Green book off the shelf and read the title; \n
 		'Pushing Past Your Own Insecurities for Fun and Profit!' 
-		by 'Mungorak the Pleasant'
+		by 'Mungorak the Pleasant'\n
 		You flip through the book and it quickly becomes your favorite, but you've
 		got no time to read, so you put the book back and can now decide to go North 
 		or South in the corridor."""
@@ -1204,7 +1204,7 @@ def secret_room_1():
 				print "You're standing in the secret room you hung out in earlier."
 				time.sleep(2)
 				print "You remember the good times you had, then you turn around"
-				print "and leave the room because there's nothing in there anymore." 
+				print "and leave the room because there's nothing in there anymore.\n" 
 				print "Do you go North or South?"
 				choice1 = raw_input(prompt)
 				print " "
@@ -1245,7 +1245,7 @@ def secret_room_1():
 				print "And it smells so good! You must eat it or leave it."
 				time.sleep(2)
 				
-				print "Eat it or leave it?"
+				print "\nEat it or leave it?"
 				choice5 = raw_input(prompt)
 				print " "
 		
@@ -1258,13 +1258,14 @@ def secret_room_1():
 					print " "
 					
 				if "eat" in choice5:
-					print "You've never tasted anything so delicious and fresh!"
+					print "You've never tasted anything so delicious and fresh!\n"
+					time.sleep(1)
 					
 					if player_class == "Wizard":
 						
 						player_int += 1
 						print "The danish expands your brain by five percent."
-						print "Your intelligence has grown by one. It is now %d." % player_int
+						print "Your intelligence has grown by one. It is now %d.\n" % player_int
 						time.sleep(3)
 						print "You leave the secret room."
 						print "Do you go North or South?"
@@ -1289,7 +1290,7 @@ def secret_room_1():
 						
 						player_dex += 1
 						print "The danish hones your muscles and heightens your quickness."
-						print "Your dexterity has grown by one. It is now %d." % player_dex
+						print "Your dexterity has grown by one. It is now %d.\n" % player_dex
 						time.sleep(3)
 						print "You leave the secret room."
 						print "Do you go North or South?"
@@ -1315,7 +1316,7 @@ def secret_room_1():
 						
 						player_str += 1
 						print "Suddenly you flex and feel more power."
-						print "Your strength has grown by one. It is now %d." % player_str
+						print "Your strength has grown by one. It is now %d.\n" % player_str
 						time.sleep(3)
 						print "You leave the secret room."
 						print "Do you go North or South?"
@@ -1339,9 +1340,9 @@ def secret_room_1():
 							first_intersection()
 							
 				else:
-					print "You back away from the danish... slowly back away."
+					print "You back away from the danish... slowly back away.\n"
 					time.sleep(4)
-					print "Phew! That thing looked too delicious to be of any use!"
+					print "Phew! That thing looked too delicious to be of any use!"\n	
 					print "Do you go North or South?"
 					choice1 = raw_input(prompt)
 					print " "
@@ -1491,8 +1492,8 @@ def third_intersection():
 	global player_hp
 	
 	print """
-	You are at an intersection with passageways to the South, West, and East. 
-	\nThere is a door along the cleft wall to the South/West."""
+	You are at an intersection with passageways to the South, West, and East.\n
+	There is a door along the cleft wall to the South/West."""
 	print "You came from %s." % came_from
 	print "Which way do you go?"
 	
