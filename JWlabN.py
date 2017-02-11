@@ -81,13 +81,13 @@ def print_wisdom(parent):
 	if parent == "Dad":
 		chance = randint(0, 10)
 		print "\nFrom your Father:\n"
-		print fathers_wisdom[chance]
+		print '"' + fathers_wisdom[chance] + '"'
 		print " "
 		
 	else: 
 		chance = randint(0, 11)
 		print "\nFrom your Mother:\n"
-		print mothers_wisdom[chance]
+		print '"' + mothers_wisdom[chance] + '"'
 		print " "
 	
 
@@ -384,7 +384,7 @@ def battle(enemy, enemy_name):
 		
 		while player_hp_dmg > 0 and enemy_hp > 0:
 			
-			print "You attack!"
+			print "You attack!\n"
 			
 			time.sleep(2)
 		
@@ -434,7 +434,7 @@ def battle(enemy, enemy_name):
 				v
 			
 			elif 30 < precision < 76:
-				result = "Hit!"
+				result = "Hit!\n"
 				v
 			
 			elif 10 < precision < 31:
@@ -794,7 +794,7 @@ def start():
 	
 	print """
 	You turn around and there is a high concrete wall stretching far 
-	in either direction. Extending either direction for at most, forever.\n"""
+	in both directions extensively, for at most, forever.\n"""
 	time.sleep(3)
 	
 	print """
