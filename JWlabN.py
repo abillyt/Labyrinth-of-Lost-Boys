@@ -75,6 +75,18 @@ mothers_wisdom = ['Take garlic, son. And raw honey.',
 'Can I look at your blackheads?', 'Let\'s go wash your face.', 'Eucalyptus oil.',
 'Always use protection.', 'Milk baths are healing.']
 
+
+def print_wisdom(parent):
+	
+	if parent == "Dad":
+		chance = randint(0, 10)
+		print fathers_wisdom[chance]
+		
+	else: 
+		chance = randint(0, 11)
+		print mothers_wisdom[chance]
+	
+
 def player_check():
 	
 	global player_lvl, player_xp, player_str, player_dex, player_int, player_hp
@@ -2626,16 +2638,3 @@ def dead(why):
 		exit(0)
 
 start()
-
-
-#def print_wisdom(parent):
-#	
-#	if parent == "Dad":
-#		print "Length of entries: %d" % len(fathers_wisdom)
-#		for i in 
-#			print fathers_wisom[i]
-#			
-#	else: 
-#		print "Mom Road."
-#	
-#print_wisdom(Dad)
