@@ -2263,7 +2263,7 @@ def twelfth_intersection():
 	global came_from
 	
 	print "The large intersection holds an immense Grand Hallway to the East."
-	print "You may go East to the hallway or North or South."
+	print "You may go East to the hallway or North or South or West."
 	print "You came from the %s." % came_from
 	chance = randint(1, 100)
 	
@@ -2298,6 +2298,16 @@ def twelfth_intersection():
 		came_from = "North"
 		
 		first_chamber()
+	
+	elif "est" in answer:
+		print "You head West."
+		chance = randint(1, 100)
+		
+		if chance <= 50:
+			enemy_encounter()
+		came_from = "East"
+		
+		eleventh_intersection()
 	
 	else:
 		print "That part of the labryinth hasn't been coded yet."
@@ -2629,6 +2639,9 @@ def battle_cave():
 	else: 
 		
 		eleventh_intersection()
+	
+	came_from = "The Cave"
+	eleventh_intersection()
 
 # incomplete ritual_room()
 
