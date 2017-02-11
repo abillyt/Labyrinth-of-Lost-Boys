@@ -80,11 +80,15 @@ def print_wisdom(parent):
 	
 	if parent == "Dad":
 		chance = randint(0, 10)
+		print "From your Father:"
 		print fathers_wisdom[chance]
+		print " "
 		
 	else: 
 		chance = randint(0, 11)
+		print "From your Mother:"
 		print mothers_wisdom[chance]
+		print " "
 	
 
 def player_check():
@@ -139,9 +143,9 @@ def player_check():
 			
 		chance = randint(1, 100)
 		if chance <= 50: 
-			print_wisdom(Dad)
+			print_wisdom("Dad")
 		else: 
-			print_wisdom(Mom)
+			print_wisdom("Mom")
 		
 	else: 
 		print "I'm sure you know your way."
@@ -203,8 +207,8 @@ def battle(enemy, enemy_name):
 		
 		while player_hp_dmg > 0 and enemy_hp > 0:
 			
-			print "The %s attacks first!" % enemy_name
-			time.sleep(2)
+			print "The %s attacks first!\n" % enemy_name
+			time.sleep(1)
 			
 			enemy_attack = randint(0, enemy[1])
 			precision = randint(1, 100)
@@ -212,36 +216,36 @@ def battle(enemy, enemy_name):
 			if precision >= 90:
 		
 				if precision == 100:
-					result = "Unreal Critical Precision!" 
+					result = "Unreal Critical Precision!\n" 
 					enemy_attack += 3
 				
 				else: 
-					result = "Critical Precision!" 
+					result = "Critical Precision!\n" 
 					enemy_attack += 2
 			
 			elif 75 < precision < 90:
-				result = "Precision hit!" 
+				result = "Precision hit!\n" 
 				enemy_attack += 1
 			
 			elif 30 < precision < 76:
-				result = "Hit!"
+				result = "Hit!\n"
 			
 			elif 10 < precision < 31:
-				result = "Weak hit!"
+				result = "Weak hit!\n"
 				enemy_attack -+ 1
 			
 			elif 1 < precision <= 10:
 			
 				if precision == 2:
-					result = "Glancing blow." 
+					result = "Glancing blow.\n" 
 					enemy_attack -= 3
 				
 				elif precision == 1:
-					result = "Missed!"
+					result = "Missed!\n"
 					enemy_attack = 0
 				
 				else:
-					result = "Contact."
+					result = "Contact.\n"
 					enemy_attack -= 2
 			
 			else:
@@ -252,7 +256,7 @@ def battle(enemy, enemy_name):
 			if enemy_attack < 0:
 				enemy_attack = 0
 			
-			print "The %s strikes you for: %d damage!" % (enemy_name, enemy_attack)
+			print "The %s strikes you for: %d damage!\n" % (enemy_name, enemy_attack)
 			time.sleep(2)
 			
 			player_hp_dmg -= enemy_attack
@@ -287,14 +291,14 @@ def battle(enemy, enemy_name):
 			balance = randint(1, 3)
 			
 			if balance == 1:
-				print "Perfectly balanced attack."
+				print "Perfectly balanced attack!\n"
 			
 			elif balance == 2:
-				print "Well balanced attack"
+				print "Well balanced attack!\n"
 				player_attack = player_attack / 2
 			
 			elif balance == 3:
-				print "Off balance attack"
+				print "Off balance attack.\n"
 				player_attack = player_attack / 3
 			
 			else:
@@ -305,36 +309,36 @@ def battle(enemy, enemy_name):
 			if precision >= 90:
 			
 				if precision == 100:
-					result = "Unreal Critical Precision!" 
+					result = "Unreal Critical Precision!\n" 
 					player_attack += 3
 				
 				else: 
-					result = "Critical Precision!" 
+					result = "Critical Precision!\n" 
 					player_attack += 2
 			
 			elif 75 < precision < 90:
-				result = "Precision hit!" 
+				result = "Precision hit!\n" 
 				player_attack += 1
 			
 			elif 30 < precision < 76:
-				result = "Hit!"
+				result = "Hit!\n"
 			
 			elif 10 < precision < 31:
-				result = "Weak hit!"
+				result = "Weak hit!\n"
 				player_attack -+ 1
 			
 			elif 1 < precision <= 10:
 			
 				if precision == 2:
-					result = "Glancing blow." 
+					result = "Glancing blow.\n" 
 					player_attack -= 3
 				
 				elif precision == 1:
-					result = "Miss!"
+					result = "Miss!\n"
 					player_attack = 0
 				
 				else:
-					result = "Contact."
+					result = "Contact.\n"
 					player_attack -= 2
 			
 			else:
@@ -342,7 +346,7 @@ def battle(enemy, enemy_name):
 				
 			print result
 			
-			print "You strike the %s for: %d damage!" % (enemy_name, player_attack)
+			print "You strike the %s for: %d damage!\n" % (enemy_name, player_attack)
 			time.sleep(2)
 			
 			enemy_hp -= player_attack
@@ -351,7 +355,7 @@ def battle(enemy, enemy_name):
 			time.sleep(2)
 			
 			if enemy_hp <= 0:
-				print "Your enemy fades to dust."
+				print "Your enemy fades to dust.\n"
 				break
 			
 		if player_hp_dmg <= 0:
@@ -378,14 +382,14 @@ def battle(enemy, enemy_name):
 			balance = randint(1, 3)
 			
 			if balance == 1:
-				print "Perfectly balanced attack."
+				print "Perfectly balanced attack!\n"
 			
 			elif balance == 2:
-				print "Well balanced attack"
+				print "Well balanced attack!\n"
 				player_attack = player_attack / 2
 			
 			elif balance == 3:
-				print "Off balance attack"
+				print "Off balance attack.\n"
 				player_attack = player_attack / 3
 			
 			else:
@@ -396,36 +400,36 @@ def battle(enemy, enemy_name):
 			if precision >= 90:
 			
 				if precision == 100:
-					result = "Unreal Critical Precision!" 
+					result = "Unreal Critical Precision!\n" 
 					player_attack += 3
 			
 				else: 
-					result = "Critical Precision!" 
+					result = "Critical Precision!\n" 
 					player_attack += 2
 			
 			elif 75 < precision < 90:
-				result = "Precision hit!" 
+				result = "Precision hit!\n" 
 				player_attack += 1
 			
 			elif 30 < precision < 76:
 				result = "Hit!"
 			
 			elif 10 < precision < 31:
-				result = "Weak hit!"
+				result = "Weak hit!\n"
 				player_attack -+ 1
 			
 			elif 1 <= precision <= 10:
 			
 				if precision == 2:
-					result = "Glancing blow." 
+					result = "Glancing blow.\n" 
 					player_attack -= 3
 			
 				elif precision == 1:
-					result = "Miss!"
+					result = "Miss!\n"
 					player_attack = 0
 			
 				else:
-					result = "Contact."
+					result = "Contact.\n"
 					player_attack -= 2
 			
 			else:
@@ -433,7 +437,7 @@ def battle(enemy, enemy_name):
 				
 			print result
 			
-			print "You strike the %s for: %d damage!" % (enemy_name, player_attack)
+			print "You strike the %s for: %d damage!\n" % (enemy_name, player_attack)
 			
 			enemy_hp -= player_attack
 			
@@ -443,10 +447,10 @@ def battle(enemy, enemy_name):
 			
 			if enemy_hp <= 0:
 			
-				print "You're enemy fades to dust."
+				print "You're enemy fades to dust.\n"
 				break 
 				
-			print "Now it's the %s\'s turn!" % enemy_name
+			print "Now it's the %s\'s turn!\n" % enemy_name
 			
 			time.sleep(2)
 			
@@ -456,36 +460,36 @@ def battle(enemy, enemy_name):
 			if precision >= 90:
 		
 				if precision == 100:
-					result = "Unreal Critical Precision!" 
+					result = "Unreal Critical Precision!\n" 
 					enemy_attack += 3
 		
 				else: 
-					result = "Critical Precision!" 
+					result = "Critical Precision!\n" 
 					enemy_attack += 2
 		
 			elif 75 < precision < 90:
-				result = "Precision hit!" 
+				result = "Precision hit!\n" 
 				enemy_attack += 1
 		
 			elif 30 < precision < 76:
-				result = "Hit!"
+				result = "Hit!\n"
 		
 			elif 10 < precision < 31:
-				result = "Weak hit!"
+				result = "Weak hit!\n"
 				enemy_attack -+ 1
 		
-			elif 1 < precision <= 10:
+			elif 1 <= precision <= 10:
 			
 				if precision == 2:
-					result = "Glancing blow." 
+					result = "Glancing blow.\n" 
 					enemy_attack -= 3
 			
 				elif precision == 1:
-					result = "Miss!"
+					result = "Miss!\n"
 					enemy_attack = 0
 			
 				else:
-					result = "Contact."
+					result = "Contact.\n"
 					enemy_attack -= 2
 			
 			else:
@@ -497,7 +501,7 @@ def battle(enemy, enemy_name):
 			if enemy_attack < 0:
 				enemy_attack = 0
 			
-			print "The %s strikes you for: %d damage!" % (enemy_name, enemy_attack)
+			print "The %s strikes you for: %d damage!\n" % (enemy_name, enemy_attack)
 			player_hp_dmg -= enemy_attack
 			
 			print "You now have %s hit points.\n" % player_hp_dmg
