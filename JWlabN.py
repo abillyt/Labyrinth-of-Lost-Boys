@@ -242,7 +242,7 @@ def battle(enemy, enemy_name):
 				enemy_attack -+ 1
 				v
 			
-			elif 1 < precision <= 10:
+			elif 1 <= precision <= 10:
 			
 				if precision == 2:
 					result = "Glancing blow.\n" 
@@ -763,8 +763,9 @@ def level_up():
 def start():
 	
 	global first_time_secret_room, first_time_first_room, came_from, player_hp_dmg
-	global player_name, player_class, player_lvl
+	global player_name, player_class, player_lvl, player_xp
 	
+	player_xp = player_xp_cap
 	player_hp_dmg = player_hp
 	player_name = ""
 	player_class = ""
@@ -786,10 +787,12 @@ def start():
 	
 	print """
 	You awaken. It's cold but you're insulated by layers. It feels like you 
-	shouldn't be here or you're lost. 
+	shouldn't be here or you're lost. It's a strange feeling."""
+	time.sleep(3)
 	
-	It's a strange feeling. You get up and look around you. You see snow covered
-	fields and a grey sky. A light snow falls.\n"""
+	print """
+	You get up and look around you. You see snow covered fields and a grey sky. 
+	A light snow falls.\n"""
 	time.sleep(3)
 	
 	print """
@@ -1342,7 +1345,7 @@ def secret_room_1():
 				else:
 					print "You back away from the danish... slowly back away.\n"
 					time.sleep(4)
-					print "Phew! That thing looked too delicious to be of any use!"\n	
+					print "Phew! That thing looked too delicious to be of any use!\n"	
 					print "Do you go North or South?"
 					choice1 = raw_input(prompt)
 					print " "
@@ -2555,6 +2558,7 @@ def battle_cave():
 	global high_scorer_bctb, high_scorer_cave, high_scorer_furthest
 	
 	count = 0
+	battle_cave_count = 0
 	
 	print "You enter the cave." 
 	print "It stinks like death and you hear living sounds beyond the darkness."
