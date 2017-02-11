@@ -730,7 +730,8 @@ def level_up():
 	Strength: %d
 	Dexterity: %d
 	Intelligence: %d
-	Hit Points: %d""" % (player_lvl, player_str, player_dex, player_int, player_hp)
+	Hit Points: %d\n""" % (player_lvl, player_str, player_dex, player_int, player_hp)
+	print "_____________\n"
 	
 	player_lvl += 1
 	player_xp_cap *= 2
@@ -762,7 +763,8 @@ def level_up():
 	Strength: %d
 	Dexterity: %d
 	Intelligence: %d
-	Hit Points: %d""" % (player_lvl, player_str, player_dex, player_int, player_hp)
+	Hit Points: %d\n\n""" % (player_lvl, player_str, player_dex, player_int, player_hp)
+	print "___________\n"
 
 def start():
 	
@@ -1655,16 +1657,18 @@ def first_chamber():
 
 	global came_from, first_time_chamber_one
 	
-	print "The chamber before you is a grand open chamber."
+	print "The chamber before you is a grand open chamber.\n"
+	time.sleep(1)
 	print "There are doors exiting the chamber in all directions,"
-	print "and the grass floor has a slight covering of snow."
+	print "and the grass floor has a slight covering of snow.\n"
 	time.sleep(2)
 	print "Great slabs of concrete act as a sort of Stonehenge"
-	print "circling the chamber." 
-	print "You came from the %s." % came_from
+	print "circling the chamber.\n\n" 
+	print "You came from the %s.\n" % came_from
 	
 	if first_time_chamber_one:
 		print "You see an older boy chained to a chair in the middle of the chamber."
+		time.sleep(1)
 		print "He is shivering yet not looking weak."
 		time.sleep(1)
 	
