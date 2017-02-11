@@ -2608,7 +2608,7 @@ def battle_cave():
 		print "You move back toward the entrance."
 		enemy_encounter()
 		count -= 1
-		battle_cave_there_and_back += 1
+		battle_cave_count += 1
 			
 	if battle_cave_count > battle_cave_there_and_back:
 				
