@@ -130,7 +130,8 @@ def player_check():
 		Most fights won before death: %d by %s
 		Most fights won walking into the Battle Cave at one go: %d by %s
 		Most fights won in the Battle Cave and survive: %d by %s
-		""" % (fight_count_most, high_scorer_fcm, battle_cave_furthest, high_scorer_bcf, battle_cave_there_and_back, high_scorer_bctb)
+		""" % (fight_count_most, high_scorer_fcm, battle_cave_furthest, high_scorer_bcf,
+		       battle_cave_there_and_back, high_scorer_bctb)
 	
 	else:
 		print "I'm not sure what you're looking for."
@@ -211,7 +212,8 @@ def battle(enemy, enemy_name):
 		while player_hp_dmg > 0 and enemy_hp > 0:
 			
 			print "\nThe %s attacks!\n" % enemy_name
-			time.sleep(1)
+			print "--------------------********--------------------\n\n"
+			time.sleep(2)
 			
 			enemy_attack = randint(0, enemy[1])
 			precision = randint(1, 100)
@@ -273,12 +275,14 @@ def battle(enemy, enemy_name):
 			player_hp_dmg -= enemy_attack
 			
 			print "You now have %s hit points.\n" % player_hp_dmg
+			print "--------------------********--------------------\n\n"
 			
 			if player_hp_dmg <= 0:
 				dead("The %s has defeated you!" % enemy_name)
 			
 			time.sleep(2)
-			print "\nNow it's your turn to attack!\n\n"
+			print "\nNow it's your turn to attack!\n"
+			print "--------------------********--------------------\n\n"
 			time.sleep(2)
 			
 			# First attack algorithm:
@@ -371,6 +375,7 @@ def battle(enemy, enemy_name):
 			enemy_hp -= player_attack
 			
 			print "The %s now has %d hit points.\n" % (enemy_name, enemy_hp)
+			print "--------------------********--------------------\n\n"
 			time.sleep(2)
 			
 			if enemy_hp <= 0:
@@ -385,6 +390,7 @@ def battle(enemy, enemy_name):
 		while player_hp_dmg > 0 and enemy_hp > 0:
 			
 			print "You attack!\n"
+			print "--------------------********--------------------\n\n"
 			
 			time.sleep(2)
 		
@@ -469,6 +475,7 @@ def battle(enemy, enemy_name):
 			enemy_hp -= player_attack
 			
 			print "The %s now has %d hit points.\n" % (enemy_name, enemy_hp)
+			print "--------------------********--------------------\n\n"
 			
 			time.sleep(2)
 			
@@ -478,6 +485,7 @@ def battle(enemy, enemy_name):
 				break 
 				
 			print "Now it's the %s\'s turn!\n" % enemy_name
+			print "--------------------********--------------------\n\n"
 			
 			time.sleep(2)
 			
@@ -540,6 +548,7 @@ def battle(enemy, enemy_name):
 			player_hp_dmg -= enemy_attack
 			
 			print "You now have %s hit points.\n" % player_hp_dmg
+			print "--------------------********--------------------\n\n"
 			
 			time.sleep(2)		
 			
@@ -2054,8 +2063,9 @@ def seventh_intersection():
 		print "You head West and shortly come to a dead end. It's different than"
 		print "a normal dead end, because the top of the wall at this dead end"
 		print "is much shorter than the walls surrounding it."
-		time.sleep(2)
+		time.sleep(3)
 		print "You can't do anything at this time so you go back to the intersection."
+		came_from = "West"
 		seventh_intersection()
 	
 	elif "orth" in answer:
@@ -2489,7 +2499,8 @@ def vendor():
 				if trade_or == satchel_contents[i]:
 					
 					satchel_contents[i+1] -= choice2
-					print "You have %d %d left over after you sold %d to me." % (satchel_contents[i+1], satchel_contents[i], choice2)
+					print "You have %d %d left over after you sold %d to me." % (satchel_contents[i+1], 
+												     satchel_contents[i], choice2)
 					gold = choice2 * 3
 					print "You have %d gold now." % gold
 		
