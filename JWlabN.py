@@ -801,7 +801,7 @@ def start():
 	
 	print """
 	You turn around and there is a high concrete wall stretching far 
-	in both directions extensively, for at most, forever.\n"""
+	in both directions extensively, going on and on for, at most, forever.\n"""
 	time.sleep(3)
 	
 	print """
