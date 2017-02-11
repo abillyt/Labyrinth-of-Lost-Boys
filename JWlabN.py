@@ -210,7 +210,7 @@ def battle(enemy, enemy_name):
 		
 		while player_hp_dmg > 0 and enemy_hp > 0:
 			
-			print "\nThe %s attacks first!\n" % enemy_name
+			print "\nThe %s attacks!\n" % enemy_name
 			time.sleep(1)
 			
 			enemy_attack = randint(0, enemy[1])
@@ -221,43 +221,43 @@ def battle(enemy, enemy_name):
 				if precision == 100:
 					result = "Unreal Critical Precision!\n" 
 					enemy_attack += 3
-					time.sleep(0.25)
+					v
 				
 				else: 
 					result = "Critical Precision!\n" 
 					enemy_attack += 2
-					time.sleep(0.25)
+					v
 			
 			elif 75 < precision < 90:
 				result = "Precision hit!\n" 
 				enemy_attack += 1
-				time.sleep(0.25)
+				v
 			
 			elif 30 < precision < 76:
 				result = "Hit!\n"
-				time.sleep(0.25)
+				v
 			
 			elif 10 < precision < 31:
 				result = "Weak hit!\n"
 				enemy_attack -+ 1
-				time.sleep(0.25)
+				v
 			
 			elif 1 < precision <= 10:
 			
 				if precision == 2:
 					result = "Glancing blow.\n" 
 					enemy_attack -= 3
-					time.sleep(0.25)
+					v
 				
 				elif precision == 1:
 					result = "Missed!\n"
 					enemy_attack = 0
-					time.sleep(0.25)
+					v
 				
 				else:
 					result = "Contact.\n"
 					enemy_attack -= 2
-					time.sleep(0.25)
+					v
 			
 			else:
 				result = "This shouldn't ever print."
@@ -278,7 +278,7 @@ def battle(enemy, enemy_name):
 				dead("The %s has defeated you!" % enemy_name)
 			
 			time.sleep(2)
-			print "\nNow it's your turn to attack!\n"
+			print "\nNow it's your turn to attack!\n\n"
 			time.sleep(2)
 			
 			# First attack algorithm:
@@ -294,10 +294,10 @@ def battle(enemy, enemy_name):
 			j = player_int
 			order = [x, y, j]
 			order.sort()
-			x = order[0] / 3
-			y = order[1] / 2
-			j = order[2]
-			player_attack = x + y + j
+			z = order[0] / 3
+			a = order[1] / 2
+			b = order[2]
+			player_attack = z + a + b
 			
 			balance = randint(1, 3)
 			
@@ -306,11 +306,11 @@ def battle(enemy, enemy_name):
 			
 			elif balance == 2:
 				print "Well balanced attack!\n"
-				player_attack = player_attack / 2
+				player_attack /= 2
 			
 			elif balance == 3:
 				print "Off balance attack.\n"
-				player_attack = player_attack / 3
+				player_attack /= 3
 			
 			else:
 				print "This should not ever print. Ever."
@@ -322,43 +322,43 @@ def battle(enemy, enemy_name):
 				if precision == 100:
 					result = "Unreal Critical Precision!\n" 
 					player_attack += 3
-					time.sleep(0.25)
+					v
 				
 				else: 
 					result = "Critical Precision!\n" 
 					player_attack += 2
-					time.sleep(0.25)
+					v
 			
 			elif 75 < precision < 90:
 				result = "Precision hit!\n" 
 				player_attack += 1
-				time.sleep(0.25)
+				v
 			
 			elif 30 < precision < 76:
 				result = "Hit!\n"
-				time.sleep(0.25)
+				v
 			
 			elif 10 < precision < 31:
 				result = "Weak hit!\n"
 				player_attack -+ 1
-				time.sleep(0.25)
+				v
 			
-			elif 1 < precision <= 10:
+			elif 1 <= precision <= 10:
 			
 				if precision == 2:
 					result = "Glancing blow.\n" 
 					player_attack -= 3
-					time.sleep(0.25)
+					v
 				
 				elif precision == 1:
 					result = "Miss!\n"
 					player_attack = 0
-					time.sleep(0.25)
+					v
 				
 				else:
 					result = "Contact.\n"
 					player_attack -= 2
-					time.sleep(0.25)
+					v
 			
 			else:
 				result = "This shouldn't ever print."
@@ -393,10 +393,10 @@ def battle(enemy, enemy_name):
 			j = player_int
 			order = [x, y, j]
 			order.sort()
-			x = order[0] / 3
-			y = order[1] / 2
-			j = order[2]
-			player_attack = x + y + j
+			z = order[0] / 3
+			a = order[1] / 2
+			b = order[2]
+			player_attack = z + a + b
 			
 			balance = randint(1, 3)
 			
@@ -405,11 +405,11 @@ def battle(enemy, enemy_name):
 			
 			elif balance == 2:
 				print "Well balanced attack!\n"
-				player_attack = player_attack / 2
+				player_attack /= 2
 			
 			elif balance == 3:
 				print "Off balance attack.\n"
-				player_attack = player_attack / 3
+				player_attack /= 3
 			
 			else:
 				print "This should not ever print. Ever."
@@ -701,7 +701,7 @@ def enemy_encounter():
 	
 	if "ight" in choice: 
 	
-		print "You and the %s fight!" % enemy_name
+		print "You and the %s fight!\n\n\n" % enemy_name
 		battle(enemy, enemy_name)
 	
 	else: 
@@ -711,7 +711,7 @@ def enemy_encounter():
 			the %s attacks and it kills ya.""" % enemy_name) 
 		
 		else:
-			print "Because of your superior quickness, you escape." 
+			print "Because of your superior quickness, you escape.\n" 
 
 def level_up():
 	
@@ -2553,6 +2553,7 @@ def battle_cave():
 	
 	global came_from, battle_cave_furthest, battle_cave_there_and_back, high_scorer_bcf
 	global high_scorer_bctb, high_scorer_cave, high_scorer_furthest
+	
 	count = 0
 	
 	print "You enter the cave." 
@@ -2581,13 +2582,14 @@ def battle_cave():
 				battle_cave_furthest = battle_cave_count
 				high_scorer_bcf = raw_input("Enter your name so it can rest atop the leaderboard: ")
 		
-		else: 
-			if battle_cave_count > battle_cave_furthest:
+		if battle_cave_count > battle_cave_furthest:
 				
-				battle_cave_furthest = battle_cave_count
+			battle_cave_furthest = battle_cave_count
 		
 		if count == 4:
 			print "You have come across one of the Old Woman's Sons!"
+			print "Would you like to bring him back with you?"
+			# hero makes trips back with the sons, to deliver them to mama	
 		
 		print "Do you go forward?"
 		answer = raw_input(prompt)
@@ -2603,20 +2605,16 @@ def battle_cave():
 		enemy_encounter()
 		count -= 1
 		battle_cave_there_and_back += 1
-	
-	if high_scorer_cave == False:
 			
-			if battle_cave_count > battle_cave_there_and_back:
+	if battle_cave_count > battle_cave_there_and_back:
 				
-				print "You have survived the longest trip into the Battle Cave!" 
-				battle_cave_there_and_back = battle_cave_count
-				high_scorer_bctb = raw_input("Enter your name so it can rest atop the leaderboard: ")
-			
-			else: 
-				
-				eleventh_intersection()
-				
-	eleventh_intersection()
+		print "You have survived the longest trip into the Battle Cave!" 
+		battle_cave_there_and_back = battle_cave_count	
+		high_scorer_bctb = raw_input("Enter your name so it can rest atop the leaderboard: ")
+
+	else: 
+		
+		eleventh_intersection()
 
 # incomplete ritual_room()
 
@@ -2625,9 +2623,9 @@ def grand_hallway():
 	global came_from
 	
 	print "There are ornately carved pillars lining the North and South walls"
-	print "and you see an exit at the Southeast end of the Hallway." 
-	print "West down the corridor or South or Southeast?"
-	print "You came from the %s." % came_from
+	print "and you see an exit at the Southeast end of the Hallway.\n" 
+	print "Do you go West down the corridor or South, or Southeast?"
+	print "You came from the %s.\n" % came_from
 	print "Which way do you go?" 
 	answer = raw_input(prompt)
 	print " "
