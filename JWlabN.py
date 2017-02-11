@@ -509,10 +509,10 @@ def battle(enemy, enemy_name):
 		
 		if fight_count > fight_count_most: 
 			
-		high_scorer = True
-		print "You've just taken 1st place on the fight count list!" 
-		time.sleep(1)
-		high_scorer_fcm = raw_input("Enter your name to go on the scoreboard: ")
+			high_scorer = True
+			print "You've just taken 1st place on the fight count list!" 
+			time.sleep(1)
+			high_scorer_fcm = raw_input("Enter your name to go on the scoreboard: ")
 	
 	if fight_count > fight_count_most:
 		fight_count_most = fight_count
@@ -2336,7 +2336,7 @@ def vendor():
 			print "What would you like to trade?"
 			trade_or = raw_input(prompt)
 		
-		for i in satchel_contents():
+		for i in satchel_contents:
 			if trade_or == satchel_contents[i]:
 				trading_block.append(satchel_contents[i])
 				trading_block.append(satchel_contents[i+1])
@@ -2366,7 +2366,7 @@ def vendor():
 		if "ye" in answer:
 			
 			print "Ok, good deal!"
-			for i in satchel_contents():
+			for i in satchel_contents:
 				if trade_or == satchel_contents[i]:
 					satchel_contents[i] = loot
 					satchel_contents[i+1] = 5
@@ -2396,7 +2396,7 @@ def vendor():
 			print "What would you like to trade?"
 			trade_or = raw_input(prompt)
 		
-		for i in satchel_contents():
+		for i in satchel_contents:
 			if trade_or == satchel_contents[i]:
 				trading_block.append(satchel_contents[i])
 				trading_block.append(satchel_contents[i+1])
@@ -2412,8 +2412,10 @@ def vendor():
 		if "ye" in choice2:
 			
 			print "Great!"
-			for i in satchel_contents():
+			for i in satchel_contents:
+				
 				if trade_or == satchel_contents[i]:
+					
 					satchel_contents[i+1] -= choice2
 					print "You have %d %d left over after you sold %d to me." % (satchel_contents[i+1], satchel_contents[i], choice2)
 					gold = choice2 * 3
@@ -2449,7 +2451,7 @@ def vendor():
 		
 		if "ye" in choice: 
 			
-			for i in satchel_contents():
+			for i in satchel_contents:
 				
 				if satchel_contents[i] == "Rubies":
 				
