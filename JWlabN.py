@@ -80,13 +80,13 @@ def print_wisdom(parent):
 	
 	if parent == "Dad":
 		chance = randint(0, 10)
-		print "From your Father:"
+		print "\nFrom your Father:\n"
 		print fathers_wisdom[chance]
 		print " "
 		
 	else: 
 		chance = randint(0, 11)
-		print "From your Mother:"
+		print "\nFrom your Mother:\n"
 		print mothers_wisdom[chance]
 		print " "
 	
@@ -144,8 +144,10 @@ def player_check():
 		chance = randint(1, 100)
 		if chance <= 50: 
 			print_wisdom("Dad")
+			"A good man."
 		else: 
 			print_wisdom("Mom")
+			"She was an excellent woman." 
 		
 	else: 
 		print "I'm sure you know your way."
@@ -202,12 +204,13 @@ def battle(enemy, enemy_name):
 	enemy_hp = enemy[0]
 	enemy_attack = 0
 	player_attack = 0
+	v = time.sleep(0.25)
 		
 	if enemy[3] > player_dex:
 		
 		while player_hp_dmg > 0 and enemy_hp > 0:
 			
-			print "The %s attacks first!\n" % enemy_name
+			print "\nThe %s attacks first!\n" % enemy_name
 			time.sleep(1)
 			
 			enemy_attack = randint(0, enemy[1])
@@ -218,35 +221,43 @@ def battle(enemy, enemy_name):
 				if precision == 100:
 					result = "Unreal Critical Precision!\n" 
 					enemy_attack += 3
+					time.sleep(0.25)
 				
 				else: 
 					result = "Critical Precision!\n" 
 					enemy_attack += 2
+					time.sleep(0.25)
 			
 			elif 75 < precision < 90:
 				result = "Precision hit!\n" 
 				enemy_attack += 1
+				time.sleep(0.25)
 			
 			elif 30 < precision < 76:
 				result = "Hit!\n"
+				time.sleep(0.25)
 			
 			elif 10 < precision < 31:
 				result = "Weak hit!\n"
 				enemy_attack -+ 1
+				time.sleep(0.25)
 			
 			elif 1 < precision <= 10:
 			
 				if precision == 2:
 					result = "Glancing blow.\n" 
 					enemy_attack -= 3
+					time.sleep(0.25)
 				
 				elif precision == 1:
 					result = "Missed!\n"
 					enemy_attack = 0
+					time.sleep(0.25)
 				
 				else:
 					result = "Contact.\n"
 					enemy_attack -= 2
+					time.sleep(0.25)
 			
 			else:
 				result = "This shouldn't ever print."
@@ -267,7 +278,7 @@ def battle(enemy, enemy_name):
 				dead("The %s has defeated you!" % enemy_name)
 			
 			time.sleep(2)
-			print "Now it's your turn to attack!"
+			print "\nNow it's your turn to attack!"
 			time.sleep(2)
 			
 			# First attack algorithm:
@@ -311,35 +322,43 @@ def battle(enemy, enemy_name):
 				if precision == 100:
 					result = "Unreal Critical Precision!\n" 
 					player_attack += 3
+					time.sleep(0.25)
 				
 				else: 
 					result = "Critical Precision!\n" 
 					player_attack += 2
+					time.sleep(0.25)
 			
 			elif 75 < precision < 90:
 				result = "Precision hit!\n" 
 				player_attack += 1
+				time.sleep(0.25)
 			
 			elif 30 < precision < 76:
 				result = "Hit!\n"
+				time.sleep(0.25)
 			
 			elif 10 < precision < 31:
 				result = "Weak hit!\n"
 				player_attack -+ 1
+				time.sleep(0.25)
 			
 			elif 1 < precision <= 10:
 			
 				if precision == 2:
 					result = "Glancing blow.\n" 
 					player_attack -= 3
+					time.sleep(0.25)
 				
 				elif precision == 1:
 					result = "Miss!\n"
 					player_attack = 0
+					time.sleep(0.25)
 				
 				else:
 					result = "Contact.\n"
 					player_attack -= 2
+					time.sleep(0.25)
 			
 			else:
 				result = "This shouldn't ever print."
@@ -402,35 +421,43 @@ def battle(enemy, enemy_name):
 				if precision == 100:
 					result = "Unreal Critical Precision!\n" 
 					player_attack += 3
+					v
 			
 				else: 
 					result = "Critical Precision!\n" 
 					player_attack += 2
+					v
 			
 			elif 75 < precision < 90:
 				result = "Precision hit!\n" 
 				player_attack += 1
+				v
 			
 			elif 30 < precision < 76:
 				result = "Hit!"
+				v
 			
 			elif 10 < precision < 31:
 				result = "Weak hit!\n"
 				player_attack -+ 1
+				v
 			
 			elif 1 <= precision <= 10:
 			
 				if precision == 2:
 					result = "Glancing blow.\n" 
 					player_attack -= 3
+					v
 			
 				elif precision == 1:
 					result = "Miss!\n"
 					player_attack = 0
+					v
 			
 				else:
 					result = "Contact.\n"
 					player_attack -= 2
+					v
 			
 			else:
 				result = "This shouldn't ever print."
@@ -462,35 +489,43 @@ def battle(enemy, enemy_name):
 				if precision == 100:
 					result = "Unreal Critical Precision!\n" 
 					enemy_attack += 3
+					v
 		
 				else: 
 					result = "Critical Precision!\n" 
 					enemy_attack += 2
+					v
 		
 			elif 75 < precision < 90:
 				result = "Precision hit!\n" 
 				enemy_attack += 1
+				v
 		
 			elif 30 < precision < 76:
 				result = "Hit!\n"
+				v
 		
 			elif 10 < precision < 31:
 				result = "Weak hit!\n"
 				enemy_attack -+ 1
+				v
 		
 			elif 1 <= precision <= 10:
 			
 				if precision == 2:
 					result = "Glancing blow.\n" 
 					enemy_attack -= 3
+					v
 			
 				elif precision == 1:
 					result = "Miss!\n"
 					enemy_attack = 0
+					v
 			
 				else:
 					result = "Contact.\n"
 					enemy_attack -= 2
+					v
 			
 			else:
 			
@@ -750,22 +785,24 @@ def start():
 	time.sleep(2)
 	
 	print """
-	You awaken. It feels like you shouldn't be here or you're lost. 
-	It's a strange feeling. You get up and look around you. You see barren 
-	fields and a grey sky.\n"""
+	You awaken. It's cold but you're insulated by layers. It feels like you 
+	shouldn't be here or you're lost. 
+	
+	It's a strange feeling. You get up and look around you. You see snow covered
+	fields and a grey sky. A light snow falls.\n"""
 	time.sleep(3)
 	
 	print """
 	You turn around and there is a high concrete wall stretching far 
-	in either direction. It seems like forever.\n"""
+	in either direction. Extending either direction for at most, forever.\n"""
 	time.sleep(3)
 	
 	print """
-	There is thin rectangular opening in the concrete and sitting next 
-	to the opening is an old woman. You approach the woman and she sees you.\n\n\n"""
+	An old woman sits next to a thin rectangular opening in the concrete. You 
+	approach the woman and she sees you.\n\n\n"""
 	time.sleep(3)
 	
-	print "\nOld Woman: 'I see you're awake. You came out of nowhere it seems.'\n"
+	print "\n\t Old Woman: 'I see you're awake. You came out of nowhere it seems.'\n"
 	
 	build_character()
 	
