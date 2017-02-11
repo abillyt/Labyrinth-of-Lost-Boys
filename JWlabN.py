@@ -19,12 +19,15 @@ satchel_contents = []
 gold = 0
 fight_count = 0
 fight_count_most = 0
-battle_cave_count = 0
 battle_cave_furthest = 0
 battle_cave_there_and_back = 0
 high_scorer_fcm = ""
 high_scorer_bcf = ""
 high_scorer_bctb = ""
+high_scorer = False
+high_scorer_furthest = False
+high_scorer_cave = False
+
 
 loot_lvl_1_3 = ['Sturdy Stick', 'Extra Pack', 'Short Stick', 'Basic Gloves', 
 'Spade', 'Rocks', 'Thick Shirt', 'Roll of String', 'Small Medallion']
@@ -110,13 +113,29 @@ def player_check():
 	elif "scores" in choice: 
 		
 		print """
-		Most fights won before death: %d
-		Most fights won walking into the Battle Cave at one go: %d
-		Most fights won in the Battle Cave and survive: %d
-		""" % (fight_count_most, battle_cave_furthest, battle_cave_there_and_back)
+		Most fights won before death: %d by %s
+		Most fights won walking into the Battle Cave at one go: %d by %s
+		Most fights won in the Battle Cave and survive: %d by %s
+		""" % (fight_count_most, high_scorer_fcm, battle_cave_furthest, high_scorer_bcf, battle_cave_there_and_back, high_scorer_bctb)
 	
 	else:
 		print "I'm not sure what you're looking for."
+	
+	print "Would you like to remember some advice from one of your parents?" 
+	
+	answer = raw_input(prompt)
+	
+	if "ye" in answer:
+			
+		chance = randint(1, 100)
+		if chance <= 50: 
+			print_wisdom(Dad)
+		else: 
+			print_wisdom(Mom)
+		
+	else: 
+		print "I'm sure you know your way."
+		
 
 def equip(): #incomplete
 	
@@ -485,10 +504,17 @@ def battle(enemy, enemy_name):
 	
 	fight_count += 1
 	
-	if fight_count > fight_count_most: 
+	if high_scorer = False:
+		
+		if fight_count > fight_count_most: 
+			
+		high_scorer = True
 		print "You've just taken 1st place on the fight count list!" 
 		time.sleep(1)
 		high_scorer_fcm = raw_input("Enter your name to go on the scoreboard: ")
+	
+	if fight_count > fight_count_most:
+		fight_count_most = fight_count
 	
 	print "You've gained %d experience points!\n" % enemy[2]
 	
@@ -690,6 +716,9 @@ def start():
 	
 	first_time_secret_room = True
 	first_time_first_room = True
+	high_scorer_cave = False
+	high_scorer_furthest = False
+	high_scorer = False
 	
 	print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 	print "\n\n\t\tLabryinth of the Lost Sons\n\n\n"
@@ -2420,7 +2449,9 @@ def vendor()
 		if "ye" in choice: 
 			
 			for i in satchel_contents():
+				
 				if satchel_contents[i] == "Rubies":
+				
 					if satchel_contents[i+1] >= 50:
 						satchel_contents[i+1] -= 50
 						print "Okay, looks good. You have %d Rubies left." % satchel_contents[i+1]
@@ -2447,8 +2478,9 @@ def vendor()
 			
 	
 def battle_cave():
-
-	global came_from
+	
+	global came_from, battle_cave_furthest, battle_cave_there_and_back, high_scorer_bcf
+	global high_scorer_bctb, high_scorer_cave, high_scorer_furthest
 	count = 0
 	
 	print "You enter the cave." 
@@ -2467,8 +2499,24 @@ def battle_cave():
 		print "You move forward."
 		enemy_encounter()
 		count += 1
+		battle_cave_furthest += 1
+		battle_cave_there_and_back += 1
+		if high_scorer_furthest = False: 
+			
+			if battle_cave_furthest > high_scorer_bcf:
+				
+				high_scorer_furthest = True
+				print "You have gone the furthest of any Battle Cave Explorer!" 
+				high_scorer_bcf = battle_cave_furthest
+		
+		else: 
+			if battle_cave_furthest > high_scorer_bcf:
+				
+				high_scorer_bcf = battle_cave_furthest
+		
 		if count == 4:
 			print "You have come across one of the Old Woman's Sons!"
+		
 		print "Do you go forward?"
 		answer = raw_input(prompt)
 	
@@ -2482,7 +2530,20 @@ def battle_cave():
 		print "You move back toward the entrance."
 		enemy_encounter()
 		count -= 1
+		battle_cave_there_and_back += 1
 	
+	if high_scorer_cave == False:
+			
+			if battle_cave_there_and_back > high_scorer_cave:
+				
+				print "You have survived the longest trip into the Battle Cave!" 
+				high_scorer_cave = battle_cave_there_and_back
+				high_scorer_bctb = raw_input("Enter your name so it can rest atop the leaderboard.")
+			
+			else: 
+				
+				eleventh_intersection()
+				
 	eleventh_intersection()
 
 # incomplete ritual_room()
