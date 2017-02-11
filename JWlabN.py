@@ -181,7 +181,8 @@ def battle(enemy, enemy_name):
 	#player list order: Hp, Str, Dex, Int, xp
 	#enemy list order: Hp, MaxAttack, xp given, dex
 		
-	global player_xp, player_hp_dmg, fight_count, fight_count_most, high_scorer_fcm
+	global player_xp, player_hp_dmg, fight_count, fight_count_most
+	global high_scorer, high_scorer_fcm
 	
 	result = "No Hit."
 	enemy_hp = enemy[0]
@@ -504,7 +505,7 @@ def battle(enemy, enemy_name):
 	
 	fight_count += 1
 	
-	if high_scorer = False:
+	if high_scorer == False:
 		
 		if fight_count > fight_count_most: 
 			
@@ -2298,7 +2299,7 @@ def vendor_room():
 		came_from = "Northeast"
 		first_chamber()
 	
-def vendor()
+def vendor():
 	
 	global satchel, satchel_contents, player_hp_dmg, satchel_used, gold
 	
@@ -2312,7 +2313,7 @@ def vendor()
 	print "1. Trade \t2. Sell \t3. Healing"
 	selection = int(raw_input(prompt))
 	
-	while selection == "player"
+	while selection == "player":
 		
 		player_check()
 		
@@ -2368,7 +2369,7 @@ def vendor()
 			for i in satchel_contents():
 				if trade_or == satchel_contents[i]:
 					satchel_contents[i] = loot
-					satchel_contents[i+] = 5
+					satchel_contents[i+1] = 5
 					satchel_used -= 5
 			
 			print "This is what is in your satchel:"
@@ -2499,20 +2500,20 @@ def battle_cave():
 		print "You move forward."
 		enemy_encounter()
 		count += 1
-		battle_cave_furthest += 1
-		battle_cave_there_and_back += 1
-		if high_scorer_furthest = False: 
+		battle_cave_count += 1
+		if high_scorer_furthest == False: 
 			
-			if battle_cave_furthest > high_scorer_bcf:
+			if battle_cave_count > battle_cave_furthest:
 				
 				high_scorer_furthest = True
 				print "You have gone the furthest of any Battle Cave Explorer!" 
-				high_scorer_bcf = battle_cave_furthest
+				battle_cave_furthest = battle_cave_count
+				high_scorer_bcf = raw_input("Enter your name so it can rest atop the leaderboard: ")
 		
 		else: 
-			if battle_cave_furthest > high_scorer_bcf:
+			if battle_cave_count > battle_cave_furthest:
 				
-				high_scorer_bcf = battle_cave_furthest
+				battle_cave_furthest = battle_cave_count
 		
 		if count == 4:
 			print "You have come across one of the Old Woman's Sons!"
@@ -2534,11 +2535,11 @@ def battle_cave():
 	
 	if high_scorer_cave == False:
 			
-			if battle_cave_there_and_back > high_scorer_cave:
+			if battle_cave_count > battle_cave_there_and_back:
 				
 				print "You have survived the longest trip into the Battle Cave!" 
-				high_scorer_cave = battle_cave_there_and_back
-				high_scorer_bctb = raw_input("Enter your name so it can rest atop the leaderboard.")
+				battle_cave_there_and_back = battle_cave_count
+				high_scorer_bctb = raw_input("Enter your name so it can rest atop the leaderboard: ")
 			
 			else: 
 				
