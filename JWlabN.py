@@ -18,12 +18,12 @@ satchel_used = 100
 satchel_contents = []
 gold = 0
 fight_count = 0
-fight_count_most = 0
-battle_cave_furthest = 0
-battle_cave_there_and_back = 0
-high_scorer_fcm = ""
-high_scorer_bcf = ""
-high_scorer_bctb = ""
+fight_count_most = 51
+battle_cave_furthest = 18
+battle_cave_there_and_back = 36
+high_scorer_fcm = "WFTIV"
+high_scorer_bcf = "WFTIV"
+high_scorer_bctb = "WFTIV"
 
 prompt = "-> "
 
