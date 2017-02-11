@@ -212,7 +212,6 @@ def battle(enemy, enemy_name):
 		while player_hp_dmg > 0 and enemy_hp > 0:
 			
 			print "\nThe %s attacks!\n" % enemy_name
-			print "--------------------********--------------------\n\n"
 			time.sleep(2)
 			
 			enemy_attack = randint(0, enemy[1])
@@ -282,7 +281,6 @@ def battle(enemy, enemy_name):
 			
 			time.sleep(2)
 			print "\nNow it's your turn to attack!\n"
-			print "--------------------********--------------------\n\n"
 			time.sleep(2)
 			
 			# First attack algorithm:
@@ -390,7 +388,6 @@ def battle(enemy, enemy_name):
 		while player_hp_dmg > 0 and enemy_hp > 0:
 			
 			print "You attack!\n"
-			print "--------------------********--------------------\n\n"
 			
 			time.sleep(2)
 		
@@ -484,9 +481,7 @@ def battle(enemy, enemy_name):
 				print "You're enemy fades to dust.\n"
 				break 
 				
-			print "Now it's the %s\'s turn!\n" % enemy_name
-			print "--------------------********--------------------\n\n"
-			
+			print "Now it's the %s\'s turn!\n" % enemy_name			
 			time.sleep(2)
 			
 			enemy_attack = randint(0, enemy[1])
