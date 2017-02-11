@@ -16,6 +16,15 @@ player_class = "Unknown"
 satchel = 100  # total units
 satchel_used = 100
 satchel_contents = []
+gold = 0
+fight_count = 0
+fight_count_most = 0
+battle_cave_count = 0
+battle_cave_furthest = 0
+battle_cave_there_and_back = 0
+high_scorer_fcm = ""
+high_scorer_bcf = ""
+high_scorer_bctb = ""
 
 loot_lvl_1_3 = ['Sturdy Stick', 'Extra Pack', 'Short Stick', 'Basic Gloves', 
 'Spade', 'Rocks', 'Thick Shirt', 'Roll of String', 'Small Medallion']
@@ -70,7 +79,7 @@ def player_check():
 	
 	player_hp_dmg = player_hp
 
-	print "Would you like to see your stats or your inventory?"
+	print "Would you like to see your stats or your inventory or best scores?"
 	choice = raw_input(prompt)
 	print " "
 	
@@ -97,6 +106,14 @@ def player_check():
 			Satchel Contents:
 			%d %s""" % (satchel, satchel_used, satchel_contents[1], satchel_contents[0])
 			print " "
+	
+	elif "scores" in choice: 
+		
+		print """
+		Most fights won before death: %d
+		Most fights won walking into the Battle Cave at one go: %d
+		Most fights won in the Battle Cave and survive: %d
+		""" % (fight_count_most, battle_cave_furthest, battle_cave_there_and_back)
 	
 	else:
 		print "I'm not sure what you're looking for."
@@ -145,14 +162,13 @@ def battle(enemy, enemy_name):
 	#player list order: Hp, Str, Dex, Int, xp
 	#enemy list order: Hp, MaxAttack, xp given, dex
 		
-	global player_xp, player_hp_dmg
+	global player_xp, player_hp_dmg, fight_count, fight_count_most, high_scorer_fcm
 	
 	result = "No Hit."
 	enemy_hp = enemy[0]
 	enemy_attack = 0
 	player_attack = 0
-			
-	
+		
 	if enemy[3] > player_dex:
 		
 		while player_hp_dmg > 0 and enemy_hp > 0:
@@ -467,6 +483,13 @@ def battle(enemy, enemy_name):
 	
 	print "You win!\n"
 	
+	fight_count += 1
+	
+	if fight_count > fight_count_most: 
+		print "You've just taken 1st place on the fight count list!" 
+		time.sleep(1)
+		high_scorer_fcm = raw_input("Enter your name to go on the scoreboard: ")
+	
 	print "You've gained %d experience points!\n" % enemy[2]
 	
 	time.sleep(2)
@@ -690,7 +713,7 @@ def start():
 	
 	print """
 	There is thin rectangular opening in the concrete and sitting next 
-	to the opening is an old woman. You approach the woman and she sees you."""
+	to the opening is an old woman. You approach the woman and she sees you.\n\n\n"""
 	time.sleep(3)
 	
 	print "\nOld Woman: 'I see you're awake. You came out of nowhere it seems.'\n"
@@ -2224,12 +2247,204 @@ def vendor_room():
 	print "You enter a triangle shaped room.\n"
 	print "You see an old man sitting behind a wooden shelf in the far corner of"
 	print "the room. He's crotcheting." 
-	time.sleep(2)
-	print "You step forward to talk to him." 
-	# vendor()
+	time.sleep(1)
+	print "\nWould you like to talk to him?"
+	answer = raw_input(prompt)
 	
-	came_from = "Northeast"
-	first_chamber()
+	while answer == "player":
+		
+		player_check()
+		
+		print "Would you like to talk to him?"
+		answer = raw_input(prompt)
+	
+	if "ye" in answer: 
+	
+		time.sleep(2)
+		print "You step forward to talk to him." 
+		vendor()
+	
+	else:
+		print "You go back to the Chamber." 
+		came_from = "Northeast"
+		first_chamber()
+	
+def vendor()
+	
+	global satchel, satchel_contents, player_hp_dmg, satchel_used, gold
+	
+	trading_block = []
+	loot = "blank"
+	
+	print "The vendor looks up from his chiseling and looks you in the eye.\n"
+	time.sleep(1)
+	print "Vendor: It's been a long time since I've seen a stranger."
+	print "What can I help you with?\n"
+	print "1. Trade \t2. Sell \t3. Healing"
+	selection = int(raw_input(prompt))
+	
+	while selection == "player"
+		
+		player_check()
+		
+		print "1. Trade \t2. Sell \t3. Healing"
+		selection = int(raw_input(prompt))
+	
+	if selection == 1:
+		
+		if satchel_contents == []:
+			
+			print "It looks like your satchel is empty. What are you trying to pull?" 
+			vendor_room()
+		
+		print "What would you like to trade?"
+		trade_or = raw_input(prompt)
+		while trade_or == "player":
+			
+			player_check()
+			
+			print "What would you like to trade?"
+			trade_or = raw_input(prompt)
+		
+		for i in satchel_contents():
+			if trade_or == satchel_contents[i]:
+				trading_block.append(satchel_contents[i])
+				trading_block.append(satchel_contents[i+1])
+		
+		print "Ahh, you have %d %d." % (satchel_contents[1], satchel_contents[2])
+		print "I have this to trade:"
+		if 0 < player_lvl < 4:
+			print "***Thick Shirt***"
+			loot = "Thick Shirt"
+		elif 3 < player_lvl < 7:
+			print "***Leather T-Shirt***"
+			loot = "Leather T-Shirt"
+		elif 6 < player_lvl:
+			print "***Leather Jacket***"
+			loot = "Leather Jacket"
+		time.sleep(2)
+		print "Would you like to trade? Straight up? Mine for yours?" 
+		answer = raw_input(prompt)
+		
+		while answer == "player":
+			
+			player_check()
+			
+			print "Would you like to trade? Straight up?"
+			answer = raw_input(prompt)
+		
+		if "ye" in answer:
+			
+			print "Ok, good deal!"
+			for i in satchel_contents():
+				if trade_or == satchel_contents[i]:
+					satchel_contents[i] = loot
+					satchel_contents[i+] = 5
+					satchel_used -= 5
+			
+			print "This is what is in your satchel:"
+			print satchel_contents()
+			print "You have %d units of space available in your satchel." % satchel_used
+			
+		else: 
+			print "Oh well." 
+			vendor_room()
+	
+	elif selection == 2:
+		
+		if satchel_contents == []:
+			
+			print "It looks like your satchel is empty. What are you trying to pull?" 
+			vendor_room()
+		
+		print "What would you like to sell?"
+		trade_or = raw_input(prompt)
+		while trade_or == "player":
+			
+			player_check()
+			
+			print "What would you like to trade?"
+			trade_or = raw_input(prompt)
+		
+		for i in satchel_contents():
+			if trade_or == satchel_contents[i]:
+				trading_block.append(satchel_contents[i])
+				trading_block.append(satchel_contents[i+1])
+		
+		print "Ahh, you have %d %d." % (trading_block[1], trading_block[0])
+		print "\nHow many %d would you like to sell? They're worth %s each." % (trading_block[0], "3 gold")
+		print " "
+		choice = int(raw_input(prompt))
+		
+		print "I will give you %d gold for that. Deal?" 
+		choice2 = raw_input(prompt)
+		
+		if "ye" in choice2:
+			
+			print "Great!"
+			for i in satchel_contents():
+				if trade_or == satchel_contents[i]:
+					satchel_contents[i+1] -= choice2
+					print "You have %d %d left over after you sold %d to me." % (satchel_contents[i+1], satchel_contents[i], choice2)
+					gold = choice2 * 3
+					print "You have %d gold now." % gold
+		
+		else: 
+			
+			print "Fine. I didn't want them anyway." 
+			vendor_room()
+		
+	else: 
+		
+		print "You want me to heal yah, huh?"
+		time.sleep(1)
+		print "There was a time a was known as a healer." 
+		print "\nI s'pose I could do that. For a price." 
+		time.sleep(2)
+		print "It'll cost you 50 rubies to heal yourself."
+		print "I know that's a lot, but they're probably just laying around somewhere to find." 
+		if satchel_contents == []:
+			
+			print "It looks like you don't have any Rubies. See ya." 
+			vendor_room()
+		
+		print "Want to give me 50 Rubies to heal you?" 
+		choice = raw_input(prompt)
+		
+		if choice == "player":
+			
+			player_check()
+			
+			print "Wnat to give me 50 Rubies to heal you?"
+		
+		if "ye" in choice: 
+			
+			for i in satchel_contents():
+				if satchel_contents[i] == "Rubies":
+					if satchel_contents[i+1] >= 50:
+						satchel_contents[i+1] -= 50
+						print "Okay, looks good. You have %d Rubies left." % satchel_contents[i+1]
+						time.sleep(2)
+						print "I will now perform a miracle of healing!!"
+						time.sleep(4)
+						print "\n\nYou have been healed!" 
+						player_hp_dmg = player_hp
+						print "You now have %d hit points." % player_hp_dmg
+						vendor_room()
+					
+					else: 
+						print "You don't have enough Rubies." 
+						vendor_room()
+					
+				else: 
+					
+					print "I don't see any Rubies in your bag." 
+					vendor_room()
+		
+		else: 
+			print "I'm glad, tbh. It means I can conserve my energy." 
+			vendor_room()
+			
 	
 def battle_cave():
 
@@ -2278,7 +2493,7 @@ def grand_hallway():
 	
 	print "There are ornately carved pillars lining the North and South walls"
 	print "and you see an exit at the Southeast end of the Hallway." 
-	print "Would you like to go West or South?"
+	print "West down the corridor or South or Southeast?"
 	print "You came from the %s." % came_from
 	print "Which way do you go?" 
 	answer = raw_input(prompt)
@@ -2295,7 +2510,7 @@ def grand_hallway():
 		print "Going West."
 		came_from = "East"
 		
-		twelfth_intersection()
+		eleventh_intersection()
 		
 	elif "outh" in answer:
 		print "Going South"
@@ -2304,9 +2519,10 @@ def grand_hallway():
 		first_chamber()
 	
 	else:
+		print "You walk to the end of the Grand Hallway and exit to the South."
 		came_from = "North"
 		
-		first_chamber()
+		ninth_intersection()
 		
 		
 def dead(why):
