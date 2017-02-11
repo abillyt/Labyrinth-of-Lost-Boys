@@ -24,6 +24,16 @@ battle_cave_there_and_back = 0
 high_scorer_fcm = ""
 high_scorer_bcf = ""
 high_scorer_bctb = ""
+
+prompt = "-> "
+
+came_from = "Unknown"
+first_time_first_room = True
+first_time_secret_room = True
+first_time_chamber_one = True
+first_time_second_room = True
+first_time_third_room = True
+first_time_2nd_secret_room = True
 high_scorer = False
 high_scorer_furthest = False
 high_scorer_cave = False
@@ -65,22 +75,10 @@ mothers_wisdom = ['Take garlic, son. And raw honey.',
 'Can I look at your blackheads?', 'Let\'s go wash your face.', 'Eucalyptus oil.',
 'Always use protection.', 'Milk baths are healing.']
 
-prompt = "-> "
-
-came_from = "Unknown"
-first_time_first_room = True
-first_time_secret_room = True
-first_time_chamber_one = True
-first_time_second_room = True
-first_time_third_room = True
-first_time_2nd_secret_room = True
-
 def player_check():
 	
 	global player_lvl, player_xp, player_str, player_dex, player_int, player_hp
 	global player_hp_dmg, player_name, player_class, satchel, satchel_contents
-	
-	player_hp_dmg = player_hp
 
 	print "Would you like to see your stats or your inventory or best scores?"
 	choice = raw_input(prompt)
@@ -404,7 +402,7 @@ def battle(enemy, enemy_name):
 				result = "Weak hit!"
 				player_attack -+ 1
 			
-			elif 1 < precision <= 10:
+			elif 1 <= precision <= 10:
 			
 				if precision == 2:
 					result = "Glancing blow." 
@@ -713,8 +711,13 @@ def level_up():
 
 def start():
 	
-	global first_time_secret_room, first_time_first_room, came_from
+	global first_time_secret_room, first_time_first_room, came_from, player_hp_dmg
+	global player_name, player_class, player_lvl
 	
+	player_hp_dmg = player_hp
+	player_name = ""
+	player_class = ""
+	player_lvl = 1
 	first_time_secret_room = True
 	first_time_first_room = True
 	high_scorer_cave = False
@@ -782,6 +785,7 @@ def start():
 		if "ye" in decision: 
 			print "'Best luck in there!'"
 			came_from = "South"
+			
 			first_intersection()
 		
 		else:
@@ -870,6 +874,7 @@ def start():
 def build_character():
 
 	global player_name, player_class, player_str, player_dex, player_int, player_hp
+	global player_hp_dmg, player_lvl
 								
 	print "'What, may I ask, is your name sweet traveler?'"
 	player_name = raw_input(prompt)
@@ -905,21 +910,31 @@ def build_character():
 	if "1" in choice:
 		
 		player_class = "Wizard"
+		player_lvl = 1
 		player_str = 1
 		player_dex = 2
 		player_int = 6
+		player_hp = 11
+		player_hp_dmg = player_hp
 	
 	elif "2" in choice:
 		
 		player_class = "Ninja"
+		player_lvl = 1
+		player_str = 3
+		player_dex = 4
+		player_int = 2
 		player_hp = 13
+		player_hp_dmg = player_hp
 	
 	else:
 		player_class = "Wizard/Ninja"
+		player_lvl = 1
 		player_str = 3
 		player_dex = 3
 		player_int = 3
 		player_hp = 12
+		player_hp_dmg = player_hp
 	
 	print "'Ahh, %s the %s! Exciting!'" % (player_name, player_class)
 	print "'Jeez. I haven't seen a %s in ages...'""" % player_class
