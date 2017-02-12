@@ -774,8 +774,6 @@ def start():
 	global first_time_secret_room, first_time_first_room, came_from, player_hp_dmg
 	global player_name, player_class, player_lvl, player_xp
 	
-	player_xp = player_xp_cap
-	player_hp_dmg = player_hp
 	player_name = ""
 	player_class = ""
 	player_lvl = 1
@@ -817,6 +815,9 @@ def start():
 	print "\n\t Old Woman: 'I see you're awake. You came out of nowhere it seems.'\n"
 	
 	build_character()
+	
+	player_xp = player_xp_cap
+	player_hp_dmg = player_hp
 	
 	print "Old Woman: 'Are you on a quest? Or just hanging out? Or What?'"
 	
@@ -869,9 +870,9 @@ def start():
 		print """
 		Speaking of my kids... I lost them.
 		They're in the labrynth and I'm certain they're being held prisoner
-		or lost somewhere...""" 
+		or lost somewhere...\n""" 
 		time.sleep(1)
-		print "Woe is me!! I have the gout."
+		print "Woe is me!! I have the gout.\n"
 		
 		print "Will you help me?'"
 		
@@ -899,7 +900,7 @@ def start():
 			first_intersection()
 		
 		elif "YE" in decision:
-			print "My hero!! Oh, I love a man that does what's right."
+			print "My hero!! Oh, I love a man that does what's right.\n"
 			print "I look forward to seeing you all real soon."
 			print "Good luck now, ya hear?" 
 			came_from = "South"
@@ -908,13 +909,16 @@ def start():
 		else: 
 			print "'I curse you then! May death be upon your door!'\n\n\n.\n..\n..."
 			print "You walk awkwardly past the woman and into the labrynth."
-			print "The wall of the labryinth breaks for no apparent reason."
+			print "The wall of the labryinth breaks for no apparent reason.\n"
+			time.sleep(1)
 			dead("The wall falls on you and the woman laughs as you perish.")
 	
 	else: 
-		print "'That doesn't suprise me."
+		print "'That doesn't suprise me.\n"
+		time.sleep(1)
 		print "I think whatever you're looking for is in this labryinth."
-		print "There's some pretty sweet loot and basically no danger."
+		print "There's some pretty sweet loot and basically no danger.\n"
+		time.sleep(1)
 		print "Are you going to enter the labryinth?'"
 		
 		decision = raw_input(prompt)
@@ -939,7 +943,7 @@ def start():
 def build_character():
 
 	global player_name, player_class, player_str, player_dex, player_int, player_hp
-	global player_hp_dmg, player_lvl
+	global player_hp_dmg, player_lvl, player_xp, player_xp_cap
 								
 	print "'What, may I ask, is your name sweet traveler?'"
 	player_name = raw_input(prompt)
@@ -981,6 +985,8 @@ def build_character():
 		player_int = 6
 		player_hp = 11
 		player_hp_dmg = player_hp
+		player_xp_cap = 10
+		player_xp = player_xp_cap
 	
 	elif "2" in choice:
 		
@@ -991,6 +997,8 @@ def build_character():
 		player_int = 2
 		player_hp = 13
 		player_hp_dmg = player_hp
+		player_xp_cap = 10
+		player_xp = player_xp_cap
 	
 	else:
 		player_class = "Wizard/Ninja"
@@ -1000,6 +1008,8 @@ def build_character():
 		player_int = 3
 		player_hp = 12
 		player_hp_dmg = player_hp
+		player_xp_cap = 10
+		player_xp = player_xp_cap
 	
 	print "'Ahh, %s the %s! Exciting!'" % (player_name, player_class)
 	print "'Jeez. I haven't seen a %s in ages...'""" % player_class
@@ -1051,13 +1061,14 @@ def first_intersection():
 		
 		print """
 		You follow the elbow and are in a corridor that smells like dust 
-		and decay."""
+		and decay.\n"""
 		chance = randint(1, 100)
 		if chance <= 50:
 			enemy_encounter()
 		time.sleep(2)
 		print "As you walk you see a 6 inch bookcase on your left."
-		print "There is a Red Book, a Green Book, and a Blue Book."
+		print "There is a Red Book, a Green Book, and a Blue Book.\n"
+		time.sleep(1)
 		print "Do you move on or do you inspect a book?"
 		
 		choice2 = raw_input(prompt)
