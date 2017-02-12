@@ -107,7 +107,7 @@ def player_check():
 		Dexterity: %d
 		Intelligence: %d
 		Max Hit Points: %d
-		Current Hit Points: %d""" % (player_name, player_class, player_str,
+		Current Hit Points: %d\n""" % (player_name, player_class, player_str,
 		player_dex, player_int, player_hp, player_hp_dmg)
 		print " "
 	
@@ -278,9 +278,9 @@ def battle(enemy, enemy_name):
 			time.sleep(1)
 			
 			if player_hp_dmg <= 0:
-				dead("The %s has defeated you!" % enemy_name)
+				dead("The %s has defeated you!\n" % enemy_name)
 			
-			print "\nNow it's your turn to attack!\n"
+			print "Now it's your turn to attack!\n"
 			time.sleep(1)
 			
 			# First attack algorithm:
@@ -378,10 +378,11 @@ def battle(enemy, enemy_name):
 			
 			if enemy_hp <= 0:
 				print "Your enemy fades to dust.\n"
+				print "---------------------------"
 				break
 			
 		if player_hp_dmg <= 0:
-			dead("You've been slain by the %r" % enemy)
+			dead("You've been slain by the %r\n" % enemy)
 	
 	else:
 		
@@ -480,6 +481,7 @@ def battle(enemy, enemy_name):
 			if enemy_hp <= 0:
 			
 				print "You're enemy fades to dust.\n"
+				print "---------------------------"
 				break 
 				
 			print "Now it's the %s\'s turn!\n" % enemy_name			
@@ -633,10 +635,10 @@ def enemy_encounter():
 			enemy = (9, 7, 6, 2) #lg_slime 24
 		
 		elif x == 1:
-			enemy = (10, 10, 10, 8) #gnoll_pack 38
+			enemy = (10, 10, 9, 8) #gnoll_pack 38
 		
 		elif x == 2:
-			enemy = (9, 9, 7, 7) #alpha_wolf 32
+			enemy = (9, 9, 8, 7) #alpha_wolf 32
 		
 		elif x == 3: 
 			enemy = (6, 10, 8, 12) #ancient_bat 36
@@ -648,13 +650,13 @@ def enemy_encounter():
 			enemy = (6, 6, 6, 10) #mountain_cat 28
 		
 		elif x == 6:
-			enemy = (5, 10, 6, 3) #self_closing_flannel_bag 24
+			enemy = (5, 10, 7, 3) #self_closing_flannel_bag 24
 		
 		elif x == 7:
-			enemy = (10, 8, 6, 2) #glowing_top_hat_w_cane 26
+			enemy = (10, 8, 8, 2) #glowing_top_hat_w_cane 26
 		
 		else:
-			enemy = (6, 8, 5, 3) #jagged_contacts 22
+			enemy = (6, 8, 6, 3) #jagged_contacts 22
 	
 	elif 6 < player_lvl <= 9:
 		
@@ -665,7 +667,7 @@ def enemy_encounter():
 			enemy = (12, 15, 12, 8) #shiny_mist 47
 		
 		elif x == 1:
-			enemy = (13, 2, 10, 18) #floor_of_marbles 43
+			enemy = (13, 2, 9, 18) #floor_of_marbles 43
 		
 		elif x == 2:
 			enemy = (8, 14, 9, 5) #shrieking_box 36
@@ -794,7 +796,7 @@ def start():
 	
 	print """
 	You awaken. It's cold but you're insulated by layers. It feels like you 
-	shouldn't be here or you're lost. It's a strange feeling."""
+	shouldn't be here or you're lost. It's a strange feeling.\n"""
 	time.sleep(3)
 	
 	print """
@@ -859,18 +861,15 @@ def start():
 	
 	elif "ang" in answer:
 		
-		print """
-		'You're so cool. I wish any one of my twelve sons were as cool 
-		as you are. Are you single?'\n"""
+		print "You're so cool. I wish any one of my twelve sons were as cool"
+		print "as you are. Are you single?'\n"
 		time.sleep(1)
 		
 		print "'Just kidding. It's fine. I didn't mean it anyway.'"
 		
 		time.sleep(2)
-		print """
-		Speaking of my kids... I lost them.
-		They're in the labrynth and I'm certain they're being held prisoner
-		or lost somewhere...\n""" 
+		print "Speaking of my kids... I lost them. They're in the labrynth 
+		print "and I'm certain they're being held prisoner or lost somewhere...\n"
 		time.sleep(1)
 		print "Woe is me!! I have the gout.\n"
 		
@@ -935,6 +934,7 @@ def start():
 		if "ye" in decision: 
 			print "'Best luck in there, you mysterious %s'" % player_class
 			came_from = "South"
+			
 			first_intersection()
 		
 		else:
@@ -1012,7 +1012,7 @@ def build_character():
 		player_xp = player_xp_cap
 	
 	print "'Ahh, %s the %s! Exciting!'" % (player_name, player_class)
-	print "'Jeez. I haven't seen a %s in ages...'""" % player_class
+	print "'Jeez. I haven't seen a %s in ages...'" % player_class
 	time.sleep(2)
 	
 	print "\n'Actually, I haven't seen anyone in ages."
@@ -1037,10 +1037,10 @@ def first_intersection():
 	global came_from
 	
 	print " "
-	print "The hallway is dark but enough light is present to see around." 
+	print "The hallway is dark but enough light is present to see around.\n" 
 	time.sleep(1)
 	print "You may choose to travel North, West, or East."
-	print "You came from the %s." % came_from
+	print "You came from the %s.\n" % came_from
 	print "Which direction do you choose?" 
 	
 	choice = raw_input(prompt)
@@ -1059,9 +1059,8 @@ def first_intersection():
 		print "You go West and come to an elbow leading North."
 		time.sleep(2)
 		
-		print """
-		You follow the elbow and are in a corridor that smells like dust 
-		and decay.\n"""
+		print "You follow the elbow and are in a corridor that smells like dust"
+		print "and decay.\n"
 		chance = randint(1, 100)
 		if chance <= 50:
 			enemy_encounter()
@@ -1101,9 +1100,8 @@ def first_intersection():
 							
 	elif "ast" in choice:
 		
-		print """
-		You follow the path East, which comes to an elbow that
-		heads North. You follow that path and come to another intersection."""
+		print "You follow the path East, which comes to an elbow that heads"
+		print "North. You follow that path and come to another intersection.\n"
 		came_from = "South"
 		chance = randint(1, 100)
 		
@@ -1124,7 +1122,7 @@ def secret_room_1():
 	global came_from, player_int, player_dex, player_str, first_time_secret_room
 		
 	print "Interesting. You're curious. I like that."
-	print "Which one book would you like to inspect?"
+	print "Which one book would you like to inspect?\n"
 	print "1. Red Book"
 	print "2. Green Book"
 	print "3. Blue Book"
@@ -1136,7 +1134,7 @@ def secret_room_1():
 		
 		player_check()
 		
-		print "Which one book would you like to inspect?"
+		print "Which one book would you like to inspect?\n"
 		print "1. Red Book"
 		print "2. Green Book"	
 		print "3. Blue Book"
@@ -1203,7 +1201,7 @@ def secret_room_1():
 		As you attempt to take the Blue Book off the shelf, you feel it
 		stick and then click mechanically into place as it comes forward. The book 
 		gets sucked back onto the shelf and a panel in the wall moves aside,
-		revealing a passageway."""
+		revealing a passageway.\n"""
 		time.sleep(5)
 		print "Do you enter the passageway?" 
 				
@@ -1224,7 +1222,7 @@ def secret_room_1():
 			print "The passageway is short and leads to a secret room!"
 			
 			if not first_time_secret_room:
-				print "You're standing in the secret room you hung out in earlier."
+				print "You're standing in the secret room you hung out in earlier.\n"
 				time.sleep(2)
 				print "You remember the good times you had, then you turn around"
 				print "and leave the room because there's nothing in there anymore.\n" 
@@ -1253,10 +1251,9 @@ def secret_room_1():
 				first_time_secret_room = False
 				enemy_encounter()
 				
-				print """
-				Now that you stand victorious, you notice there is a shaft
-				of light highlighting a sweet looking chocolate danish on a narrow 
-				pedestal.\n"""
+				print "Now that you stand victorious, you notice there is a shaft"
+				print "of light highlighting a sweet looking chocolate danish on a"
+				print "narrow pedestal.\n"
 				time.sleep(3)
 				
 				print "\nYou examine it closely.\n"
@@ -1428,7 +1425,7 @@ def second_intersection():
 	global player_hp
 
 	print "You are at an intersection that has passageways to the South, West, and East."
-	print "There is a dripping sound."
+	print "There is a dripping sound.\n"
 	print "You came from the %s." % came_from
 	time.sleep(1)
 	print "Which way do you go?"
@@ -1465,12 +1462,10 @@ def second_intersection():
 	elif "est" in choice:
 		print "You go West and come to an elbow leading South."
 		time.sleep(2)
-		print """
-		You follow the elbow and are in a corridor that smells like dust 
-		and decay."""
+		print "You follow the elbow and are in a corridor that smells like dust and decay.\n"
 		time.sleep(2)
 		print "As you walk you see a 6 inch bookcase on your right."
-		print "There is a Red Book, a Green Book, and a Blue Book."
+		print "There is a Red Book, a Green Book, and a Blue Book.\n"
 		print "Do you move on or do you inspect a book?"
 		
 		choice2 = raw_input(prompt)
@@ -1514,9 +1509,8 @@ def third_intersection():
 	global came_from
 	global player_hp
 	
-	print """
-	You are at an intersection with passageways to the South, West, and East.\n
-	There is a door along the cleft wall to the South/West."""
+	print "You are at an intersection with passageways to the South, West, and East.\n"
+	print "There is a door along the cleft wall to the South/West.\n"
 	print "You came from %s." % came_from
 	print "Which way do you go?"
 	
@@ -1537,7 +1531,7 @@ def third_intersection():
 	
 	elif "outh" in choice:
 		print "You head South and hang a right, heading West, and"
-		print "come to another intersection."
+		print "come to another intersection.\n"
 		came_from = "East"
 		chance = randint(1, 100)
 		
@@ -1557,11 +1551,11 @@ def third_intersection():
 		second_intersection()
 	
 	elif "ast" in choice:
-		print "You head East... and the hallway turns slightly."
+		print "You head East... and the hallway turns slightly.\n"
 		time.sleep(1)
 		print "Following the turn you head up stone stairs."
 		time.sleep(1)
-		print "Upon reaching the top, a great chamber comes into view!"
+		print "Upon reaching the top, a great chamber comes into view!\n"
 		came_from = "Southwest"
 		
 		chance = randint(1, 100)
@@ -1573,7 +1567,7 @@ def third_intersection():
 	
 	elif "orth" in choice:
 		
-		print "You try to head North, but run into the concrete wall."
+		print "You try to head North, but run into the concrete wall.\n"
 		player_hp -= 1
 		print "You lost a hit point! you now have %d hit points." % player_hp
 		chance = randint(1, 100)
@@ -1661,9 +1655,7 @@ def first_room():
 					
 	print "You stand in the familiar doorway. All of the rubies have vanished."
 	time.sleep(3)
-	print """
-	You sniff and cry a little, then you get over it and get back to 
-	the hallway."""
+	print "You sniff and cry a little, then you get over it and get back to the hallway."
 	
 	third_intersection()
 
@@ -1683,7 +1675,7 @@ def first_chamber():
 	if first_time_chamber_one:
 		print "You see an older boy chained to a chair in the middle of the chamber."
 		time.sleep(1)
-		print "He is shivering yet not looking weak."
+		print "He is shivering yet not looking weak.\n"
 		time.sleep(1)
 	
 	else: 
@@ -1698,15 +1690,16 @@ def first_chamber():
 		
 		print "So what'll it be? Approach the boy or take a door?"
 		answer = raw_input(prompt)
+		print " "
 	
 	if "boy" in answer:
 		
 		print "You approach the boy."
 		time.sleep(1)
-		print "He looks up at hearing your footsteps."
+		print "He looks up at hearing your footsteps.\n"
 		time.sleep(1)
 		print "'Hello there! I haven't seen anyone in so long, I don't even"
-		print "know how I'm still alive.'"
+		print "know how I'm still alive.'\n"
 		time.sleep(2)
 		print "'Are you here to help me?'"
 		
@@ -1742,7 +1735,7 @@ def first_chamber():
 		
 		else: 
 			print "That's okay. I kind of like this chair anyway. I do miss"
-			print "the freedom though. I got used to that before I was tied here."
+			print "the freedom though. I got used to that before I was tied here.\n"
 			time.sleep(2)
 			print "It's fine. I'll be fine. Have fun out there." 
 
@@ -1838,7 +1831,7 @@ def fourth_intersection():
 
 	global came_from
 	
-	print "You are at a mossy intersection that branches West, East, and North,"
+	print "You are at a mossy intersection that branches West, East, and North.\n"
 	print "You came from the %s." % came_from
 	
 	print "Which way do you go?"
@@ -1860,7 +1853,7 @@ def fourth_intersection():
 		if chance <= 50:
 			enemy_encounter()
 		
-		print "...you come to a large room!" 
+		print "...you come to a large room!\n" 
 		came_from = "East"
 		
 		second_room()
@@ -1894,7 +1887,7 @@ def fifth_intersection():
 	global came_from
 	
 	print "You are at an intersection that branches West and East."
-	print "There is a branch to the South whose end is visible."
+	print "There is a branch to the South whose end is visible.\n"
 	print "Do you go East or West or South?"
 	print "You came from the %s." % came_from
 	
@@ -1914,24 +1907,24 @@ def fifth_intersection():
 		if chance <= 50:
 			enemy_encounter()
 		print "You walk to the small dead end. In the floor, centered a few feet"
-		print "from the back wall, stands a small pedestal with a circular top."
+		print "from the back wall, stands a small pedestal with a circular top.\n"
 		time.sleep(2)
 		choice = raw_input(prompt)
 		
 		print "You cannot find any way to interact with the pedestal so you turn"
-		print "back around."
+		print "back around.\n"
 		came_from = "South"
 		
 		fifth_intersection()
 	
 	elif "ast" in answer: 
-		print "You abruptly come upon the edge of a pit." 
+		print "You abruptly come upon the edge of a pit.\n" 
 		time.sleep(2)
 		print "You can see the other side, though it is quite a distance." 
 		print "There is tree trunk punched through the labryinth walls."
 		time.sleep(2)
 		print "The trunk is well above you and in between the path you stand on"
-		print "and the path across the pit."
+		print "and the path across the pit.\n"
 		print "Do you do something or go back?"
 		to_do = raw_input(prompt)
 		
@@ -1957,8 +1950,8 @@ def sixth_intersection():
 	global came_from
 	
 	print "You can see that both the North and the South paths turn a"
-	print "corner heading in the same direction. You can go North, South, or East."
-	print "You came from %s." % came_from
+	print "corner heading in the same direction. You can go North, South, or East.\n"
+	print "You came from %s.\n" % came_from
 	print "Which way do you go?" 
 	answer = raw_input(prompt)
 	print " "
@@ -1971,16 +1964,16 @@ def sixth_intersection():
 		print " "
 	
 	if "outh" in answer:
-		print "You head South, turning the corner to the West." 
+		print "You head South, turning the corner to the West.\n" 
 		time.sleep(2)
 		chance = randint(1, 100)
 		if chance <= 50:
 			enemy_encounter()
 		print "You walk along a narrow corridor until you reach an elbow heading"
-		print "North. Now you walk and stop between two walls." 
+		print "North. Now you walk and stop between two walls.\n" 
 		time.sleep(2)
 		print "On your left the wall is blank. On the right there are three"
-		print "protruding circles." 
+		print "protruding circles.\n" 
 		print "You can go North or South or examine the wall."
 		answer1 = raw_input(prompt)
 		while answer1 == "player":
@@ -1991,7 +1984,7 @@ def sixth_intersection():
 		
 		if "xamin" in answer1:
 			print "Looking more closely, you see that the circles move, but you"
-			print "you cannot make odds or ends of it." 
+			print "you cannot make odds or ends of it.\n" 
 		
 			sixth_intersection()
 		
@@ -2007,28 +2000,28 @@ def sixth_intersection():
 			
 	elif "orth" in answer: 
 		
-		print "You head North, turning the corner to the West." 
+		print "You head North, turning the corner to the West.\n" 
 		time.sleep(2)
 		chance = randint(1, 100)
 		if chance <= 50:
 			enemy_encounter()
 		print "You walk along a narrow corridor until you reach an elbow heading"
-		print "South. Now you walk and stop between two walls." 
+		print "South. Now you walk and stop between two walls.\n" 
 		time.sleep(2)
 		print "On your right the wall is blank. On the left there are three"
-		print "protruding circles." 
-		print "You can go North or South or examine the wall."
+		print "protruding circles.\n" 
+		print "You can go North or South or examine the wall.\n"
 		answer1 = raw_input(prompt)
 		
 		while answer1 == "player":
 			player_check()
 			
-			print "You can go North or South or examine the wall."
+			print "You can go North or South or examine the wall.\n"
 			answer1 = raw_input(prompt)
 		
 		if "xamin" in answer1:
 			print "Looking more closely, you see that the circles move, but you"
-			print "you cannot make odds or ends of it."
+			print "you cannot make odds or ends of it.\n"
 			print "You keep walking."
 			
 			sixth_intersection()
@@ -2056,8 +2049,8 @@ def seventh_intersection():
 	global came_from
 	
 	print "Heading down the stone steps, you come to an intersection." 
-	print "the intersection goes West or North."
-	print "You came from the %s." % came_from
+	print "the intersection goes West or North.\n"
+	print "You came from the %s.\n" % came_from
 	print "Which way do you go?" 
 	answer = raw_input(prompt)
 	print " "
@@ -2075,9 +2068,9 @@ def seventh_intersection():
 			enemy_encounter()
 		print "You head West and shortly come to a dead end. It's different than"
 		print "a normal dead end, because the top of the wall at this dead end"
-		print "is much shorter than the walls surrounding it."
+		print "is much shorter than the walls surrounding it.\n"
 		time.sleep(3)
-		print "You can't do anything at this time so you go back to the intersection."
+		print "You can't do anything at this time so you go back to the intersection.\n"
 		came_from = "West"
 		seventh_intersection()
 	
@@ -2102,8 +2095,8 @@ def eighth_intersection():
 	global came_from
 	
 	print "You stand in a four-way intersection."
-	print "You can go North, South, East, or West."
-	print "You came from the %s." % came_from
+	print "You can go North, South, East, or West.\n"
+	print "You came from the %s.\n" % came_from
 	print "Which way do you go?" 
 	answer = raw_input(prompt)
 	print " "
@@ -2121,19 +2114,19 @@ def eighth_intersection():
 		
 		if chance <= 50:
 			enemy_encounter()
-		print "You've come to another intersection."
+		print "You've come to another intersection.\n"
 		came_from = "South"
 		
 		grand_hallway()
 	
 	elif "outh" in answer:
-		print "You head South."
+		print "You head South.\n"
 		chance = randint(1, 100)
 		
 		if chance <= 50:
 			enemy_encounter()
 		
-		print "The corridor turns an elbow to the east." 
+		print "The corridor turns an elbow to the east.\n" 
 		time.sleep(2)
 		chance = randint(1, 100)
 		
@@ -2141,8 +2134,8 @@ def eighth_intersection():
 			enemy_encounter()
 		print "The corridor turns into a dead end. The wall at the end has"
 		print "an intricately carved inlay on the wall, centered by a hollow"
-		print "circular form." 
-		print "You can't seem to do anything, so you turn around and go back."
+		print "circular form.\n" 
+		print "You can't seem to do anything, so you turn around and go back.\n"
 		came_from = "South"
 		
 		eighth_intersection()
@@ -2163,8 +2156,8 @@ def ninth_intersection():
 	global came_from
 	
 	print "You stand at a three-way intersection."
-	print "You can go North, South, or East."
-	print "You came from the %s." % came_from
+	print "You can go North, South, or East.\n"
+	print "You came from the %s.\n" % came_from
 	print "Which way do you go?" 
 	answer = raw_input(prompt)
 	print " "
@@ -2177,11 +2170,11 @@ def ninth_intersection():
 		print " "
 	
 	if "ast" in answer:
-		print "You head East and immediately the corridor takes you South."
-		print "You come to a dead end with a portrait hanging on the wall."
+		print "You head East and immediately the corridor takes you South.\n"
+		print "You come to a dead end with a portrait hanging on the wall.\n"
 		time.sleep(2)
 		print "The portrait is of the old woman you saw at the beginning of"
-		print "the labryinth."
+		print "the labryinth.\n"
 		came_from = "East"
 		
 		ninth_intersection()
@@ -2192,7 +2185,7 @@ def ninth_intersection():
 		chance = randint(1, 100)
 		if chance <= 50:
 			enemy_encounter()
-		print "You find yourself at the back of a Grand Hallway."
+		print "You find yourself at the back of a Grand Hallway.\n"
 		
 		grand_hallway()
 	
@@ -2211,8 +2204,8 @@ def eleventh_intersection():
 	
 	global came_from
 	
-	print "You stand at an intersection that leads North, East, or South."
-	print "You came from the %s." % came_from
+	print "You stand at an intersection that leads North, East, or South.\n"
+	print "You came from the %s.\n" % came_from
 	print "Which way do you go?" 
 	answer = raw_input(prompt)
 	print " "
@@ -2225,7 +2218,7 @@ def eleventh_intersection():
 		print " "
 	
 	if "orth" in answer:
-		print "You approach the mouth of a cave!" 
+		print "You approach the mouth of a cave!\n" 
 		print "Do you go into the cave?"
 
 		answer1 = raw_input(prompt)
@@ -2276,8 +2269,8 @@ def twelfth_intersection():
 
 	global came_from
 	
-	print "The large intersection holds an immense Grand Hallway to the East."
-	print "You may go East to the hallway or North or South or West."
+	print "The large intersection holds an immense Grand Hallway to the East.\n"
+	print "You may go East to the hallway or North or South or West.\n"
 	print "You came from the %s." % came_from
 	chance = randint(1, 100)
 	
@@ -2295,7 +2288,7 @@ def twelfth_intersection():
 		print " "
 	
 	if "ast" in answer:
-		print "You find yourself in the Grand Hallway."
+		print "You find yourself in the Grand Hallway.\n"
 		chance = randint(1, 100)
 		
 		if chance <= 80:
@@ -2337,13 +2330,13 @@ def second_room():
 	global came_from
 	came_from = "East"
 	
-	print "You enter a large room full of caskets." 
-	print "You came from the %s." % came_from
+	print "You enter a large room full of caskets.\n" 
+	print "You came from the %s.\n" % came_from
 	
 	enemy_encounter()
 	
 	print "You try to open the caskets and see that they are all"
-	print "made of solid stone." 
+	print "made of solid stone.\n" 
 	
 	print "You exit the room and come to an intersection."
 	
@@ -2356,11 +2349,12 @@ def third_room():
 	global came_from
 	
 	print "The door you took leads directly into a small room."
-	print "You came from the %s." % came_from
+	print "You came from the %s.\n" % came_from
 	
 	enemy_encounter()
 	
-	print "There is some sweet art in this room. Dang. Good stuff." 
+	print "There is some sweet art in this room. Dang. Good stuff.\n"
+	time.sleep(2)
 	print "You head back to the chamber."
 	
 	came_from = "Southeast"
@@ -2371,7 +2365,7 @@ def fourth_room():
 	
 	print "In the fourth room."
 	time.sleep(2)
-	print "Now leaving. Room incomplete."
+	print "Now leaving. Room incomplete.\n"
 	
 	eighth_intersection()
 	
@@ -2381,7 +2375,7 @@ def vendor_room():
 	
 	print "You enter a triangle shaped room.\n"
 	print "You see an old man sitting behind a wooden shelf in the far corner of"
-	print "the room. He's crotcheting." 
+	print "the room. He's crotcheting.\n" 
 	time.sleep(1)
 	print "\nWould you like to talk to him?"
 	answer = raw_input(prompt)
@@ -2429,7 +2423,7 @@ def vendor():
 		
 		if satchel_contents == []:
 			
-			print "It looks like your satchel is empty. What are you trying to pull?" 
+			print "It looks like your satchel is empty. What are you trying to pull?\n" 
 			vendor_room()
 		
 		print "What would you like to trade?"
@@ -2447,7 +2441,7 @@ def vendor():
 				trading_block.append(satchel_contents[i+1])
 		
 		print "Ahh, you have %d %d." % (satchel_contents[1], satchel_contents[2])
-		print "I have this to trade:"
+		print "I have this to trade:\n"
 		if 0 < player_lvl < 4:
 			print "***Thick Shirt***"
 			loot = "Thick Shirt"
@@ -2473,8 +2467,8 @@ def vendor():
 			print "Ok, good deal!"
 			for i in satchel_contents:
 				if trade_or == satchel_contents[i]:
-					satchel_contents[i] = loot
-					satchel_contents[i+1] = 5
+					satchel_contents.append(loot)
+					satchel_contents.append(5)
 					satchel_used -= 5
 			
 			print "This is what is in your satchel:"
@@ -2507,11 +2501,11 @@ def vendor():
 				trading_block.append(satchel_contents[i+1])
 		
 		print "Ahh, you have %d %d." % (trading_block[1], trading_block[0])
-		print "\nHow many %d would you like to sell? They're worth %s each." % (trading_block[0], "3 gold")
+		print "\nHow many %d would you like to sell? They're worth %d gold each." % (trading_block[0], 3)
 		print " "
 		choice = int(raw_input(prompt))
 		
-		print "I will give you %d gold for that. Deal?" 
+		print "I will give you %d gold for that. Deal?" % (choice * 3)
 		choice2 = raw_input(prompt)
 		
 		if "ye" in choice2:
@@ -2522,14 +2516,14 @@ def vendor():
 				if trade_or == satchel_contents[i]:
 					
 					satchel_contents[i+1] -= choice2
-					print "You have %d %d left over after you sold %d to me." % (satchel_contents[i+1], 
+					print "You have %d %s left over after you sold %d to me.\n" % (satchel_contents[i+1], 
 												     satchel_contents[i], choice2)
 					gold = choice2 * 3
 					print "You have %d gold now." % gold
 		
 		else: 
 			
-			print "Fine. I didn't want them anyway." 
+			print "Fine. I didn't want them anyway.\n" 
 			vendor_room()
 		
 	else: 
@@ -2594,8 +2588,8 @@ def battle_cave():
 	count = 0
 	battle_cave_count = 0
 	
-	print "You enter the cave." 
-	print "It stinks like death and you hear living sounds beyond the darkness."
+	print "You enter the cave.\n" 
+	print "It stinks like death and you hear living sounds beyond the darkness.\n"
 	print "You can only see about five feet in front of you."
 	print "Do you go forward?"
 	answer = raw_input(prompt)
@@ -2616,7 +2610,7 @@ def battle_cave():
 			if battle_cave_count > battle_cave_furthest:
 				
 				high_scorer_furthest = True
-				print "You have gone the furthest of any Battle Cave Explorer!" 
+				print "You have gone the furthest of any Battle Cave Explorer!\n" 
 				battle_cave_furthest = battle_cave_count
 				high_scorer_bcf = raw_input("Enter your name so it can rest atop the leaderboard: ")
 		
@@ -2626,7 +2620,7 @@ def battle_cave():
 		
 		if count == 4:
 			print "You have come across one of the Old Woman's Sons!"
-			print "Would you like to bring him back with you?"
+			print "Would you like to bring him back with you?\n"
 			# hero makes trips back with the sons, to deliver them to mama	
 		
 		print "Do you go forward?"
