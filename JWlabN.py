@@ -205,14 +205,14 @@ def battle(enemy, enemy_name):
 	enemy_hp = enemy[0]
 	enemy_attack = 0
 	player_attack = 0
-	v = time.sleep(0.5)
+	v = time.sleep(0.25)
 		
 	if enemy[3] > player_dex:
 		
 		while player_hp_dmg > 0 and enemy_hp > 0:
 			
 			print "\nThe %s attacks!\n" % enemy_name
-			time.sleep(2)
+			time.sleep(1)
 			
 			enemy_attack = randint(0, enemy[1])
 			precision = randint(1, 100)
@@ -269,19 +269,19 @@ def battle(enemy, enemy_name):
 				enemy_attack = 0
 			
 			print "The %s strikes you for: %d damage!\n" % (enemy_name, enemy_attack)
-			time.sleep(2)
+			time.sleep(1)
 			
 			player_hp_dmg -= enemy_attack
 			
 			print "You now have %s hit points.\n" % player_hp_dmg
 			print "--------------------********--------------------\n\n"
+			time.sleep(1)
 			
 			if player_hp_dmg <= 0:
 				dead("The %s has defeated you!" % enemy_name)
 			
-			time.sleep(2)
 			print "\nNow it's your turn to attack!\n"
-			time.sleep(2)
+			time.sleep(1)
 			
 			# First attack algorithm:
 			# player_attack = x + y + j
@@ -368,13 +368,13 @@ def battle(enemy, enemy_name):
 			print result
 			
 			print "You strike the %s for: %d damage!\n" % (enemy_name, player_attack)
-			time.sleep(2)
+			time.sleep(1)
 			
 			enemy_hp -= player_attack
 			
 			print "The %s now has %d hit points.\n" % (enemy_name, enemy_hp)
 			print "--------------------********--------------------\n\n"
-			time.sleep(2)
+			time.sleep(1)
 			
 			if enemy_hp <= 0:
 				print "Your enemy fades to dust.\n"
@@ -389,7 +389,7 @@ def battle(enemy, enemy_name):
 			
 			print "You attack!\n"
 			
-			time.sleep(2)
+			time.sleep(1)
 		
 			x = player_str
 			y = player_dex 
@@ -468,13 +468,14 @@ def battle(enemy, enemy_name):
 			print result
 			
 			print "You strike the %s for: %d damage!\n" % (enemy_name, player_attack)
+			time.sleep(1)
 			
 			enemy_hp -= player_attack
 			
 			print "The %s now has %d hit points.\n" % (enemy_name, enemy_hp)
 			print "--------------------********--------------------\n\n"
 			
-			time.sleep(2)
+			time.sleep(1)
 			
 			if enemy_hp <= 0:
 			
@@ -482,7 +483,7 @@ def battle(enemy, enemy_name):
 				break 
 				
 			print "Now it's the %s\'s turn!\n" % enemy_name			
-			time.sleep(2)
+			time.sleep(1)
 			
 			enemy_attack = randint(0, enemy[1])
 			precision = randint(1, 100)
@@ -540,12 +541,14 @@ def battle(enemy, enemy_name):
 				enemy_attack = 0
 			
 			print "The %s strikes you for: %d damage!\n" % (enemy_name, enemy_attack)
+			time.sleep(1)
+			
 			player_hp_dmg -= enemy_attack
 			
 			print "You now have %s hit points.\n" % player_hp_dmg
 			print "--------------------********--------------------\n\n"
 			
-			time.sleep(2)		
+			time.sleep(1)		
 			
 			if player_hp_dmg <= 0:
 				dead("You've been defeated by the %s." % enemy_name)
