@@ -868,7 +868,7 @@ def start():
 		print "'Just kidding. It's fine. I didn't mean it anyway.'"
 		
 		time.sleep(2)
-		print "Speaking of my kids... I lost them. They're in the labrynth 
+		print "Speaking of my kids... I lost them. They're in the labrynth"
 		print "and I'm certain they're being held prisoner or lost somewhere...\n"
 		time.sleep(1)
 		print "Woe is me!! I have the gout.\n"
