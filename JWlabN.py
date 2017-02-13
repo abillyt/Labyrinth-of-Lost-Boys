@@ -2567,6 +2567,7 @@ def vendor():
 				
 				if satchel_contents_weight[0] >= 50:
 					satchel_contents_weight[0] -= 50
+					satchel_used += 50
 					print "Okay, looks good. You have %d Rubies left." % satchel_contents_weight[0]
 					time.sleep(2)
 					print "I will now perform a miracle of healing!!"
