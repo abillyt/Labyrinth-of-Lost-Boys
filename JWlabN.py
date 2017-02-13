@@ -2442,10 +2442,10 @@ def vendor():
 			print "What would you like to trade?"
 			trade_or = raw_input(prompt)
 		
-		for i in satchel_contents_item:
-			if trade_or in satchel_contents_item[i]:
-				trading_block.append(satchel_contents_item[i])
-				trading_quan.append(satchel_contents_weight[i])
+		
+		if trade_or in satchel_contents_item:
+			trading_block.append(satchel_contents_item[0)
+			trading_quan.append(satchel_contents_weight[0])
 		
 		print "Ahh, you have %d %s." % (trading_quan[0], trading_block[0])
 		print "I have this to trade:\n"
@@ -2475,15 +2475,14 @@ def vendor():
 		if "ye" in answer:
 			
 			print "Ok, good deal!"
-			for i in satchel_contents_item:
-				if trade_or in satchel_contents_item[i]:
-					del satchel_contents_item[i]
-					del satchel_contents_weight[i]
-					del satchel_contents_use[i]
-					satchel_contents_item.append(loot)
-					satchel_contents_weight.append(5)
-					satchel_contents_use.append(use)
-					satchel_used -= 5
+			if trade_or in satchel_contents_item:
+				#del satchel_contents_item[i]
+				#del satchel_contents_weight[i]
+				#del satchel_contents_use[i]
+				satchel_contents_item.append(loot)
+				satchel_contents_weight.append(5)
+				satchel_contents_use.append(use)
+				satchel_used -= 5
 			
 			print "This is what is in your satchel:"
 			print satchel_contents_item()
@@ -2510,11 +2509,11 @@ def vendor():
 			trade_or = raw_input(prompt)
 		
 		for i in satchel_contents_item:
-			if trade_or in satchel_contents_item[i]:
+			if trade_or in satchel_contents_item:
 				trading_block.append(satchel_contents_item[i])
 				trading_quan.append(satchel_contents_weight[i])
 		
-		print "Ahh, you have %d %d." % (trading_block[0], trading_quan[0])
+		print "Ahh, you have %d %s." % (trading_quan[0], trading_block[0])
 		print "\nHow many %s would you like to sell? They're worth %d gold each." % (trading_block[0], 3)
 		print " "
 		choice = int(raw_input(prompt))
@@ -2525,15 +2524,14 @@ def vendor():
 		if "ye" in choice2:
 			
 			print "Great!"
-			for i in satchel_contents_item:
-				
-				if trade_or in satchel_contents_item[i]:
+
+			if trade_or in satchel_contents_item[i]:
 					
-					satchel_contents_weight[i] -= choice2
-					print "You have %d %s left over after you sold %d to me.\n" % (satchel_contents_weight[i], 
-												     satchel_contents_item[i], choice2)
-					gold = choice2 * 3
-					print "You have %d gold now." % gold
+				satchel_contents_weight[0] -= choice
+				print "You have %d %s left over after you sold %d to me.\n" % (satchel_contents_weight[0], 
+											     satchel_contents_item[0], choice)
+				gold = choice * 3
+				print "You have %d gold now." % gold
 		
 		else: 
 			
@@ -2564,30 +2562,28 @@ def vendor():
 			print "Want to give me 50 Rubies to heal you?"
 		
 		if "ye" in choice: 
-			
-			for i in satchel_contents_item:
 				
-				if "Rubies" in satchel_contents_item[i]:
+			if "Rubies" in satchel_contents_item:
 				
-					if satchel_contents_weight[i] >= 50:
-						satchel_contents_weight[i] -= 50
-						print "Okay, looks good. You have %d Rubies left." % satchel_contents_weight[i]
-						time.sleep(2)
-						print "I will now perform a miracle of healing!!"
-						time.sleep(4)
-						print "\n\nYou have been healed!" 
-						player_hp_dmg = player_hp
-						print "You now have %d hit points." % player_hp_dmg
-						vendor_room()
-					
-					else: 
-						print "You don't have enough Rubies." 
-						vendor_room()
+				if satchel_contents_weight[0] >= 50:
+					satchel_contents_weight[0] -= 50
+					print "Okay, looks good. You have %d Rubies left." % satchel_contents_weight[0]
+					time.sleep(2)
+					print "I will now perform a miracle of healing!!"
+					time.sleep(4)
+					print "\n\nYou have been healed!" 
+					player_hp_dmg = player_hp
+					print "You now have %d hit points." % player_hp_dmg
+					vendor_room()
 					
 				else: 
-					
-					print "I don't see any Rubies in your bag." 
+					print "You don't have enough Rubies." 
 					vendor_room()
+					
+			else: 
+				
+				print "I don't see any Rubies in your bag." 
+				vendor_room()
 		
 		else: 
 			print "I'm glad, tbh. It means I can conserve my energy." 
