@@ -719,31 +719,31 @@ def enemy_encounter():
 		enemy_name = enemy
 		#Enemy form: (hp, max_attack, gives_xp, dex)
 		if x == 0:
-			enemy = (6, 4, 3, 1) #slime 14
+			enemy = (6, 3, 4, 1) #slime 14
 		
 		elif x == 1:
-			enemy = (6, 5, 4, 5) #gnoll 20
+			enemy = (6, 3, 4, 5) #gnoll 18
 		
 		elif x == 2:
-			enemy = (6, 6, 5, 6) #wolf 23
+			enemy = (6, 4, 5, 6) #wolf 21
 		
 		elif x == 3: 
-			enemy = (4, 4, 5, 10) #bat 23
+			enemy = (5, 3, 5, 10) #bat 23
 		
 		elif x == 4:
-			enemy = (6, 5, 5, 6) #goblin 22
+			enemy = (6, 3, 4, 6) #goblin 19
 		
 		elif x == 5:
-			enemy = (3, 3, 3, 8) #cat 17
+			enemy = (3, 2, 3, 8) #cat 16
 		
 		elif x == 6:
-			enemy = (6, 3, 3, 1) #flannel_bag 13
+			enemy = (6, 2, 3, 1) #flannel_bag 12
 		
 		elif x == 7:
 			enemy = (10, 2, 5, 2) #glowing_top_hat 19
 		
 		else:
-			enemy = (5, 3, 2, 2) #round_spectacles() 12
+			enemy = (5, 2, 2, 2) #round_spectacles() 11
 	
 	elif 3 < player_lvl <= 6:
 		
@@ -751,31 +751,31 @@ def enemy_encounter():
 		enemy_name = enemy
 		
 		if x == 0:
-			enemy = (9, 7, 6, 2) #lg_slime 24
+			enemy = (9, 5, 6, 2) #lg_slime 22
 		
 		elif x == 1:
-			enemy = (10, 10, 9, 8) #gnoll_pack 38
+			enemy = (10, 10, 9, 8) #gnoll_pack 37
 		
 		elif x == 2:
-			enemy = (9, 9, 8, 7) #alpha_wolf 32
+			enemy = (9, 7, 8, 7) #alpha_wolf 31
 		
 		elif x == 3: 
-			enemy = (6, 10, 8, 12) #ancient_bat 36
+			enemy = (6, 8, 9, 12) #ancient_bat 35
 		
 		elif x == 4:
-			enemy = (4, 12, 6, 6) #desperate_goblin 28
+			enemy = (4, 10, 7, 6) #desperate_goblin 27
 		
 		elif x == 5:
-			enemy = (6, 6, 6, 10) #mountain_cat 28
+			enemy = (8, 6, 7, 10) #mountain_cat 31
 		
 		elif x == 6:
-			enemy = (5, 10, 7, 3) #self_closing_flannel_bag 24
+			enemy = (5, 10, 7, 3) #self_closing_flannel_bag 25
 		
 		elif x == 7:
-			enemy = (10, 8, 8, 2) #glowing_top_hat_w_cane 26
+			enemy = (10, 8, 9, 2) #glowing_top_hat_w_cane 29
 		
 		else:
-			enemy = (6, 8, 6, 3) #jagged_contacts 22
+			enemy = (6, 8, 6, 3) #jagged_contacts 23
 	
 	elif 6 < player_lvl <= 9:
 		
@@ -786,10 +786,10 @@ def enemy_encounter():
 			enemy = (12, 15, 12, 8) #shiny_mist 47
 		
 		elif x == 1:
-			enemy = (13, 2, 9, 18) #floor_of_marbles 43
+			enemy = (13, 2, 6, 18) #floor_of_marbles 43
 		
 		elif x == 2:
-			enemy = (8, 14, 9, 5) #shrieking_box 36
+			enemy = (8, 14, 10, 5) #shrieking_box 36
 		
 		elif x == 3: 
 			enemy = (12, 12, 12, 5) #wall_of_bats 41
