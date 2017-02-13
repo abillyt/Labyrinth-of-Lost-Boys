@@ -13,9 +13,11 @@ player_hp = 11 # hit point capacity
 player_hp_dmg = 11	# current hit points
 player_name = "Unknown"
 player_class = "Unknown"
-satchel = 100  # total units
+satchel_cap = 100  # total units
 satchel_used = 100
-satchel_contents = []
+satchel_contents_item = []
+satchel_contents_weight = []
+satchel_contents_use = []
 gold = 0
 fight_count = 0
 fight_count_most = 51
@@ -93,8 +95,8 @@ def print_wisdom(parent):
 
 def player_check():
 	
-	global player_lvl, player_xp, player_str, player_dex, player_int, player_hp
-	global player_hp_dmg, player_name, player_class, satchel, satchel_contents
+	#global player_lvl, player_xp, player_str, player_dex, player_int, player_hp
+	#global player_hp_dmg, player_name, player_class, satchel, satchel_contents
 
 	print "Would you like to see your stats or your inventory or best scores?"
 	choice = raw_input(prompt)
@@ -113,15 +115,15 @@ def player_check():
 	
 	elif "nvent" in choice:
 	
-		if satchel_contents == []:
-			print "Your satchel has a capacity of %d and is empty!" % satchel
+		if satchel_contents_item == []:
+			print "Your satchel has a capacity of %d and is empty!" % satchel_cap
 		
 		else:
 			print """Here is your current inventory:\n
 			Satchel Capacity: %d
 			Satchel's available space: %d
 			Satchel Contents:
-			%d %s""" % (satchel, satchel_used, satchel_contents[1], satchel_contents[0])
+			%d %s""" % (satchel_cap, satchel_used, satchel_contents_weight[], satchel_contents_item[])
 			print " "
 	
 	elif "scores" in choice: 
@@ -159,15 +161,15 @@ def equip(): #incomplete
 	global player_str, player_dex, player_int, player_hp
 	
 	if player_class == "Wizard":
-		print "What would you like to equip, good %s?" % player_class
+		print "What would you like to equip, good %s, the %s?" % (player_name, player_class)
 		answer = raw_input(prompt)
 	
 	elif player_class == "Ninja":
-		print "What would you like to equip, dear %s?" % player_class
+		print "What would you like to equip, dear %s, the %s?" % (player_name, player_class)
 		answer = raw_input(prompt)
 	
 	else:
-		print "What would you like to equip, hybrid %s?" % player_class
+		print "What would you like to equip, sweet %s, the %s?" % (player_name, player_class)
 		answer = raw_input(prompt) 
 
 # incomplete def use(): 
@@ -725,7 +727,7 @@ def enemy_encounter():
 def level_up():
 	
 	global player_lvl, player_xp_cap, player_str, player_dex, player_int, player_hp
-	global player_hp_dmg
+	global player_hp_dmg, player_xp
 	
 	print "You've leveled up! Congrats, that's awesome!\n" 
 	time.sleep(4)
@@ -1584,7 +1586,8 @@ def third_intersection():
 
 def first_room():
 	
-	global satchel, satchel_contents, came_from, first_time_first_room
+	global satchel_cap, satchel_contents_item, satchel_contents_weight
+	global came_from, first_time_first_room, satchel_used
 	came_from = "The Room"
 	
 	while first_time_first_room:
@@ -1593,7 +1596,7 @@ def first_room():
 	
 		print "You open the door and step into a room full of rubies!"
 		time.sleep(2)
-		print "Currently, your satchel has %d units of space available." % satchel
+		print "Currently, your satchel has %d units of space available." % satchel_used
 		print "HINT: Rubies each occupy 1 unit of space in your satchel.\n"
 		print "But your hands can hold so much more, so it's tempting to grab more."
 		time.sleep(1)
@@ -1602,17 +1605,17 @@ def first_room():
 		choice = int(raw_input(prompt))
 		print " "
 				
-		if 0 < choice <= satchel:
+		if 0 < choice <= satchel_used:
 			
 			print "You put %d rubies in your bag." % choice
 			
-			satchel_contents.append("Rubies")
-			satchel_contents.append(choice)
-			satchel = satchel - choice
+			satchel_contents_item.append("Rubies")
+			satchel_contents_weight.append(choice)
+			satchel_used -= choice
 			time.sleep(2)
 			
-			print "Your satchel contains %r" % satchel_contents
-			print "You have %d units of space left in your satchel." % satchel
+			print "Your satchel holds the %d %s" % (satchel_contents_weight[0], satchel_contents_item[0])
+			print "You have %d units of space left in your satchel." % satchel_used
 			
 			third_intersection()
 		else:
@@ -1639,12 +1642,12 @@ def first_room():
 				
 				print "You put %d rubies in your bag." % choice
 				
-				satchel_contents.append("Rubies")
-				satchel_contents.append(choice)
-				satchel = satchel - choice
+				satchel_contents_item.append("Rubies")
+				satchel_contents_weight.append(choice)
+				satchel_used -= choice
 				
-				print "Your satchel contains %r" % satchel_contents
-				print "You have %d units of space left in your satchel." % satchel
+				print "Your satchel contains %d %s" % (satchel_contents_weight[0], satchel_contents_item[0])
+				print "You have %d units of space left in your satchel." % satchel_used
 				
 				third_intersection()
 			
@@ -2400,28 +2403,31 @@ def vendor_room():
 	
 def vendor():
 	
-	global satchel, satchel_contents, player_hp_dmg, satchel_used, gold
+	global satchel_used, satchel_cap, satchel_contents_item, satchel_contents_weight, player_hp_dmg, gold
+	global satchel_contents_use
 	
 	trading_block = []
+	trading_quan = []
 	loot = "blank"
+	use = "blank"
 	
 	print "The vendor looks up from his chiseling and looks you in the eye.\n"
 	time.sleep(1)
 	print "Vendor: It's been a long time since I've seen a stranger."
 	print "What can I help you with?\n"
 	print "1. Trade \t2. Sell \t3. Healing"
-	selection = int(raw_input(prompt))
+	selection = raw_input(prompt)
 	
 	while selection == "player":
 		
 		player_check()
 		
 		print "1. Trade \t2. Sell \t3. Healing"
-		selection = int(raw_input(prompt))
+		selection = raw_input(prompt)
 	
-	if selection == 1:
+	if selection == "1":
 		
-		if satchel_contents == []:
+		if satchel_contents_item == []:
 			
 			print "It looks like your satchel is empty. What are you trying to pull?\n" 
 			vendor_room()
@@ -2435,22 +2441,25 @@ def vendor():
 			print "What would you like to trade?"
 			trade_or = raw_input(prompt)
 		
-		for i in satchel_contents:
-			if trade_or == satchel_contents[i]:
-				trading_block.append(satchel_contents[i])
-				trading_block.append(satchel_contents[i+1])
+		for i in satchel_contents_item:
+			if trade_or == satchel_contents_item[i]:
+				trading_block.append(satchel_contents_item[i])
+				trading_quan.append(satchel_contents_weight[i])
 		
-		print "Ahh, you have %d %d." % (satchel_contents[1], satchel_contents[2])
+		print "Ahh, you have %d %s." % (trading_quan[0], trading_block[0])
 		print "I have this to trade:\n"
 		if 0 < player_lvl < 4:
 			print "***Thick Shirt***"
 			loot = "Thick Shirt"
+			use = "+1 Defense"
 		elif 3 < player_lvl < 7:
 			print "***Leather T-Shirt***"
 			loot = "Leather T-Shirt"
+			use = "+2 Defense"
 		elif 6 < player_lvl:
 			print "***Leather Jacket***"
 			loot = "Leather Jacket"
+			use = "+3 Defense"
 		time.sleep(2)
 		print "Would you like to trade? Straight up? Mine for yours?" 
 		answer = raw_input(prompt)
@@ -2465,23 +2474,27 @@ def vendor():
 		if "ye" in answer:
 			
 			print "Ok, good deal!"
-			for i in satchel_contents:
-				if trade_or == satchel_contents[i]:
-					satchel_contents.append(loot)
-					satchel_contents.append(5)
+			for i in satchel_contents_item:
+				if trade_or == satchel_contents_item[i]:
+					del satchel_contents_item[i]
+					del satchel_contents_weight[i]
+					del satchel_contents_use[i]
+					satchel_contents_item.append(loot)
+					satchel_contents_weight.append(5)
+					satchel_contents_use.append(use)
 					satchel_used -= 5
 			
 			print "This is what is in your satchel:"
-			print satchel_contents()
+			print satchel_contents_item()
 			print "You have %d units of space available in your satchel." % satchel_used
 			
 		else: 
 			print "Oh well." 
 			vendor_room()
 	
-	elif selection == 2:
+	elif selection == "2":
 		
-		if satchel_contents == []:
+		if satchel_contents_item == []:
 			
 			print "It looks like your satchel is empty. What are you trying to pull?" 
 			vendor_room()
@@ -2495,13 +2508,13 @@ def vendor():
 			print "What would you like to trade?"
 			trade_or = raw_input(prompt)
 		
-		for i in satchel_contents:
-			if trade_or == satchel_contents[i]:
-				trading_block.append(satchel_contents[i])
-				trading_block.append(satchel_contents[i+1])
+		for i in satchel_contents_item:
+			if trade_or == satchel_contents_item[i]:
+				trading_block.append(satchel_contents_item[i])
+				trading_quan.append(satchel_contents_weight[i])
 		
-		print "Ahh, you have %d %d." % (trading_block[1], trading_block[0])
-		print "\nHow many %d would you like to sell? They're worth %d gold each." % (trading_block[0], 3)
+		print "Ahh, you have %d %d." % (trading_block[0], trading_quan[0])
+		print "\nHow many %s would you like to sell? They're worth %d gold each." % (trading_block[0], 3)
 		print " "
 		choice = int(raw_input(prompt))
 		
@@ -2511,13 +2524,13 @@ def vendor():
 		if "ye" in choice2:
 			
 			print "Great!"
-			for i in satchel_contents:
+			for i in satchel_contents_item:
 				
-				if trade_or == satchel_contents[i]:
+				if trade_or == satchel_contents_item[i]:
 					
-					satchel_contents[i+1] -= choice2
-					print "You have %d %s left over after you sold %d to me.\n" % (satchel_contents[i+1], 
-												     satchel_contents[i], choice2)
+					satchel_contents_weight[i] -= choice2
+					print "You have %d %s left over after you sold %d to me.\n" % (satchel_contents_weight[i], 
+												     satchel_contents_item[i], choice2)
 					gold = choice2 * 3
 					print "You have %d gold now." % gold
 		
@@ -2535,7 +2548,7 @@ def vendor():
 		time.sleep(2)
 		print "It'll cost you 50 rubies to heal yourself."
 		print "I know that's a lot, but they're probably just laying around somewhere to find." 
-		if satchel_contents == []:
+		if satchel_contents_item == []:
 			
 			print "It looks like you don't have any Rubies. See ya." 
 			vendor_room()
@@ -2551,13 +2564,13 @@ def vendor():
 		
 		if "ye" in choice: 
 			
-			for i in satchel_contents:
+			for i in satchel_contents_item:
 				
-				if satchel_contents[i] == "Rubies":
+				if satchel_contents_item[i] == "Rubies":
 				
-					if satchel_contents[i+1] >= 50:
-						satchel_contents[i+1] -= 50
-						print "Okay, looks good. You have %d Rubies left." % satchel_contents[i+1]
+					if satchel_contents_weight[i] >= 50:
+						satchel_contents_weight[i] -= 50
+						print "Okay, looks good. You have %d Rubies left." % satchel_contents_weight[i]
 						time.sleep(2)
 						print "I will now perform a miracle of healing!!"
 						time.sleep(4)
