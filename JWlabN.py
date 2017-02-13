@@ -91,7 +91,6 @@ def print_wisdom(parent):
 		print "\nFrom your Mother:\n"
 		print '"' + mothers_wisdom[chance] + '"'
 		print " "
-	
 
 def player_check():
 	
@@ -155,7 +154,6 @@ def player_check():
 	else: 
 		print "I'm sure you know your way."
 		
-
 def equip(): #incomplete
 	
 	global player_str, player_dex, player_int, player_hp
@@ -268,6 +266,7 @@ def battle(enemy, enemy_name):
 			print result
 			
 			if enemy_attack < 0:
+			
 				enemy_attack = 0
 			
 			print "The %s strikes you for: %d damage!\n" % (enemy_name, enemy_attack)
@@ -280,7 +279,8 @@ def battle(enemy, enemy_name):
 			time.sleep(1)
 			
 			if player_hp_dmg <= 0:
-				dead("The %s has defeated you!\n" % enemy_name)
+				
+				determine_player_death(player_hp_dmg, enemy_name)
 			
 			print "Now it's your turn to attack!\n"
 			time.sleep(1)
@@ -369,6 +369,10 @@ def battle(enemy, enemy_name):
 				
 			print result
 			
+			if player_attack < 0:
+				
+				player_attack = 0
+			
 			print "You strike the %s for: %d damage!\n" % (enemy_name, player_attack)
 			time.sleep(1)
 			
@@ -379,12 +383,14 @@ def battle(enemy, enemy_name):
 			time.sleep(1)
 			
 			if enemy_hp <= 0:
-				print "Your enemy fades to dust.\n"
+				
+				determine_enemy_death(enemy_hp, enemy_name)
 				print "---------------------------"
 				break
 			
 		if player_hp_dmg <= 0:
-			dead("You've been slain by the %r\n" % enemy)
+			
+			determine_player_death(player_hp_dmg, enemy_name)
 	
 	else:
 		
@@ -473,6 +479,10 @@ def battle(enemy, enemy_name):
 			print "You strike the %s for: %d damage!\n" % (enemy_name, player_attack)
 			time.sleep(1)
 			
+			if player_attack < 0:
+				
+				player_attack = 0
+			
 			enemy_hp -= player_attack
 			
 			print "The %s now has %d hit points.\n" % (enemy_name, enemy_hp)
@@ -482,7 +492,7 @@ def battle(enemy, enemy_name):
 			
 			if enemy_hp <= 0:
 			
-				print "You're enemy fades to dust.\n"
+				determine_enemy_death(enemy_hp, enemy_name)
 				print "---------------------------"
 				break 
 				
@@ -542,6 +552,7 @@ def battle(enemy, enemy_name):
 			print result
 			
 			if enemy_attack < 0:
+			
 				enemy_attack = 0
 			
 			print "The %s strikes you for: %d damage!\n" % (enemy_name, enemy_attack)
@@ -555,10 +566,12 @@ def battle(enemy, enemy_name):
 			time.sleep(1)		
 			
 			if player_hp_dmg <= 0:
-				dead("You've been defeated by the %s." % enemy_name)
+				
+				determine_player_death(player_hp_dmg, enemy_name)
 			
 		if player_hp_dmg <= 0:
-			dead("You've been DEFEATED by the %s" % enemy_name)
+			
+			determine_player_death(player_hp_dmg, enemy_name)
 			
 	
 	print "You win!\n"
@@ -588,6 +601,110 @@ def battle(enemy, enemy_name):
 		player_xp = player_xp_cap
 	
 	print "You have %d experience points to gain before you level up.\n" % player_xp
+
+def determine_enemy_death(num, enemy_name):
+
+	if num == 0:
+		print "You barely defeated the %s!\n" % enemy_name
+		
+	elif num == -1:
+		print "The %s juuuuust rolls over!\n" % enemy_name
+		
+	elif num == -2:
+		print "The %s falls with little glory.\n" % enemy_name
+		
+	elif num == -3:
+		print "You thwacked the %s.\n" % enemy_name
+		
+	elif num == -4:
+		print "Solidly dead. Nice work.\n"
+	
+	elif num == -5:
+		print "Clearly dead. No brainer.\n"
+		
+	elif num == -6:
+		print "Were you making that personal?\n"
+	
+	elif num == -7:
+		print "Holy Maloly, you freaking crushed it. freaking. crushed. it.\n"
+	
+	elif num == -8:
+		print "Having a good day?\n"
+	
+	elif num == -9:
+		print "Yikes. Not too often I need to look away at a death.\n"
+		
+	elif num == -10:
+		print "You might need to change your clothes after that shelacking!\n"
+		
+	elif num == -11:
+		print "Foooooeey! Cosmic strike!"
+		
+	elif num == -12:
+		print "The %s explodes!" % enemy_name
+	
+	elif num == -13:
+		print "The %s basically died 5 minutes ago from that hit."
+	
+	elif num == -14:
+		print "-14, really? Holy Fuggin Heckfire."
+		
+	elif num == -15:
+		print "Hit so hard it's been forgotten."
+	
+	elif num == -16:
+		print "I'm not sure it coul get any more dead."
+		
+	elif num <= -17:
+		print "Bravo! Hall of Fame Death!"
+	
+	else:
+		print "This should never ever ever print."
+		
+def determine_player_death(num, enemy_name):
+
+	if num == 0:
+		dead("The %s has barely defeated you!\n" % enemy_name)
+		
+	elif num == -1:
+		dead("The %s juuuuust defeated you!\n" % enemy_name)
+		
+	elif num == -2:
+		dead("You got beaten by the %s.\n" % enemy_name)
+		
+	elif num == -3:
+		dead("You got thwacked by the %s.\n" % enemy_name)
+		
+	elif num == -4:
+		dead("Well, solidly dead, I'd say.\n")
+	
+	elif num == -5:
+		dead("Clearly dead. No doubter.\n") 
+		
+	elif num == -6:
+		dead("That was not nice and frankly, I think it was personal.\n")
+	
+	elif num == -7:
+		dead("Holy Maloly, you got freaking crushed. freaking. crushed.\n")
+	
+	elif num == -8:
+		dead("Having a bad day?\n") 
+	
+	elif num == -9:
+		dead("Yikes. Not too often I need to look away at a death.\n")
+		
+	elif num == -10:
+		dead("May need to check the corners for limbs because you got torn apart!\n")
+		
+	elif num == -11:
+		dead("I'm not sure you can get this dead.")
+		
+	elif num <= -12:
+		dead("Bravo! Hall of Fame Death!")
+	
+	else:
+		
+		dead("this should never print")
 
 def enemy_encounter():
 	
@@ -776,7 +893,8 @@ def level_up():
 def start():
 	
 	global first_time_secret_room, first_time_first_room, came_from, player_hp_dmg
-	global player_name, player_class, player_lvl, player_xp
+	global player_name, player_class, player_lvl, player_xp, satchel_used
+	global satchel_contents_item, satchel_contents_weight
 	
 	player_name = ""
 	player_class = ""
@@ -786,6 +904,9 @@ def start():
 	high_scorer_cave = False
 	high_scorer_furthest = False
 	high_scorer = False
+	satchel_contents_item = []
+	satchel_contents_weight = []
+	satchel_used = satchel_cap
 	
 	print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 	print "\n\n\t\tLabryinth of the Lost Sons\n\n\n"
@@ -1557,13 +1678,14 @@ def third_intersection():
 		time.sleep(1)
 		print "Following the turn you head up stone stairs."
 		time.sleep(1)
-		print "Upon reaching the top, a great chamber comes into view!\n"
-		came_from = "Southwest"
 		
 		chance = randint(1, 100)
 		
 		if chance <= 70:
 			enemy_encounter()
+			
+		print "Upon reaching the top of the stairs, a great chamber comes into view!\n"
+		came_from = "Southwest"
 		
 		first_chamber()
 	
@@ -1639,7 +1761,7 @@ def first_room():
 				choice = int(raw_input(prompt))
 				print " "
 				
-			if 0 < choice <= satchel:
+			if 0 < choice <= satchel_used:
 				
 				print "You put %d rubies in your bag." % choice
 				
@@ -2267,7 +2389,6 @@ def eleventh_intersection():
 	else: 
 		print "Dunno why"
 		seventh_intersection()
-		
 	
 def twelfth_intersection():
 
@@ -2567,7 +2688,6 @@ def vendor():
 				
 				if satchel_contents_weight[0] >= 50:
 					satchel_contents_weight[0] -= 50
-					satchel_used += 50
 					print "Okay, looks good. You have %d Rubies left." % satchel_contents_weight[0]
 					time.sleep(2)
 					print "I will now perform a miracle of healing!!"
@@ -2588,8 +2708,7 @@ def vendor():
 		
 		else: 
 			print "I'm glad, tbh. It means I can conserve my energy." 
-			vendor_room()
-			
+			vendor_room()	
 	
 def battle_cave():
 	
@@ -2700,11 +2819,21 @@ def grand_hallway():
 		came_from = "North"
 		
 		ninth_intersection()
-		
-		
+			
 def dead(why):
 	
-	print why, "\nWeak effort, dying so soon. Better luck next time."
+	global player_hp_dmg
+	
+	print why
+	
+	print "test version. Would you like to reload with all yo stats & lvl?"
+	quandry = raw_input(prompt)
+	
+	if "y" in quandry:
+	
+		player_hp_dmg = player_hp
+		battle_cave()
+	
 	print "Would you like to play again? y or n?"
 	
 	answer = raw_input(prompt)
@@ -2724,3 +2853,4 @@ def dead(why):
 		exit(0)
 
 start()
+
