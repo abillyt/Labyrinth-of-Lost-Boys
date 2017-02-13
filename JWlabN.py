@@ -123,7 +123,7 @@ def player_check():
 			Satchel Capacity: %d
 			Satchel's available space: %d
 			Satchel Contents:
-			%d %s""" % (satchel_cap, satchel_used, satchel_contents_weight[], satchel_contents_item[])
+			%s %s""" % (satchel_cap, satchel_used, satchel_contents_weight, satchel_contents_item)
 			print " "
 	
 	elif "scores" in choice: 
@@ -1587,7 +1587,7 @@ def third_intersection():
 def first_room():
 	
 	global satchel_cap, satchel_contents_item, satchel_contents_weight
-	global came_from, first_time_first_room, satchel_used
+	global came_from, first_time_first_room, satchel_used, satchel_contents_use
 	came_from = "The Room"
 	
 	while first_time_first_room:
@@ -1611,6 +1611,7 @@ def first_room():
 			
 			satchel_contents_item.append("Rubies")
 			satchel_contents_weight.append(choice)
+			satchel_contents_use.append("They're shiny!")
 			satchel_used -= choice
 			time.sleep(2)
 			
@@ -2566,7 +2567,7 @@ def vendor():
 			
 			for i in satchel_contents_item:
 				
-				if satchel_contents_item[i] == "Rubies":
+				if "Rubies" == satchel_contents_item[i]:
 				
 					if satchel_contents_weight[i] >= 50:
 						satchel_contents_weight[i] -= 50
