@@ -2443,7 +2443,7 @@ def vendor():
 			trade_or = raw_input(prompt)
 		
 		for i in satchel_contents_item:
-			if trade_or == satchel_contents_item[i]:
+			if trade_or in satchel_contents_item[i]:
 				trading_block.append(satchel_contents_item[i])
 				trading_quan.append(satchel_contents_weight[i])
 		
@@ -2476,7 +2476,7 @@ def vendor():
 			
 			print "Ok, good deal!"
 			for i in satchel_contents_item:
-				if trade_or == satchel_contents_item[i]:
+				if trade_or in satchel_contents_item[i]:
 					del satchel_contents_item[i]
 					del satchel_contents_weight[i]
 					del satchel_contents_use[i]
@@ -2510,7 +2510,7 @@ def vendor():
 			trade_or = raw_input(prompt)
 		
 		for i in satchel_contents_item:
-			if trade_or == satchel_contents_item[i]:
+			if trade_or in satchel_contents_item[i]:
 				trading_block.append(satchel_contents_item[i])
 				trading_quan.append(satchel_contents_weight[i])
 		
@@ -2527,7 +2527,7 @@ def vendor():
 			print "Great!"
 			for i in satchel_contents_item:
 				
-				if trade_or == satchel_contents_item[i]:
+				if trade_or in satchel_contents_item[i]:
 					
 					satchel_contents_weight[i] -= choice2
 					print "You have %d %s left over after you sold %d to me.\n" % (satchel_contents_weight[i], 
@@ -2561,13 +2561,13 @@ def vendor():
 			
 			player_check()
 			
-			print "Wnat to give me 50 Rubies to heal you?"
+			print "Want to give me 50 Rubies to heal you?"
 		
 		if "ye" in choice: 
 			
 			for i in satchel_contents_item:
 				
-				if "Rubies" == satchel_contents_item[i]:
+				if "Rubies" in satchel_contents_item[i]:
 				
 					if satchel_contents_weight[i] >= 50:
 						satchel_contents_weight[i] -= 50
