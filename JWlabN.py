@@ -2444,7 +2444,7 @@ def vendor():
 		
 		
 		if trade_or in satchel_contents_item:
-			trading_block.append(satchel_contents_item[0)
+			trading_block.append(satchel_contents_item[0])
 			trading_quan.append(satchel_contents_weight[0])
 		
 		print "Ahh, you have %d %s." % (trading_quan[0], trading_block[0])
