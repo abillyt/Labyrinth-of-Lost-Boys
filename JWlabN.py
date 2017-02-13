@@ -644,7 +644,7 @@ def determine_enemy_death(num, enemy_name):
 		print "The %s explodes!" % enemy_name
 	
 	elif num == -13:
-		print "The %s basically died 5 minutes ago from that hit."
+		print "The %s basically died 5 minutes ago from that hit." % enemy_name
 	
 	elif num == -14:
 		print "-14, really? Holy Fuggin Heckfire."
@@ -653,7 +653,7 @@ def determine_enemy_death(num, enemy_name):
 		print "Hit so hard it's been forgotten."
 	
 	elif num == -16:
-		print "I'm not sure it coul get any more dead."
+		print "I'm not sure it could get any more dead."
 		
 	elif num <= -17:
 		print "Bravo! Hall of Fame Death!"
@@ -2174,8 +2174,8 @@ def seventh_intersection():
 
 	global came_from
 	
-	print "Heading down the stone steps, you come to an intersection." 
-	print "the intersection goes West or North.\n"
+	print "You come to a three-way intersection." 
+	print "The paths go West or North or Southeast up the stairs.\n"
 	print "You came from the %s.\n" % came_from
 	print "Which way do you go?" 
 	answer = raw_input(prompt)
@@ -2212,7 +2212,7 @@ def seventh_intersection():
 		chance = randint(1, 100)
 		if chance <= 50:
 			enemy_encounter()
-		print "You head back up the stairs."
+		print "You head up the stairs to the Southeast."
 		came_from = "Northwest"
 		first_chamber()
 
@@ -2525,8 +2525,8 @@ def vendor_room():
 	
 def vendor():
 	
-	global satchel_used, satchel_cap, satchel_contents_item, satchel_contents_weight, player_hp_dmg, gold
-	global satchel_contents_use
+	global satchel_used, satchel_cap, satchel_contents_item, satchel_contents_weight
+	global satchel_contents_use, player_hp_dmg, gold
 	
 	trading_block = []
 	trading_quan = []
@@ -2629,10 +2629,10 @@ def vendor():
 			print "What would you like to trade?"
 			trade_or = raw_input(prompt)
 		
-		for i in satchel_contents_item:
-			if trade_or in satchel_contents_item:
-				trading_block.append(satchel_contents_item[i])
-				trading_quan.append(satchel_contents_weight[i])
+		
+		if trade_or in satchel_contents_item:
+			trading_block.append(satchel_contents_item[0])
+			trading_quan.append(satchel_contents_weight[0])
 		
 		print "Ahh, you have %d %s." % (trading_quan[0], trading_block[0])
 		print "\nHow many %s would you like to sell? They're worth %d gold each." % (trading_block[0], 3)
@@ -2646,7 +2646,7 @@ def vendor():
 			
 			print "Great!"
 
-			if trade_or in satchel_contents_item[i]:
+			if trade_or in satchel_contents_item:
 					
 				satchel_contents_weight[0] -= choice
 				print "You have %d %s left over after you sold %d to me.\n" % (satchel_contents_weight[0], 
@@ -2688,6 +2688,7 @@ def vendor():
 				
 				if satchel_contents_weight[0] >= 50:
 					satchel_contents_weight[0] -= 50
+					satchel_used += 50
 					print "Okay, looks good. You have %d Rubies left." % satchel_contents_weight[0]
 					time.sleep(2)
 					print "I will now perform a miracle of healing!!"
