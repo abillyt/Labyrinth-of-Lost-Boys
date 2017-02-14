@@ -909,7 +909,7 @@ def start():
 	satchel_used = satchel_cap
 	
 	print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-	print "\n\n\t\tLabryinth of the Lost Sons\n\n\n"
+	print "\n\n\t\tLabyrinth of the Lost Sons\n\n\n"
 	
 	time.sleep(2)
 	print "Thanks for playing.\n"
