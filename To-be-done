@@ -1,5 +1,5 @@
 Implement Loot System - Must adjust the satchel to utilize two lists, rather than one. 
 Having one list makes manipulating hard or impossible because I'm using strings and integers in the same list. 
-So I will now implement having a List for the string content and a List for the quantity content. 
+I may do away with the "weight" list, meaning the integer amount of space something uses up in list form. 
 Implement Defense in battling
 Implement Working Save Game Feature (writing to file an option?) 
