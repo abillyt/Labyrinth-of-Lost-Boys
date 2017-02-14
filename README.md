@@ -1,6 +1,8 @@
 Labyrinth-of-Lost-Boys
 a text-based adventure game.
-First uploaded version is an workable but incomplete map, with character creation, leveling up, a honed fighting algorithm
+First uploaded version is an workable but incomplete map, with character creation, leveling up, a honed fighting algorithm. 
+
+It's coded in Python 2.7
 
 To play: 
 The game will work best if you enter words in lower case without getting cheeky. 
