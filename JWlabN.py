@@ -36,6 +36,21 @@ high_scorer = False
 high_scorer_furthest = False
 high_scorer_cave = False
 
+loot_dict = {'Sturdy Walking Stick': '+1 attack for Ninja or Hybrid', 'Cloth Cap': '+1 int for Wizard', 
+'Short Stick': '+1 attack for Wizard or Hybrid', 'Basic Gloves': '+1 dex for all classes', 
+'Spade': 'a small, handheld digging instrument', 'Rocks': 'a few rocks of varying size and weight',
+'Thick Shirt': '+1 defense for all classes', 'Roll of String': 'about 100 feet of string',
+'Small Medallion': 'a unique pattern is displayed on the face',
+'3\' Pipe': '+2 attack for Ninja or Hybrid', 'Sturdy Hat': '+2 int for Wizard',
+'Madrona Wand': '+2 attack for Wizard or Hybrid', 'Fingerless Gloves': '+2 dexterity for all classes',
+'Shovel': 'a tool you could dig a hole with', 'Jagged Rocks': 'a few rocks with sharp edges', 
+'Leather T-Shirt': '+2 defense for all classes', 'Short Rope': 'about 12 feet of good rope',
+'Big Medallion': 'a unique pattern is displayed on the face', 'Sword': '+3 attack for Ninja or Hybrid',
+'Wide Brim Hat': '+3 int for Wizard', 'Oak Staff': '+3 attack for Wizard or Hybrid', 
+'Power Mitts': '+3 dex for all classes', 'Balanced Pickaxe': 'a well weighted tool for digging or breaking stone',
+'Balanced Jagged Rocks': 'a few rocks that feel good in the hand and yet are sharp as hell',
+'Leather Jacket': '+3 defense for all classes', 'Long Rope': 'a 30 foot coil of good rope',
+'Intricate Medallion': 'a craft of wonder and brilliance'}
 
 loot_lvl_1_3 = ['Sturdy Walking Stick', 'Cloth Cap', 'Short Stick', 'Basic Gloves', 
 'Spade', 'Rocks', 'Thick Shirt', 'Roll of String', 'Small Medallion']
