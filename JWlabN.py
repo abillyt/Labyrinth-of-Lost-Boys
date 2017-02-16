@@ -115,7 +115,7 @@ def player_check():
 		
 		else:
 			print "Here are the current contents of your Satchel: "
-			print "%s" % (for item in satchel_contents: print item)
+			print "%s" % satchel_contents
 			print " "
 	
 	elif "scores" in choice: 
@@ -1915,7 +1915,8 @@ def first_room():
 				print "What do you do now?\n"
 				print "\t1. Take the Emerald."
 				print "\t2. Take nothing more and leave the room.\n"
-			
+				choice2 = raw_input(prompt)
+				
 			if choice2 == "1":
 				
 				print "You grab the Emerald.\n"
@@ -2841,11 +2842,6 @@ def vendor():
 			else: 
 				print "You don't have a Ruby." 
 				vendor_room()
-					
-			else: 
-				
-				print "I don't see any gems." 
-				vendor_room()
 				
 		elif "hire" in choice:
 			
@@ -2864,12 +2860,7 @@ def vendor():
 			else: 
 				print "You don't have a Sapphire." 
 				vendor_room()
-					
-			else: 
-				
-				print "I don't see any gems." 
-				vendor_room()
-		
+			
 		else: 
 			print "I'm glad, tbh. It means I can conserve my energy." 
 			vendor_room()	
