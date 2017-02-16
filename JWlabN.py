@@ -847,7 +847,7 @@ def enemy_encounter():
 	
 		print "You and the %s fight!\n\n\n" % enemy_name
 		battle(enemy, enemy_name)
-		chance = rand_int(1, 100)
+		chance = randint(1, 100)
 		if chance > 40: 
 			
 			print "The %s dropped loot!" % enemy_name
@@ -1026,7 +1026,7 @@ def start():
 		
 		print "'Oh, a quest, eh?" 
 		time.sleep(2)
-		print "This labryinth holds great treasure. And danger. Did I mention danger?"
+		print "This labyrinth holds great treasure. And danger. Did I mention danger?"
 		print "Are you willing to proceed?'"
 		
 		decision = raw_input(prompt)
@@ -1057,7 +1057,7 @@ def start():
 		print "'Just kidding. It's fine. I didn't mean it anyway.'"
 		
 		time.sleep(2)
-		print "Speaking of my kids... I lost them. They're in the labrynth"
+		print "Speaking of my kids... I lost them. They're in the labyrinth"
 		print "and I'm certain they're being held prisoner or lost somewhere...\n"
 		time.sleep(1)
 		print "Woe is me!! I have the gout.\n"
@@ -1096,8 +1096,8 @@ def start():
 		
 		else: 
 			print "'I curse you then! May death be upon your door!'\n\n\n.\n..\n..."
-			print "You walk awkwardly past the woman and into the labrynth."
-			print "The wall of the labryinth breaks for no apparent reason.\n"
+			print "You walk awkwardly past the woman and into the labyrinth."
+			print "The wall of the labyrinth breaks for no apparent reason.\n"
 			time.sleep(1)
 			dead("The wall falls on you and the woman laughs as you perish.")
 	
@@ -1107,7 +1107,7 @@ def start():
 		print "I think whatever you're looking for is in this labryinth."
 		print "There's some pretty sweet loot and basically no danger.\n"
 		time.sleep(1)
-		print "Are you going to enter the labryinth?'"
+		print "Are you going to enter the labyrinth?'"
 		
 		decision = raw_input(prompt)
 		print " "
@@ -1116,7 +1116,7 @@ def start():
 			
 			player_check()
 			
-			print "Are you going to enter the labryinth?'"
+			print "Are you going to enter the labyrinth?'"
 			decision = raw_input(prompt)
 			print " "
 		
