@@ -37,13 +37,13 @@ high_scorer_furthest = False
 high_scorer_cave = False
 
 
-loot_lvl_1_3 = ['Sturdy Stick', 'Extra Pack', 'Short Stick', 'Basic Gloves', 
+loot_lvl_1_3 = ['Sturdy Walking Stick', 'Cloth Cap', 'Short Stick', 'Basic Gloves', 
 'Spade', 'Rocks', 'Thick Shirt', 'Roll of String', 'Small Medallion']
 
-loot_lvl_4_6 = ['3\' Pipe', 'Extra Large Pack', 'Madrona Wand', 'Fingerless Gloves',
+loot_lvl_4_6 = ['3\' Pipe', 'Sturdy Hat', 'Madrona Wand', 'Fingerless Gloves',
 'Shovel', 'Jagged Rocks', 'Leather T-Shirt', 'Short Rope', 'Big Medallion']
 
-loot_lvl_7_9 = ['Sword', 'Duffel Bag', 'Oak Staff', 'Power Mitts',
+loot_lvl_7_9 = ['Sword', 'Wide Brim Hat', 'Oak Staff', 'Power Mitts',
 'Balanced Pickaxe', 'Balanced Jagged Rocks', 'Leather Jacket', 'Long Rope',
 'Intricate Medallion'] 
 
@@ -166,11 +166,6 @@ def equip(): #incomplete
 # incomplete def use(): 
 
 def print_enemies_full():
-
-	#global enemies_lvl_1_3
-	#global enemies_lvl_4_6
-	#global enemies_lvl_7_9
-	
 	
 	print "\nEnemies for Adventurers, Level 1 - 3: "
 	for i in range(len(enemies_lvl_1_3)):
@@ -185,6 +180,22 @@ def print_enemies_full():
 	print "Enemies for Adventurers, Level 7 - 9: "
 	for i in range(len(enemies_lvl_7_9)):
 		print enemies_lvl_7_9[i]
+		
+def print_items_full():
+	
+	print "\nItems for Adventurers, Level 1 - 3: "
+	for i in range(len(loot_lvl_1_3)):
+		print loot_lvl_1_3[i]
+	print '\n'
+	
+	print "Items for Adventurers, Level 4 - 6: "
+	for i in range(len(loot_lvl_4_6)):
+		print loot_lvl_4_6[i]
+	print '\n'
+	
+	print "Items for Adventurers, Level 7 - 9: "
+	for i in range(len(loot_lvl_7_9)):
+		print loot_lvl_7_9[i]
 
 def battle(enemy, enemy_name):
 	
@@ -716,6 +727,7 @@ def enemy_encounter():
 	global player_lvl
 	
 	x = randint(0, 8)
+	loot = ""
 	
 	if 0 < player_lvl <= 3:
 		
@@ -835,15 +847,71 @@ def enemy_encounter():
 	
 		print "You and the %s fight!\n\n\n" % enemy_name
 		battle(enemy, enemy_name)
+		chance = rand_int(1, 100)
+		if chance > 40: 
+			
+			print "The %s dropped loot!" % enemy_name
+			j = randint(0, 8)
+			if player_lvl <= 3:
+				loot = loot_lvl_1_3[j]
+				print "It's a %s!" % loot
+				
+				if loot in satchel_contents:
+					print "You've already got a %s...\n" % loot
+				
+				else: 
+					satchel_contents.append(loot)
+					print "You've looted %s from the %s!" % (loot, enemy_name)
+			
+			elif player_lvl <= 6:
+				loot = loot_lvl_4_6[j]
+				print "It's a %s!" % loot
+				
+				if loot in satchel_contents:
+					print "You've already got a %s...\n" % loot
+				
+				else: 
+					satchel_contents.append(loot)
+					print "You've looted %s from the %s!" % (loot, enemy_name)
+					
+			else:
+				
+				loot = loot_lvl_7_9[j]
+				print "It's a %s!" % loot
+				
+				if loot in satchel_contents:
+					print "You've already got a %s...\n" % loot
+				
+				else: 
+					satchel_contents.append(loot)
+					print "You've looted %s from the %s!" % (loot, enemy_name)
 	
 	else: 
 	
 		if enemy[3] > player_dex:
-			dead("""Wow, you're slow. As you turn around and expose your neck,
-			the %s attacks and it kills ya.""" % enemy_name) 
+			
+			diff = (enemy[3] - player_dex) * 10
+			chance = randint(1, 100)
+			if chance >= 50 + diff:
+				
+				print "Somehow you escape!"
+			
+			else: 
+				dead("""Wow, you're slow. As you turn around and expose your neck,
+				the %s attacks and it kills ya.""" % enemy_name) 
 		
 		else:
-			print "Because of your superior quickness, you escape.\n" 
+			
+			diff = (player_dex - enemy[3]) * 10
+			if diff > 40:
+				diff = 40
+			chance = randint(1, 100)
+			if chance <= 50 + diff:
+				
+				print "Because of your superior quickness, you escape.\n" 
+			
+			else: 
+				dead("Just because you SHOULD BE faster than your enemy, you weren't.")
 
 def level_up():
 	
@@ -2694,7 +2762,7 @@ def vendor():
 	time.sleep(1)
 	print "Vendor: It's been a long time since I've seen a stranger."
 	print "What can I help you with?\n"
-	print "1. Trade \t2. Sell \t3. Healing"
+	print "1. Trade \t2. Sell \t3. Heal \t4. Enemies \t5. Items"
 	selection = raw_input(prompt)
 	
 	while selection == "player":
@@ -2809,7 +2877,7 @@ def vendor():
 			print "Fine. I didn't want it anyway.\n" 
 			vendor_room()
 		
-	else: 
+	elif selection == "3": 
 		
 		print "You want me to heal yah, huh?"
 		time.sleep(1)
@@ -2878,6 +2946,45 @@ def vendor():
 		else: 
 			print "I'm glad, tbh. It means I can conserve my energy." 
 			vendor_room()	
+			
+	elif selection == "4":
+		
+		print "You want to learn about the enemies of this dungeon, do yah?\n"
+		print "Well, because we're in a beta version, I can do that for you." 
+		print_enemies_full()
+		time.sleep(4)
+		vendor_room()
+		
+	else: 
+		
+		print "What item would you like to learn about?" 
+		answer = raw_input(prompt)
+		
+		while answer == "player":
+			player_check()
+			
+			print "What item would you like to learn about?"
+			answer = raw_input(prompt)
+			
+		if answer == "list all items":
+			
+			print_items_full()
+			time.sleep(4)
+			vendor_room()
+		
+		elif answer in satchel_contents:
+			
+			print "Ah, yes, the %s!\n" % answer
+			time.sleep(2)
+			print "At this moment, I don't know much about that.\n"
+			vendor_room()
+		
+		else:
+			
+			print "I don't know what you're talking about.\n"
+			vendor_room()
+			
+			
 	
 def battle_cave():
 	
