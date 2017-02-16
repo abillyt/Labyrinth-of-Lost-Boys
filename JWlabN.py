@@ -2672,7 +2672,6 @@ def vendor_room():
 	
 	if "ye" in answer: 
 	
-		time.sleep(2)
 		print "You step forward to talk to him." 
 		vendor()
 	
@@ -2827,11 +2826,12 @@ def vendor():
 		print "Which gem do you want to give me in exchange for full health?" 
 		choice = raw_input(prompt)
 		
-		if choice == "player":
+		while choice == "player":
 			
 			player_check()
 			
 			print "Which gem do you want to give me in exchange for full health?"
+			choice = raw_input(prompt)
 		
 		if "uby" in choice: 
 				
