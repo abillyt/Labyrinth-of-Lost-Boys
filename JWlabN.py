@@ -1104,7 +1104,7 @@ def start():
 	else: 
 		print "'That doesn't suprise me.\n"
 		time.sleep(1)
-		print "I think whatever you're looking for is in this labryinth."
+		print "I think whatever you're looking for is in this labyrinth."
 		print "There's some pretty sweet loot and basically no danger.\n"
 		time.sleep(1)
 		print "Are you going to enter the labyrinth?'"
