@@ -13,11 +13,7 @@ player_hp = 11 # hit point capacity
 player_hp_dmg = 11	# current hit points
 player_name = "Unknown"
 player_class = "Unknown"
-satchel_cap = 100  # total units
-satchel_used = 100
-satchel_contents_item = []
-satchel_contents_weight = []
-satchel_contents_use = []
+satchel_contents = []
 gold = 0
 fight_count = 0
 fight_count_most = 51
@@ -114,15 +110,12 @@ def player_check():
 	
 	elif "nvent" in choice:
 	
-		if satchel_contents_item == []:
-			print "Your satchel has a capacity of %d and is empty!" % satchel_cap
+		if satchel_contents == []:
+			print "Your satchel is empty!"
 		
 		else:
-			print """Here is your current inventory:\n
-			Satchel Capacity: %d
-			Satchel's available space: %d
-			Satchel Contents:
-			%s %s""" % (satchel_cap, satchel_used, satchel_contents_weight, satchel_contents_item)
+			print "Here are the current contents of your Satchel: "
+			print "%s" % satchel_contents
 			print " "
 	
 	elif "scores" in choice: 
@@ -174,9 +167,9 @@ def equip(): #incomplete
 
 def print_enemies_full():
 
-	global enemies_lvl_1_3
-	global enemies_lvl_4_6
-	global enemies_lvl_7_9
+	#global enemies_lvl_1_3
+	#global enemies_lvl_4_6
+	#global enemies_lvl_7_9
 	
 	
 	print "\nEnemies for Adventurers, Level 1 - 3: "
@@ -647,7 +640,7 @@ def determine_enemy_death(num, enemy_name):
 		print "The %s basically died 5 minutes ago from that hit." % enemy_name
 	
 	elif num == -14:
-		print "-14, really? Holy Fuggin Heckfire."
+		print "-14, really? Holy Fuggin Heckfire!"
 		
 	elif num == -15:
 		print "Hit so hard it's been forgotten."
@@ -655,7 +648,19 @@ def determine_enemy_death(num, enemy_name):
 	elif num == -16:
 		print "I'm not sure it could get any more dead."
 		
-	elif num <= -17:
+	elif num == -17:
+		print "Flat out flattened!"
+	
+	elif num == -18:
+		print "Undeniably destroyed!"
+		
+	elif num == -19:
+		print "It's like three of them died with that blow."
+	
+	elif num == -20:
+		print "A strike like that should not be possible."
+	
+	elif num <= -21:
 		print "Bravo! Hall of Fame Death!"
 	
 	else:
@@ -703,7 +708,6 @@ def determine_player_death(num, enemy_name):
 		dead("Bravo! Hall of Fame Death!")
 	
 	else:
-		
 		dead("this should never print")
 
 def enemy_encounter():
@@ -869,8 +873,8 @@ def level_up():
 	
 	elif player_class == "Ninja":
 		
-		player_str += randint(0, 2)
-		player_dex += randint(1, 4)
+		player_str += randint(0, 1)
+		player_dex += randint(2, 4)
 		player_int += randint(0, 1)
 	
 	else:
@@ -893,8 +897,7 @@ def level_up():
 def start():
 	
 	global first_time_secret_room, first_time_first_room, came_from, player_hp_dmg
-	global player_name, player_class, player_lvl, player_xp, satchel_used
-	global satchel_contents_item, satchel_contents_weight
+	global player_name, player_class, player_lvl, player_xp, satchel_contents
 	
 	player_name = ""
 	player_class = ""
@@ -904,9 +907,7 @@ def start():
 	high_scorer_cave = False
 	high_scorer_furthest = False
 	high_scorer = False
-	satchel_contents_item = []
-	satchel_contents_weight = []
-	satchel_used = satchel_cap
+	satchel_contents = []
 	
 	print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 	print "\n\n\t\tLabyrinth of the Lost Sons\n\n\n"
@@ -940,9 +941,6 @@ def start():
 	print "\n\t Old Woman: 'I see you're awake. You came out of nowhere it seems.'\n"
 	
 	build_character()
-	
-	player_xp = player_xp_cap
-	player_hp_dmg = player_hp
 	
 	print "Old Woman: 'Are you on a quest? Or just hanging out? Or What?'"
 	
@@ -1544,8 +1542,7 @@ def secret_room_1():
 
 def second_intersection():
 
-	global came_from
-	global player_hp
+	global came_from, player_hp
 
 	print "You are at an intersection that has passageways to the South, West, and East."
 	print "There is a dripping sound.\n"
@@ -1629,8 +1626,7 @@ def second_intersection():
 
 def third_intersection():
 
-	global came_from
-	global player_hp
+	global came_from, player_hp
 	
 	print "You are at an intersection with passageways to the South, West, and East.\n"
 	print "There is a door along the cleft wall to the South/West.\n"
@@ -1708,76 +1704,238 @@ def third_intersection():
 
 def first_room():
 	
-	global satchel_cap, satchel_contents_item, satchel_contents_weight
-	global came_from, first_time_first_room, satchel_used, satchel_contents_use
+	global satchel_contents, came_from, first_time_first_room
 	came_from = "The Room"
+	
+	print "You open the door and step into a stark, dark room!"
+	time.sleep(1)
+	
+	chance = randint(1, 100)
+	if chance <= 70:
+		enemy_encounter()
 	
 	while first_time_first_room:
 	
 		first_time_first_room = False
 	
-		print "You open the door and step into a room full of rubies!"
-		time.sleep(2)
-		print "Currently, your satchel has %d units of space available." % satchel_used
-		print "HINT: Rubies each occupy 1 unit of space in your satchel.\n"
-		print "But your hands can hold so much more, so it's tempting to grab more."
+		print "You notice a cube of stone in the center of the room and sitting"
+		print "atop the stone are three precious gems.\n"
 		time.sleep(1)
-		print "How many do you take?"
+		print "There is an Emerald, a Ruby, and a Sapphire."
+		print "What do you do?\n"
+		print "\t1. Take the Emerald."
+		print "\t2. Take the Ruby."
+		print "\t3. Take the Sapphire."
+		print "\t4. Take the Emerald & Ruby."
+		print "\t5. Take the Emerald & Sapphire."
+		print "\t6. Take the Ruby & Sapphire."
+		print "\t7. Take all 3 stones."
+		print "\t8. Take nothing and leave the room.\n" 
 	
-		choice = int(raw_input(prompt))
+		choice = raw_input(prompt)
 		print " "
+		
+		while choice == "player":
+			player_check()
+			
+			print "What do you do?\n"
+			print "\t1. Take the Emerald."
+			print "\t2. Take the Ruby."
+			print "\t3. Take the Sapphire."
+			print "\t4. Take the Emerald & Ruby."
+			print "\t5. Take the Emerald & Sapphire."
+			print "\t6. Take the Ruby & Sapphire."
+			print "\t7. Take all 3 stones."
+			print "\t8. Take nothing and leave the room.\n" 
+			choice = raw_input(prompt)
+			
 				
-		if 0 < choice <= satchel_used:
+		if choice == "1":
 			
-			print "You put %d rubies in your bag." % choice
-			
-			satchel_contents_item.append("Rubies")
-			satchel_contents_weight.append(choice)
-			satchel_contents_use.append("They're shiny!")
-			satchel_used -= choice
+			print "You grab the Emerald.\n"
 			time.sleep(2)
+			dead("Although the pain was searing, it was brief. You dead.")
 			
-			print "Your satchel holds the %d %s" % (satchel_contents_weight[0], satchel_contents_item[0])
-			print "You have %d units of space left in your satchel." % satchel_used
+		elif choice == "2":
 			
-			third_intersection()
-		else:
-			print "Your greed angers a nearby enemy!"
+			print "You pick up the Ruby and put it in your bag.\n"
+			satchel_contents.append("Ruby")
+			print "Now what do you do?"
+			print "\t1. Take the Emerald."
+			print "\t2. Take the Sapphire."
+			print "\t3. Take the Emerald & Sapphire."
+			print "\t4. Take nothing more and leave the room.\n"
 			
-			enemy_encounter()
+			choice2 = raw_input(prompt)
 			
-			print "You stand victorious."
-			time.sleep(2)
-			
-			print "How many rubies do you take?"
-			choice = int(raw_input(prompt))
-			print " "
-	
-			while choice == "player":
-				
+			while choice2 == "player":
 				player_check()
-			
-				print "How many do you take?"
-				choice = int(raw_input(prompt))
-				print " "
 				
-			if 0 < choice <= satchel_used:
+				print "Now what do you do?"
+				print "\t1. Take the Emerald."
+				print "\t2. Take the Sapphire."
+				print "\t3. Take the Emerald & Sapphire."
+				print "\t4. Take nothing more and leave the room.\n"
+				choice2 = raw_input(prompt)
 				
-				print "You put %d rubies in your bag." % choice
+			if choice2 == "1":
 				
-				satchel_contents_item.append("Rubies")
-				satchel_contents_weight.append(choice)
-				satchel_used -= choice
+				print "You grab the Emerald.\n"
+				time.sleep(2)
+				dead("Although the pain was searing, it was brief. You dead.")
 				
-				print "Your satchel contains %d %s" % (satchel_contents_weight[0], satchel_contents_item[0])
-				print "You have %d units of space left in your satchel." % satchel_used
+			elif choice2 == "2":
 				
+				print "You pick up the Sapphire and put it in your bag.\n"
+				satchel_contents.append("Sapphire")
+				print "Now what do you do?"
+				print "\t1. Take the Emerald."
+				print "\t2. Take nothing more and leave the room.\n"
+				
+				choice3 = raw_input(prompt)
+				
+				while choice3 == "player":
+					player_check()
+					
+					print "Now what do you do?"
+					print "\t1. Take the Emerald."
+					print "\t2. Take nothing more and leave the room.\n"
+					choice3 = raw_input(prompt)
+					
+				if choice3 == "1":
+					
+					print "You grab the Emerald.\n"
+					time.sleep(2)
+					dead("Although the pain was searing, it was brief. You dead.")
+					
+				else: 
+					third_intersection()
+					
+			elif choice2 == "3":
+				
+				print "You grab the Sapphire & Emerald.\n"
+				time.sleep(2)
+				dead("Although the pain was searing, it was brief. You dead.")
+				
+			else: 
+				print "You're finished in this room." 
 				third_intersection()
+		
+		elif choice == "3":
 			
-			else:
-				print "You temporarily lose memory and wake up in the hallway."
+			print "You pick up the Sapphire and put it in your bag.\n"
+			satchel_contents.append("Sapphire")
+			print "Now what do you do?"
+			print "\t1. Take the Emerald."
+			print "\t2. Take the Ruby."
+			print "\t3. Take the Emerald & Ruby."
+			print "\t4. Take nothing more and leave the room.\n"
+			
+			choice2 = raw_input(prompt)
+			
+			while choice2 == "player":
+				player_check()
 				
+				print "Now what do you do?"
+				print "\t1. Take the Emerald."
+				print "\t2. Take the Ruby."
+				print "\t3. Take the Emerald & Ruby."
+				print "\t4. Take nothing more and leave the room.\n"
+				choice2 = raw_input(prompt)
+				
+			if choice2 == "1":
+				
+				print "You grab the Emerald.\n"
+				time.sleep(2)
+				dead("Although the pain was searing, it was brief. You dead.")
+				
+			elif choice2 == "2":
+				
+				print "You pick up the Ruby and put it in your bag.\n"
+				satchel_contents.append("Ruby")
+				print "Now what do you do?"
+				print "\t1. Take the Emerald."
+				print "\t2. Take nothing more and leave the room.\n"
+				
+				choice3 = raw_input(prompt)
+				
+				while choice3 == "player":
+					player_check()
+					
+					print "Now what do you do?"
+					print "\t1. Take the Emerald."
+					print "\t2. Take nothing more and leave the room.\n"
+					choice3 = raw_input(prompt)
+					
+				if choice3 == "1":
+					
+					print "You grab the Emerald.\n"
+					time.sleep(2)
+					dead("Although the pain was searing, it was brief. You dead.")
+					
+				else: 
+					third_intersection()
+					
+			elif choice2 == "3":
+				
+				print "You grab the Ruby & Emerald.\n"
+				time.sleep(2)
+				dead("Although the pain was searing, it was brief. You dead.")
+				
+			else: 
+				print "You're finished in this room." 
 				third_intersection()
+				
+		elif choice == "4":
+			
+			print "You grab the Ruby and the Emerald.\n"
+			time.sleep(2)
+			dead("Although the pain was searing, it was brief. You dead.")
+			
+		elif choice == "5":
+			
+			print "You grab the Sapphire and the Emerald.\n"
+			time.sleep(2)
+			dead("Although the pain was searing, it was brief. You dead.")
+			
+		elif choice == "6":
+			
+			print "You grab the Ruby and the Sapphire and put them in your bag.\n"
+			satchel_contents.append("Ruby")
+			satchel_contents.append("Sapphire")
+			print "What do you do now?\n"
+			print "\t1. Take the Emerald."
+			print "\t2. Take nothing more and leave the room.\n"
+			
+			choice2 = raw_input(prompt)
+			
+			while choice2 == "player":
+				player_check()
+				
+				print "What do you do now?\n"
+				print "\t1. Take the Emerald."
+				print "\t2. Take nothing more and leave the room.\n"
+				choice2 = raw_input(prompt)
+				
+			if choice2 == "1":
+				
+				print "You grab the Emerald.\n"
+				time.sleep(2)
+				dead("Although the pain was searing, it was brief. You dead.")
+				
+			else: 
+				print "You're totally done in this room. Booyah!"
+				third_intersection()
+		
+		elif choice == "7":
+			
+			print "You take the stones, Sapphire, Ruby, and Emerald.\n"
+			time.sleep(2)
+			dead("Was it your greed?! Something seared into you and you disintigrate on the spot.")
+			
+		else: 
+			print "Yeah, who needs those stones anyway? I'm sure they're worthless in here...\n"
+			third_intersection()
 					
 	print "You stand in the familiar doorway. All of the rubies have vanished."
 	time.sleep(3)
@@ -2525,13 +2683,11 @@ def vendor_room():
 	
 def vendor():
 	
-	global satchel_used, satchel_cap, satchel_contents_item, satchel_contents_weight
-	global satchel_contents_use, player_hp_dmg, gold
+	global satchel_contents, player_hp_dmg, gold
 	
 	trading_block = []
-	trading_quan = []
-	loot = "blank"
 	use = "blank"
+	loot = "blank"
 	
 	print "The vendor looks up from his chiseling and looks you in the eye.\n"
 	time.sleep(1)
@@ -2549,7 +2705,7 @@ def vendor():
 	
 	if selection == "1":
 		
-		if satchel_contents_item == []:
+		if satchel_contents == []:
 			
 			print "It looks like your satchel is empty. What are you trying to pull?\n" 
 			vendor_room()
@@ -2563,12 +2719,10 @@ def vendor():
 			print "What would you like to trade?"
 			trade_or = raw_input(prompt)
 		
+		if trade_or in satchel_contents:
+			trading_block.append(satchel_contents[trade_or])
 		
-		if trade_or in satchel_contents_item:
-			trading_block.append(satchel_contents_item[0])
-			trading_quan.append(satchel_contents_weight[0])
-		
-		print "Ahh, you have %d %s." % (trading_quan[0], trading_block[0])
+		print "Ahh, you have a %s." % trading_block[0]
 		print "I have this to trade:\n"
 		if 0 < player_lvl < 4:
 			print "***Thick Shirt***"
@@ -2596,18 +2750,12 @@ def vendor():
 		if "ye" in answer:
 			
 			print "Ok, good deal!"
-			if trade_or in satchel_contents_item:
-				#del satchel_contents_item[i]
-				#del satchel_contents_weight[i]
-				#del satchel_contents_use[i]
-				satchel_contents_item.append(loot)
-				satchel_contents_weight.append(5)
-				satchel_contents_use.append(use)
-				satchel_used -= 5
+			satchel_contents.pop(trade_or)
+			satchel_contents.append(loot)
 			
 			print "This is what is in your satchel:"
-			print satchel_contents_item()
-			print "You have %d units of space available in your satchel." % satchel_used
+			for item in satchel_contents:
+				print item + " " 
 			
 		else: 
 			print "Oh well." 
@@ -2615,7 +2763,7 @@ def vendor():
 	
 	elif selection == "2":
 		
-		if satchel_contents_item == []:
+		if satchel_contents == []:
 			
 			print "It looks like your satchel is empty. What are you trying to pull?" 
 			vendor_room()
@@ -2630,28 +2778,23 @@ def vendor():
 			trade_or = raw_input(prompt)
 		
 		
-		if trade_or in satchel_contents_item:
-			trading_block.append(satchel_contents_item[0])
-			trading_quan.append(satchel_contents_weight[0])
+		if trade_or in satchel_contents:
+			trading_block.append(satchel_contents[trade_or])
 		
-		print "Ahh, you have %d %s." % (trading_quan[0], trading_block[0])
-		print "\nHow many %s would you like to sell? They're worth %d gold each." % (trading_block[0], 3)
+		print "Ahh, you have a %s." % trading_block[0]
+		print "I will give you 50 gold for the %s." % trading_block[0]
 		print " "
-		choice = int(raw_input(prompt))
-		
-		print "I will give you %d gold for that. Deal?" % (choice * 3)
 		choice2 = raw_input(prompt)
 		
 		if "ye" in choice2:
 			
 			print "Great!"
 
-			if trade_or in satchel_contents_item:
+			if trade_or in satchel_contents:
 					
-				satchel_contents_weight[0] -= choice
-				print "You have %d %s left over after you sold %d to me.\n" % (satchel_contents_weight[0], 
-											     satchel_contents_item[0], choice)
-				gold = choice * 3
+				satchel_contents.pop(trade_or)
+				print "You received 50 gold!"
+				gold += 50
 				print "You have %d gold now." % gold
 		
 		else: 
@@ -2666,47 +2809,58 @@ def vendor():
 		print "There was a time a was known as a healer." 
 		print "\nI s'pose I could do that. For a price." 
 		time.sleep(2)
-		print "It'll cost you 50 rubies to heal yourself."
-		print "I know that's a lot, but they're probably just laying around somewhere to find." 
-		if satchel_contents_item == []:
+		print "It'll cost you a rare gem to heal yourself."
+		print "I know that's a valuable item, but they're probably just laying around somewhere to find." 
+		if satchel_contents == []:
 			
-			print "It looks like you don't have any Rubies. See ya." 
+			print "It looks like you don't have any gems. See ya." 
 			vendor_room()
 		
-		print "Want to give me 50 Rubies to heal you?" 
+		print "Which gem do you want to give me in exchange for full health?" 
 		choice = raw_input(prompt)
 		
 		if choice == "player":
 			
 			player_check()
 			
-			print "Want to give me 50 Rubies to heal you?"
+			print "Which gem do you want to give me in exchange for full health?"
 		
-		if "ye" in choice: 
+		if "uby" in choice: 
 				
-			if "Rubies" in satchel_contents_item:
+			if "Ruby" in satchel_contents:
 				
-				if satchel_contents_weight[0] >= 50:
-					satchel_contents_weight[0] -= 50
-					satchel_used += 50
-					print "Okay, looks good. You have %d Rubies left." % satchel_contents_weight[0]
-					time.sleep(2)
-					print "I will now perform a miracle of healing!!"
-					time.sleep(4)
-					print "\n\nYou have been healed!" 
-					player_hp_dmg = player_hp
-					print "You now have %d hit points." % player_hp_dmg
-					vendor_room()
-					
-				else: 
-					print "You don't have enough Rubies." 
-					vendor_room()
+				satchel_contents.pop("Ruby")
+				print "Okay, looks good. I took your Ruby.\n"
+				time.sleep(2)
+				print "I will now perform a miracle of healing!!"
+				time.sleep(4)
+				print "\n\nYou have been healed!" 
+				player_hp_dmg = player_hp
+				print "You now have %d hit points." % player_hp_dmg
+				vendor_room()
 					
 			else: 
-				
-				print "I don't see any Rubies in your bag." 
+				print "You don't have a Ruby." 
 				vendor_room()
-		
+				
+		elif "hire" in choice:
+			
+			if "Sapphire" in satchel_contents:
+				
+				satchel_contents.pop("Sapphire")
+				print "Okay, looks good. I took your Sapphire.\n"
+				time.sleep(2)
+				print "I will now perform a miracle of healing!!"
+				time.sleep(4)
+				print "\n\nYou have been healed!" 
+				player_hp_dmg = player_hp
+				print "You now have %d hit points." % player_hp_dmg
+				vendor_room()
+					
+			else: 
+				print "You don't have a Sapphire." 
+				vendor_room()
+			
 		else: 
 			print "I'm glad, tbh. It means I can conserve my energy." 
 			vendor_room()	
