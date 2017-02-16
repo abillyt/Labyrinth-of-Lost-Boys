@@ -62,16 +62,16 @@ enemies_lvl_7_9 = ['Shiny Mist', 'Floor of Marbles', 'Shrieking Box', 'Wall of B
 'Competetive Eater', 'Donald Trump', 'Mary Poppin\'s Bag of Horrors', 
 'Badass Three Piece Suit w/ Hat & Cane', 'Eye Candy']
 
-fathers_wisdom = ['If it\'s the easy way, it\'s probably the wrong way.', 
-'Make soup, not war.', 'The fastest way to the end of any journey is slow running.',
+fathers_wisdom = ['If it\'s the easy way, it\'s the wrong way.', 
+'Make soup, not war.', 'The fastest way to the end of any journey is forward.',
 'Life isn\'t fair.', 'When the going gets tough, stop and think about things.',
 'Give it a little shake and see what falls out.',
-'Talking is to be done silently.', 'When talking is silent, silence is golden.',
-'Don\'t forget to drink water.', 'Just reach for it. Move!', 
+'Talking is to first be done silently.', 'When talking is silent, silence is golden.',
+'Don\'t forget to drink water.', 'Enunciated vowels produce healthy bowels!', 
 'Club once in awhile, don\'t be a constant clubber.']
 
 mothers_wisdom = ['Take garlic, son. And raw honey.',
-'If you take ill, raw honey.', 'Don\'t shake hands with a troll',
+'If you take ill, take raw honey.', 'Don\'t shake hands with a troll',
 'Raw garlic. Feel the burn.', 'Soak your bunions.',
 'Never trust a woman with one eye.', 'Always trust a bearded wizard.',
 'Can I look at your blackheads?', 'Let\'s go wash your face.', 'Eucalyptus oil.',
