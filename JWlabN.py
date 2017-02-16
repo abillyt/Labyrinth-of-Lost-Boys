@@ -2800,14 +2800,14 @@ def vendor():
 
 			if trade in satchel_contents:
 					
-				satchel_contents.pop(trade_or)
+				satchel_contents.pop(item_loc)
 				print "You received 50 gold!"
 				gold += 50
 				print "You have %d gold now." % gold
 		
 		else: 
 			
-			print "Fine. I didn't want them anyway.\n" 
+			print "Fine. I didn't want it anyway.\n" 
 			vendor_room()
 		
 	else: 
@@ -2837,7 +2837,7 @@ def vendor():
 				
 			if "Ruby" in satchel_contents:
 				
-				satchel_contents.pop("Ruby")
+				satchel_contents.remove("Ruby")
 				print "Okay, looks good. I took your Ruby.\n"
 				time.sleep(2)
 				print "I will now perform a miracle of healing!!"
@@ -2855,7 +2855,7 @@ def vendor():
 			
 			if "Sapphire" in satchel_contents:
 				
-				satchel_contents.pop("Sapphire")
+				satchel_contents.remove("Sapphire")
 				print "Okay, looks good. I took your Sapphire.\n"
 				time.sleep(2)
 				print "I will now perform a miracle of healing!!"
