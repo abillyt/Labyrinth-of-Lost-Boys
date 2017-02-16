@@ -2688,6 +2688,8 @@ def vendor():
 	trading_block = []
 	use = "blank"
 	loot = "blank"
+	count = 0
+	item_loc = 0
 	
 	print "The vendor looks up from his chiseling and looks you in the eye.\n"
 	time.sleep(1)
@@ -2711,17 +2713,20 @@ def vendor():
 			vendor_room()
 		
 		print "What would you like to trade?"
-		trade_or = raw_input(prompt)
-		while trade_or == "player":
+		trade = raw_input(prompt)
+		while trade == "player":
 			
 			player_check()
 			
 			print "What would you like to trade?"
 			trade_or = raw_input(prompt)
 		
-		if trade_or in satchel_contents:
-			trading_block.append(satchel_contents[trade_or])
-		
+		for item in satchel_contents:
+			if item == trade:
+				trading_block.append(satchel_contents[count])
+				item_loc = count
+			count += 1
+			
 		print "Ahh, you have a %s." % trading_block[0]
 		print "I have this to trade:\n"
 		if 0 < player_lvl < 4:
@@ -2750,7 +2755,7 @@ def vendor():
 		if "ye" in answer:
 			
 			print "Ok, good deal!"
-			satchel_contents.pop(trade_or)
+			satchel_contents.pop(item_loc)
 			satchel_contents.append(loot)
 			
 			print "This is what is in your satchel:"
@@ -2769,17 +2774,20 @@ def vendor():
 			vendor_room()
 		
 		print "What would you like to sell?"
-		trade_or = raw_input(prompt)
+		trade = raw_input(prompt)
 		while trade_or == "player":
 			
 			player_check()
 			
 			print "What would you like to trade?"
-			trade_or = raw_input(prompt)
+			trade = raw_input(prompt)
 		
 		
-		if trade_or in satchel_contents:
-			trading_block.append(satchel_contents[trade_or])
+		for item in satchel_contents:
+			if item == trade:
+				trading_block.append(satchel_contents[count])
+				item_loc = count
+			count += 1
 		
 		print "Ahh, you have a %s." % trading_block[0]
 		print "I will give you 50 gold for the %s." % trading_block[0]
@@ -2790,7 +2798,7 @@ def vendor():
 			
 			print "Great!"
 
-			if trade_or in satchel_contents:
+			if trade in satchel_contents:
 					
 				satchel_contents.pop(trade_or)
 				print "You received 50 gold!"
