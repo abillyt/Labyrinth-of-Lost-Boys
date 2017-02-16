@@ -2813,7 +2813,13 @@ def vendor():
 		
 		print "You want me to heal yah, huh?"
 		time.sleep(1)
-		print "There was a time a was known as a healer." 
+		print "There was a time a was known as a healer.\n"
+		print "I see that you currently have %d hit points." % player_hp_dmg
+		print "That is %d less than your maximum!\n" % (player_hp - player_hp_dmg)
+		
+		if player_hp_dmg <= 2:
+			print "I can hardly believe you're still alive.\n"
+		
 		print "\nI s'pose I could do that. For a price." 
 		time.sleep(2)
 		print "It'll cost you a rare gem to heal yourself."
