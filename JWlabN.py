@@ -2786,7 +2786,7 @@ def vendor():
 			player_check()
 			
 			print "What would you like to trade?"
-			trade_or = raw_input(prompt)
+			trade = raw_input(prompt)
 		
 		for item in satchel_contents:
 			if item == trade:
@@ -2842,11 +2842,11 @@ def vendor():
 		
 		print "What would you like to sell?"
 		trade = raw_input(prompt)
-		while trade_or == "player":
+		while trade == "player":
 			
 			player_check()
 			
-			print "What would you like to trade?"
+			print "What would you like to sell?"
 			trade = raw_input(prompt)
 		
 		
