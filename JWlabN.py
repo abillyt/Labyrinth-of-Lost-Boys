@@ -179,10 +179,10 @@ def player_check():
 		chance = randint(1, 100)
 		if chance <= 50: 
 			print_wisdom("Dad")
-			print "He was a good man."
+			print "He was a good man.\n"
 		else: 
 			print_wisdom("Mom")
-			print "She was an excellent woman." 
+			print "She was an excellent woman.\n" 
 		
 	else: 
 		print "I'm sure you know your way."
@@ -462,16 +462,16 @@ def equip():
 			
 			print "You're already wearing the Leather Jacket!\n"
 		
-		elif answer == "Sturdy Walking Stick" and sturdy_walking_stick == False:
+		elif answer == "Sturdy Walking Stick" and walking_stick == False:
 			
 			if three_ft_pipe or sword:
 				print "Why would you do that? You'd go down in attack damage!\n"
 				
 			print "Okay, you equip the Sturdy Walking Stick! Your attack has increased by 1!\n"
 			attack_mod += 1
-			sturdy_walking_stick = True
+			walking_stick = True
 			
-		elif answer == "Sturdy Walking Stick" and sturdy_walking_stick == True:
+		elif answer == "Sturdy Walking Stick" and walking_stick == True:
 			
 			print "You've already got the Sturdy Walking Stick equipped!\n"
 
@@ -481,7 +481,7 @@ def equip():
 				print "You're attack has increased by 2!\n"
 				attack_mod += 1
 				three_ft_pipe = True
-				sturdy_walking_stick = False
+				walking_stick = False
 				
 			elif sword:
 				print "Up to you, there, %s." % player_name
@@ -500,12 +500,12 @@ def equip():
 			print "You've already got the Three Foot Pipe equipped!\n"
 		
 		elif answer == "Sword" and sword == False:
-			if sturdy_walking_stick == True:
+			if walking_stick == True:
 				print "You have removed the Sturdy Walking Stick and equipped the Sword!\n"
 				print "You're attack has increased by 3!\n"
 				attack_mod += 2
 				sword = True
-				sturdy_walking_stick = False
+				walking_stick = False
 				
 			elif three_ft_pipe == True:
 				print "You have removed the Three Foot Pipe and equipped the Sword!\n"
