@@ -35,6 +35,7 @@ first_time_chamber_one = True
 first_time_second_room = True
 first_time_third_room = True
 first_time_2nd_secret_room = True
+defeat_goblin_king = False
 high_scorer = False
 high_scorer_furthest = False
 high_scorer_cave = False
@@ -1112,12 +1113,14 @@ def battle(enemy, enemy_name):
 	
 	print "You win!\n"
 	
+	#LOOT CODE
 	chance = randint(1, 100)
 	if chance > 40: 
 		
 		print "The %s dropped loot!\n" % enemy_name
 		j = randint(0, 8)
 		if player_lvl <= 3:
+			
 			loot = loot_lvl_1_3[j]
 			#loot_lvl_1_3.pop(j)
 		
@@ -1131,7 +1134,13 @@ def battle(enemy, enemy_name):
 				print "You've looted %s from the %s!\n" % (loot, enemy_name)
 		
 		elif player_lvl <= 6:
-			loot = loot_lvl_4_6[j]
+			
+			chance = randint(1, 50)
+			if chance < 20:
+				loot = loot_lvl_1_3[j]
+			else: 
+				loot = loot_lvl_4_6[j]
+			
 			print "It's a %s!\n" % loot
 			
 			if loot in satchel_contents:
@@ -1143,7 +1152,14 @@ def battle(enemy, enemy_name):
 				
 		else:
 			
-			loot = loot_lvl_7_9[j]
+			chance = randint(1, 60)
+			if chance < 10:
+				loot = loot_lvl_1_3[j]
+			elif chance < 25:
+				loot = loot_lvl_4_6[j]
+			else:
+				loot = loot_lvl_7_9[j]
+			
 			print "It's a %s!\n" % loot
 			
 			if loot in satchel_contents:
@@ -1153,7 +1169,7 @@ def battle(enemy, enemy_name):
 				satchel_contents.append(loot)
 				print "You've looted %s from the %s!\n" % (loot, enemy_name)
 		
-	fight_count += 1
+	fight_count += 1  #to tabulate fights won while alive
 	
 	if high_scorer == False:
 		
@@ -1326,49 +1342,9 @@ def boss_encounter(room, modifier):
 			enemy = (80, 12, 32, 12)
 			print "Your bumbling has made a mess. %s appears at the door and he's ready to fight!\n" % enemy_name
 	
-	print "Are you going to fight or flee?"
-	
-	choice = raw_input(prompt)
-	print " "
-	
-	while choice == "player":
-		player_check()
-		
-		print "Are you going to fight or flee?"
-		choice = raw_input(prompt)
-		print " "
-	
-	if "ight" in choice: 
 	
 		print "You and the %s fight!\n\n\n" % enemy_name
 		battle(enemy, enemy_name)
-	
-	else: 
-	
-		if enemy[3] > player_dex:
-			
-			diff = (enemy[3] - player_dex) * 10
-			chance = randint(1, 100)
-			if chance >= 50 + diff:
-				
-				print "Somehow you escape!\n\n"
-			
-			else: 
-				dead("""Wow, you're slow. As you turn around and expose your neck,
-				the %s attacks and it kills ya.""" % enemy_name) 
-		
-		else:
-			
-			diff = (player_dex - enemy[3]) * 10
-			if diff > 40:
-				diff = 40
-			chance = randint(1, 100)
-			if chance <= 50 + diff:
-				
-				print "Because of your superior quickness, you escape.\n\n" 
-			
-			else: 
-				dead("Just because you SHOULD BE faster than your enemy, you weren't.")
 		
 def enemy_encounter():
 	
@@ -3259,7 +3235,7 @@ def twelfth_intersection():
 
 def second_room():
 
-	global came_from
+	global came_from, defeat_goblin_king
 	came_from = "East"
 	
 	print "You enter a large room, its walls covered in stone carved flowers.\n\n\n" 
@@ -3305,23 +3281,29 @@ def second_room():
 			
 			if answer2 == "Spade":
 				boss_encounter("room2", "Spade")
+				defeat_goblin_king = True
 			
 			elif answer2 == "Shovel":
 				boss_encounter("room2", "Shovel")
+				defeat_goblin_king = True
 			
 			elif answer2 == "Balanced Pickaxe":
 				boss_encounter("room2", "Balanced Pickaxe")
+				defeat_goblin_king = True
 			
 			else: 
 				boss_encounter("room2", answer2)
+				defeat_goblin_king = True
 	
 	elif answer == "2" or answer == "3":
 		
 		boss_encounter("room2", "Thief")
+		defeat_goblin_king = True
 		
 	elif answer == "4":
 		
 		boss_encounter("room2", "Hands")
+		defeat_goblin_king = True
 	
 	else:
 		
