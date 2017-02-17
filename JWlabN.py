@@ -219,6 +219,10 @@ def equip():
 			player_int += 1
 			cloth_cap = True
 			
+		elif answer == "Cloth Cap" and cloth_cap == True:
+			
+			print "You are already wearing the Cloth Cap!\n"
+			
 		elif answer == "Short Stick" and short_stick == False:
 			
 			if madrona_wand or oak_staff:
@@ -227,6 +231,10 @@ def equip():
 			print "Okay, you equip the Short Stick! Your attack has increased by 1!\n"
 			attack_mod += 1
 			short_stick = True
+			
+		elif answer == "Short Stick" and short_stick == True:
+			
+			print "You already have the Short Stick equipped!\n"
 			
 		elif answer == "Basic Gloves" and basic_gloves == False:
 			
@@ -237,6 +245,10 @@ def equip():
 			player_dex += 1
 			basic_gloves = True
 			
+		elif answer == "Basic Gloves" and basic_gloves == True:
+			
+			print "You are already wearing the Basic Gloves!\n"
+			
 		elif answer == "Thick Shirt" and thick_shirt == False:
 				
 			if leather_t or leather_jacket:
@@ -245,6 +257,10 @@ def equip():
 			print "Okay, you equip the Thick Shirt! Your defense has increased by 1!\n"
 			defense_mod += 1
 			thick_shirt = True
+			
+		elif answer == "Thick Shirt" and thick_shirt == True:
+			
+			print "You are already wearing the Thick Shirt!"
 			
 		elif answer == "Sturdy Hat" and sturdy_hat == False:
 			
@@ -266,6 +282,10 @@ def equip():
 				print "Okay, you equip the Sturdy Hat! Your intelligence has increased by 2!\n"
 				player_int += 2
 				sturdy_hat = True
+				
+		elif answer == "Sturdy Hat" and sturdy_hat == True:
+			
+			print "You're already wearing the Sturdy Hat!\n"
 		
 		elif answer == "Madrona Wand" and madrona_wand == False:
 			
@@ -287,6 +307,10 @@ def equip():
 				print "Okay, you equip the Madrona Wand! Your attack has increased by 2!\n"
 				attack_mod += 2
 				madrona_wand = True
+				
+		elif answer == "Madrona Wand" and madrona_wand == True:
+			
+			print "You've already got the Madrona Wand equipped!\n"
 			
 		elif answer == "Fingerless Gloves" and fingerless_gloves == False:
 			
@@ -308,6 +332,10 @@ def equip():
 				print "Okay, you equip the Fingerless Gloves! Your dexterity is increased by 2!\n"
 				player_dex += 2
 				fingerless_gloves = True
+				
+		elif answer == "Fingerless Gloves" and fingerless_gloves == True:
+			
+			print "You're already wearing the Fingerless Gloves!\n"
 			
 		elif answer == "Leather T-Shirt" and leather_t == False:
 			
@@ -329,6 +357,10 @@ def equip():
 				print "Okay, you equip the Leather T-Shirt! Your defense has increased by 2!\n"
 				defense_mod += 2
 				leather_t = True
+				
+		elif answer == "Leather T-Shirt" and leather_t == True:
+			
+			print "You're already wearing the Leather T-Shirt, and I must say it looks dashing!\n"
 			
 		elif answer == "Wide Brim Hat" and wide_brim_hat == False:
 			
@@ -350,6 +382,10 @@ def equip():
 				print "Okay, you equip the Wide Brim Hat! Your intelligence has increased by 3!\n"
 				player_int += 3
 				wide_brim_hat = True
+				
+		elif answer == "Wide Brim Hat" and wide_brim_hat == True:
+			
+			print "You're already wearing the Wide Brim Hat!\n"
 		
 		elif answer == "Oak Staff" and oak_staff == False:
 			
@@ -371,6 +407,10 @@ def equip():
 				print "Okay, you equip the Oak Staff! Your attack has increased by 3!\n"
 				attack_mod += 3
 				oak_staff = True
+				
+		elif answer == "Oak Staff" and oak_staff == True:
+			
+			print "You've already got the Oak Staff equipped!\n"
 			
 		elif answer == "Power Mitts" and power_mitts == False:
 			
@@ -392,6 +432,10 @@ def equip():
 				print "Okay, you equip the Power Mitts! Your dexterity is increased by 3!\n"
 				player_dex += 3
 				fingerless_gloves = True
+				
+		elif answer == "Power Mitts" and power_mitts == True:
+			
+			print "You're already wearing the Power Mitts!\n"
 			
 		elif answer == "Leather Jacket" and leather_jacket == False:
 			
@@ -413,6 +457,10 @@ def equip():
 				print "Okay, you equip the Leather Jacket! Your defense has increased by 3!\n"
 				defense_mod += 3
 				leather_jacket = True
+				
+		elif answer == "Leather Jacket" and leather_jacket == True:
+			
+			print "You're already wearing the Leather Jacket!\n"
 		
 		elif answer == "Sturdy Walking Stick" and sturdy_walking_stick == False:
 			
@@ -422,6 +470,10 @@ def equip():
 			print "Okay, you equip the Sturdy Walking Stick! Your attack has increased by 1!\n"
 			attack_mod += 1
 			sturdy_walking_stick = True
+			
+		elif answer == "Sturdy Walking Stick" and sturdy_walking_stick == True:
+			
+			print "You've already got the Sturdy Walking Stick equipped!\n"
 
 		elif answer == "Three Foot Pipe" and three_ft_pipe == False:
 			if sturdy_walking_stick == True:
@@ -442,6 +494,10 @@ def equip():
 				print "Okay, you equip the Three Foot Pipe! Your attack has increased by 2!\n"
 				attack_mod += 2
 				three_ft_pipe = True
+				
+		elif answer == "Three Foot Pipe" and three_ft_pipe == True:
+			
+			print "You've already got the Three Foot Pipe equipped!\n"
 		
 		elif answer == "Sword" and sword == False:
 			if sturdy_walking_stick == True:
@@ -462,21 +518,37 @@ def equip():
 				print "Okay, you equip the Sword! Your attack has increased by 3!\n"
 				attack_mod += 3
 				sword = True
+				
+		elif answer == "Sword" and sword == True:
+			
+			print "You've already got the Sword equipped!\n"
 			
 		elif answer == "Small Medallion" and small_medallion == False:
 				
 			print "You put the Small Medallion around your neck.\n"
 			small_medallion = True
 			
+		elif answer == "Small Medallion" and small_medallion == True:
+			
+			print "You're already wearing the Small Medallion!\n"
+			
 		elif answer == "Big Medallion" and big_medallion == False:
 				
 			print "You put the Big Medallion around your neck.\n"
 			big_medallion = True
 			
+		elif answer == "Big Medallion" and big_medallion == True:
+			
+			print "You're already wearing the Big Medallion, and you look sexy!\n"
+			
 		elif answer == "Intricate Medallion" and intricate_medallion == False:
 			
 			print "You put the intricate medallion around your neck.\n"
 			intricate_medallion = True 
+			
+		elif answer == "Intricate Medallion" and intricate_medallion == True:
+			
+			print "You're already wearing the intricate medallion!\n"
 				
 	else: 
 		"You do not have that item!"
@@ -725,10 +797,14 @@ def battle(enemy, enemy_name):
 			if small_medallion:
 				print "You feel warmth on your chest, and suddenly become a little healthier."
 				player_hp_dmg += 1
+				if player_hp_dmg > player_hp:
+					player_hp_dmg = player_hp
 			
 			elif big_medallion or intricate_medallion:
 				print "You feel heat all over your body, and suddenly become much healthier."
-				player_hp_dm += 2
+				player_hp_dmg += 2
+				if player_hp_dmg > player_hp:
+					player_hp_dmg = player_hp
 			
 		if player_hp_dmg <= 0:
 			
@@ -920,10 +996,14 @@ def battle(enemy, enemy_name):
 			if small_medallion:
 				print "You feel warmth on your chest, and suddenly become a little healthier."
 				player_hp_dmg += 1
+				if player_hp_dmg > player_hp:
+					player_hp_dmg = player_hp
 			
 			elif big_medallion or intricate_medallion:
 				print "You feel heat all over your body, and suddenly become much healthier."
-				player_hp_dm += 2
+				player_hp_dmg += 2
+				if player_hp_dmg > player_hp:
+					player_hp_dmg = player_hp
 			
 		if player_hp_dmg <= 0:
 			
@@ -932,6 +1012,47 @@ def battle(enemy, enemy_name):
 	
 	print "You win!\n"
 	
+	chance = randint(1, 100)
+	if chance > 40: 
+		
+		print "The %s dropped loot!\n" % enemy_name
+		j = randint(0, 8)
+		if player_lvl <= 3:
+			loot = loot_lvl_1_3[j]
+			#loot_lvl_1_3.pop(j)
+		
+			print "It's a %s!" % loot
+			
+			if loot in satchel_contents:
+				print "You've already got a %s...\n" % loot
+			
+			else: 
+				satchel_contents.append(loot)
+				print "You've looted %s from the %s!\n" % (loot, enemy_name)
+		
+		elif player_lvl <= 6:
+			loot = loot_lvl_4_6[j]
+			print "It's a %s!\n" % loot
+			
+			if loot in satchel_contents:
+				print "You've already got a %s...\n" % loot
+			
+			else: 
+				satchel_contents.append(loot)
+				print "You've looted %s from the %s!\n" % (loot, enemy_name)
+				
+		else:
+			
+			loot = loot_lvl_7_9[j]
+			print "It's a %s!\n" % loot
+			
+			if loot in satchel_contents:
+				print "You've already got a %s...\n" % loot
+			
+			else: 
+				satchel_contents.append(loot)
+				print "You've looted %s from the %s!\n" % (loot, enemy_name)
+		
 	fight_count += 1
 	
 	if high_scorer == False:
@@ -939,7 +1060,7 @@ def battle(enemy, enemy_name):
 		if fight_count > fight_count_most: 
 			
 			high_scorer = True
-			print "You've just taken 1st place on the fight count list!" 
+			print "You've just taken 1st place on the fight count list!\n" 
 			time.sleep(1)
 			high_scorer_fcm = raw_input("Enter your name to go on the scoreboard: ")
 	
@@ -1199,46 +1320,6 @@ def enemy_encounter():
 	
 		print "You and the %s fight!\n\n\n" % enemy_name
 		battle(enemy, enemy_name)
-		chance = randint(1, 100)
-		if chance > 40: 
-			
-			print "The %s dropped loot!" % enemy_name
-			j = randint(0, 8)
-			if player_lvl <= 3:
-				loot = loot_lvl_1_3[j]
-				#loot_lvl_1_3.pop(j)
-			
-				print "It's a %s!" % loot
-				
-				if loot in satchel_contents:
-					print "You've already got a %s...\n" % loot
-				
-				else: 
-					satchel_contents.append(loot)
-					print "You've looted %s from the %s!" % (loot, enemy_name)
-			
-			elif player_lvl <= 6:
-				loot = loot_lvl_4_6[j]
-				print "It's a %s!" % loot
-				
-				if loot in satchel_contents:
-					print "You've already got a %s...\n" % loot
-				
-				else: 
-					satchel_contents.append(loot)
-					print "You've looted %s from the %s!" % (loot, enemy_name)
-					
-			else:
-				
-				loot = loot_lvl_7_9[j]
-				print "It's a %s!" % loot
-				
-				if loot in satchel_contents:
-					print "You've already got a %s...\n" % loot
-				
-				else: 
-					satchel_contents.append(loot)
-					print "You've looted %s from the %s!" % (loot, enemy_name)
 	
 	else: 
 	
