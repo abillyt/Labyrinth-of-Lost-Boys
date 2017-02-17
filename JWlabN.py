@@ -133,7 +133,7 @@ def player_check():
 	
 	if "tats" in choice:
 		print """Here are your current stats:\n
-		Name: %s, Class: %s
+		Name: %s Class: %s
 		Strength: %d
 		Dexterity: %d
 		Intelligence: %d
