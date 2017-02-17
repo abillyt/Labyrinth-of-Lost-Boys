@@ -24,6 +24,7 @@ high_scorer_bcf = "WFTIV"
 high_scorer_bctb = "WFTIV"
 attack_mod = 0
 defense_mod = 0
+current_weapon = "blank"
 
 prompt = "-> "
 
@@ -192,7 +193,7 @@ def equip():
 	global player_str, player_dex, player_int, player_hp, attack_mod, defense_mod, walking_stick
 	global cloth_cap, short_stick, basic_gloves, thick_shirt, three_ft_pipe, sturdy_hat, madrona_wand
 	global fingerless_gloves, leather_t, sword, wide_brim_hat, oak_staff, power_mitts, leather_jacket
-	global small_medallion, big_medallion, intricate_medalion, weapon
+	global small_medallion, big_medallion, intricate_medalion, weapon, current_weapon
 	
 	
 	print "What would you like to equip, good %s, the %s?\n" % (player_name, player_class)
@@ -225,12 +226,33 @@ def equip():
 			
 		elif answer == "Short Stick" and short_stick == False:
 			
-			if madrona_wand or oak_staff:
-				print "Why would you do that? You'd go down in attack damage!\n"
+			if weapon:
+				print "Okay, %s, the Short Stick is replacing your %s!\n" % (player_name, current_weapon)
+				print "Your bonus attack is 1!\n"
+				attack_mod = 1
+				short_stick = True
+				if current_weapon == "Madrona Wand":
+					madrona_wand = False
 				
-			print "Okay, you equip the Short Stick! Your attack has increased by 1!\n"
-			attack_mod += 1
-			short_stick = True
+				elif current_weapon == "Oak Staff":
+					oak_staff = False
+					
+				elif current_weapon == "Sturdy Walking Stick":
+					walking_stick = False
+					
+				elif current_weapon == "Three Foot Pipe":
+					three_ft_pipe = False
+					
+				else:
+					sword = False
+				current_weapon = "Short Stick"
+			
+			else:
+				print "Okay, you equip the Short Stick! Your attack has increased by 1!\n"
+				attack_mod = 1
+				short_stick = True
+				weapon = True
+				current_weapon = "Short Stick"
 			
 		elif answer == "Short Stick" and short_stick == True:
 			
@@ -289,24 +311,33 @@ def equip():
 		
 		elif answer == "Madrona Wand" and madrona_wand == False:
 			
-			if short_stick == True:
-				print "You have removed the Short Stick and equipped the Madrona Wand!\n"
-				print "You're attack has increased by 2!\n"
-				attack_mod += 1
-				madrona_wand = True
-				short_stick = False
+			if weapon:
+				print "Okay, %s, the Madrona Wand is replacing your %s!\n" % (player_name, current_weapon)
+				print "Your bonus attack is 2!\n"
+				attack_mod = 2
+				madrona_want = True
+				if current_weapon == "Short Stick":
+					short_stick = False
 				
-			elif oak_staff:
-				print "Up to you, there, %s." % player_name
-				print "Your attack is decreased by 1.\n"
-				player_int -= 1
-				wide_brim_hat = False
-				sturdy_hat = True
+				elif current_weapon == "Oak Staff":
+					oak_staff = False
+					
+				elif current_weapon == "Sturdy Walking Stick":
+					walking_stick = False
+					
+				elif current_weapon == "Three Foot Pipe":
+					three_ft_pipe = False
+					
+				else:
+					sword = False
+				current_weapon = "Madrona Wand"
 				
 			else: 
 				print "Okay, you equip the Madrona Wand! Your attack has increased by 2!\n"
-				attack_mod += 2
+				attack_mod = 2
 				madrona_wand = True
+				weapon = True
+				current_weapon = "Madrona Wand"
 				
 		elif answer == "Madrona Wand" and madrona_wand == True:
 			
@@ -389,24 +420,33 @@ def equip():
 		
 		elif answer == "Oak Staff" and oak_staff == False:
 			
-			if short_stick == True:
-				print "You have removed the Short Stick and equipped the Oak Staff!\n"
-				print "You're attack has increased by 2!\n"
-				attack_mod += 2
+			if weapon:
+				print "Okay, %s, the Oak Staff is replacing your %s!\n" % (player_name, current_weapon)
+				print "Your bonus attack is 3!\n"
+				attack_mod = 3
 				oak_staff = True
-				short_stick = False
+				if current_weapon == "Short Stick":
+					short_stick = False
 				
-			elif madrona_wand == True:
-				print "You have removed the Madrona Wand and equipped the Oak Staff!\n"
-				print "You're attack has increased by 1!\n"
-				attack_mod += 1
-				oak_staff = True
-				madrona_wand = False
+				elif current_weapon == "Madrona Wand":
+					madrona_wand = False
+					
+				elif current_weapon == "Sturdy Walking Stick":
+					walking_stick = False
+					
+				elif current_weapon == "Three Foot Pipe":
+					three_ft_pipe = False
+					
+				else:
+					sword = False
+				current_weapon = "Oak Staff"
 				
 			else: 
 				print "Okay, you equip the Oak Staff! Your attack has increased by 3!\n"
-				attack_mod += 3
+				attack_mod = 3
 				oak_staff = True
+				weapon = True
+				current_weapon = "Oak Staff"
 				
 		elif answer == "Oak Staff" and oak_staff == True:
 			
@@ -464,60 +504,101 @@ def equip():
 		
 		elif answer == "Sturdy Walking Stick" and walking_stick == False:
 			
-			if three_ft_pipe or sword:
-				print "Why would you do that? You'd go down in attack damage!\n"
+			if weapon:
+				print "Okay, %s, the Sturdy Walking Stick is replacing your %s!\n" % (player_name, current_weapon)
+				print "Your bonus attack is 1!\n"
+				attack_mod = 1
+				walking_stick = True
+				if current_weapon == "Short Stick":
+					short_stick = False
 				
-			print "Okay, you equip the Sturdy Walking Stick! Your attack has increased by 1!\n"
-			attack_mod += 1
-			walking_stick = True
+				elif current_weapon == "Oak Staff":
+					oak_staff = False
+					
+				elif current_weapon == "Madrona Wand":
+					madrona_wand = False
+					
+				elif current_weapon == "Three Foot Pipe":
+					three_ft_pipe = False
+					
+				else:
+					sword = False
+				current_weapon = "Sturdy Walking Stick"
+				
+			else: 
+				print "Okay, you equip the Sturdy Walking Stick! Your attack has increased by 1!\n"
+				attack_mod = 1
+				walking_stick = True
+				weapon = True
+				current_weapon = "Sturdy Walking Stick"
 			
 		elif answer == "Sturdy Walking Stick" and walking_stick == True:
 			
 			print "You've already got the Sturdy Walking Stick equipped!\n"
 
 		elif answer == "Three Foot Pipe" and three_ft_pipe == False:
-			if sturdy_walking_stick == True:
-				print "You have removed the Sturdy Walking Stick and equipped the Three Foot Pipe!\n"
-				print "You're attack has increased by 2!\n"
-				attack_mod += 1
+			
+			if weapon:
+				print "Okay, %s, the Three Foot Pipe is replacing your %s!\n" % (player_name, current_weapon)
+				print "Your bonus attack is 2!\n"
+				attack_mod = 2
 				three_ft_pipe = True
-				walking_stick = False
+				if current_weapon == "Short Stick":
+					short_stick = False
 				
-			elif sword:
-				print "Up to you, there, %s." % player_name
-				print "Your attack is decreased by 1.\n"
-				player_int -= 1
-				sword = False
-				three_ft_pipe = True
+				elif current_weapon == "Oak Staff":
+					oak_staff = False
+					
+				elif current_weapon == "Sturdy Walking Stick":
+					walking_stick = False
+					
+				elif current_weapon == "Madrona Wand":
+					madrona_wand = False
+					
+				else:
+					sword = False
+				current_weapon = "Three Foot Pipe"
 				
 			else: 
 				print "Okay, you equip the Three Foot Pipe! Your attack has increased by 2!\n"
 				attack_mod += 2
 				three_ft_pipe = True
+				weapon = True
+				current_weapon = "Three Foot Pipe"
 				
 		elif answer == "Three Foot Pipe" and three_ft_pipe == True:
 			
 			print "You've already got the Three Foot Pipe equipped!\n"
 		
 		elif answer == "Sword" and sword == False:
-			if walking_stick == True:
-				print "You have removed the Sturdy Walking Stick and equipped the Sword!\n"
-				print "You're attack has increased by 3!\n"
-				attack_mod += 2
-				sword = True
-				walking_stick = False
+			
+			if weapon:
+				print "Okay, %s, the Sword is replacing your %s!\n" % (player_name, current_weapon)
+				print "Your bonus attack is 3!\n"
+				attack_mod = 3
+				madrona_want = True
+				if current_weapon == "Short Stick":
+					short_stick = False
 				
-			elif three_ft_pipe == True:
-				print "You have removed the Three Foot Pipe and equipped the Sword!\n"
-				print "You're attack has increased by 3!\n"
-				attack_mod += 1
-				sword = True
-				three_ft_pipe = False
+				elif current_weapon == "Oak Staff":
+					oak_staff = False
+					
+				elif current_weapon == "Sturdy Walking Stick":
+					walking_stick = False
+					
+				elif current_weapon == "Three Foot Pipe":
+					three_ft_pipe = False
+					
+				else:
+					madrona_wand = False
+				current_weapon = "Sword"
 				
 			else: 
 				print "Okay, you equip the Sword! Your attack has increased by 3!\n"
-				attack_mod += 3
+				attack_mod = 3
 				sword = True
+				weapon = True
+				current_weapon = "Sword"
 				
 		elif answer == "Sword" and sword == True:
 			
@@ -549,9 +630,12 @@ def equip():
 		elif answer == "Intricate Medallion" and intricate_medallion == True:
 			
 			print "You're already wearing the intricate medallion!\n"
+			
+		else: 
+			print "You do not have that item!"
 				
 	else: 
-		"You do not have that item!"
+		print "You do not have that item!"
 	
 	#if player_class == "Wizard":
 
