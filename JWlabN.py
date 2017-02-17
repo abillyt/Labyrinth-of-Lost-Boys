@@ -1278,10 +1278,83 @@ def determine_player_death(num, enemy_name):
 	else:
 		dead("this should never print")
 
-def enemy_encounter():
+def boss_encounter(room, modifier):
 	
-	global player_hp, player_xp, enemies_lvl_1_3, enemies_lvl_4_6, enemies_lvl_7_9
-	global player_lvl, loot_lvl_1_3, loot_lvl_4_6, loot_lvl_7_9
+	if room == "room2":
+		enemy_name = "The Goblin King"
+		
+		if modifier == "Spade":
+			enemy = (80, 9, 32, 12)
+			print "You have cleanly re-potted %s\'s plant!\n" % enemy_name
+			print "Even though he's appreciative, %s is still going to fight you.\n" % enemy_name
+		
+		elif modifier == "Shovel" or modifier == "Hands":
+			enemy = (80, 12, 32, 12)
+			print "You have messily re-potted %s\'s plant!\n" % enemy_name
+			print "He's particular about keeping his soil from hitting the stone, and so he's"
+			print "frustrated and disappointed with you, and is ready to fight.\n"
+		
+		elif modifier == "Balanced Pickaxe":
+			enemy = (80, 15, 32, 12)
+			print "Your pickaxe breaks the empty pot and you hear an enraged roar!\n"
+			print "%s bursts into the room and throws his arms above his head, howling"
+			print "with rage as he sees his broken pot.\n"
+		
+		elif modifier == "Thief":
+			enemy = (80, 15, 32, 12)
+			print "The moment you touch the pot, you hear a deep scream of anguish!\n"
+			print "Charging through the door is %s! He sees you trying to take his pot"
+			print "and he becomes enraged!\n"
+		
+		else:
+			enemy = (80, 12, 32, 12)
+			print "Your bumbling has made a mess. %s appears at the door and he's ready to fight!\n" % enemy_name
+	
+	print "Are you going to fight or flee?"
+	
+	choice = raw_input(prompt)
+	print " "
+	
+	while choice == "player":
+		player_check()
+		
+		print "Are you going to fight or flee?"
+		choice = raw_input(prompt)
+		print " "
+	
+	if "ight" in choice: 
+	
+		print "You and the %s fight!\n\n\n" % enemy_name
+		battle(enemy, enemy_name)
+	
+	else: 
+	
+		if enemy[3] > player_dex:
+			
+			diff = (enemy[3] - player_dex) * 10
+			chance = randint(1, 100)
+			if chance >= 50 + diff:
+				
+				print "Somehow you escape!"
+			
+			else: 
+				dead("""Wow, you're slow. As you turn around and expose your neck,
+				the %s attacks and it kills ya.""" % enemy_name) 
+		
+		else:
+			
+			diff = (player_dex - enemy[3]) * 10
+			if diff > 40:
+				diff = 40
+			chance = randint(1, 100)
+			if chance <= 50 + diff:
+				
+				print "Because of your superior quickness, you escape.\n" 
+			
+			else: 
+				dead("Just because you SHOULD BE faster than your enemy, you weren't.")
+		
+def enemy_encounter():
 	
 	x = randint(0, 8)
 	loot = ""
@@ -3200,13 +3273,71 @@ def second_room():
 	global came_from
 	came_from = "East"
 	
-	print "You enter a large room full of caskets.\n" 
+	print "You enter a large room, its walls covered in stone carved flowers.\n" 
 	print "You came from the %s.\n" % came_from
 	
 	enemy_encounter()
 	
-	print "You try to open the caskets and see that they are all"
-	print "made of solid stone.\n" 
+	print "An eerie silence falls upon the room after your battle.\n"
+	print "There is a plant in a pot on a stone slab in the middle of the room."
+	print "Beside this pot is another pot, though empty.\n"
+	print "On the ground, there is a container of what looks like fresh potting soil.\n"
+	print "What do you do?\n"
+	print "\t1. Use an item."
+	print "\t2. Take the empty pot."
+	print "\t3. Take the potted plant."
+	print "\t4. Put the new soil in the empty pot with your hands and re-pot the plant."
+	print "\t5. Do nothing and leave the room."
+	answer = raw_input(prompt)
+	
+	while answer == "player":
+		player_check()
+		
+		print "What do you do?\n"
+		print "\t1. Use an item."
+		print "\t2. Take the empty pot."
+		print "\t3. Take the potted plant."
+		print "\t4. Put the new soil in the empty pot with your hands and re-pot the plant."
+		print "\t5. Do nothing and leave the room.\n"
+		answer = raw_input(prompt)
+	
+	if answer == "1":
+		
+		print "Which item would you like to use?"
+		answer2 == raw_input(prompt)
+		
+		while answer2 == "player":
+			player_check()
+			
+			print "Which item would you like to use?"
+			answer2 == raw_input(prompt)
+		
+		if answer2 in satchel_contents:
+			
+			if answer2 == "Spade":
+				boss_encounter("room2", "Spade")
+			
+			elif answer2 == "Shovel":
+				boss_encounter("room2", "Shovel")
+			
+			elif answer2 == "Balanced Pickaxe":
+				boss_encounter("room2", "Balanced Pickaxe")
+			
+			else: 
+				boss_encounter("room2", answer2)
+	
+	elif answer == "2" or answer == "3":
+		
+		boss_encounter("room2", "Thief")
+		
+	elif answer == "4":
+		
+		boss_encounter("room2", "Hands")
+	
+	else:
+		
+		print "You back away slowly, touching nothing.\n"
+				
 	
 	print "You exit the room and come to an intersection."
 	
