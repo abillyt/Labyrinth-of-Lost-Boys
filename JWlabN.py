@@ -60,7 +60,7 @@ weapon = False
 
 loot_dict = {'Sturdy Walking Stick': '+1 attack for Ninja or Hybrid', 'Cloth Cap': '+1 int for Wizard', 
 'Short Stick': '+1 attack for Wizard or Hybrid', 'Basic Gloves': '+1 dex for all classes', 
-'Spade': 'a small, handheld digging instrument', 'Paper & Pen': 'Good for explaining stuff!',
+'Spade': 'a small, handheld digging instrument', 'Paper and Pen': 'Good for explaining stuff!',
 'Thick Shirt': '+1 defense for all classes', 'Roll of String': 'about 100 feet of string',
 'Small Medallion': 'a unique pattern is displayed on the face',
 'Three Foot Pipe': '+2 attack for Ninja or Hybrid', 'Sturdy Hat': '+2 int for Wizard',
@@ -74,13 +74,13 @@ loot_dict = {'Sturdy Walking Stick': '+1 attack for Ninja or Hybrid', 'Cloth Cap
 'Long Rope': 'a 30 foot coil of good rope', 'Intricate Medallion': 'a craft of wonder and brilliance'}
 
 loot_lvl_1_3 = ['Sturdy Walking Stick', 'Cloth Cap', 'Short Stick', 'Basic Gloves', 
-'Spade', 'Rocks', 'Thick Shirt', 'Roll of String', 'Small Medallion']
+'Spade', 'Paper and Pen', 'Thick Shirt', 'Roll of String', 'Small Medallion']
 
 loot_lvl_4_6 = ['Three Foot Pipe', 'Sturdy Hat', 'Madrona Wand', 'Fingerless Gloves',
 'Shovel', 'Jagged Rocks', 'Leather T-Shirt', 'Short Rope', 'Big Medallion']
 
 loot_lvl_7_9 = ['Sword', 'Wide Brim Hat', 'Oak Staff', 'Power Mitts',
-'Balanced Pickaxe', 'Balanced Jagged Rocks', 'Leather Jacket', 'Long Rope',
+'Balanced Pickaxe', 'Book of Knots', 'Leather Jacket', 'Long Rope',
 'Intricate Medallion'] 
 
 enemies_lvl_1_3 = ['Slime', 'Gnoll', 'Wolf', 'Bat', 'Goblin', 'Cat', 'Flannel Bag',
