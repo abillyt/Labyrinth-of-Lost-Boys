@@ -56,6 +56,7 @@ leather_jacket = False
 small_medallion = False
 big_medallion = False
 intricate_medallion = False
+weapon = False
 
 loot_dict = {'Sturdy Walking Stick': '+1 attack for Ninja or Hybrid', 'Cloth Cap': '+1 int for Wizard', 
 'Short Stick': '+1 attack for Wizard or Hybrid', 'Basic Gloves': '+1 dex for all classes', 
@@ -186,12 +187,12 @@ def player_check():
 	else: 
 		print "I'm sure you know your way."
 		
-def equip(): #incomplete
+def equip():
 	
 	global player_str, player_dex, player_int, player_hp, attack_mod, defense_mod, walking_stick
 	global cloth_cap, short_stick, basic_gloves, thick_shirt, three_ft_pipe, sturdy_hat, madrona_wand
 	global fingerless_gloves, leather_t, sword, wide_brim_hat, oak_staff, power_mitts, leather_jacket
-	global small_medallion, big_medallion, intricate_medalion
+	global small_medallion, big_medallion, intricate_medalion, weapon
 	
 	
 	print "What would you like to equip, good %s, the %s?\n" % (player_name, player_class)
@@ -212,6 +213,7 @@ def equip(): #incomplete
 				print "this level of intelligence, what kind of decisions are"
 				print "you going to make with less intelligence?\n"
 				time.sleep(9)
+				print "We'll hold off for now."
 				
 			print "Okay, you equip the Cloth Cap! Your intelligence has increased by 1!\n"
 			player_int += 1
@@ -482,14 +484,10 @@ def equip(): #incomplete
 	#if player_class == "Wizard":
 
 	#elif player_class == "Ninja":
-	#	print "What would you like to equip, dear %s, the %s?" % (player_name, player_class)
-	#	answer = raw_input(prompt)
 	
 	#else:
-	#	print "What would you like to equip, sweet %s, the %s?" % (player_name, player_class)
-	#	answer = raw_input(prompt) 
 
-# incomplete def use(): 
+# def use(): 
 
 def print_enemies_full():
 	
