@@ -63,7 +63,7 @@ loot_dict = {'Sturdy Walking Stick': '+1 attack for Ninja or Hybrid', 'Cloth Cap
 'Spade': 'a small, handheld digging instrument', 'Paper & Pen': 'Good for explaining stuff!',
 'Thick Shirt': '+1 defense for all classes', 'Roll of String': 'about 100 feet of string',
 'Small Medallion': 'a unique pattern is displayed on the face',
-'3\' Pipe': '+2 attack for Ninja or Hybrid', 'Sturdy Hat': '+2 int for Wizard',
+'Three Foot Pipe': '+2 attack for Ninja or Hybrid', 'Sturdy Hat': '+2 int for Wizard',
 'Madrona Wand': '+2 attack for Wizard or Hybrid', 'Fingerless Gloves': '+2 dexterity for all classes',
 'Shovel': 'a tool you could dig a hole with', 'Jagged Rocks': 'a few rocks, sharp as hell', 
 'Leather T-Shirt': '+2 defense for all classes', 'Short Rope': 'about 12 feet of good rope',
@@ -76,7 +76,7 @@ loot_dict = {'Sturdy Walking Stick': '+1 attack for Ninja or Hybrid', 'Cloth Cap
 loot_lvl_1_3 = ['Sturdy Walking Stick', 'Cloth Cap', 'Short Stick', 'Basic Gloves', 
 'Spade', 'Rocks', 'Thick Shirt', 'Roll of String', 'Small Medallion']
 
-loot_lvl_4_6 = ['3\' Pipe', 'Sturdy Hat', 'Madrona Wand', 'Fingerless Gloves',
+loot_lvl_4_6 = ['Three Foot Pipe', 'Sturdy Hat', 'Madrona Wand', 'Fingerless Gloves',
 'Shovel', 'Jagged Rocks', 'Leather T-Shirt', 'Short Rope', 'Big Medallion']
 
 loot_lvl_7_9 = ['Sword', 'Wide Brim Hat', 'Oak Staff', 'Power Mitts',
@@ -204,7 +204,7 @@ def equip():
 		answer = raw_input(prompt)
 	
 	if answer in satchel_contents:
-		if answer.lower() == "cloth cap" and cloth_cap == False:
+		if answer == "Cloth Cap" and cloth_cap == False:
 			
 			if sturdy_hat or wide_brim_hat:
 				print "Why would you do that? You'd lose intelligence!\n"
@@ -219,7 +219,7 @@ def equip():
 			player_int += 1
 			cloth_cap = True
 			
-		elif answer.lower() == "short stick" and short_stick == False:
+		elif answer == "Short Stick" and short_stick == False:
 			
 			if madrona_wand or oak_staff:
 				print "Why would you do that? You'd go down in attack damage!\n"
@@ -228,7 +228,7 @@ def equip():
 			attack_mod += 1
 			short_stick = True
 			
-		elif answer.lower() == "basic gloves" and basic_gloves == False:
+		elif answer == "Basic Gloves" and basic_gloves == False:
 			
 			if fingerless_gloves or power_mitts:
 				print "Why would you do that? You'd lose dexterity!"
@@ -237,7 +237,7 @@ def equip():
 			player_dex += 1
 			basic_gloves = True
 			
-		elif answer.lower() == "thick shirt" and thick_shirt == False:
+		elif answer == "Thick Shirt" and thick_shirt == False:
 				
 			if leather_t or leather_jacket:
 				print "Why would you do that? You'd become more defenseless!\n"
@@ -246,7 +246,7 @@ def equip():
 			defense_mod += 1
 			thick_shirt = True
 			
-		elif answer.lower() == "sturdy hat" and sturdy_hat == False:
+		elif answer == "Sturdy Hat" and sturdy_hat == False:
 			
 			if cloth_cap == True:
 				print "You have removed the Cloth Cap and equipped the Sturdy Hat!\n"
@@ -256,7 +256,7 @@ def equip():
 				cloth_cap = False
 				
 			elif wide_brim_hat:
-				print "Up to you, %s." player_name
+				print "Up to you, %s." % player_name
 				print "Your intelligence is decreased by 1.\n"
 				player_int -= 1
 				wide_brim_hat = False
@@ -267,7 +267,7 @@ def equip():
 				player_int += 2
 				sturdy_hat = True
 		
-		elif answer.lower() == "madrona wand" and madrona_wand == False:
+		elif answer == "Madrona Wand" and madrona_wand == False:
 			
 			if short_stick == True:
 				print "You have removed the Short Stick and equipped the Madrona Wand!\n"
@@ -277,7 +277,7 @@ def equip():
 				short_stick = False
 				
 			elif oak_staff:
-				print "Up to you, there, %s." player_name
+				print "Up to you, there, %s." % player_name
 				print "Your attack is decreased by 1.\n"
 				player_int -= 1
 				wide_brim_hat = False
@@ -288,7 +288,7 @@ def equip():
 				attack_mod += 2
 				madrona_wand = True
 			
-		elif answer.lower() == "fingerless gloves" and fingerless_gloves == False:
+		elif answer == "Fingerless Gloves" and fingerless_gloves == False:
 			
 			if basic_gloves == True:
 				print "You have removed the Basic Gloves and equipped the Fingerless Gloves!\n"
@@ -298,7 +298,7 @@ def equip():
 				basic_gloves = False
 				
 			elif power_mitts:
-				print "Up to you, %s." player_name
+				print "Up to you, %s." % player_name
 				print "Your dexterity is decreased by 1.\n"
 				player_dex -= 1
 				power_mitts = False
@@ -309,7 +309,7 @@ def equip():
 				player_dex += 2
 				fingerless_gloves = True
 			
-		elif answer.lower() == "leather t-shirt" and leather_t == False:
+		elif answer == "Leather T-Shirt" and leather_t == False:
 			
 			if thick_shirt == True:
 				print "You have removed the Thick Shirt and equipped the Leather T-Shirt!\n"
@@ -319,7 +319,7 @@ def equip():
 				thick_shirt = False
 				
 			elif leather_jacket:
-				print "Up to you, %s." player_name
+				print "Up to you, %s." % player_name
 				print "Your defense is decreased by 1.\n"
 				defense_mod -= 1
 				leather_jacket = False
@@ -330,7 +330,7 @@ def equip():
 				defense_mod += 2
 				leather_t = True
 			
-		elif answer.lower() == "wide brim hat" and wide_brim_hat == False:
+		elif answer == "Wide Brim Hat" and wide_brim_hat == False:
 			
 			if cloth_cap == True:
 				print "You have removed the Cloth Cap and equipped the Wide Brim Hat!\n"
@@ -351,7 +351,7 @@ def equip():
 				player_int += 3
 				wide_brim_hat = True
 		
-		elif answer.lower() == "oak staff" and oak_staff == False:
+		elif answer == "Oak Staff" and oak_staff == False:
 			
 			if short_stick == True:
 				print "You have removed the Short Stick and equipped the Oak Staff!\n"
@@ -372,7 +372,7 @@ def equip():
 				attack_mod += 3
 				oak_staff = True
 			
-		elif answer.lower() == "power mitts" and power_mitts == False:
+		elif answer == "Power Mitts" and power_mitts == False:
 			
 			if basic_gloves == True:
 				print "You have removed the Basic Gloves and equipped the Power Mitts!\n"
@@ -393,7 +393,7 @@ def equip():
 				player_dex += 3
 				fingerless_gloves = True
 			
-		elif answer.lower() == "leather jacket" and leather_jacket == False:
+		elif answer == "Leather Jacket" and leather_jacket == False:
 			
 			if thick_shirt == True:
 				print "You have removed the Thick Shirt and equipped the Leather Jacket!\n"
@@ -414,7 +414,7 @@ def equip():
 				defense_mod += 3
 				leather_jacket = True
 		
-		elif answer.lower() == "sturdy walking stick" and sturdy_walking_stick == False:
+		elif answer == "Sturdy Walking Stick" and sturdy_walking_stick == False:
 			
 			if three_ft_pipe or sword:
 				print "Why would you do that? You'd go down in attack damage!\n"
@@ -423,27 +423,27 @@ def equip():
 			attack_mod += 1
 			sturdy_walking_stick = True
 
-		elif answer.lower() == "3\' Pipe" and three_ft_pipe == False:
+		elif answer == "Three Foot Pipe" and three_ft_pipe == False:
 			if sturdy_walking_stick == True:
-				print "You have removed the Sturdy Walking Stick and equipped the 3\' Pipe!\n"
+				print "You have removed the Sturdy Walking Stick and equipped the Three Foot Pipe!\n"
 				print "You're attack has increased by 2!\n"
 				attack_mod += 1
 				three_ft_pipe = True
 				sturdy_walking_stick = False
 				
 			elif sword:
-				print "Up to you, there, %s." player_name
+				print "Up to you, there, %s." % player_name
 				print "Your attack is decreased by 1.\n"
 				player_int -= 1
 				sword = False
 				three_ft_pipe = True
 				
 			else: 
-				print "Okay, you equip the 3\' Pipe! Your attack has increased by 2!\n"
+				print "Okay, you equip the Three Foot Pipe! Your attack has increased by 2!\n"
 				attack_mod += 2
 				three_ft_pipe = True
 		
-		elif answer.lower() == "sword" and sword == False:
+		elif answer == "Sword" and sword == False:
 			if sturdy_walking_stick == True:
 				print "You have removed the Sturdy Walking Stick and equipped the Sword!\n"
 				print "You're attack has increased by 3!\n"
@@ -452,7 +452,7 @@ def equip():
 				sturdy_walking_stick = False
 				
 			elif three_ft_pipe == True:
-				print "You have removed the 3\' Pipe and equipped the Sword!\n"
+				print "You have removed the Three Foot Pipe and equipped the Sword!\n"
 				print "You're attack has increased by 3!\n"
 				attack_mod += 1
 				sword = True
@@ -463,17 +463,17 @@ def equip():
 				attack_mod += 3
 				sword = True
 			
-		elif answer.lower() == "small medallion" and small_medallion == False:
+		elif answer == "Small Medallion" and small_medallion == False:
 				
 			print "You put the Small Medallion around your neck.\n"
 			small_medallion = True
 			
-		elif answer.lower() == "big medallion" and big_medallion == False:
+		elif answer == "Big Medallion" and big_medallion == False:
 				
 			print "You put the Big Medallion around your neck.\n"
 			big_medallion = True
 			
-		elif answer.lower() == "intricate medallion" and intricate_medallion == False:
+		elif answer == "Intricate Medallion" and intricate_medallion == False:
 			
 			print "You put the intricate medallion around your neck.\n"
 			intricate_medallion = True 
@@ -593,6 +593,9 @@ def battle(enemy, enemy_name):
 				
 			print result
 			
+			enemy_attack -= defense_mod
+			print "\n -- Defense Modifier is %d -- \n" % defense_mod
+			
 			if enemy_attack < 0:
 			
 				enemy_attack = 0
@@ -697,6 +700,9 @@ def battle(enemy, enemy_name):
 				
 			print result
 			
+			player_attack += attack_mod
+			print "\n -- Attack Modifier is %d -- \n" % attack_mod
+			
 			if player_attack < 0:
 				
 				player_attack = 0
@@ -715,6 +721,14 @@ def battle(enemy, enemy_name):
 				determine_enemy_death(enemy_hp, enemy_name)
 				print "---------------------------"
 				break
+				
+			if small_medallion:
+				print "You feel warmth on your chest, and suddenly become a little healthier."
+				player_hp_dmg += 1
+			
+			elif big_medallion or intricate_medallion:
+				print "You feel heat all over your body, and suddenly become much healthier."
+				player_hp_dm += 2
 			
 		if player_hp_dmg <= 0:
 			
@@ -804,12 +818,15 @@ def battle(enemy, enemy_name):
 				
 			print result
 			
-			print "You strike the %s for: %d damage!\n" % (enemy_name, player_attack)
-			time.sleep(1)
+			player_attack += attack_mod
+			print "\n -- Attack Modifier is %d -- \n" % attack_mod
 			
 			if player_attack < 0:
 				
 				player_attack = 0
+				
+			print "You strike the %s for: %d damage!\n" % (enemy_name, player_attack)
+			time.sleep(1)
 			
 			enemy_hp -= player_attack
 			
@@ -879,6 +896,9 @@ def battle(enemy, enemy_name):
 				
 			print result
 			
+			enemy_attack -= defense_mod
+			print "\n -- Defense Modifier is %d -- \n" % defense_mod
+			
 			if enemy_attack < 0:
 			
 				enemy_attack = 0
@@ -896,6 +916,14 @@ def battle(enemy, enemy_name):
 			if player_hp_dmg <= 0:
 				
 				determine_player_death(player_hp_dmg, enemy_name)
+				
+			if small_medallion:
+				print "You feel warmth on your chest, and suddenly become a little healthier."
+				player_hp_dmg += 1
+			
+			elif big_medallion or intricate_medallion:
+				print "You feel heat all over your body, and suddenly become much healthier."
+				player_hp_dm += 2
 			
 		if player_hp_dmg <= 0:
 			
