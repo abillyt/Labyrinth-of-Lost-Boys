@@ -1685,6 +1685,8 @@ def start():
 		
 		if "ye" in decision:
 			print "'Oh, thank you! Send them back to me when you've found them.\n\n"
+			print "You might need to draw them a map, if you have the materials for it..."
+			print "Just so they know how to get back to me.\n"
 			print "Good luck!'"
 			came_from = "South"
 			first_intersection()
