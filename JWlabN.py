@@ -749,8 +749,9 @@ def battle(enemy, enemy_name):
 				
 			print result
 			
-			enemy_attack -= defense_mod
-			print "\n -- Defense Modifier is %d -- \n" % defense_mod
+			if defense_mod > 0:
+				enemy_attack -= defense_mod
+				print "\n -- Defense Modifier is %d -- \n" % defense_mod
 			
 			if enemy_attack < 0:
 			
@@ -856,8 +857,9 @@ def battle(enemy, enemy_name):
 				
 			print result
 			
-			player_attack += attack_mod
-			print "\n -- Attack Modifier is %d -- \n" % attack_mod
+			if attack_mod > 0:
+				player_attack += attack_mod
+				print "\n -- Attack Modifier is %d -- \n" % attack_mod
 			
 			if player_attack < 0:
 				
@@ -978,8 +980,9 @@ def battle(enemy, enemy_name):
 				
 			print result
 			
-			player_attack += attack_mod
-			print "\n -- Attack Modifier is %d -- \n" % attack_mod
+			if attack_mod > 0:
+				player_attack += attack_mod
+				print "\n -- Attack Modifier is %d -- \n" % attack_mod
 			
 			if player_attack < 0:
 				
@@ -1056,8 +1059,9 @@ def battle(enemy, enemy_name):
 				
 			print result
 			
-			enemy_attack -= defense_mod
-			print "\n -- Defense Modifier is %d -- \n" % defense_mod
+			if defense_mod > 0:
+				enemy_attack -= defense_mod
+				print "\n -- Defense Modifier is %d -- \n" % defense_mod
 			
 			if enemy_attack < 0:
 			
