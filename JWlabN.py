@@ -22,6 +22,8 @@ battle_cave_there_and_back = 36
 high_scorer_fcm = "WFTIV"
 high_scorer_bcf = "WFTIV"
 high_scorer_bctb = "WFTIV"
+attack_mod = 0
+defense_mod = 0
 
 prompt = "-> "
 
@@ -36,21 +38,36 @@ high_scorer = False
 high_scorer_furthest = False
 high_scorer_cave = False
 
+walking_stick = False
+cloth_cap = False
+short_stick = False
+basic_gloves = False
+thick_shirt = False
+three_ft_pipe = False
+sturdy_hat = False
+madrona_wand = False
+fingerless_gloves = False
+leather_t = False
+sword = False
+wide_brim_hat = False
+oak_staff = False
+power_mitts = False
+leather_jacket = False
+
 loot_dict = {'Sturdy Walking Stick': '+1 attack for Ninja or Hybrid', 'Cloth Cap': '+1 int for Wizard', 
 'Short Stick': '+1 attack for Wizard or Hybrid', 'Basic Gloves': '+1 dex for all classes', 
-'Spade': 'a small, handheld digging instrument', 'Rocks': 'a few rocks of varying size and weight',
+'Spade': 'a small, handheld digging instrument', 'Paper & Pen': 'Good for explaining stuff!',
 'Thick Shirt': '+1 defense for all classes', 'Roll of String': 'about 100 feet of string',
 'Small Medallion': 'a unique pattern is displayed on the face',
 '3\' Pipe': '+2 attack for Ninja or Hybrid', 'Sturdy Hat': '+2 int for Wizard',
 'Madrona Wand': '+2 attack for Wizard or Hybrid', 'Fingerless Gloves': '+2 dexterity for all classes',
-'Shovel': 'a tool you could dig a hole with', 'Jagged Rocks': 'a few rocks with sharp edges', 
+'Shovel': 'a tool you could dig a hole with', 'Jagged Rocks': 'a few rocks, sharp as hell', 
 'Leather T-Shirt': '+2 defense for all classes', 'Short Rope': 'about 12 feet of good rope',
 'Big Medallion': 'a unique pattern is displayed on the face', 'Sword': '+3 attack for Ninja or Hybrid',
 'Wide Brim Hat': '+3 int for Wizard', 'Oak Staff': '+3 attack for Wizard or Hybrid', 
 'Power Mitts': '+3 dex for all classes', 'Balanced Pickaxe': 'a well weighted tool for digging or breaking stone',
-'Balanced Jagged Rocks': 'a few rocks that feel good in the hand and yet are sharp as hell',
-'Leather Jacket': '+3 defense for all classes', 'Long Rope': 'a 30 foot coil of good rope',
-'Intricate Medallion': 'a craft of wonder and brilliance'}
+'Book of Knots': 'Learn all sorts of knots!', 'Leather Jacket': '+3 defense for all classes',
+'Long Rope': 'a 30 foot coil of good rope', 'Intricate Medallion': 'a craft of wonder and brilliance'}
 
 loot_lvl_1_3 = ['Sturdy Walking Stick', 'Cloth Cap', 'Short Stick', 'Basic Gloves', 
 'Spade', 'Rocks', 'Thick Shirt', 'Roll of String', 'Small Medallion']
@@ -104,9 +121,6 @@ def print_wisdom(parent):
 		print " "
 
 def player_check():
-	
-	#global player_lvl, player_xp, player_str, player_dex, player_int, player_hp
-	#global player_hp_dmg, player_name, player_class, satchel, satchel_contents
 
 	print "Would you like to see your stats or your inventory or best scores?"
 	choice = raw_input(prompt)
@@ -132,6 +146,13 @@ def player_check():
 			print "Here are the current contents of your Satchel: "
 			print "%s" % satchel_contents
 			print " "
+			
+			print "Would you like to equip something?"
+			choice2 = raw_input(prompt)
+			
+			if "ye" in choice2:
+				
+				equip()
 	
 	elif "scores" in choice: 
 		
@@ -154,21 +175,181 @@ def player_check():
 		chance = randint(1, 100)
 		if chance <= 50: 
 			print_wisdom("Dad")
-			"A good man."
+			print "He was a good man."
 		else: 
 			print_wisdom("Mom")
-			"She was an excellent woman." 
+			print "She was an excellent woman." 
 		
 	else: 
 		print "I'm sure you know your way."
 		
 def equip(): #incomplete
 	
-	global player_str, player_dex, player_int, player_hp
+	global player_str, player_dex, player_int, player_hp, attack_mod, defense_mod, walking_stick
+	global cloth_cap, short_stick, basic_gloves, thick_shirt, three_ft_pipe, sturdy_hat, madrona_wand
+	global fingerless_gloves, leather_t, sword, wide_brim_hat, oak_staff, power_mitts, leather_jacket
 	
 	if player_class == "Wizard":
-		print "What would you like to equip, good %s, the %s?" % (player_name, player_class)
+		print "What would you like to equip, good %s, the %s?\n" % (player_name, player_class)
 		answer = raw_input(prompt)
+		while answer == "player":
+			player_check()
+			
+			print "What would you like to equip, good %s, the %s?\n" % (player_name, player_class)
+			answer = raw_input(prompt)
+		
+		if answer in satchel_contents:
+			if answer.lower() == "cloth cap" and cloth_cap == False:
+				print "Okay, you equip the Cloth Cap! Your intelligence has increased by 1!\n"
+				player_int += 1
+				cloth_cap = True
+				
+			elif answer.lower() == "short stick" and short_stick == False:
+				print "Okay, you equip the Short Stick! Your attack has increased by 1!\n"
+				attack_mod += 1
+				short_stick = True
+				
+			elif answer.lower() == "basic gloves" and basic_gloves == False:
+				print "Okay, you equip the Basic Gloves! Your dexterity has increased by 1!\n"
+				player_dex += 1
+				basic_gloves = True
+			
+			elif answer.lower() == "thick shirt" and thick_shirt == False:
+				print "Okay, you equip the Thick Shirt! Your defense has increased by 1!\n"
+				defense_mod += 1
+				thick_shirt = True
+				
+			elif answer.lower() == "sturdy hat" and sturdy_hat == False:
+				if cloth_cap == True:
+					print "You have removed the Cloth Cap and equipped the Sturdy Hat!\n"
+					print "Your intelligence has increased by 2!\n"
+					player_int += 1
+					sturdy_hat = True
+					cloth_cap = False
+				
+				else:
+					print "Okay, you equip the Sturdy Hat! Your intelligence has increased by 2!\n"
+					player_int += 2
+					sturdy_hat = True
+			
+			elif answer.lower() == "madrona wand" and madrona_wand == False:
+				if short_stick == True:
+					print "You have removed the Short Stick and equipped the Madrona Wand!\n"
+					print "You're attack has increased by 2!\n"
+					attack_mod += 1
+					madrona_wand = True
+					short_stick = False
+					
+				else: 
+					print "Okay, you equip the Madrona Wand! Your attack has increased by 2!\n"
+					attack_mod += 2
+					madrona_wand = True
+				
+			elif answer.lower() == "fingerless gloves" and fingerless_gloves == False:
+				if basic_gloves == True:
+					print "You have removed the Basic Gloves and equipped the Fingerless Gloves!\n"
+					print "You're dexterity has increased by 2!\n"
+					player_dex += 1
+					fingerless_gloves = True
+					basic_gloves = False
+				
+				else:
+					print "Okay, you equip the Fingerless Gloves! Your dexterity is increased by 2!\n"
+					player_dex += 2
+					fingerless_gloves = True
+				
+			elif answer.lower() == "leather t-shirt" and leather_t == False:
+				if thick_shirt == True:
+					print "You have removed the Thick Shirt and equipped the Leather T-Shirt!\n"
+					print "You're defense has increased by 2!\n"
+					defense_mod += 1
+					leather_t = True
+					thick_shirt = False
+				
+				else:
+					print "Okay, you equip the Leather T-Shirt! Your defense has increased by 2!\n"
+					defense_mod += 2
+					leather_t = True
+				
+			elif answer.lower() == "wide brim hat" and wide_brim_hat == False:
+				if cloth_cap == True:
+					print "You have removed the Cloth Cap and equipped the Wide Brim Hat!\n"
+					print "Your intelligence has increased by 3!\n"
+					player_int += 2
+					wide_brim_hat = True
+					cloth_cap = False
+				
+				elif sturdy_hat == True:
+					print "You have removed the Sturdy Hat and equipped the Wide Brim Hat!\n"
+					print "Your intelligence has increased by 3!\n"
+					player_int += 1
+					wide_brim_hat = True
+					sturdy_hat = False
+					
+				else: 
+					print "Okay, you equip the Wide Brim Hat! Your intelligence has increased by 3!\n"
+					player_int += 3
+					wide_brim_hat = True
+			
+			elif answer.lower() == "oak staff" and oak_staff == False:
+				if short_stick == True:
+					print "You have removed the Short Stick and equipped the Oak Staff!\n"
+					print "You're attack has increased by 3!\n"
+					attack_mod += 2
+					oak_staff = True
+					short_stick = False
+					
+				elif madrona_wand == True:
+					print "You have removed the Madrona Wand and equipped the Oak Staff!\n"
+					print "You're attack has increased by 3!\n"
+					attack_mod += 1
+					oak_staff = True
+					madrona_wand = False
+					
+				else: 
+					print "Okay, you equip the Oak Staff! Your attack has increased by 3!\n"
+					attack_mod += 3
+					madrona_wand = True
+				
+			elif answer.lower() == "power mitts" and power_mitts == False:
+				if basic_gloves == True:
+					print "You have removed the Basic Gloves and equipped the Power Mitts!\n"
+					print "You're dexterity has increased by 3!\n"
+					player_dex += 2
+					power_mitts = True
+					basic_gloves = False
+					
+				elif fingerless_gloves == True:
+					print "You have removed the Fingerless Gloves and equipped the Power Mitts!\n"
+					print "You're dexterity has increased by 3!\n"
+					player_dex += 1
+					power_mitts = True
+					fingerless_gloves = False
+				
+				else:
+					print "Okay, you equip the Power Mitts! Your dexterity is increased by 3!\n"
+					player_dex += 3
+					fingerless_gloves = True
+				
+			elif answer.lower() == "leather jacket" and leather_jacket == False:
+				if thick_shirt == True:
+					print "You have removed the Thick Shirt and equipped the Leather Jacket!\n"
+					print "You're defense has increased by 3!\n"
+					defense_mod += 2
+					leather_jacket = True
+					thick_shirt = False
+					
+				elif leather_t == True:
+					print "You have removed the Leather T-Shirt and equipped the Leather Jacket!\n"
+					print "You're defense has increased by 3!\n"
+					defense_mod += 1
+					leather_jacket = True
+					leather_t = False
+				
+				else:
+					print "Okay, you equip the Leather Jacket! Your defense has increased by 3!\n"
+					defense_mod += 3
+					leather_jacket = True
 	
 	elif player_class == "Ninja":
 		print "What would you like to equip, dear %s, the %s?" % (player_name, player_class)
@@ -2991,15 +3172,14 @@ def vendor():
 			
 			print "Ah, yes, the %s!\n" % answer
 			time.sleep(2)
-			print "At this moment, I don't know much about that.\n"
+			print "As far as I'm aware, this is what the %s does:\n"
+			print loot_dict[answer]
 			vendor_room()
 		
 		else:
 			
 			print "I don't know what you're talking about.\n"
 			vendor_room()
-			
-			
 	
 def battle_cave():
 	
