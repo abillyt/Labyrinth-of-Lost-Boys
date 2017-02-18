@@ -2083,7 +2083,7 @@ def secret_room_1():
 			
 			choice = direction("Would you like to go North or South in the corridor?")
 		
-		if choice = "n":
+		if choice == "n":
 			print "You go North."
 			second_intersection()
 		
@@ -2999,7 +2999,7 @@ def sixth_intersection():
 			
 			answer1 = direction("You can go North or South or examine the wall.")
 		
-		if answer1 = "examine":
+		if answer1 == "examine":
 			print "Looking more closely, you see that the circles move, but you"
 			print "you cannot make odds or ends of it.\n" 
 		
