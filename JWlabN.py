@@ -198,6 +198,7 @@ def equip():
 	global fingerless_gloves, leather_t, sword, wide_brim_hat, oak_staff, power_mitts, leather_jacket
 	global small_medallion, big_medallion, intricate_medalion, weapon, current_weapon
 	
+	equip_again = True
 	
 	print "What would you like to equip, good %s, the %s?\n" % (player_name, player_class)
 	answer = raw_input(prompt)
@@ -207,7 +208,7 @@ def equip():
 		print "What would you like to equip, good %s, the %s?\n" % (player_name, player_class)
 		answer = raw_input(prompt)
 	
-	if answer in satchel_contents:
+	while answer in satchel_contents and equip_again == True:
 		if answer == "Cloth Cap" and cloth_cap == False:
 			
 			if sturdy_hat or wide_brim_hat:
@@ -642,6 +643,28 @@ def equip():
 			
 		else: 
 			print "You do not have that item!\n"
+		
+		print "Would you like to equip something else?"
+		another_equip = raw_input(prompt)
+		
+		while another_equip == "player":
+			player_check()
+			
+			print "Would you like to equip something else?"
+			another_equip = raw_input(prompt)
+		
+		if "ye" in another_equip:
+			print "What would you like to equip?"
+			answer = raw_input(prompt)
+			
+			while answer == "player":
+				player_check()
+				
+				print "What would you like to equip?"
+				answer = raw_input(prompt)
+		
+		else:
+			equip_again = False
 				
 	else: 
 		print "You do not have that item!\n"
@@ -772,7 +795,7 @@ def battle(enemy, enemy_name):
 			player_hp_dmg -= enemy_attack
 			
 			print "You now have %s hit points.\n" % player_hp_dmg
-			print "--------------------********--------------------\n\n"
+			print "  -------------********-------------  \n\n"
 			time.sleep(1)
 			
 			if player_hp_dmg <= 0:
@@ -883,13 +906,13 @@ def battle(enemy, enemy_name):
 			enemy_hp -= player_attack
 			
 			print "The %s now has %d hit points.\n" % (enemy_name, enemy_hp)
-			print "--------------------********--------------------\n\n"
+			print "  -------------********-------------  \n\n"
 			time.sleep(1)
 			
 			if enemy_hp <= 0:
 				
 				determine_enemy_death(enemy_hp, enemy_name)
-				print "---------------------------"
+				time.sleep(3)
 				break
 				
 			if small_medallion:
@@ -1009,14 +1032,14 @@ def battle(enemy, enemy_name):
 			enemy_hp -= player_attack
 			
 			print "The %s now has %d hit points.\n" % (enemy_name, enemy_hp)
-			print "--------------------********--------------------\n\n"
+			print "  -------------********-------------  \n\n"
 			
 			time.sleep(1)
 			
 			if enemy_hp <= 0:
 			
 				determine_enemy_death(enemy_hp, enemy_name)
-				print "---------------------------"
+				time.sleep(3)
 				break 
 				
 			print "Now it's the %s\'s turn!\n" % enemy_name			
@@ -1088,7 +1111,7 @@ def battle(enemy, enemy_name):
 			player_hp_dmg -= enemy_attack
 			
 			print "You now have %s hit points.\n" % player_hp_dmg
-			print "--------------------********--------------------\n\n"
+			print "  -------------********-------------  \n\n"
 			
 			time.sleep(1)		
 			
@@ -3753,7 +3776,7 @@ def dead(why):
 	if "y" in quandry:
 	
 		player_hp_dmg = player_hp
-		first_chamber()
+		first_intersection()
 	
 	print "Would you like to play again? y or n?"
 	
