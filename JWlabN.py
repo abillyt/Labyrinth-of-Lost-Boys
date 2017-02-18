@@ -1321,31 +1321,37 @@ def boss_encounter(room, modifier):
 			enemy = (99, 9, 32, 12)
 			print "You have cleanly re-potted the plant!\n" 
 			print "Suddenly, you hear a grumble in the hallway, and in walks in %s!" % enemy_name
+			time.sleep(2)
 			print "Even though he\'s appreciative of you doing the chore he\'d been"
 			print "neglecting, %s is still going to fight you.\n" % enemy_name
 		
 		elif modifier == "Shovel" or modifier == "Hands":
 			enemy = (99, 12, 32, 12)
-			print "You have messily re-potted the plant!\n" 
+			print "You have messily re-potted the plant!\n"
 			print "Suddenly, you hear an angry grunt from the hallway, and in walks in %s!" % enemy_name
+			time.sleep(2)
 			print "Apparently, he\'s particular about keeping his soil from hitting the stone,"
 			print "and so he\'s frustrated and disappointed with you, and is ready to fight.\n"
 		
 		elif modifier == "Balanced Pickaxe":
 			enemy = (99, 15, 32, 12)
 			print "Your pickaxe breaks the empty pot and you hear an enraged roar!\n"
+			time.sleep(2)
 			print "%s bursts into the room and throws his arms above his head, howling"
 			print "with rage as he sees his broken pot.\n"
 		
 		elif modifier == "Thief":
 			enemy = (99, 15, 32, 12)
 			print "The moment you touch the pot, you hear a deep scream of anguish!\n"
+			time.sleep(2)
 			print "Charging through the door is %s! He sees you trying to take his pot"
 			print "and he becomes enraged!\n"
 		
 		else:
 			enemy = (99, 12, 32, 12)
-			print "Your bumbling has made a mess. %s appears at the door and he's ready to fight!\n" % enemy_name
+			print "Your bumbling has made a mess and caused a ruckus in the hallway!\n"
+			time.sleep(2)
+			print "%s appears at the door and he's ready to fight!\n" % enemy_name
 	
 	
 		print "You and the %s fight!\n\n\n" % enemy_name
@@ -3257,78 +3263,83 @@ def second_room():
 	
 	enemy_encounter()
 	
-	print "\n\nAn eerie silence falls upon the room after your battle.\n"
-	print "There is a plant in a pot on a stone slab in the middle of the room."
-	print "Beside this pot is another pot, though empty.\n"
-	print "On the ground, there is a container of what looks like fresh potting soil.\n"
-	print "What do you do?\n"
-	print "\t1. Use an item."
-	print "\t2. Take the empty pot."
-	print "\t3. Take the potted plant."
-	print "\t4. Put the new soil in the empty pot with your hands and re-pot the plant."
-	print "\t5. Do nothing and leave the room."
-	answer = raw_input(prompt)
-	
-	while answer == "player":
-		player_check()
-		
+	if defeat_goblin_king == False:
+		print "\n\nAn eerie silence falls upon the room after your battle.\n"
+		print "There is a plant in a pot on a stone slab in the middle of the room."
+		print "Beside this pot is another pot, though empty.\n"
+		print "On the ground, there is a container of what looks like fresh potting soil.\n"
 		print "What do you do?\n"
 		print "\t1. Use an item."
 		print "\t2. Take the empty pot."
 		print "\t3. Take the potted plant."
 		print "\t4. Put the new soil in the empty pot with your hands and re-pot the plant."
-		print "\t5. Do nothing and leave the room.\n"
+		print "\t5. Do nothing and leave the room."
 		answer = raw_input(prompt)
-	
-	if answer == "1":
 		
-		print "Which item would you like to use?"
-		answer2 = raw_input(prompt)
-		
-		while answer2 == "player":
+		while answer == "player":
 			player_check()
+			
+			print "What do you do?\n"
+			print "\t1. Use an item."
+			print "\t2. Take the empty pot."
+			print "\t3. Take the potted plant."
+			print "\t4. Put the new soil in the empty pot with your hands and re-pot the plant."
+			print "\t5. Do nothing and leave the room.\n"
+			answer = raw_input(prompt)
+		
+		if answer == "1":
 			
 			print "Which item would you like to use?"
 			answer2 = raw_input(prompt)
 		
-		if answer2 in satchel_contents:
+			while answer2 == "player":
+				player_check()
 			
-			if answer2 == "Spade":
-				boss_encounter("room2", "Spade")
-				defeat_goblin_king = True
+				print "Which item would you like to use?"
+				answer2 = raw_input(prompt)
+		
+			if answer2 in satchel_contents:
 			
-			elif answer2 == "Shovel":
-				boss_encounter("room2", "Shovel")
-				defeat_goblin_king = True
+				if answer2 == "Spade":
+					boss_encounter("room2", "Spade")
+					defeat_goblin_king = True
 			
-			elif answer2 == "Balanced Pickaxe":
-				boss_encounter("room2", "Balanced Pickaxe")
-				defeat_goblin_king = True
+				elif answer2 == "Shovel":
+					boss_encounter("room2", "Shovel")
+					defeat_goblin_king = True
 			
-			else: 
-				boss_encounter("room2", answer2)
-				defeat_goblin_king = True
+				elif answer2 == "Balanced Pickaxe":
+					boss_encounter("room2", "Balanced Pickaxe")
+					defeat_goblin_king = True
+				
+				else: 
+					boss_encounter("room2", answer2)
+					defeat_goblin_king = True
 	
-	elif answer == "2" or answer == "3":
+		elif answer == "2" or answer == "3":
 		
-		boss_encounter("room2", "Thief")
-		defeat_goblin_king = True
+			boss_encounter("room2", "Thief")
+			defeat_goblin_king = True
 		
-	elif answer == "4":
+		elif answer == "4":
 		
-		boss_encounter("room2", "Hands")
-		defeat_goblin_king = True
+			boss_encounter("room2", "Hands")
+			defeat_goblin_king = True
 	
-	else:
+		else:
 		
-		print "You back away slowly, touching nothing.\n"
+			print "You back away slowly, touching nothing.\n"
 				
 	
-	print "You exit the room and come to an intersection.\n"
+		print "You exit the room and come to an intersection.\n"
 	
-	came_from = "West"
+		came_from = "West"
 	
-	fourth_intersection()
+		fourth_intersection()
+	
+	else: 
+		print "The room looks just like you left it, and will forevermore..."
+		print "since you've destroyed The Goblin King.\n\n"
 
 def third_room():
 	
