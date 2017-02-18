@@ -150,7 +150,9 @@ def player_check():
 		
 		else:
 			print "Here are the current contents of your Satchel: "
-			print "%s" % satchel_contents
+			satchel_contents.sort()
+			for item in satchel_contents: 
+				print "\t" + item + "\n"
 			print " "
 			
 			print "Would you like to equip something?"
@@ -3600,7 +3602,7 @@ def vendor():
 			
 			print "Ah, yes, the %s!\n" % answer
 			time.sleep(2)
-			print "As far as I'm aware, this is what the %s does:\n"
+			print "As far as I'm aware, this is what the %s does:\n" % answer
 			print loot_dict[answer]
 			vendor_room()
 		
