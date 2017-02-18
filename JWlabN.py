@@ -67,7 +67,7 @@ yes_list = ["yep", "yeppers", "yeah", "uh huh", "well, sure", "absolutely", "ame
 		"true", "yea", "decent", "beyond a doubt", "certainly", "good enough", "naturally", "of course",
 		"undoubtedly", "unquestionably", "definitely", "you bet", "you betcha", "hell yea i am",
 		"heck ya", "heck yah", "hell ya", "hell yeah", "hell yah", "without a doubt", "i am",
-		"i am!", "yes", "y"]
+		"i am!", "yes", "y", "sure", "okay"]
 
 no_list = ["nope", "no way", "negative", "absolutely not", "not at all", "not by any means", "never",
 		"by no means", "nix", "not", "no", "n"] 
