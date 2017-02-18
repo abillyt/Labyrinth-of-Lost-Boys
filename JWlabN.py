@@ -74,6 +74,22 @@ no_list = ["nope", "no way", "negative", "absolutely not", "not at all", "not by
 
 maybe_list = ["perchance", "perhaps", "mayhaps", "can be", "feasible", "imaginably", "i might be", 
 		"i could be", "possibly", "god willing", "god willing", "could be", "maybe"]
+
+north_list = ["north", "go north", "head north", "nrth", "nroth", "nrt", "n", "no",
+		"how about north", "how bout north", "north, i guess"]
+
+south_list = ["south", "go south", "head south", "soth", "suoth", "sth", "s", "so",
+		"how about south", "how bout south", "south, i guess"]
+
+west_list = ["west", "go west", "head west", "wst", "w", "we", "how about west",
+		"how bout west", "west, i guess"]
+		
+east_list = ["east", "go east", "head east", "est", "e", "ea", "how about east",
+		"how bout east", "east, i guess"]
+
+undecided_list = ["not sure", "which way should i go?", "dunno", "i don\'t know"]
+
+door_list = ["enter door", "open door", "open", "door", "enter room", "room", "go into the room"]
 		
 loot_dict = {'Sturdy Walking Stick': '+1 attack for Ninja or Hybrid', 'Cloth Cap': '+1 int for Wizard', 
 'Short Stick': '+1 attack for Wizard or Hybrid', 'Basic Gloves': '+1 dex for all classes', 
@@ -149,6 +165,12 @@ def yes_no(question):
 		answer = raw_input(prompt2)
 		answer = answer.lower()
 		print "\n\n"
+		
+		if answer in yes_list:			
+			return "y"
+
+		elif answer in no_list:		
+			return "n"
 
 	if answer in yes_list:			
 		return "y"
@@ -159,7 +181,50 @@ def yes_no(question):
 	else: 
 		yes_no(question)
 		
+def direction(question):
+	
+	prompt2 = question + "\n-> "
+	
+	answer = raw_input(prompt2)
+	answer = answer.lower()
+	print "\n"
 
+	if answer == "player":
+		return "player"
+	
+	if answer in door_list:
+		return "door"
+	
+	if answer == "examine":
+		return answer
+	
+	while len(answer) == 0:
+		print "Please choose the direction, instead of not answering at all.\n"
+		answer = raw_input(prompt2)
+		answer = answer.lower()
+		print "\n\n"
+		
+	while answer in undecided_list:
+		print "I think you better decide for yourself."
+		answer = raw_input(prompt2)
+		answer = answer.lower()
+		print "\n\n"
+
+	if answer in north_list:			
+		return "n"
+
+	elif answer in south_list:		
+		return "s"
+		
+	elif answer in west_list:		
+		return "w"
+		
+	elif answer in east_list:		
+		return "e"
+
+	else: 
+		direction(question)
+		
 def print_wisdom(parent):
 	
 	if parent == "Dad":
@@ -228,10 +293,10 @@ def player_check():
 		chance = randint(1, 100)
 		if chance <= 50: 
 			print_wisdom("Dad")
-			print "He was a good man.\n"
+			print "He was a good man.\n\n\n"
 		else: 
 			print_wisdom("Mom")
-			print "She was an excellent woman.\n" 
+			print "She was an excellent woman.\n\n\n" 
 		
 	else: 
 		print "I'm sure you know your way.\n"
@@ -1875,20 +1940,16 @@ def first_intersection():
 	time.sleep(1)
 	print "You may choose to travel North, West, or East."
 	print "You came from the %s.\n" % came_from
-	print "Which direction do you choose?" 
 	
-	choice = raw_input(prompt)
-	print " "
+	choice = direction("Which direction do you choose?")
 	
 	while choice == "player":
 		
 		player_check()
 		
-		print "Which direction do you choose?" 
-		choice = raw_input(prompt)
-		print " "
+		choice = direction("Which direction do you choose?")
 	
-	if "est" in choice:
+	if choice == "w":
 		
 		print "You go West and come to an elbow leading North.\n"
 		time.sleep(2)
@@ -1932,7 +1993,7 @@ def first_intersection():
 			print "I wish I was human! Then I could understand you!"
 			dead("A wave of sound comes and crushes your skull.")
 							
-	elif "ast" in choice:
+	elif choice == "e":
 		
 		print "You follow the path East, which comes to an elbow that heads"
 		print "North. You follow that path and come to another intersection.\n"
@@ -1943,13 +2004,16 @@ def first_intersection():
 			enemy_encounter()
 		third_intersection()
 		
-	else: 
+	elif choice == "n": 
 		print "You head North and come to a T intersection, branching West and East.\n"
 		came_from = "South"
 		chance = randint(1, 100)
 		if chance <= 50:
 			enemy_encounter()
 		second_intersection()
+	
+	else: 
+		print "You've entered something I do not understand."
 
 def secret_room_1():
 
@@ -1985,22 +2049,22 @@ def secret_room_1():
 		can now decide to go North or South in the corridor."""
 		came_from = "West"
 		
-		choice = raw_input(prompt)
-		print " "
+		choice = direction("Would you like to go North or South in the corridor?")
 		
 		while choice == "player":
 			
 			player_check()
 			
-			print "Would you like to go North or South in the corridor?"
-			choice = raw_input(prompt)
-			print " "
+			choice = direction("Would you like to go North or South in the corridor?")
 		
-		if "orth" in choice:
+		if choice == "n":
 			second_intersection()
 		
-		else:
+		elif choice == "s":
 			first_intersection()
+			
+		else: 
+			print "I do not know what you are trying for."
 						
 	elif "2" in choice3:
 		print """
@@ -2012,23 +2076,23 @@ def secret_room_1():
 		or South in the corridor."""
 		came_from = "West"
 		
-		choice = raw_input(prompt)
-		print " "
+		choice = direction("Would you like to go North or South in the corridor?")
 		
 		while choice == "player":
 			player_check()
 			
-			print "Would you like to go North or South in the corridor?"
-			choice = raw_input(prompt)
-			print " "
+			choice = direction("Would you like to go North or South in the corridor?")
 		
-		if "orth" in choice:
+		if choice = "n":
 			print "You go North."
 			second_intersection()
 		
-		else:
+		elif choice == "s":
 			print "You go South."
 			first_intersection()
+			
+		else:
+			print "I DO NOT UNDERSTAND."
 			
 	elif "3" in choice3:
 		print """
@@ -2056,25 +2120,25 @@ def secret_room_1():
 				time.sleep(2)
 				print "You remember the good times you had, then you turn around"
 				print "and leave the room because there's nothing in there anymore.\n" 
-				print "Do you go North or South?"
-				choice1 = raw_input(prompt)
-				print " "
+				
+				choice1 = direction("Do you go North or South?")
 				
 				while choice1 == "player":
 					
 					player_check()
 					
-					print "Do you go North or South?"
-					choice1 = raw_input(prompt)
-					print " "
+					choice1 = direction("Do you go North or South?")
 						
-				if "orth" in choice1:
+				if choice1 == "n":
 					print "North you go!"
 					second_intersection()
 				
-				else: 
+				elif choice1 == "s": 
 					print "South it is!"
 					first_intersection()
+					
+				else: 
+					print "No idea what you want from me."
 			
 			while first_time_secret_room:
 				
@@ -2168,24 +2232,25 @@ def secret_room_1():
 					time.sleep(3)
 					print "Phew! That thing looked too delicious to be of any use!\n"	
 					print "Do you go North or South?"
-					choice1 = raw_input(prompt)
-					print " "
+					
+					choice1 = direction("Do you go North or South?")
 					
 					while choice1 == "player":
 						
 						player_check()
 						
-						print "Do you go North or South?"
-						choice1 = raw_input(prompt)
-						print " "
+						choice1 = direction("Do you go North or South?")
 						
-					if "orth" in choice1:
+					if choice1 == "n":
 						print "North you go!"
 						second_intersection()
 					
-					else: 
+					elif choice1 == "s":
 						print "South it is!"
 						first_intersection()
+						
+					else: 
+						print "I DO NOT KNOW WHY I PRINT."
 			 	
 		elif choice4 == "n":
 			print """
@@ -2194,24 +2259,24 @@ def secret_room_1():
 			can now decide to go North or South in the corridor.\n"""
 			came_from = "West"
 			
-			choice2 = raw_input(prompt)
-			print " "
+			choice2 = direction("Would you like to go North or South in the corridor?")
 			
 			while choice2 == "player":
 				
 				player_check()
 				
-				print "Would you like to go North or South in the corridor?"
-				choice2 = raw_input(prompt)
-				print " "
+				choice2 = direction("Would you like to go North or South in the corridor?")
 			
-			if "orth" in choice2:
+			if choice2 == "n":
 				print "You go North.\n"
 				second_intersection()
 			
-			else:
+			elif choice2 == "s":
 				print "You go South.\n"
 				first_intersection()
+			
+			else:
+				print "DO NOT KNOW."
 				
 		else: 
 			dead("Standing. Waiting. The floor opens and you fall into eternity.")
@@ -2231,20 +2296,16 @@ def second_intersection():
 	print "There is a dripping sound.\n"
 	print "You came from the %s." % came_from
 	time.sleep(1)
-	print "Which way do you go?"
 	
-	choice = raw_input(prompt)
-	print " "
+	choice = direction("Which way do you go?")
 	
 	while choice == "player":
 		
 		player_check()
 		
-		print "Which way do you go?"
-		choice = raw_input(prompt)
-		print " "
+		choice = direction("Which way do you go?")
 	
-	if "outh" in choice:
+	if choice == "s":
 		print "You move South.\n"
 		came_from = "North"
 		chance = randint(1, 100)
@@ -2253,7 +2314,7 @@ def second_intersection():
 			enemy_encounter()
 		first_intersection()
 	
-	elif "ast" in choice:
+	elif choice == "e":
 		print "You move East\n"
 		came_from = "West"
 		chance = randint(1, 100)
@@ -2262,7 +2323,7 @@ def second_intersection():
 			enemy_encounter()
 		third_intersection()
 	
-	elif "est" in choice:
+	elif choice == "w":
 		print "You go West and come to an elbow leading South.\n"
 		time.sleep(2)
 		print "You follow the elbow and are in a corridor that smells like dust and decay.\n"
@@ -2295,7 +2356,7 @@ def second_intersection():
 			
 			secret_room_1()
 	
-	elif "orth" in choice:
+	elif choice == "n":
 		print "You try to head North, but run into the concrete wall.\n"
 		player_hp -= 1
 		print "You lost a hit point! you now have %d hit points.\n" % player_hp
@@ -2304,8 +2365,9 @@ def second_intersection():
 		if chance <= 50:
 			enemy_encounter()
 		second_intersection()
+	
 	else:
-		dead("triggering dead")
+		print "NO DIRECTION."
 
 def third_intersection():
 
@@ -2314,24 +2376,20 @@ def third_intersection():
 	print "You are at an intersection with passageways to the South, West, and East.\n"
 	print "There is a door along the cleft wall to the South/West.\n"
 	print "You came from %s." % came_from
-	print "Which way do you go?"
 	
-	choice = raw_input(prompt)
-	print " "
+	choice = direction("Which way do you go?")
 	
 	while choice == "player":
 		
 		player_check()
 	
-		print "Which way do you go?"
-		choice = raw_input(prompt)
-		print " "
+		choice = direction("Which way do you go?")
 			
 	if "door" in choice:
 	
 		first_room()
 	
-	elif "outh" in choice:
+	elif choice == "s":
 		print "You head South and hang a right, heading West, and"
 		print "come to another intersection.\n"
 		came_from = "East"
@@ -2342,7 +2400,7 @@ def third_intersection():
 		
 		first_intersection()
 	
-	elif "est" in choice:
+	elif choice == "w":
 		print "You head West and shortly come to another intersection.\n"
 		came_from = "East"
 		chance = randint(1, 100)
@@ -2352,7 +2410,7 @@ def third_intersection():
 		
 		second_intersection()
 	
-	elif "ast" in choice:
+	elif choice == "e":
 		print "You head East... and the hallway turns slightly.\n"
 		time.sleep(1)
 		print "Following the turn you head up stone stairs.\n"
@@ -2368,7 +2426,7 @@ def third_intersection():
 		
 		first_chamber()
 	
-	elif "orth" in choice:
+	elif choice == "n":
 		
 		print "You try to head North, but run into the concrete wall.\n"
 		player_hp -= 1
@@ -2381,7 +2439,8 @@ def third_intersection():
 		third_intersection()
 	
 	else:
-		dead("Triggering DEATH")
+		
+		print "no thAnks."
 	
 	third_intersection()
 
@@ -2799,19 +2858,15 @@ def fourth_intersection():
 	print "You are at a mossy intersection that branches West, East, and North.\n"
 	print "You came from the %s." % came_from
 	
-	print "Which way do you go?"
-	answer = raw_input(prompt)
-	print " "
+	answer = direction("Which way do you choose to go?")
 	
 	while answer == "player":
 		
 		player_check()
 		
-		print "Which way do you go?"
-		answer = raw_input(prompt)
-		print " "
+		answer = direction("Which way do you choose to go?")
 	
-	if "est" in answer:
+	if answer == "w":
 		print "You head west and...\n"
 		chance = randint(1, 100)
 		
@@ -2823,7 +2878,7 @@ def fourth_intersection():
 		
 		second_room()
 	
-	elif "ast" in answer:
+	elif answer == "e":
 		print "You head east and...\n"
 		chance = randint(1, 100)
 		
@@ -2835,7 +2890,7 @@ def fourth_intersection():
 		
 		fifth_intersection()
 	
-	else: 
+	elif answer == "n": 
 		print "You head north and...\n"
 		chance = randint(1, 100)
 		
@@ -2846,6 +2901,9 @@ def fourth_intersection():
 		came_from = "South"
 		
 		first_chamber()
+		
+	else: 
+		print "i d o n o t k n o w"
 
 def fifth_intersection():
 	
@@ -2856,18 +2914,14 @@ def fifth_intersection():
 	print "Do you go East or West or South?\n"
 	print "You came from the %s." % came_from
 	
-	print "Which way do you go?"
-	answer = raw_input(prompt)
-	print " "
+	answer = direction("Which way do you choose to go?")
 	
 	while answer == "player":
 		player_check()
 		
-		print "Which way do you go?"
-		answer = raw_input(prompt)
-		print " "
+		answer = direction("Which way do you choose to go?")
 		
-	if "outh" in answer:
+	if answer == "s":
 		chance = randint(1, 100)
 		if chance <= 50:
 			enemy_encounter()
@@ -2882,8 +2936,8 @@ def fifth_intersection():
 		
 		fifth_intersection()
 	
-	elif "ast" in answer: 
-		print "You abruptly come upon the edge of a pit.\n" 
+	elif answer == "e": 
+		print "You go east and abruptly come upon the edge of a pit.\n" 
 		time.sleep(2)
 		print "You can see the other side, though it is quite a distance." 
 		print "There is tree trunk punched through the labryinth walls.\n"
@@ -2899,7 +2953,7 @@ def fifth_intersection():
 			
 			fifth_intersection()
 			
-	else:
+	elif answer == "w":
 		print "You head West and...\n"
 		came_from = "West"
 		chance = randint(1, 100)
@@ -2907,6 +2961,9 @@ def fifth_intersection():
 			enemy_encounter()
 		print "...you come to another intersection.\n"
 		fourth_intersection()
+		
+	else: 
+		print "should    no     printing"
 
 def sixth_intersection():
 
@@ -2915,18 +2972,15 @@ def sixth_intersection():
 	print "You can see that both the North and the South paths turn a"
 	print "corner heading in the same direction. You can go North, South, or East.\n"
 	print "You came from %s.\n" % came_from
-	print "Which way do you go?" 
-	answer = raw_input(prompt)
-	print " "
+	
+	answer = direction("Which way do you choose to go?")
 	
 	while answer == "player":
 		player_check()
 		
-		print "Which way do you go?"
-		answer = raw_input(prompt)
-		print " "
+		answer = direction("Which way do you choose to go?")
 	
-	if "outh" in answer:
+	if answer == "s":
 		print "You head South, turning the corner to the West.\n" 
 		time.sleep(2)
 		chance = randint(1, 100)
@@ -2937,31 +2991,34 @@ def sixth_intersection():
 		time.sleep(2)
 		print "On your left the wall is blank. On the right there are three"
 		print "protruding circles.\n" 
-		print "You can go North or South or examine the wall."
-		answer1 = raw_input(prompt)
+		
+		answer1 = direction("You can go North or South or examine the wall.")
+		
 		while answer1 == "player":
 			player_check()
 			
-			print "You can go North or South or examine the wall.\n"
-			answer1 = raw_input(prompt)
+			answer1 = direction("You can go North or South or examine the wall.")
 		
-		if "xamin" in answer1:
+		if answer1 = "examine":
 			print "Looking more closely, you see that the circles move, but you"
 			print "you cannot make odds or ends of it.\n" 
 		
 			sixth_intersection()
 		
-		elif "outh" in answer1: 
+		elif answer1 == "s": 
 			print "You go South.\n"
 			
 			sixth_intersection()
 		
-		else:
+		elif answer1 == "n":
 			print "You go North.\n"
 			
 			sixth_intersection()
 			
-	elif "orth" in answer: 
+		else: 
+			print "DO not KNOW."
+			
+	elif answer == "n": 
 		
 		print "You head North, turning the corner to the West.\n" 
 		time.sleep(2)
@@ -2973,23 +3030,22 @@ def sixth_intersection():
 		time.sleep(2)
 		print "On your right the wall is blank. On the left there are three"
 		print "protruding circles.\n" 
-		print "You can go North or South or examine the wall.\n"
-		answer1 = raw_input(prompt)
+
+		answer1 = direction("You can go North or South or examine the wall.")
 		
 		while answer1 == "player":
 			player_check()
 			
-			print "You can go North or South or examine the wall.\n"
-			answer1 = raw_input(prompt)
+			answer1 = direction("You can go North or South or examine the wall.")
 		
-		if "xamin" in answer1:
+		if answer1 == "examine":
 			print "Looking more closely, you see that the circles move, but you"
 			print "you cannot make odds or ends of it.\n"
 			print "You keep walking."
 			
 			sixth_intersection()
 		
-		elif "outh" in answer1: 
+		elif answer1 == "s": 
 			print "You go South.\n"
 			chance = randint(1, 100)
 			if chance <= 50:
@@ -2997,13 +3053,17 @@ def sixth_intersection():
 				
 			sixth_intersection()
 		
-		else:
+		elif answer1 == "n":
 			print "You go North.\n"
 			chance = randint(1, 100)
 			if chance <= 50:
 				enemy_encounter()
 				
 			sixth_intersection()
+		
+		else: 
+			print "dunno why printing"
+			
 	else: 
 		first_chamber()
 
@@ -3014,18 +3074,15 @@ def seventh_intersection():
 	print "You come to a three-way intersection." 
 	print "The paths go West or North or Southeast up the stairs.\n"
 	print "You came from the %s.\n" % came_from
-	print "Which way do you go?" 
-	answer = raw_input(prompt)
-	print " "
+	
+	answer = direction("Which way do you go? West, North, or South?")
 	
 	while answer == "player":
 		player_check()
 		
-		print "Which way do you go?"
-		answer = raw_input(prompt)
-		print " "
+		answer = direction("Which way do you go? West, North, or South?")
 	
-	if "est" in answer: 
+	if answer == "w": 
 		chance = randint(1, 100)
 		if chance <= 50:
 			enemy_encounter()
@@ -3037,7 +3094,7 @@ def seventh_intersection():
 		came_from = "West"
 		seventh_intersection()
 	
-	elif "orth" in answer:
+	elif answer == "n":
 		chance = randint(1, 100)
 		if chance <= 50:
 			enemy_encounter()
@@ -3045,7 +3102,7 @@ def seventh_intersection():
 		came_from = "South"
 		eleventh_intersection()
 	
-	else:
+	elif answer == "s":
 		chance = randint(1, 100)
 		if chance <= 50:
 			enemy_encounter()
@@ -3060,18 +3117,15 @@ def eighth_intersection():
 	print "You stand in a four-way intersection."
 	print "You can go North, South, East, or West.\n"
 	print "You came from the %s.\n" % came_from
-	print "Which way do you go?" 
-	answer = raw_input(prompt)
-	print " "
+	
+	answer = direction("Which way do you go?")
 	
 	while answer == "player":
 		player_check()
 		
-		print "Which way do you go?"
-		answer = raw_input(prompt)
-		print " "
+		answer = direction("Which way do you go?")
 	
-	if "orth" in answer:
+	if answer == "n":
 		print "You head North.\n"
 		chance = randint(1, 100)
 		
@@ -3082,7 +3136,7 @@ def eighth_intersection():
 		
 		grand_hallway()
 	
-	elif "outh" in answer:
+	elif answer == "s":
 		print "You head South.\n"
 		chance = randint(1, 100)
 		
@@ -3103,16 +3157,19 @@ def eighth_intersection():
 		
 		eighth_intersection()
 	
-	elif "ast" in answer:
+	elif answer == "e":
 		print "You head East and enter a long room.\n"
 		enemy_encounter()
 		
 		fourth_room()
 	
-	else:
+	elif answer == "w":
 		print "You head West.\n"
 		
 		first_chamber()
+		
+	else:
+		print "should not be printing this."
 
 def ninth_intersection():
 
@@ -3121,18 +3178,15 @@ def ninth_intersection():
 	print "You stand at a three-way intersection."
 	print "You can go North, South, or East.\n"
 	print "You came from the %s.\n" % came_from
-	print "Which way do you go?" 
-	answer = raw_input(prompt)
-	print " "
+	
+	answer = direction("Which way do you go?")
 	
 	while answer == "player":
 		player_check()
 		
-		print "Which way do you go?"
-		answer = raw_input(prompt)
-		print " "
+		answer = direction("Which way do you go?")
 	
-	if "ast" in answer:
+	if answer == "e":
 		print "You head East and immediately the corridor takes you South.\n"
 		print "You come to a dead end with a portrait hanging on the wall.\n"
 		time.sleep(2)
@@ -3142,7 +3196,7 @@ def ninth_intersection():
 		
 		ninth_intersection()
 	
-	elif "orth" in answer:
+	elif answer == "n":
 		print "You head North.\n"
 		came_from = "South"
 		chance = randint(1, 100)
@@ -3152,7 +3206,7 @@ def ninth_intersection():
 		
 		grand_hallway()
 	
-	else:
+	elif answer == "s":
 		print "You head South.\n"
 		came_from = "North"
 		chance = randint(1, 100)
@@ -3160,6 +3214,9 @@ def ninth_intersection():
 			enemy_encounter()
 		
 		eighth_intersection()
+		
+	else: 
+		print "NO THANKS."
 		
 # incomplete def tenth_intersection():
 
@@ -3169,18 +3226,15 @@ def eleventh_intersection():
 	
 	print "You stand at an intersection that leads North, East, or South.\n"
 	print "You came from the %s.\n" % came_from
-	print "Which way do you go?" 
-	answer = raw_input(prompt)
-	print " "
+	
+	answer = direction("Which way do you go?")
 	
 	while answer == "player":
 		player_check()
 		
-		print "Which way do you go?"
-		answer = raw_input(prompt)
-		print " "
+		answer = direction("Which way do you go?")
 	
-	if "orth" in answer:
+	if answer == "n":
 		print "You approach the mouth of a cave!\n" 
 
 		answer1 = yes_no("Do you go into the cave?")
@@ -3197,7 +3251,7 @@ def eleventh_intersection():
 		else: 
 			eleventh_intersection()
 	
-	elif "ast" in answer: 
+	elif answer == "e": 
 		print "You head East along a long corridor.\n"
 		time.sleep(2)
 		chance = randint(1, 100)
@@ -3209,7 +3263,7 @@ def eleventh_intersection():
 		
 		twelfth_intersection()
 	
-	elif "outh" in answer:
+	elif answer == "s":
 		print "You head South.\n"
 		chance = randint(1, 100)
 		
@@ -3234,18 +3288,15 @@ def twelfth_intersection():
 	
 	if chance <= 50:
 		enemy_encounter()
-	print "Which way do you go?" 
-	answer = raw_input(prompt)
-	print " "
+	
+	answer = direction("Which way do you go?")
 	
 	while answer == "player":
 		player_check()
 		
-		print "Which way do you go?"
-		answer = raw_input(prompt)
-		print " "
+		answer = direction("Which way do you go?")
 	
-	if "ast" in answer:
+	if answer == "e":
 		print "You find yourself in the Grand Hallway.\n"
 		chance = randint(1, 100)
 		
@@ -3254,7 +3305,7 @@ def twelfth_intersection():
 		
 		grand_hallway()
 	
-	elif "outh" in answer:
+	elif answer == "s":
 		print "You head South.\n"
 		chance = randint(1, 100)
 		
@@ -3264,7 +3315,7 @@ def twelfth_intersection():
 		
 		first_chamber()
 	
-	elif "est" in answer:
+	elif answer == "w":
 		print "You head West.\n"
 		chance = randint(1, 100)
 		
@@ -3274,14 +3325,17 @@ def twelfth_intersection():
 		
 		eleventh_intersection()
 	
-	else:
+	elif answer == "n":
 		print "That part of the labryinth hasn't been coded yet.\n\n"
 		chance = randint(1, 100)
 		
 		if chance <= 50:
 			enemy_encounter()
 		
-		twelfth_intersection()		
+		twelfth_intersection()	
+		
+	else:
+		print "investigate this printing."
 
 def second_room():
 
@@ -3695,7 +3749,7 @@ def battle_cave():
 				
 			battle_cave_furthest = battle_cave_count
 		
-		if count == 4:
+		if count == 20:
 			print "You have come across one of the Old Woman's Sons!\n"
 			print "Would you like to bring him back with you?\n"
 			# hero makes trips back with the sons, to deliver them to mama	
@@ -3736,24 +3790,21 @@ def grand_hallway():
 	print "and you see an exit at the Southeast end of the Hallway.\n" 
 	print "Do you go West down the corridor or South, or Southeast?"
 	print "You came from the %s.\n" % came_from
-	print "Which way do you go?" 
-	answer = raw_input(prompt)
-	print " "
+	
+	answer = direction("Which way do you go?")
 	
 	while answer == "player":
 		player_check()
 		
-		print "Which way do you go?"
-		answer = raw_input(prompt)
-		print " " 
+		answer = direction("Which way do you go?")
 	
-	if "est" in answer:
+	if answer == "w":
 		print "Going West.\n"
 		came_from = "East"
 		
 		eleventh_intersection()
 		
-	elif "outh" in answer:
+	elif answer == "s":
 		print "Going South.\n"
 		came_from = "North"
 		
