@@ -152,7 +152,7 @@ def player_check():
 			print "Here are the current contents of your Satchel: "
 			satchel_contents.sort()
 			for item in satchel_contents: 
-				print "\t" + item + "\n"
+				print "\t--" + item + "--"
 			print " "
 			
 			print "Would you like to equip something?"
