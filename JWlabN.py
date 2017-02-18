@@ -10,7 +10,7 @@ player_str = 3
 player_dex = 4
 player_int = 2
 player_hp = 11 # hit point capacity
-player_hp_dmg = 11	# current hit points
+player_hp_dmg = 11 # current hit points
 player_name = "Unknown"
 player_class = "Unknown"
 satchel_contents = []
@@ -1318,38 +1318,47 @@ def boss_encounter(room, modifier):
 		enemy_name = "The Goblin King"
 		
 		if modifier == "Spade":
-			enemy = (80, 9, 32, 12)
+			enemy = (99, 9, 32, 12)
 			print "You have cleanly re-potted the plant!\n" 
 			print "Suddenly, you hear a grumble in the hallway, and in walks in %s!" % enemy_name
 			print "Even though he\'s appreciative of you doing the chore he\'d been"
 			print "neglecting, %s is still going to fight you.\n" % enemy_name
 		
 		elif modifier == "Shovel" or modifier == "Hands":
-			enemy = (80, 12, 32, 12)
+			enemy = (99, 12, 32, 12)
 			print "You have messily re-potted the plant!\n" 
 			print "Suddenly, you hear an angry grunt from the hallway, and in walks in %s!" % enemy_name
 			print "Apparently, he\'s particular about keeping his soil from hitting the stone,"
 			print "and so he\'s frustrated and disappointed with you, and is ready to fight.\n"
 		
 		elif modifier == "Balanced Pickaxe":
-			enemy = (80, 15, 32, 12)
+			enemy = (99, 15, 32, 12)
 			print "Your pickaxe breaks the empty pot and you hear an enraged roar!\n"
 			print "%s bursts into the room and throws his arms above his head, howling"
 			print "with rage as he sees his broken pot.\n"
 		
 		elif modifier == "Thief":
-			enemy = (80, 15, 32, 12)
+			enemy = (99, 15, 32, 12)
 			print "The moment you touch the pot, you hear a deep scream of anguish!\n"
 			print "Charging through the door is %s! He sees you trying to take his pot"
 			print "and he becomes enraged!\n"
 		
 		else:
-			enemy = (80, 12, 32, 12)
+			enemy = (99, 12, 32, 12)
 			print "Your bumbling has made a mess. %s appears at the door and he's ready to fight!\n" % enemy_name
 	
 	
 		print "You and the %s fight!\n\n\n" % enemy_name
 		battle(enemy, enemy_name)
+	
+	#elif room == "hidden1":
+		#enemy_name = "The Twisted Jester"
+		
+	#elif room == "hidden2":
+		#enemy_name = "The Deranged Duke"
+	
+	#elif room == "hidden3":
+		#enemy_name = "The Venomous Queen"
 		
 def enemy_encounter():
 	
@@ -1394,31 +1403,31 @@ def enemy_encounter():
 		enemy_name = enemy
 		
 		if x == 0:
-			enemy = (9, 5, 6, 2) #lg_slime 22
+			enemy = (12, 5, 7, 2) #lg_slime 22
 		
 		elif x == 1:
-			enemy = (10, 10, 9, 8) #gnoll_pack 37
+			enemy = (14, 10, 9, 8) #gnoll_pack 37
 		
 		elif x == 2:
-			enemy = (9, 7, 8, 7) #alpha_wolf 31
+			enemy = (11, 7, 8, 7) #alpha_wolf 31
 		
 		elif x == 3: 
-			enemy = (6, 8, 9, 12) #ancient_bat 35
+			enemy = (8, 8, 9, 12) #ancient_bat 35
 		
 		elif x == 4:
-			enemy = (4, 10, 7, 6) #desperate_goblin 27
+			enemy = (6, 10, 7, 6) #desperate_goblin 27
 		
 		elif x == 5:
-			enemy = (8, 6, 7, 10) #mountain_cat 31
+			enemy = (10, 6, 7, 10) #mountain_cat 31
 		
 		elif x == 6:
-			enemy = (5, 10, 7, 3) #self_closing_flannel_bag 25
+			enemy = (7, 10, 7, 3) #self_closing_flannel_bag 25
 		
 		elif x == 7:
-			enemy = (10, 8, 9, 2) #glowing_top_hat_w_cane 29
+			enemy = (12, 8, 9, 2) #glowing_top_hat_w_cane 29
 		
 		else:
-			enemy = (6, 8, 6, 3) #jagged_contacts 23
+			enemy = (8, 8, 6, 3) #jagged_contacts 23
 	
 	elif 6 < player_lvl <= 9:
 		
@@ -1426,28 +1435,28 @@ def enemy_encounter():
 		enemy_name = enemy
 	
 		if x == 0:
-			enemy = (12, 15, 12, 8) #shiny_mist 47
+			enemy = (16, 15, 12, 8) #shiny_mist 47
 		
 		elif x == 1:
-			enemy = (13, 2, 6, 18) #floor_of_marbles 43
+			enemy = (17, 2, 9, 18) #floor_of_marbles 43
 		
 		elif x == 2:
-			enemy = (8, 14, 10, 5) #shrieking_box 36
+			enemy = (14, 14, 10, 5) #shrieking_box 36
 		
 		elif x == 3: 
-			enemy = (12, 12, 12, 5) #wall_of_bats 41
+			enemy = (18, 12, 12, 5) #wall_of_bats 41
 		
 		elif x == 4:
-			enemy = (18, 5, 9, 3) #competetive_eater 35
+			enemy = (28, 5, 9, 3) #competetive_eater 35
 		
 		elif x == 5:
-			enemy = (10, 15, 14, 1) #donald_trump 40
+			enemy = (19, 15, 14, 1) #donald_trump 40
 		
 		elif x == 6:
-			enemy = (15, 18, 14, 4) #mary_poppins_bag_of_horrors 51
+			enemy = (25, 18, 14, 4) #mary_poppins_bag_of_horrors 51
 		
 		elif x == 7:
-			enemy = (12, 13, 14, 11) #badass_3_suit_hat_cane 50
+			enemy = (19, 13, 14, 11) #badass_3_suit_hat_cane 50
 		
 		else:
 			enemy = (1, 20, 15, 20) #eye_candy 56
