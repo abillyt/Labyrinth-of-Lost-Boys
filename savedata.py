@@ -72,3 +72,27 @@ bctb_satchel_quantity = 1
 
 user_names = []
 user_name_count = []
+
+def addNamesAndCount(name):
+  spot = 0
+
+  if name in user_name:
+
+	  for x in range(len(user_name)):
+		
+		  if name == user_name[x]:
+		  	spot = user_name_count[x]
+		  	spot += 1
+		  	user_name_count[x] = spot			
+
+
+  else: 
+  	user_name.append(name)
+  	user_name_count.append(1)
+
+
+    
+print "\t\t-=Character Names Used=-"
+for x in range(len(user_names)):
+
+	print "\tName:   %s   |      Spawns:   %s" % (user_names[x], user_name_count[x])
