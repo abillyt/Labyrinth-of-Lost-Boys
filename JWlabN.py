@@ -3753,7 +3753,7 @@ def dead(why):
 	if "y" in quandry:
 	
 		player_hp_dmg = player_hp
-		battle_cave()
+		first_chamber()
 	
 	print "Would you like to play again? y or n?"
 	
