@@ -1317,14 +1317,17 @@ def boss_encounter(room, modifier):
 		
 		if modifier == "Spade":
 			enemy = (80, 9, 32, 12)
-			print "You have cleanly re-potted %s\'s plant!\n" % enemy_name
-			print "Even though he's appreciative, %s is still going to fight you.\n" % enemy_name
+			print "You have cleanly re-potted the plant!\n" 
+			print "Suddenly, you hear a grumble in the hallway, and in walks in %s!" % enemy_name
+			print "Even though he\'s appreciative of you doing the chore he\'d been"
+			print "neglecting, %s is still going to fight you.\n" % enemy_name
 		
 		elif modifier == "Shovel" or modifier == "Hands":
 			enemy = (80, 12, 32, 12)
-			print "You have messily re-potted %s\'s plant!\n" % enemy_name
-			print "He's particular about keeping his soil from hitting the stone, and so he's"
-			print "frustrated and disappointed with you, and is ready to fight.\n"
+			print "You have messily re-potted the plant!\n" 
+			print "Suddenly, you hear an angry grunt from the hallway, and in walks in %s!" % enemy_name
+			print "Apparently, he\'s particular about keeping his soil from hitting the stone,"
+			print "and so he\'s frustrated and disappointed with you, and is ready to fight.\n"
 		
 		elif modifier == "Balanced Pickaxe":
 			enemy = (80, 15, 32, 12)
@@ -3243,7 +3246,7 @@ def second_room():
 	
 	enemy_encounter()
 	
-	print "An eerie silence falls upon the room after your battle.\n"
+	print "\n\nAn eerie silence falls upon the room after your battle.\n"
 	print "There is a plant in a pot on a stone slab in the middle of the room."
 	print "Beside this pot is another pot, though empty.\n"
 	print "On the ground, there is a container of what looks like fresh potting soil.\n"
