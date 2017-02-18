@@ -1,8 +1,13 @@
-Initiate 3 hidden bosses, each that give a loot item specific to the class of character that defeats them. (continued)
-(cont) They are equal in function to the top level item drops, but, when equipped as a set of 3, they each produce 1 extra (att, def, main stat):
+Initiate 3 hidden bosses, each that give a loot item specific to the class of character that defeats them. 
+They are equal in function to the top level item drops, but, when equipped as a set of 3,
+they each produce 1 extra (att, def, main stat):
 Wizard: Robe, Hat, Staff
 Ninja: Headband, Katana, Stealth Slippers
-Hybrid: 
+Hybrid: Top Hat, Scepter, Knickers
+hidden bosses located 1) Behind the Wall 2) Beyond the treasure room beyond the pit 3) TBD
+
 Implement the "saving" of the boys in the labyrinth. 
+
 Expand the map, add more bosses and environment conundrums
+
 Implement Working Save Game Feature (writing to file an option?) 
