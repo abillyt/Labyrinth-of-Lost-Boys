@@ -2,7 +2,6 @@
 
 from random import randint
 import time
-import savedata
 
 player_lvl = 1
 player_xp = 10 # current experience points
@@ -1752,8 +1751,6 @@ def build_character():
 		print "'What, may I ask, is your name sweet traveler?'"
 		player_name = raw_input(prompt)
 		print " "
-		
-	savedata.addNamesAndCount(player_name)
 	
 	print "'And what type of a hero are you, %s?'" % player_name
 	print "\t 1. Pro Wizard"
