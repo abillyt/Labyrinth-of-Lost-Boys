@@ -60,6 +60,21 @@ big_medallion = False
 intricate_medallion = False
 weapon = False
 
+# this function takes a user input and determines whether or not it is a yes or no
+# it will interact with the user until a Yes or No answer is given. 
+
+yes_list = ["yep", "yeppers", "yeah", "uh huh", "well, sure", "absolutely", "amen", "affirmative",
+		"true", "yea", "decent", "beyond a doubt", "certainly", "good enough", "naturally", "of course",
+		"undoubtedly", "unquestionably", "definitely", "you bet", "you betcha", "hell yea i am",
+		"heck ya", "heck yah", "hell ya", "hell yeah", "hell yah", "without a doubt", "i am",
+		"i am!", "yes", "y"]
+
+no_list = ["nope", "no way", "negative", "absolutely not", "not at all", "not by any means", "never",
+		"by no means", "nix", "not", "no", "n"] 
+
+maybe_list = ["perchance", "perhaps", "mayhaps", "can be", "feasible", "imaginably", "i might be", 
+		"i could be", "possibly", "god willing", "god willing", "could be", "maybe"]
+		
 loot_dict = {'Sturdy Walking Stick': '+1 attack for Ninja or Hybrid', 'Cloth Cap': '+1 int for Wizard', 
 'Short Stick': '+1 attack for Wizard or Hybrid', 'Basic Gloves': '+1 dex for all classes', 
 'Spade': 'a small, handheld digging instrument', 'Paper and Pen': 'Good for explaining stuff!',
@@ -112,6 +127,39 @@ mothers_wisdom = ['Take garlic, son. And raw honey.',
 'Always use protection.', 'Milk baths are healing.']
 
 
+def yes_no(question):
+	
+	prompt2 = question + "\n-> "
+	
+	answer = raw_input(prompt2)
+	answer = answer.lower()
+	print "\n"
+
+	if answer == "player":
+		return answer
+	
+	while len(answer) == 0:
+		print "How about not leaving the field blank and answering yes or no?\n"
+		answer = raw_input(prompt2)
+		answer = answer.lower()
+		print "\n\n"
+		
+	while answer in maybe_list:
+		print "I think you better decide definitively."
+		answer = raw_input(prompt2)
+		answer = answer.lower()
+		print "\n\n"
+
+	if answer in yes_list:			
+		return "y"
+
+	elif answer in no_list:		
+		return "n"
+
+	else: 
+		yes_no(question)
+		
+
 def print_wisdom(parent):
 	
 	if parent == "Dad":
@@ -155,10 +203,9 @@ def player_check():
 				print "\t--" + item + "--"
 			print " "
 			
-			print "Would you like to equip something?"
-			choice2 = raw_input(prompt)
+			choice2 = yes_no("Would you like to equip something?")
 			
-			if "ye" in choice2:
+			if choice2 == "y":
 				
 				equip()
 	
@@ -174,11 +221,9 @@ def player_check():
 	else:
 		print "I'm not sure what you're looking for.\n"
 	
-	print "Would you like to remember some advice from one of your parents?" 
+	answer = yes_no("Would you like to remember some advice from one of your parents?")
 	
-	answer = raw_input(prompt)
-	
-	if "ye" in answer:
+	if answer == "y":
 			
 		chance = randint(1, 100)
 		if chance <= 50: 
@@ -644,16 +689,14 @@ def equip():
 		else: 
 			print "You do not have that item!\n"
 		
-		print "Would you like to equip something else?"
-		another_equip = raw_input(prompt)
+		another_equip = yes_no("Would you like to equip something else?")
 		
 		while another_equip == "player":
 			player_check()
 			
-			print "Would you like to equip something else?"
-			another_equip = raw_input(prompt)
+			another_equip = yes_no("Would you like to equip something else?")
 		
-		if "ye" in another_equip:
+		if another_equip == "y":
 			print "What would you like to equip?"
 			answer = raw_input(prompt)
 			
@@ -1633,11 +1676,11 @@ def start():
 	approach the woman and she sees you.\n\n\n"""
 	time.sleep(3)
 	
-	print "\n\t Old Woman: 'I see you're awake. You came out of nowhere it seems.'\n"
+	print "\n\t Old Woman: I see you're awake. You came out of nowhere it seems.\n"
 	
 	build_character()
 	
-	print "Old Woman: 'Are you on a quest? Or just hanging out? Or What?'"
+	print "Old Woman: Are you on a quest? Or just hanging out? Or What?'"
 	
 	answer = raw_input(prompt)
 	print " "
@@ -1651,23 +1694,19 @@ def start():
 	
 	if "uest" in answer: 
 		
-		print "'Oh, a quest, eh?" 
+		print "Oh, a quest, eh?" 
 		time.sleep(2)
 		print "This labyrinth holds great treasure. And danger. Did I mention danger?"
-		print "Are you willing to proceed?'"
 		
-		decision = raw_input(prompt)
-		print " "
+		decision = yes_no("Are you willing to proceed?")
 		
 		while decision == "player":
 			player_check()
 			
-			print "Are you willing to proceed?'"
-			decision = raw_input(prompt)
-			print " "
+			decision = yes_no("Are you willing to proceed?")
 		
-		if "ye" in decision: 
-			print "'Best luck in there!'"
+		if decision == "y": 
+			print "Best luck in there!"
 			came_from = "South"
 			
 			first_intersection()
@@ -1678,10 +1717,10 @@ def start():
 	elif "ang" in answer:
 		
 		print "You're so cool. I wish any one of my twelve sons were as cool"
-		print "as you are. Are you single?'\n"
+		print "as you are. Are you single?\n"
 		time.sleep(1)
 		
-		print "'Just kidding. It's fine. I didn't mean it anyway.'\n"
+		print "Just kidding. It's fine. I didn't mean it anyway.\n"
 		
 		time.sleep(2)
 		print "Speaking of my kids... I lost them. They're in the labyrinth"
@@ -1689,67 +1728,45 @@ def start():
 		time.sleep(1)
 		print "Woe is me!! I have the gout.\n"
 		
-		print "Will you help me?'\n"
-		
-		decision = raw_input(prompt)
-		print " "
+		decision = yes_no("Will you help me?")
 		
 		while decision == "player":
 			
 			player_check()
 			
-			print "Will you help me?'\n"
-			decision = raw_input(prompt)
-			print " "
+			decision = yes_no("Will you help me?")
 		
-		if "ye" in decision:
-			print "'Oh, thank you! Send them back to me when you've found them.\n\n"
+		if decision == "y":
+			print "Oh, thank you! Send them back to me when you've found them.\n\n"
 			print "You might need to draw them a map, if you have the materials for it..."
 			print "Just so they know how to get back to me.\n"
-			print "Good luck!'"
-			came_from = "South"
-			first_intersection()
-		
-		elif "Ye" in decision:
-			print "Oh, I knew I could trust you.\n\n"
-			print "Send them back safely!"
-			came_from = "South"
-			first_intersection()
-		
-		elif "YE" in decision:
-			print "My hero!! Oh, I love a man that does what's right.\n"
-			print "I look forward to seeing you all real soon.\n\n"
-			print "Good luck now, ya hear?" 
+			print "Good luck!"
 			came_from = "South"
 			first_intersection()
 		
 		else: 
-			print "'I curse you then! May death be upon your door!'\n\n\n.\n..\n..."
+			print "I curse you then! May death be upon your door!\n\n\n.\n..\n..."
 			print "You walk awkwardly past the woman and into the labyrinth."
 			print "The wall of the labyrinth breaks for no apparent reason.\n"
 			time.sleep(1)
 			dead("The wall falls on you and the woman laughs as you perish.")
 	
 	else: 
-		print "'That doesn't suprise me.\n"
+		print "That doesn't suprise me.\n"
 		time.sleep(1)
 		print "I think whatever you're looking for is in this labyrinth.\n\n"
 		print "There's some pretty sweet loot and basically no danger.\n"
 		time.sleep(1)
-		print "Are you going to enter the labyrinth?'"
 		
-		decision = raw_input(prompt)
-		print " "
+		decision = yes_no("Are you going to enter the labyrinth?")
 		
 		while decision == "player":
 			
 			player_check()
 			
-			print "Are you going to enter the labyrinth?'"
-			decision = raw_input(prompt)
-			print " "
+			decision = yes_no("Are you going to enter the labyrinth?")
 		
-		if "ye" in decision: 
+		if decision == "y": 
 			print "'Best luck in there, you mysterious %s'\n\n" % player_class
 			came_from = "South"
 			
@@ -1763,7 +1780,7 @@ def build_character():
 	global player_name, player_class, player_str, player_dex, player_int, player_hp
 	global player_hp_dmg, player_lvl, player_xp, player_xp_cap
 								
-	print "'What, may I ask, is your name sweet traveler?'"
+	print "What, may I ask, is your name sweet traveler?"
 	player_name = raw_input(prompt)
 	print " "
 	
@@ -1771,11 +1788,11 @@ def build_character():
 		
 		player_check()
 		
-		print "'What, may I ask, is your name sweet traveler?'"
+		print "What, may I ask, is your name sweet traveler?"
 		player_name = raw_input(prompt)
 		print " "
 	
-	print "'And what type of a hero are you, %s?'" % player_name
+	print "And what type of a hero are you, %s?" % player_name
 	print "\t 1. Pro Wizard"
 	print "\t 2. Master Ninja"
 	print "\t 3. Amatuer Wizard, decent Ninja"
@@ -1787,7 +1804,7 @@ def build_character():
 		
 		player_check()
 		
-		print "'And what type of a hero are you, %s?'" % player_name
+		print "And what type of a hero are you, %s?" % player_name
 		print "\t 1. Pro Wizard"
 		print "\t 2. Master Ninja"
 		print "\t 3. Amatuer Wizard, decent Ninja"
@@ -1829,12 +1846,12 @@ def build_character():
 		player_xp_cap = 10
 		player_xp = player_xp_cap
 	
-	print "'Ahh, %s the %s! Exciting!'" % (player_name, player_class)
-	print "'Jeez. I haven't seen a %s in ages...'" % player_class
+	print "Ahh, %s the %s! Exciting!" % (player_name, player_class)
+	print "Jeez. I haven't seen a %s in ages..." % player_class
 	time.sleep(2)
 	
-	print "\n'Actually, I haven't seen anyone in ages."
-	print "You look really good. Seriously, have you looked at yourself lately?'"
+	print "\nActually, I haven't seen anyone in ages."
+	print "You look really good. Seriously, have you looked at yourself lately?"
 	print " "
 	time.sleep(2)
 	
@@ -1848,7 +1865,7 @@ def build_character():
 	
 	else:
 		
-		print "I guess I'm not your mother so I can't force you to...\n\n"
+		print "I guess I am not your mother so I cannot force you to...\n\n"
 
 def first_intersection():
 
@@ -2020,20 +2037,16 @@ def secret_room_1():
 		gets sucked back onto the shelf and a panel in the wall moves aside,
 		revealing a passageway.\n"""
 		time.sleep(3)
-		print "Do you enter the passageway?" 
 				
-		choice4 = raw_input(prompt)
-		print " "
+		choice4 = yes_no("Do you enter the passageway?")
 		
 		while choice4 == "player":
 			
 			player_check()
 			
-			print "Do you enter the passageway?"
-			choice4 = raw_input(prompt)
-			print " "
+			choice4 = yes_no("Do you enter the passageway?")
 				
-		if "ye" in choice4:
+		if choice4 == "y":
 			came_from = "West"
 			
 			print "The passageway is short and leads to a secret room!\n"
@@ -2174,7 +2187,7 @@ def secret_room_1():
 						print "South it is!"
 						first_intersection()
 			 	
-		elif "no" in choice4:
+		elif choice4 == "n":
 			print """
 			Yeah, who in their right mind would go in there!? It's probably 
 			haunted or something. Definitely worth avoiding. You leave the panel and
@@ -2652,22 +2665,20 @@ def first_chamber():
 		time.sleep(1)
 		print "He looks up at hearing your footsteps.\n"
 		time.sleep(1)
-		print "'Hello there! I haven't seen anyone in so long, I don't even"
-		print "know how I'm still alive.'\n"
+		print "Hello there! I haven't seen anyone in so long, I don't even"
+		print "know how I'm still alive.\n"
 		time.sleep(2)
-		print "'Are you here to help me?'\n"
+		print 
 		
-		answer1 = raw_input(prompt)
+		answer1 = yes_no("Are you here to help me?")
 		
 		while answer1 == "player":
 			
 			player_check()
 			
-			print "'Are you here to help me?'"
-			answer1 = raw_input(prompt)
-			print " "
+			answer1 = yes_no("Are you here to help me?")
 			
-		if "ye" in answer1:
+		if answer1 == "y":
 			print "'Wonderful! My chains are secured to the ground by stone.'"
 			print "'Are you able to free me?'"
 			answer2 = raw_input(prompt)
@@ -3171,19 +3182,15 @@ def eleventh_intersection():
 	
 	if "orth" in answer:
 		print "You approach the mouth of a cave!\n" 
-		print "Do you go into the cave?"
 
-		answer1 = raw_input(prompt)
-		print " "
+		answer1 = yes_no("Do you go into the cave?")
 		
 		while answer1 == "player":
 			player_check()
 			
-			print "Do you go into the cave?"
-			answer1 = raw_input(prompt)
-			print " "
+			answer1 = yes_no("Do you go into the cave?")
 		
-		if "ye" in answer1:
+		if answer1 == "y":
 			came_from = "South"
 			battle_cave()
 		
@@ -3397,17 +3404,16 @@ def vendor_room():
 	print "You see an old man sitting behind a wooden shelf in the far corner of"
 	print "the room. He's crotcheting.\n" 
 	time.sleep(1)
-	print "\nWould you like to talk to him?"
-	answer = raw_input(prompt)
+
+	answer = yes_no("Would you like to talk to him?")
 	
 	while answer == "player":
 		
 		player_check()
 		
-		print "Would you like to talk to him?\n"
-		answer = raw_input(prompt)
+		answer = yes_no("Would you like to talk to him?")
 	
-	if "ye" in answer: 
+	if answer == "y": 
 	
 		print "You step forward to talk to him.\n" 
 		vendor()
@@ -3478,17 +3484,16 @@ def vendor():
 			loot = "Leather Jacket"
 			use = "+3 Defense"
 		time.sleep(2)
-		print "Would you like to trade? Straight up? Mine for yours?" 
-		answer = raw_input(prompt)
+		
+		answer = yes_no("Would you like to trade? Straight up? Mine for yours?" )
 		
 		while answer == "player":
 			
 			player_check()
 			
-			print "Would you like to trade? Straight up?"
-			answer = raw_input(prompt)
+			answer = yes_no("Would you like to trade? Straight up? Mine for yours?" )
 		
-		if "ye" in answer:
+		if answer == "y":
 			
 			print "Ok, good deal!"
 			satchel_contents.pop(item_loc)
@@ -3526,11 +3531,10 @@ def vendor():
 			count += 1
 		
 		print "Ahh, you have a %s." % trading_block[0]
-		print "I will give you 50 gold for the %s." % trading_block[0]
-		print " "
-		choice2 = raw_input(prompt)
+
+		choice2 = yes_no("I will give you 50 gold for the %s, okay?" % trading_block[0])
 		
-		if "ye" in choice2:
+		if choice2 == "y":
 			
 			print "Great!\n"
 
@@ -3665,16 +3669,15 @@ def battle_cave():
 	print "You enter the cave.\n" 
 	print "It stinks like death and you hear living sounds beyond the darkness.\n"
 	print "You can only see about five feet in front of you.\n\n\n"
-	print "Do you go forward?"
-	answer = raw_input(prompt)
+	
+	answer = yes_no("Do you go forward?")
 	
 	while answer == "player":
 		player_check()
 		
-		print "Do you go forward?"
-		answer = raw_input(prompt)
+		answer = yes_no("Do you go forward?")
 	
-	while "ye" in answer:
+	while answer == "y":
 		print "You move forward.\n"
 		enemy_encounter()
 		count += 1
@@ -3697,14 +3700,12 @@ def battle_cave():
 			print "Would you like to bring him back with you?\n"
 			# hero makes trips back with the sons, to deliver them to mama	
 		
-		print "Do you go forward?"
-		answer = raw_input(prompt)
+		answer = yes_no("Do you go forward?")
 	
 		while answer == "player":
 			player_check()
 			
-			print "Do you go forward?"
-			answer = raw_input(prompt)
+			answer = yes_no("Do you go forward?")
 	
 	while count > 0:
 		print "You move back toward the entrance.\n"
@@ -3770,30 +3771,25 @@ def dead(why):
 	
 	print why
 	
-	print "test version. Would you like to reload with all yo stats & lvl?"
-	quandry = raw_input(prompt)
+	quandry = yes_no("test version. Would you like to reload with all yo stats & lvl?")
 	
-	if "y" in quandry:
+	if quandry == "y":
 	
 		player_hp_dmg = player_hp
 		first_intersection()
 	
-	print "Would you like to play again? y or n?"
-	
-	answer = raw_input(prompt)
-	print " "
+	answer = yes_no("Would you like to play again?")
 	
 	while answer == "player":
 		player_check()
 		
-		print "Would you like to play again? y or n?"
-		answer = raw_input(prompt)
-		print " "
+		answer = yes_no("Would you like to play again?")
 		
-	if "y" in answer:
+	if answer == "y":
 		start()
 	
 	else: 
+		print "Thank you for playing!\n"
 		exit(0)
 
 start()
