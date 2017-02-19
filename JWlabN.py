@@ -60,8 +60,33 @@ big_medallion = False
 intricate_medallion = False
 weapon = False
 
-# this function takes a user input and determines whether or not it is a yes or no
-# it will interact with the user until a Yes or No answer is given. 
+walking_stick_use_disc = False
+cloth_cap_use_disc = False
+short_stick_use_disc = False
+basic_gloves_use_disc = False
+spade_use_disc = False
+paper_pen_use_disc = False
+thick_shirt_use_disc = False
+roll_of_string_use_disc = False
+small_medal_use_disc = False
+three_foot_pipe_use_disc = False
+sturdy_hat_use_disc = False
+madrona_wand_use_disc = False
+fingerless_gloves_use_disc = False
+shovel_use_disc = False
+jagged_rocks_use_disc = False
+leather_t_use_disc = False
+short_rope_use_disc = False
+big_medal_use_disc = False
+sword_use_disc = False
+wide_brim_hat_use_disc = False
+oak_staff_use_disc = False
+power_mitts_use_disc = False
+pickaxe_use_disc = Falses
+book_of_knots_use_disc = False
+leather_jacket_use_disc = False
+long_rope_use_disc = False
+intricate_medal_use_disc = False
 
 yes_list = ["yep", "yeppers", "yeah", "uh huh", "well, sure", "absolutely", "amen", "affirmative",
 		"true", "yea", "decent", "beyond a doubt", "certainly", "good enough", "naturally", "of course",
@@ -89,7 +114,7 @@ east_list = ["east", "go east", "head east", "est", "e", "ea", "how about east",
 
 undecided_list = ["not sure", "which way should i go?", "dunno", "i don\'t know"]
 
-door_list = ["enter door", "open door", "open", "door", "enter room", "room", "go into the room"]
+door_list = ['enter door', 'open door', 'open', 'door', 'enter room', 'room', 'go into the room']
 		
 loot_dict = {'Sturdy Walking Stick': '+1 attack for Ninja or Hybrid', 'Cloth Cap': '+1 int for Wizard', 
 'Short Stick': '+1 attack for Wizard or Hybrid', 'Basic Gloves': '+1 dex for all classes', 
@@ -115,6 +140,11 @@ loot_lvl_4_6 = ['Three Foot Pipe', 'Sturdy Hat', 'Madrona Wand', 'Fingerless Glo
 loot_lvl_7_9 = ['Sword', 'Wide Brim Hat', 'Oak Staff', 'Power Mitts',
 'Balanced Pickaxe', 'Book of Knots', 'Leather Jacket', 'Long Rope',
 'Intricate Medallion'] 
+
+equippable_loot = ['Sturdy Walking Stick', 'Cloth Cap', 'Short Stick', 'Basic Gloves',
+'Thick Shirt', 'Small Medallion', 'Three Foot Pipe', 'Sturdy Hat', 'Madrona Wand'
+'Fingerless Gloves', 'Leather T-Shirt', 'Big Medallion', 'Sword', 'Wide Brim Hat',
+'Oak Staff', 'Power Mitts', 'Leather Jacket', 'Intricate Medallion']
 
 enemies_lvl_1_3 = ['Slime', 'Gnoll', 'Wolf', 'Bat', 'Goblin', 'Cat', 'Flannel Bag',
 'Glowing Top Hat', 'Pair of Round Spectacles']
@@ -239,13 +269,10 @@ def print_wisdom(parent):
 		print '"' + mothers_wisdom[chance] + '"'
 		print " "
 
-def player_check():
+def player_check(menu_check):
 
-	print "Would you like to see your stats or your inventory or best scores?"
-	choice = raw_input(prompt)
-	print " "
 	
-	if "tats" in choice:
+	if menu_check == "stats":
 		print """Here are your current stats:\n
 		Name: %s Class: %s
 		Strength: %d
@@ -256,7 +283,21 @@ def player_check():
 		player_dex, player_int, player_hp, player_hp_dmg)
 		print " "
 	
-	elif "nvent" in choice:
+	elif menu_check == "options":
+		print "Each of these commands will do something if typed in when prompted for an answer.\n"
+		print "\tstats"
+		print "\tinventory"
+		print "\tscoreboard"
+		
+		
+		
+		--stats or inventory or scoreboard?"
+		choice = raw_input(prompt)
+		print " "
+	
+		
+	
+	elif menu_check == "inventory":
 	
 		if satchel_contents == []:
 			print "Your satchel is empty!\n"
@@ -268,13 +309,21 @@ def player_check():
 				print "\t--" + item + "--"
 			print " "
 			
+			print "These are the equippable items in your possession: "
+			for item in satchel_contents:
+				if item in equippable_loot:
+					print "\t<-> " + item
+					
+			print "Here is what you have equipped: "
+			
+			
 			choice2 = yes_no("Would you like to equip something?")
 			
 			if choice2 == "y":
 				
 				equip()
 	
-	elif "scores" in choice: 
+	elif menu_check == "scoreboard": 
 		
 		print """
 		Most fights won before death: %d by %s
