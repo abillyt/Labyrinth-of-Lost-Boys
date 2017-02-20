@@ -82,7 +82,7 @@ sword_use_disc = False
 wide_brim_hat_use_disc = False
 oak_staff_use_disc = False
 power_mitts_use_disc = False
-pickaxe_use_disc = Falses
+pickaxe_use_disc = False
 book_of_knots_use_disc = False
 leather_jacket_use_disc = False
 long_rope_use_disc = False
@@ -207,6 +207,9 @@ def yes_no(question):
 
 	elif answer in no_list:		
 		return "n"
+	
+	elif answer == "quit":
+		dead("You have quit.") 
 
 	else: 
 		yes_no(question)
@@ -264,6 +267,9 @@ def direction(question):
 	elif answer in east_list:		
 		return "e"
 
+	elif answer == "quit":
+		dead("Due to a lack of personal direction, you've quit.")
+	
 	else: 
 		direction(question)
 		
@@ -284,11 +290,22 @@ def print_wisdom(parent):
 def player_check(menu_check, question):
 	
 	prompt2 = question + "\n-> "
+	valid = False
 	
-	menu_check = menu_check.lower()
+	if menu_check == "stats":
+		valid = True
+	elif menu_check == "options":
+		valid = True
+	elif menu_check == "inventory":
+		valid = True
+	elif menu_check == "scoreboard":
+		valid = True
+	elif menu_check == "equip":
+		valid = True
+	elif menu_check == "quit":
+		valid = True
 	
-	while menu_check == "stats" or menu_check == "options" or menu_check == "inventory" or menu_check == "scoreboard":
-	
+	if valid: 	
 		if menu_check == "stats":
 			print """Here are your current stats:\n
 			Name: %s Class: %s
@@ -315,20 +332,23 @@ def player_check(menu_check, question):
 			else: 
 				print "I'm sure you know your way.\n"
 				
-			menu_check = raw_input(prompt2)
-			menu_check = menu_check.lower()
+			menu_ch = raw_input(prompt2)
 			print "\n"
+			player_check(menu_ch, question)
 	
+		
 		elif menu_check == "options":
 			print "Each of these commands will do something if typed in when prompted for an answer.\n"
-			print "\toptions <--- this is how you got here
+			print "\toptions   <--- That is this list!"
 			print "\tstats"
 			print "\tinventory"
-			print "\tscoreboard\n"
+			print "\tscoreboard"
+			print "\tequip\n"
 			
-			menu_check = raw_input(prompt2)
-			menu_check = menu_check.lower()
+			menu_ch = raw_input(prompt2)
 			print "\n"
+			player_check(menu_ch, question)
+			
 		
 		elif menu_check == "inventory":
 		
@@ -357,9 +377,9 @@ def player_check(menu_check, question):
 				
 					equip()
 			
-			menu_check = raw_input(prompt2)
-			menu_check = menu_check.lower()
+			menu_ch = raw_input(prompt2)
 			print "\n"
+			player_check(menu_ch, question)
 	
 		elif menu_check == "scoreboard": 
 		
@@ -370,9 +390,20 @@ def player_check(menu_check, question):
 			\n""" % (fight_count_most, high_scorer_fcm, battle_cave_furthest, high_scorer_bcf,
 			       battle_cave_there_and_back, high_scorer_bctb)
 			
-			menu_check = raw_input(prompt2)
-			menu_check = menu_check.lower()
+			menu_ch = raw_input(prompt2)
 			print "\n"
+			
+		elif menu_check == "equip":
+		
+			equip()
+			
+			menu_ch = raw_input(prompt2)
+			print "\n"
+		 	player_check(menu_ch, question)
+		 	
+		elif menu_check == "quit":
+			
+			dead("No body likes a quitter.")
 		
 def equip():
 	
@@ -901,7 +932,7 @@ def battle(enemy, enemy_name):
 			
 			round_count += 1
 			
-			print "ROUND %d.!!!\n\n\n" % round_count
+			print "### ROUND %d ###\n\n\n" % round_count
 			
 			print "\nThe %s attacks!\n" % enemy_name
 			time.sleep(1)
@@ -1113,7 +1144,7 @@ def battle(enemy, enemy_name):
 			
 			round_count += 1
 			
-			print "ROUND %d.!!!\n\n\n" % round_count
+			print "### ROUND %d ###" % round_count
 			
 			print "You attack!\n"
 			
@@ -1783,7 +1814,7 @@ def start():
 	
 	time.sleep(2)
 	print "Thanks for playing.\n"
-	print "At any time type 'player' to see your stats or inventory."
+	print "At any time type 'options' to view your in-game commands."
 	print "\n\n\n"
 	time.sleep(2)
 	
@@ -1814,7 +1845,6 @@ def start():
 	print "Old Woman: Are you on a quest? Or just hanging out? Or What?"
 	
 	answer = raw_input(prompt)
-	print " "
 	
 	player_check(answer, "Are you on a quest? Or just hanging out?")
 	
@@ -1837,7 +1867,7 @@ def start():
 		else:
 			dead("The old woman rises up in a fury and one-punch kills you.")
 	
-	elif "ang" in answer:
+	elif "hang" in answer:
 		
 		print "You're so cool. I wish any one of my twelve sons were as cool"
 		print "as you are. Are you single?\n"
@@ -1910,8 +1940,8 @@ def build_character():
 	print " "
 	
 	player_check(choice, """And what type of a hero are you, %s? 
-		\t 1. Pro Wizard"
-		\t 2. Master Ninja"
+		\t 1. Pro Wizard
+		\t 2. Master Ninja
 		\t 3. Amatuer Wizard, decent Ninja""" % player_name)
 	
 	if "1" in choice:
@@ -1958,17 +1988,13 @@ def build_character():
 	print " "
 	time.sleep(2)
 	
-	print "Type 'player' to check yourself out." 
+	print "Type 'stats' to check yourself out." 
 	choice2 = raw_input(prompt)
-	print " "
 	
-	if "player" in choice2: 
-		
-		player_check()
+	player_check(choice2, "Great. Now you really know yourself. Play?")
 	
-	else:
-		
-		print "I guess I am not your mother so I cannot force you to...\n\n"
+	if choice2 == "n":
+		print "I am not your mother, so I'm not going to force you."
 
 def first_intersection():
 
@@ -3267,7 +3293,6 @@ def second_room():
 			\t3. Take the potted plant.
 			\t4. Put the new soil in the empty pot with your hands and re-pot the plant.
 			\t5. Do nothing and leave the room.\n""")
-			answer = raw_input(prompt)
 		
 		if answer == "1":
 			
