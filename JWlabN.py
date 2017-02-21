@@ -185,10 +185,16 @@ def yes_no(question):
 		return answer
 	
 	while len(answer) == 0:
-		print "How about not leaving the field blank and answering yes or no?\n"
+		print "Please answer yes or no.\n"
 		answer = raw_input(prompt2)
 		answer = answer.lower()
 		print "\n\n"
+		
+		if answer in yes_list:			
+			return "y"
+
+		elif answer in no_list:		
+			return "n"
 		
 	while answer in maybe_list:
 		print "I think you better decide definitively."
@@ -225,10 +231,10 @@ def direction(question):
 	if answer == "player":
 		return "player"
 	
-	if answer in door_list:
+	elif answer in door_list:
 		return "door"
 	
-	if answer == "examine":
+	elif answer == "examine":
 		return answer
 	
 	while len(answer) == 0:
@@ -236,6 +242,21 @@ def direction(question):
 		answer = raw_input(prompt2)
 		answer = answer.lower()
 		print "\n\n"
+		
+		if answer in north_list:			
+			return "n"
+
+		elif answer in south_list:		
+			return "s"
+		
+		elif answer in west_list:		
+			return "w"
+		
+		elif answer == "quit":
+			dead("Due to a lack of personal direction, you've quit.")
+		
+		else: 
+			return "e"
 		
 	while answer in undecided_list:
 		print "I think you better decide for yourself."
@@ -252,7 +273,10 @@ def direction(question):
 		elif answer in west_list:		
 			return "w"
 		
-		else:		
+		elif answer == "quit":
+			dead("Due to a lack of personal direction, you've quit.")
+		
+		else:
 			return "e"
 
 	if answer in north_list:			
