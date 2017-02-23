@@ -185,99 +185,124 @@ def determine_intent(question):
 		answer = raw_input(prompt2)
 		answer = answer.lower()
 		print "\n\n"
+		
+	while answer == "stats" or answer == "options" or answer == "inventory" or answer == "scoreboard" or answer == "equip" or answer == "advice":
+		
+		if answer == "stats":
+			print """Here are your current stats:\n
+			Name: %s Class: %s
+			Strength: %d
+			Dexterity: %d
+			Intelligence: %d
+			Max Hit Points: %d
+			Current Hit Points: %d\n\n""" % (player_name, player_class, player_str,
+			player_dex, player_int, player_hp, player_hp_dmg)
+			
+			answer = raw_input(prompt2)
+			answer = answer.lower()
+		
+		elif answer == "options":
+			print "Each of these commands will do something if typed in when prompted for an answer.\n"
+			print "\toptions     <--- That is this list!"
+			print "\tstats       <--- Player Stats!"
+			print "\tinventory   <--- Contents of your satchel!"
+			print "\tscoreboard  <--- Best scores!"
+			print "\tequip       <--- Equip an item!
+			print "\tadvice      <--- Remember advice from one of your parents!\n\n"
+			
+			answer = raw_input(prompt2)
+			answer = answer.lower()
+			
+		elif answer == "inventory":
+		
+			if satchel_contents == []:
+				print "Your satchel is empty!\n\n"
+				
+				answer = raw_input(prompt2)
+				answer = answer.lower()
+			
+			else:
+				print "Here are the current contents of your Satchel: "
+				satchel_contents.sort()
+				for item in satchel_contents: 
+					print "\t--" + item + "--"
+					print "\n\n"
+			
+				print "These are the equippable items in your possession: "
+				for item in satchel_contents:
+					if item in equippable_loot:
+						print "\t<-> " + item
+						print "\n\n"
+						
+				print "Here is what you have equipped: "
+				print "This function is not working properly yet.\n\n" 
+				
+				answer = raw_input(prompt2)
+				answer = answer.lower()
+		
+		elif answer == "scoreboard": 
+		
+			print """
+			Most fights won before death: %d by %s
+			Most fights won walking into the Battle Cave at one go: %d by %s
+			Most fights won in the Battle Cave and survive: %d by %s
+			\n\n""" % (fight_count_most, high_scorer_fcm, battle_cave_furthest, high_scorer_bcf,
+			       battle_cave_there_and_back, high_scorer_bctb)
+			
+			answer = raw_input(prompt2)
+			answer = answer.lower()
+			
+		elif answer == "equip":
+		
+			equip()
+			
+			answer = raw_input(prompt2)
+			answer = answer.lower()
+		
+		elif answer == "advice":
+			
+			chance = randint(1, 100)
+			if chance <= 50: 
+				print_wisdom("Dad")
+				print "He was a good man.\n\n\n"
+			else: 
+				print_wisdom("Mom")
+				print "She was an excellent woman.\n\n\n" 	
+			
+			answer = raw_input(prompt2)
+			answer = answer.lower()
 
 	if answer in yes_list:			
-		return "y"
+		answer = "y"
 
 	elif answer in no_list:		
-		return "n"
+		answer = "n"
 	
 	elif answer in door_list:
-		return "door"
+		answer = "door"
 	
 	elif answer == "examine":
 		return answer
 
 	elif answer in north_list:			
-		return "n"
+		answer = "n"
 
 	elif answer in south_list:		
-		return "s"
+		answer = "s"
 		
 	elif answer in west_list:		
-		return "w"
+		answer = "w"
 		
 	elif answer in east_list:		
-		return "e"
+		answer = "e"
 
 	elif answer == "quit":
 		dead("You have quit.") 
 	
-	elif answer == "stats":
-		print """Here are your current stats:\n
-		Name: %s Class: %s
-		Strength: %d
-		Dexterity: %d
-		Intelligence: %d
-		Max Hit Points: %d
-		Current Hit Points: %d\n""" % (player_name, player_class, player_str,
-		player_dex, player_int, player_hp, player_hp_dmg)
-		print " "
-		
-	elif answer == "options":
-		print "Each of these commands will do something if typed in when prompted for an answer.\n"
-		print "\toptions     <--- That is this list!"
-		print "\tstats       <--- Player Stats!"
-		print "\tinventory   <--- Contents of your satchel!"
-		print "\tscoreboard  <--- Best scores!"
-		print "\tequip       <--- Equip an item!
-		print "\tadvice      <--- Remember advice from one of your parents!\n"
-			
-	elif answer == "inventory":
-		
-		if satchel_contents == []:
-			print "Your satchel is empty!\n"
-			
-		else:
-			print "Here are the current contents of your Satchel: "
-			satchel_contents.sort()
-			for item in satchel_contents: 
-				print "\t--" + item + "--"
-				print " "
-			
-			print "These are the equippable items in your possession: "
-			for item in satchel_contents:
-				if item in equippable_loot:
-					print "\t<-> " + item
-						
-			print "Here is what you have equipped: "
-			print "This function is not working properly yet." 
-	
-	elif answer == "scoreboard": 
-		
-		print """
-		Most fights won before death: %d by %s
-		Most fights won walking into the Battle Cave at one go: %d by %s
-		Most fights won in the Battle Cave and survive: %d by %s
-		\n""" % (fight_count_most, high_scorer_fcm, battle_cave_furthest, high_scorer_bcf,
-		       battle_cave_there_and_back, high_scorer_bctb)
-			
-	elif answer == "equip":
-		
-		equip()
-		
-	elif answer == "advice":
-			
-		chance = randint(1, 100)
-		if chance <= 50: 
-			print_wisdom("Dad")
-			print "He was a good man.\n\n\n"
-		else: 
-			print_wisdom("Mom")
-			print "She was an excellent woman.\n\n\n" 	
-		
 	else: 
 		print "This shouldn't print, due to the coverage of elifs stated before it.\n\n"
+	
+	return answer
 		
 def print_wisdom(parent):
 	
@@ -2320,13 +2345,8 @@ def first_room():
 				
 				print "You pick up the Sapphire and put it in your bag.\n"
 				satchel_contents.append("Sapphire")
-				print "Now what do you do?"
-				print "\t1. Take the Emerald."
-				print "\t2. Take nothing more and leave the room.\n"
 				
-				choice3 = raw_input(prompt)
-				
-				player_check(choice3, """Now what do you do?
+				choice3 = determine_intent("""Now what do you do?
 					\t1. Take the Emerald.
 					\t2. Take nothing more and leave the room.\n""")
 					
@@ -2334,7 +2354,13 @@ def first_room():
 					
 					print "You grab the Emerald.\n"
 					time.sleep(2)
-					dead("Although the pain was searing, it was brief. You dead.")
+					print "You feel intense burning that travels up your arm to your chest!\n\n"
+					print "You lose 5 hit points!\n"
+					player_hp_dmg -= 5
+					if player_hp_dmg <= 0:
+						dead("Looks like grabbing that Emerald kilt ya.")
+					else:
+						third_intersection()
 					
 				else: 
 					third_intersection()
@@ -2343,7 +2369,14 @@ def first_room():
 				
 				print "You grab the Sapphire & Emerald.\n"
 				time.sleep(2)
-				dead("Although the pain was searing, it was brief. You dead.")
+				print "You feel intense burning that travels up your arm to your chest!\n\n"
+				print "You lose 5 hit points!\n"
+				player_hp_dmg -= 5
+				if player_hp_dmg <= 0:
+					dead("Looks like grabbing that Emerald kilt ya.")
+				else:
+					print "You are finished in this room."
+					third_intersection()
 				
 			else: 
 				print "You're finished in this room." 
@@ -2353,15 +2386,8 @@ def first_room():
 			
 			print "You pick up the Sapphire and put it in your bag.\n"
 			satchel_contents.append("Sapphire")
-			print "Now what do you do?"
-			print "\t1. Take the Emerald."
-			print "\t2. Take the Ruby."
-			print "\t3. Take the Emerald & Ruby."
-			print "\t4. Take nothing more and leave the room.\n"
 			
-			choice2 = raw_input(prompt)
-			
-			player_check(choice2, """Now what do you do?
+			choice2 = determine_intent("""Now what do you do?
 				\t1. Take the Emerald.
 				\t2. Take the Ruby.
 				\t3. Take the Emerald & Ruby.
@@ -2371,19 +2397,21 @@ def first_room():
 				
 				print "You grab the Emerald.\n"
 				time.sleep(2)
-				dead("Although the pain was searing, it was brief. You dead.")
+				print "You feel intense burning that travels up your arm to your chest!\n\n"
+				print "You lose 5 hit points!\n"
+				player_hp_dmg -= 5
+				if player_hp_dmg <= 0:
+					dead("Looks like grabbing that Emerald kilt ya.")
+				else: 
+					print "You left the room."
+					third_intersection()
 				
 			elif choice2 == "2":
 				
 				print "You pick up the Ruby and put it in your bag.\n"
 				satchel_contents.append("Ruby")
-				print "Now what do you do?"
-				print "\t1. Take the Emerald."
-				print "\t2. Take nothing more and leave the room.\n"
 				
-				choice3 = raw_input(prompt)
-				
-				player_check(choice3, """Now what do you do?
+				choice3 = determine_intent("""Now what do you do?
 					\t1. Take the Emerald.
 					\t2. Take nothing more and leave the room.\n""")
 					
@@ -2391,7 +2419,14 @@ def first_room():
 					
 					print "You grab the Emerald.\n"
 					time.sleep(2)
-					dead("Although the pain was searing, it was brief. You dead.")
+					print "You feel intense burning that travels up your arm to your chest!\n\n"
+					print "You lose 5 hit points!\n"
+					player_hp_dmg -= 5
+					if player_hp_dmg <= 0:
+						dead("Looks like grabbing that Emerald kilt ya.")
+					else:
+						print "You are finished in that room.\n"
+						third_intersection()
 					
 				else: 
 					third_intersection()
@@ -2400,10 +2435,17 @@ def first_room():
 				
 				print "You grab the Ruby & Emerald.\n"
 				time.sleep(2)
-				dead("Although the pain was searing, it was brief. You dead.")
+				print "You feel intense burning that travels up your arm to your chest!\n\n"
+				print "You lose 5 hit points!\n"
+				player_hp_dmg -= 5
+				if player_hp_dmg <= 0:
+					dead("Looks like grabbing that Emerald kilt ya.")
+				else: 
+					print "You are fond of leaving that room now.\n"
+					third_intersection()
 				
 			else: 
-				print "You're finished in this room." 
+				print "You're finished in this room.\n" 
 				third_intersection()
 				
 		elif choice == "4":
@@ -2453,7 +2495,7 @@ def first_room():
 			print "Yeah, who needs those stones anyway? I'm sure they're worthless in here...\n"
 			third_intersection()
 					
-	print "You stand in the familiar doorway. All of the rubies have vanished.\n"
+	print "You stand in the familiar doorway. All of the gems have vanished.\n"
 	time.sleep(3)
 	print "You sniff and cry a little, then you get over it and get back to the hallway.\n"
 	
