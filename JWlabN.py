@@ -172,41 +172,19 @@ mothers_wisdom = ['Take garlic, son. And raw honey.',
 'Can I look at your blackheads?', 'Let\'s go wash your face.', 'Eucalyptus oil.',
 'Always use protection.', 'Milk baths are healing.']
 
-
-def yes_no(question):
+def determine_intent(question):
 	
 	prompt2 = question + "\n-> "
 	
 	answer = raw_input(prompt2)
 	answer = answer.lower()
 	print "\n"
-
-	if answer == "player":
-		return answer
 	
-	while len(answer) == 0:
-		print "Please answer yes or no.\n"
+	while len(answer) == 0 or answer in maybe_list or answer in undecided_list:
+		print "Please enter a valid choice.\n"
 		answer = raw_input(prompt2)
 		answer = answer.lower()
 		print "\n\n"
-		
-		if answer in yes_list:			
-			return "y"
-
-		elif answer in no_list:		
-			return "n"
-		
-	while answer in maybe_list:
-		print "I think you better decide definitively."
-		answer = raw_input(prompt2)
-		answer = answer.lower()
-		print "\n\n"
-		
-		if answer in yes_list:			
-			return "y"
-
-		elif answer in no_list:		
-			return "n"
 
 	if answer in yes_list:			
 		return "y"
@@ -214,72 +192,13 @@ def yes_no(question):
 	elif answer in no_list:		
 		return "n"
 	
-	elif answer == "quit":
-		dead("You have quit.") 
-
-	else: 
-		yes_no(question)
-		
-def direction(question):
-	
-	prompt2 = question + "\n-> "
-	
-	answer = raw_input(prompt2)
-	answer = answer.lower()
-	print "\n"
-
-	if answer == "player":
-		return "player"
-	
 	elif answer in door_list:
 		return "door"
 	
 	elif answer == "examine":
 		return answer
-	
-	while len(answer) == 0:
-		print "Please choose the direction, instead of not answering at all.\n"
-		answer = raw_input(prompt2)
-		answer = answer.lower()
-		print "\n\n"
-		
-		if answer in north_list:			
-			return "n"
 
-		elif answer in south_list:		
-			return "s"
-		
-		elif answer in west_list:		
-			return "w"
-		
-		elif answer == "quit":
-			dead("Due to a lack of personal direction, you've quit.")
-		
-		else: 
-			return "e"
-		
-	while answer in undecided_list:
-		print "I think you better decide for yourself."
-		answer = raw_input(prompt2)
-		answer = answer.lower()
-		print "\n\n"
-		
-		if answer in north_list:			
-			return "n"
-
-		elif answer in south_list:		
-			return "s"
-		
-		elif answer in west_list:		
-			return "w"
-		
-		elif answer == "quit":
-			dead("Due to a lack of personal direction, you've quit.")
-		
-		else:
-			return "e"
-
-	if answer in north_list:			
+	elif answer in north_list:			
 		return "n"
 
 	elif answer in south_list:		
@@ -292,10 +211,73 @@ def direction(question):
 		return "e"
 
 	elif answer == "quit":
-		dead("Due to a lack of personal direction, you've quit.")
+		dead("You have quit.") 
 	
+	elif answer == "stats":
+		print """Here are your current stats:\n
+		Name: %s Class: %s
+		Strength: %d
+		Dexterity: %d
+		Intelligence: %d
+		Max Hit Points: %d
+		Current Hit Points: %d\n""" % (player_name, player_class, player_str,
+		player_dex, player_int, player_hp, player_hp_dmg)
+		print " "
+		
+	elif answer == "options":
+		print "Each of these commands will do something if typed in when prompted for an answer.\n"
+		print "\toptions     <--- That is this list!"
+		print "\tstats       <--- Player Stats!"
+		print "\tinventory   <--- Contents of your satchel!"
+		print "\tscoreboard  <--- Best scores!"
+		print "\tequip       <--- Equip an item!
+		print "\tadvice      <--- Remember advice from one of your parents!\n"
+			
+	elif answer == "inventory":
+		
+		if satchel_contents == []:
+			print "Your satchel is empty!\n"
+			
+		else:
+			print "Here are the current contents of your Satchel: "
+			satchel_contents.sort()
+			for item in satchel_contents: 
+				print "\t--" + item + "--"
+				print " "
+			
+			print "These are the equippable items in your possession: "
+			for item in satchel_contents:
+				if item in equippable_loot:
+					print "\t<-> " + item
+						
+			print "Here is what you have equipped: "
+			print "This function is not working properly yet." 
+	
+	elif answer == "scoreboard": 
+		
+		print """
+		Most fights won before death: %d by %s
+		Most fights won walking into the Battle Cave at one go: %d by %s
+		Most fights won in the Battle Cave and survive: %d by %s
+		\n""" % (fight_count_most, high_scorer_fcm, battle_cave_furthest, high_scorer_bcf,
+		       battle_cave_there_and_back, high_scorer_bctb)
+			
+	elif answer == "equip":
+		
+		equip()
+		
+	elif answer == "advice":
+			
+		chance = randint(1, 100)
+		if chance <= 50: 
+			print_wisdom("Dad")
+			print "He was a good man.\n\n\n"
+		else: 
+			print_wisdom("Mom")
+			print "She was an excellent woman.\n\n\n" 	
+		
 	else: 
-		direction(question)
+		print "This shouldn't print, due to the coverage of elifs stated before it.\n\n"
 		
 def print_wisdom(parent):
 	
@@ -310,124 +292,6 @@ def print_wisdom(parent):
 		print "\nFrom your Mother:\n"
 		print '"' + mothers_wisdom[chance] + '"'
 		print " "
-
-def player_check(menu_check, question):
-	
-	prompt2 = question + "\n-> "
-	valid = False
-	
-	if menu_check == "stats":
-		valid = True
-	elif menu_check == "options":
-		valid = True
-	elif menu_check == "inventory":
-		valid = True
-	elif menu_check == "scoreboard":
-		valid = True
-	elif menu_check == "equip":
-		valid = True
-	elif menu_check == "quit":
-		valid = True
-	
-	if valid: 	
-		if menu_check == "stats":
-			print """Here are your current stats:\n
-			Name: %s Class: %s
-			Strength: %d
-			Dexterity: %d
-			Intelligence: %d
-			Max Hit Points: %d
-			Current Hit Points: %d\n""" % (player_name, player_class, player_str,
-			player_dex, player_int, player_hp, player_hp_dmg)
-			print " "
-		
-			answer = yes_no("Would you like to remember some advice from one of your parents?")
-	
-			if answer == "y":
-				
-				chance = randint(1, 100)
-				if chance <= 50: 
-					print_wisdom("Dad")
-					print "He was a good man.\n\n\n"
-				else: 
-					print_wisdom("Mom")
-					print "She was an excellent woman.\n\n\n" 
-		
-			else: 
-				print "I'm sure you know your way.\n"
-				
-			menu_ch = raw_input(prompt2)
-			print "\n"
-			player_check(menu_ch, question)
-	
-		
-		elif menu_check == "options":
-			print "Each of these commands will do something if typed in when prompted for an answer.\n"
-			print "\toptions   <--- That is this list!"
-			print "\tstats"
-			print "\tinventory"
-			print "\tscoreboard"
-			print "\tequip\n"
-			
-			menu_ch = raw_input(prompt2)
-			print "\n"
-			player_check(menu_ch, question)
-			
-		
-		elif menu_check == "inventory":
-		
-			if satchel_contents == []:
-				print "Your satchel is empty!\n"
-			
-			else:
-				print "Here are the current contents of your Satchel: "
-				satchel_contents.sort()
-				for item in satchel_contents: 
-					print "\t--" + item + "--"
-				print " "
-			
-				print "These are the equippable items in your possession: "
-				for item in satchel_contents:
-					if item in equippable_loot:
-						print "\t<-> " + item
-						
-				print "Here is what you have equipped: "
-				print "This function is not working properly yet." 
-			
-			
-				choice2 = yes_no("Would you like to equip something?")
-				
-				if choice2 == "y":
-				
-					equip()
-			
-			menu_ch = raw_input(prompt2)
-			print "\n"
-			player_check(menu_ch, question)
-	
-		elif menu_check == "scoreboard": 
-		
-			print """
-			Most fights won before death: %d by %s
-			Most fights won walking into the Battle Cave at one go: %d by %s
-			Most fights won in the Battle Cave and survive: %d by %s
-			\n""" % (fight_count_most, high_scorer_fcm, battle_cave_furthest, high_scorer_bcf,
-			       battle_cave_there_and_back, high_scorer_bctb)
-			
-			menu_ch = raw_input(prompt2)
-			print "\n"
-			
-		elif menu_check == "equip":
-		
-			equip()
-			
-			menu_ch = raw_input(prompt2)
-			print "\n"
-		 	player_check(menu_ch, question)
-		 	
-		elif menu_check == "quit":
-			
-			dead("No body likes a quitter.")
 		
 def equip():
 	
@@ -437,11 +301,8 @@ def equip():
 	global small_medallion, big_medallion, intricate_medalion, weapon, current_weapon
 	
 	equip_again = True
-	
-	print "What would you like to equip, good %s, the %s?\n" % (player_name, player_class)
-	answer = raw_input(prompt)
-	
-	player_check(answer, "What would you like to equip")
+
+	answer = determine_intent(answer, "What would you like to equip good %s, the %s?\n" % (player_name, player_class))
 	
 	while answer in satchel_contents and equip_again == True:
 		if answer == "Cloth Cap" and cloth_cap == False:
@@ -455,7 +316,7 @@ def equip():
 				time.sleep(9)
 				print "We'll hold off for now.\n"
 				
-			print "Okay, you equip the Cloth Cap! Your intelligence has increased by 1!\n"
+			print "Okay, you equip the Cloth Cap! Your intelligence is increased by 1!\n"
 			player_int += 1
 			cloth_cap = True
 			
@@ -487,7 +348,7 @@ def equip():
 				current_weapon = "Short Stick"
 			
 			else:
-				print "Okay, you equip the Short Stick! Your attack has increased by 1!\n"
+				print "Okay, you equip the Short Stick! Your bonus attack is 1!\n"
 				attack_mod = 1
 				short_stick = True
 				weapon = True
@@ -502,7 +363,7 @@ def equip():
 			if fingerless_gloves or power_mitts:
 				print "Why would you do that? You'd lose dexterity!\n"
 				
-			print "Okay, you equip the Basic Gloves! Your dexterity has increased by 1!\n"
+			print "Okay, you equip the Basic Gloves! Your dexterity iss increased by 1!\n"
 			player_dex += 1
 			basic_gloves = True
 			
@@ -515,8 +376,8 @@ def equip():
 			if leather_t or leather_jacket:
 				print "Why would you do that? You'd become more defenseless!\n"
 				
-			print "Okay, you equip the Thick Shirt! Your defense has increased by 1!\n"
-			defense_mod += 1
+			print "Okay, you equip the Thick Shirt! Your defense bonus is 1!\n"
+			defense_mod = 1
 			thick_shirt = True
 			
 		elif answer == "Thick Shirt" and thick_shirt == True:
@@ -527,7 +388,7 @@ def equip():
 			
 			if cloth_cap == True:
 				print "You have removed the Cloth Cap and equipped the Sturdy Hat!\n"
-				print "Your intelligence has increased by 2!\n"
+				print "Your intelligence is increased by 1!\n"
 				player_int += 1
 				sturdy_hat = True
 				cloth_cap = False
@@ -540,7 +401,7 @@ def equip():
 				sturdy_hat = True
 			
 			else:
-				print "Okay, you equip the Sturdy Hat! Your intelligence has increased by 2!\n"
+				print "Okay, you equip the Sturdy Hat! Your intelligence is increased by 2!\n"
 				player_int += 2
 				sturdy_hat = True
 				
@@ -554,7 +415,7 @@ def equip():
 				print "Okay, %s, the Madrona Wand is replacing your %s!\n" % (player_name, current_weapon)
 				print "Your bonus attack is 2!\n"
 				attack_mod = 2
-				madrona_want = True
+				madrona_wand = True
 				if current_weapon == "Short Stick":
 					short_stick = False
 				
@@ -572,7 +433,7 @@ def equip():
 				current_weapon = "Madrona Wand"
 				
 			else: 
-				print "Okay, you equip the Madrona Wand! Your attack has increased by 2!\n"
+				print "Okay, you equip the Madrona Wand! Your bonus attack is 2!\n"
 				attack_mod = 2
 				madrona_wand = True
 				weapon = True
@@ -586,7 +447,7 @@ def equip():
 			
 			if basic_gloves == True:
 				print "You have removed the Basic Gloves and equipped the Fingerless Gloves!\n"
-				print "You're dexterity has increased by 2!\n"
+				print "You're dexterity is increased by 1!\n"
 				player_dex += 1
 				fingerless_gloves = True
 				basic_gloves = False
@@ -611,21 +472,21 @@ def equip():
 			
 			if thick_shirt == True:
 				print "You have removed the Thick Shirt and equipped the Leather T-Shirt!\n"
-				print "You're defense has increased by 1!\n"
-				defense_mod += 1
+				print "You're defense bonus is 2!\n"
+				defense_mod = 2
 				leather_t = True
 				thick_shirt = False
 				
 			elif leather_jacket:
 				print "Up to you, %s." % player_name
-				print "Your defense is decreased by 1.\n"
-				defense_mod -= 1
+				print "Your defense bonus is 2!\n"
+				defense_mod = 2
 				leather_jacket = False
 				leather_t = True
 			
 			else:
-				print "Okay, you equip the Leather T-Shirt! Your defense has increased by 2!\n"
-				defense_mod += 2
+				print "Okay, you equip the Leather T-Shirt! Your defense bonus is 2!\n"
+				defense_mod = 2
 				leather_t = True
 				
 		elif answer == "Leather T-Shirt" and leather_t == True:
@@ -636,20 +497,20 @@ def equip():
 			
 			if cloth_cap == True:
 				print "You have removed the Cloth Cap and equipped the Wide Brim Hat!\n"
-				print "Your intelligence has increased by 2!\n"
+				print "Your intelligence is increased by 2!\n"
 				player_int += 2
 				wide_brim_hat = True
 				cloth_cap = False
 			
 			elif sturdy_hat == True:
 				print "You have removed the Sturdy Hat and equipped the Wide Brim Hat!\n"
-				print "Your intelligence has increased by 1!\n"
+				print "Your intelligence is increased by 1!\n"
 				player_int += 1
 				wide_brim_hat = True
 				sturdy_hat = False
 				
 			else: 
-				print "Okay, you equip the Wide Brim Hat! Your intelligence has increased by 3!\n"
+				print "Okay, you equip the Wide Brim Hat! Your intelligence is increased by 3!\n"
 				player_int += 3
 				wide_brim_hat = True
 				
@@ -681,7 +542,7 @@ def equip():
 				current_weapon = "Oak Staff"
 				
 			else: 
-				print "Okay, you equip the Oak Staff! Your attack has increased by 3!\n"
+				print "Okay, you equip the Oak Staff! Your bonus attack is 3!\n"
 				attack_mod = 3
 				oak_staff = True
 				weapon = True
@@ -695,14 +556,14 @@ def equip():
 			
 			if basic_gloves == True:
 				print "You have removed the Basic Gloves and equipped the Power Mitts!\n"
-				print "You're dexterity has increased by 2!\n"
+				print "You're dexterity is increased by 2!\n"
 				player_dex += 2
 				power_mitts = True
 				basic_gloves = False
 				
 			elif fingerless_gloves == True:
 				print "You have removed the Fingerless Gloves and equipped the Power Mitts!\n"
-				print "You're dexterity has increased by 1!\n"
+				print "You're dexterity is increased by 1!\n"
 				player_dex += 1
 				power_mitts = True
 				fingerless_gloves = False
@@ -710,7 +571,7 @@ def equip():
 			else:
 				print "Okay, you equip the Power Mitts! Your dexterity is increased by 3!\n"
 				player_dex += 3
-				fingerless_gloves = True
+				power_mitts = True
 				
 		elif answer == "Power Mitts" and power_mitts == True:
 			
@@ -720,21 +581,21 @@ def equip():
 			
 			if thick_shirt == True:
 				print "You have removed the Thick Shirt and equipped the Leather Jacket!\n"
-				print "You're defense has increased by 2!\n"
-				defense_mod += 2
+				print "You're defense bonus is 3!\n"
+				defense_mod = 3
 				leather_jacket = True
 				thick_shirt = False
 				
 			elif leather_t == True:
 				print "You have removed the Leather T-Shirt and equipped the Leather Jacket!\n"
-				print "You're defense has increased by 1!\n"
-				defense_mod += 1
+				print "You're defense bonus is 3!\n"
+				defense_mod = 3
 				leather_jacket = True
 				leather_t = False
 			
 			else:
-				print "Okay, you equip the Leather Jacket! Your defense has increased by 3!\n"
-				defense_mod += 3
+				print "Okay, you equip the Leather Jacket! Your defense is increased by 3!\n"
+				defense_mod = 3
 				leather_jacket = True
 				
 		elif answer == "Leather Jacket" and leather_jacket == True:
@@ -765,7 +626,7 @@ def equip():
 				current_weapon = "Sturdy Walking Stick"
 				
 			else: 
-				print "Okay, you equip the Sturdy Walking Stick! Your attack has increased by 1!\n"
+				print "Okay, you equip the Sturdy Walking Stick! Your bonus attack is 1!\n"
 				attack_mod = 1
 				walking_stick = True
 				weapon = True
@@ -799,8 +660,8 @@ def equip():
 				current_weapon = "Three Foot Pipe"
 				
 			else: 
-				print "Okay, you equip the Three Foot Pipe! Your attack has increased by 2!\n"
-				attack_mod += 2
+				print "Okay, you equip the Three Foot Pipe! Your bonus attack is 2!\n"
+				attack_mod = 2
 				three_ft_pipe = True
 				weapon = True
 				current_weapon = "Three Foot Pipe"
@@ -833,7 +694,7 @@ def equip():
 				current_weapon = "Sword"
 				
 			else: 
-				print "Okay, you equip the Sword! Your attack has increased by 3!\n"
+				print "Okay, you equip the Sword! Your bonus attack is 3!\n"
 				attack_mod = 3
 				sword = True
 				weapon = True
@@ -879,15 +740,11 @@ def equip():
 		else: 
 			print "You do not have that item!\n"
 		
-		another_equip = yes_no("Would you like to equip something else?")
-		
-		player_check(another_equip, "Would you like to equip something else?")
+		another_equip = determine_intent("Would you like to equip something else?")
 		
 		if another_equip == "y":
-			print "What would you like to equip?"
-			answer = raw_input(prompt)
 			
-			player_check(answer, "What would you like to equip?")
+			answer = determine_intent("What would you like to equip?")
 		
 		else:
 			equip_again = False
@@ -956,7 +813,7 @@ def battle(enemy, enemy_name):
 			
 			round_count += 1
 			
-			print "### ROUND %d ###\n\n\n" % round_count
+			print "\t### ROUND %d ###\n\n\n" % round_count
 			
 			print "\nThe %s attacks!\n" % enemy_name
 			time.sleep(1)
@@ -1168,7 +1025,7 @@ def battle(enemy, enemy_name):
 			
 			round_count += 1
 			
-			print "### ROUND %d ###" % round_count
+			print "\t### ROUND %d ###" % round_count
 			
 			print "You attack!\n"
 			
@@ -1731,11 +1588,7 @@ def enemy_encounter():
 	print "You've run into an enemy!" 
 	print "It's a %s\n" % enemy_name
 	
-	print "Are you going to fight or flee?"
-	
-	choice = raw_input(prompt)
-	
-	player_check(choice, "Are you going to fight or flee?")
+	choice = determine_intent("Are you going to fight or flee?")
 	
 	if "ight" in choice: 
 	
@@ -1866,11 +1719,7 @@ def start():
 	
 	build_character()
 	
-	print "Old Woman: Are you on a quest? Or just hanging out? Or What?"
-	
-	answer = raw_input(prompt)
-	
-	player_check(answer, "Are you on a quest? Or just hanging out?")
+	answer = determine_intent("Are you on a quest? Or just hanging out? Or What?")
 	
 	if "uest" in answer: 
 		
@@ -1878,9 +1727,7 @@ def start():
 		time.sleep(2)
 		print "This labyrinth holds great treasure. And danger. Did I mention danger?"
 		
-		decision = yes_no("Are you willing to proceed?")
-		
-		player_check(decision, "Are you willing to proceed?")
+		decision = determine_intent("Are you willing to proceed?")
 		
 		if decision == "y": 
 			print "Best luck in there!"
@@ -1905,9 +1752,7 @@ def start():
 		time.sleep(1)
 		print "Woe is me!! I have the gout.\n"
 		
-		decision = yes_no("Will you help me?")
-		
-		player_check(decision, "Will you help me?")
+		decision = determine_intent("Will you help me?")
 		
 		if decision == "y":
 			print "Oh, thank you! Send them back to me when you've found them.\n\n"
@@ -1931,9 +1776,7 @@ def start():
 		print "There's some pretty sweet loot and basically no danger.\n"
 		time.sleep(1)
 		
-		decision = yes_no("Are you going to enter the labyrinth?")
-		
-		player_check(decision, "Are you going to enter the labyrinth?")
+		decision = determine_intent("Are you going to enter the labyrinth?")
 		
 		if decision == "y": 
 			print "'Best luck in there, you mysterious %s'\n\n" % player_class
@@ -1949,26 +1792,14 @@ def build_character():
 	global player_name, player_class, player_str, player_dex, player_int, player_hp
 	global player_hp_dmg, player_lvl, player_xp, player_xp_cap
 								
-	print "What, may I ask, is your name sweet traveler?"
-	player_name = raw_input(prompt)
-	print " "
+	player_name = determine_intent("What, may I ask, is your name, sweet traveler?")
 	
-	player_check(player_name, "What is your name, sweet traveler?")
-	
-	print "And what type of a hero are you, %s?" % player_name
-	print "\t 1. Pro Wizard"
-	print "\t 2. Master Ninja"
-	print "\t 3. Amatuer Wizard, decent Ninja"
-	
-	choice = raw_input(prompt)
-	print " "
-	
-	player_check(choice, """And what type of a hero are you, %s? 
+	choice = determine_intent("""And what type of a hero are you, %s? 
 		\t 1. Pro Wizard
 		\t 2. Master Ninja
 		\t 3. Amatuer Wizard, decent Ninja""" % player_name)
 	
-	if "1" in choice:
+	if choice == "1":
 		
 		player_class = "Wizard"
 		player_lvl = 1
@@ -1980,7 +1811,7 @@ def build_character():
 		player_xp_cap = 10
 		player_xp = player_xp_cap
 	
-	elif "2" in choice:
+	elif choice == "2":
 		
 		player_class = "Ninja"
 		player_lvl = 1
@@ -2012,10 +1843,7 @@ def build_character():
 	print " "
 	time.sleep(2)
 	
-	print "Type 'stats' to check yourself out." 
-	choice2 = raw_input(prompt)
-	
-	player_check(choice2, "Great. Now you really know yourself. Play?")
+	choice2 = determine_intent("Type 'stats' to check yourself out.")
 	
 	if choice2 == "n":
 		print "I am not your mother, so I'm not going to force you."
@@ -2029,9 +1857,7 @@ def first_intersection():
 	print "You may choose to travel North, West, or East."
 	print "You came from the %s.\n" % came_from
 	
-	choice = direction("Which direction do you choose?")
-	
-	player_check(choice, "Which direction do you choose?")
+	choice = determine_intent("Which direction do you choose?")
 	
 	if choice == "w":
 		
@@ -2047,12 +1873,8 @@ def first_intersection():
 		print "As you walk you see a 6 inch bookcase on your left."
 		print "There is a Red Book, a Green Book, and a Blue Book.\n"
 		time.sleep(1)
-		print "Do you move on or do you inspect a book?"
 		
-		choice2 = raw_input(prompt)
-		print " "
-		
-		player_check(choice2, "Do you move on or do you inspect a book?")
+		choice2 = determine_intent("Do you move on or do you inspect a book?")
 		
 		if "move" in choice2:
 			
@@ -2065,6 +1887,7 @@ def first_intersection():
 			second_intersection()
 		
 		elif "nsp" in choice2:
+			
 			secret_room_1()
 		
 		else: 
@@ -2095,21 +1918,14 @@ def first_intersection():
 
 def secret_room_1():
 
-	global came_from, player_int, player_dex, player_str, first_time_secret_room
+	global came_from, player_int, player_dex, first_time_secret_room
 		
 	print "Interesting. You're curious. I like that.\n"
-	print "Which one book would you like to inspect?\n"
-	print "1. Red Book"
-	print "2. Green Book"
-	print "3. Blue Book"
-			
-	choice3 = raw_input(prompt)
-	print " "
-	
-	player_check(choice3, """Which one book would you like to inspect?\n"
+		
+	choice3 = determine_input("""Which one book would you like to inspect?\n"
 		1. Red Book"
 		2. Green Book	
-		3. Blue Book""")
+		3. Blue Book\n""")
 			
 	if choice3 == "1":
 		
@@ -2121,9 +1937,7 @@ def secret_room_1():
 		can now decide to go North or South in the corridor."""
 		came_from = "West"
 		
-		choice = direction("Would you like to go North or South in the corridor?")
-		
-		player_check(choice, "Would you like to go North or South in the corridor?")
+		choice = determine_intent("Would you like to go North or South in the corridor?")
 		
 		if choice == "n":
 			second_intersection()
@@ -2144,9 +1958,7 @@ def secret_room_1():
 		or South in the corridor."""
 		came_from = "West"
 		
-		choice = direction("Would you like to go North or South in the corridor?")
-		
-		player_check(choice, "Would you like to go North or South in the corridor?")
+		choice = determine_intent("Would you like to go North or South in the corridor?")
 			
 		if choice == "n":
 			print "You go North."
@@ -2167,9 +1979,7 @@ def secret_room_1():
 		revealing a passageway.\n"""
 		time.sleep(3)
 				
-		choice4 = yes_no("Do you enter the passageway?")
-		
-		player_check(choice4, "Do you enter the passageway?")
+		choice4 = determine_intent("Do you enter the passageway?")
 				
 		if choice4 == "y":
 			came_from = "West"
@@ -2182,9 +1992,7 @@ def secret_room_1():
 				print "You remember the good times you had, then you turn around"
 				print "and leave the room because there's nothing in there anymore.\n" 
 				
-				choice1 = direction("Do you go North or South?")
-				
-				player_check(choice1, "Do you go North or South?")
+				choice1 = determine_intent("Do you go North or South?")
 						
 				if choice1 == "n":
 					print "North you go!"
@@ -2216,11 +2024,7 @@ def secret_room_1():
 				print "And it smells so good! You must eat it or leave it."
 				time.sleep(2)
 				
-				print "\nEat it or leave it?"
-				choice5 = raw_input(prompt)
-				print " "
-					
-				player_check(choice5, "Do you eat the danish?")
+				choice5 = determine_intent("Do you eat the danish or leave it?")
 					
 				if "eat" in choice5:
 					print "You've never tasted anything so delicious and fresh!\n"
@@ -2233,15 +2037,8 @@ def secret_room_1():
 						print "Your intelligence has grown by one. It is now %d.\n" % player_int
 						time.sleep(3)
 						print "You leave the secret room."
-						print "Do you go North or South?"
-						choice1 = raw_input(prompt)
-						print " "
 						
-						while choice1 == "player":
-							player_check()
-							print "Do you go North or South?"
-							choice1 = raw_input(prompt)
-							print " "
+						choice1 = determine_intent("Do you go North or South?")
 							
 						if "orth" in choice1:
 							print "North you go!"
@@ -2258,17 +2055,8 @@ def secret_room_1():
 						print "Your dexterity has grown by one. It is now %d.\n" % player_dex
 						time.sleep(3)
 						print "You leave the secret room."
-						print "Do you go North or South?"
-						choice1 = raw_input(prompt)
-						print " "
 						
-						while choice1 == "player":
-							
-							player_check()
-							
-							print "Do you go North or South?"
-							choice1 = raw_input(prompt)
-							print " "
+						choice1 = determine_intent("Do you go North or South?")
 							
 						if "orth" in choice1:
 							print "North you go!"
@@ -2282,11 +2070,8 @@ def secret_room_1():
 					print "You back away from the danish... slowly back away.\n"
 					time.sleep(3)
 					print "Phew! That thing looked too delicious to be of any use!\n"	
-					print "Do you go North or South?"
 					
-					choice1 = direction("Do you go North or South?")
-					
-					player_check(choice1, "Do you go North or South?")
+					choice1 = determine_intent("Do you go North or South?")
 						
 					if choice1 == "n":
 						print "North you go!"
@@ -2306,9 +2091,7 @@ def secret_room_1():
 			can now decide to go North or South in the corridor.\n"""
 			came_from = "West"
 			
-			choice2 = direction("Would you like to go North or South in the corridor?")
-			
-			player_check(choice2, "Would you like to go North or South in the corridor?")
+			choice2 = determine_intent("Would you like to go North or South in the corridor?")
 			
 			if choice2 == "n":
 				print "You go North.\n"
@@ -2333,16 +2116,14 @@ def secret_room_1():
 
 def second_intersection():
 
-	global came_from, player_hp
+	global came_from, player_hp_dmg
 
 	print "You are at an intersection that has passageways to the South, West, and East."
 	print "There is a dripping sound.\n"
 	print "You came from the %s." % came_from
 	time.sleep(1)
 	
-	choice = direction("Which way do you go?")
-	
-	player_check(choice, "Which way do you go?")
+	choice = determine_intent("Which way do you go?")
 	
 	if choice == "s":
 		print "You move South.\n"
@@ -2369,11 +2150,8 @@ def second_intersection():
 		time.sleep(2)
 		print "As you walk you see a 6 inch bookcase on your right."
 		print "There is a Red Book, a Green Book, and a Blue Book.\n"
-		print "Do you move on or do you inspect a book?"
 		
-		choice2 = raw_input(prompt)
-		
-		player_check(choice2, "Do you move on or do you inspect a book?")
+		choice2 = determine_intent("Do you move on or do you inspect a book?")
 		
 		if "move" in choice2:
 			print "You go around the corner and come to another intersection.\n"
@@ -2390,8 +2168,8 @@ def second_intersection():
 	
 	elif choice == "n":
 		print "You try to head North, but run into the concrete wall.\n"
-		player_hp -= 1
-		print "You lost a hit point! you now have %d hit points.\n" % player_hp
+		player_hp_dmg -= 1
+		print "You lost a hit point! you now have %d hit points.\n" % player_hp_dmg
 		chance = randint(1, 100)
 	
 		if chance <= 50:
@@ -2403,15 +2181,13 @@ def second_intersection():
 
 def third_intersection():
 
-	global came_from, player_hp
+	global came_from, player_hp_dmg
 	
 	print "You are at an intersection with passageways to the South, West, and East.\n"
 	print "There is a door along the cleft wall to the South/West.\n"
 	print "You came from %s." % came_from
 	
-	choice = direction("Which way do you go?")
-	
-	player_check(choice, "Which way do you go?")
+	choice = determine_intent("Which way do you go?")
 			
 	if "door" in choice:
 	
@@ -2457,8 +2233,8 @@ def third_intersection():
 	elif choice == "n":
 		
 		print "You try to head North, but run into the concrete wall.\n"
-		player_hp -= 1
-		print "You lost a hit point! you now have %d hit points.\n" % player_hp
+		player_hp_dmg -= 1
+		print "You lost a hit point! you now have %d hit points.\n" % player_hp_dmg
 		chance = randint(1, 100)
 		
 		if chance <= 50:
@@ -2470,11 +2246,9 @@ def third_intersection():
 		
 		print "no thAnks."
 	
-	third_intersection()
-
 def first_room():
 	
-	global satchel_contents, came_from, first_time_first_room
+	global satchel_contents, came_from, first_time_first_room, player_hp_dmg
 	came_from = "The Room"
 	
 	print "You open the door and step into a stark, dark room!\n\n"
@@ -2492,20 +2266,8 @@ def first_room():
 		print "atop the stone are three precious gems.\n"
 		time.sleep(1)
 		print "There is an Emerald, a Ruby, and a Sapphire.\n\n"
-		print "What do you do?\n"
-		print "\t1. Take the Emerald."
-		print "\t2. Take the Ruby."
-		print "\t3. Take the Sapphire."
-		print "\t4. Take the Emerald & Ruby."
-		print "\t5. Take the Emerald & Sapphire."
-		print "\t6. Take the Ruby & Sapphire."
-		print "\t7. Take all 3 stones."
-		print "\t8. Take nothing and leave the room.\n" 
 	
-		choice = raw_input(prompt)
-		print " "
-		
-		player_check(choice, """What do you do?\n
+		choice = determine_intent("""What do you do?\n
 			\t1. Take the Emerald.
 			\t2. Take the Ruby.
 			\t3. Take the Sapphire.
@@ -2519,34 +2281,42 @@ def first_room():
 			
 			print "You grab the Emerald.\n"
 			time.sleep(2)
-			dead("Although the pain was searing, it was brief. You dead.")
+			print "You feel intense burning that travels up your arm to your chest!\n\n"
+			print "You lose 5 hit points!\n"
+			player_hp_dmg -= 5
+			if player_hp_dmg <= 0:
+				dead("Looks like grabbing that Emerald kilt ya.")
+			else: 
+				first_time_first_room = True
 			
 		elif choice == "2":
 			
 			print "You pick up the Ruby and put it in your bag.\n"
 			satchel_contents.append("Ruby")
-			print "Now what do you do?"
-			print "\t1. Take the Emerald."
-			print "\t2. Take the Sapphire."
-			print "\t3. Take the Emerald & Sapphire."
-			print "\t4. Take nothing more and leave the room.\n"
 			
-			choice2 = raw_input(prompt)
-			
-			player_check(choice2, """Now what do you do?
+			choice2 = determine_intent("""Now what do you do?
 				\t1. Take the Emerald.
 				\t2. Take the Sapphire.
 				\t3. Take the Emerald & Sapphire.
 				\t4. Take nothing more and leave the room.\n""")
 		
-				
-			if choice2 == "1":
+			while choice2 == "1":
 				
 				print "You grab the Emerald.\n"
 				time.sleep(2)
-				dead("Although the pain was searing, it was brief. You dead.")
+				print "You feel intense burning that travels up your arm to your chest!\n\n"
+				print "You lose 5 hit points!\n"
+				player_hp_dmg -= 5
+				if player_hp_dmg <= 0:
+					dead("Looks like grabbing that Emerald kilt ya.")
+				else: 
+					choice2 = determine_input("""Now what do you do?
+						\t1. Take the Emerald.
+						\t2. Take the Sapphire.
+						\t3. Take the Emerald & Sapphire.
+						\t4. Take nothing more and leave the room.\n""")
 				
-			elif choice2 == "2":
+			if choice2 == "2":
 				
 				print "You pick up the Sapphire and put it in your bag.\n"
 				satchel_contents.append("Sapphire")
