@@ -1,4 +1,5 @@
 Labyrinth-of-Lost-Boys; coded in Python 2.7
+
 a text-based adventure game.
 
 Current version includes character creation, fighting, looting, equipping, some environment interaction, and essentially a "beta" version of infinite lives (selecting YES to keeping your level and stats starts your character with full health at the entrance to the labyrinth). 
