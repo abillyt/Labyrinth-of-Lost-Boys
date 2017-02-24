@@ -303,9 +303,6 @@ def determine_intent(question):
 	elif answer == "5" or answer == "6" or answer == "7" or answer == "8":
 		return answer
 	
-	else: 
-		print "This shouldn't print, due to the coverage of elifs stated before it.\n\n"
-	
 	return answer
 		
 def print_wisdom(parent):
