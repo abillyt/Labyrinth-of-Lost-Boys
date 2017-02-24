@@ -2066,7 +2066,7 @@ def secret_room_1():
 						
 						choice1 = determine_intent("Do you go North or South?")
 							
-						if "orth" in choice1:
+						if choice1 == "n":
 							print "North you go!"
 							second_intersection()
 						
@@ -2084,7 +2084,7 @@ def secret_room_1():
 						
 						choice1 = determine_intent("Do you go North or South?")
 							
-						if "orth" in choice1:
+						if choice1 == "n":
 							print "North you go!"
 							second_intersection()
 						
