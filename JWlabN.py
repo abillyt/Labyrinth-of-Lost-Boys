@@ -178,7 +178,7 @@ def determine_intent(question):
 	
 	answer = raw_input(prompt2)
 	answer = answer.lower()
-	print "\n"
+	print "\n\n"
 	
 	while len(answer) == 0 or answer in maybe_list or answer in undecided_list:
 		print "Please enter a valid choice.\n"
@@ -201,18 +201,20 @@ def determine_intent(question):
 			
 			answer = raw_input(prompt2)
 			answer = answer.lower()
+			print "\n\n"
 		
 		elif answer == "options":
 			print "Each of these commands will do something if typed in when prompted for an answer.\n"
-			print "\toptions     <--- That is this list!"
-			print "\tstats       <--- Player Stats!"
-			print "\tinventory   <--- Contents of your satchel!"
-			print "\tscoreboard  <--- Best scores!"
-			print "\tequip       <--- Equip an item!"
-			print "\tadvice      <--- Remember advice from one of your parents!\n\n"
+			print "\toptions       <--- That is this list!"
+			print "\tstats         <--- Player Stats!"
+			print "\tinventory     <--- Contents of your satchel!"
+			print "\tscoreboard    <--- Best scores!"
+			print "\tequip         <--- Equip an item!"
+			print "\tadvice        <--- Remember advice from one of your parents!\n\n"
 			
 			answer = raw_input(prompt2)
 			answer = answer.lower()
+			print "\n\n"
 			
 		elif answer == "inventory":
 		
@@ -221,6 +223,7 @@ def determine_intent(question):
 				
 				answer = raw_input(prompt2)
 				answer = answer.lower()
+				print "\n\n"
 			
 			else:
 				print "Here are the current contents of your Satchel: "
@@ -240,6 +243,7 @@ def determine_intent(question):
 				
 				answer = raw_input(prompt2)
 				answer = answer.lower()
+				print "\n\n"
 		
 		elif answer == "scoreboard": 
 		
@@ -252,6 +256,7 @@ def determine_intent(question):
 			
 			answer = raw_input(prompt2)
 			answer = answer.lower()
+			print "\n\n"
 			
 		elif answer == "equip":
 		
@@ -259,6 +264,7 @@ def determine_intent(question):
 			
 			answer = raw_input(prompt2)
 			answer = answer.lower()
+			print "\n\n"
 		
 		elif answer == "advice":
 			
@@ -272,6 +278,7 @@ def determine_intent(question):
 			
 			answer = raw_input(prompt2)
 			answer = answer.lower()
+			print "\n\n"
 
 	if answer in yes_list:			
 		answer = "y"
@@ -311,13 +318,13 @@ def print_wisdom(parent):
 		chance = randint(0, 10)
 		print "\nFrom your Father:\n"
 		print '"' + fathers_wisdom[chance] + '"'
-		print " "
+		print "\n\n"
 		
 	else: 
 		chance = randint(0, 11)
 		print "\nFrom your Mother:\n"
 		print '"' + mothers_wisdom[chance] + '"'
-		print " "
+		print "\n\n"
 		
 def equip():
 	
@@ -328,9 +335,10 @@ def equip():
 	
 	equip_again = True
 
-	answer = determine_intent("What would you like to equip good %s, the %s?\n" % (player_name, player_class))
+	answer = determine_intent("What would you like to equip?\n")
 	
 	while answer in satchel_contents and equip_again == True:
+		
 		if answer == "Cloth Cap" and cloth_cap == False:
 			
 			if sturdy_hat or wide_brim_hat:
@@ -339,12 +347,13 @@ def equip():
 				print "I mean, if you're willing to make this decision with"
 				print "this level of intelligence, what kind of decisions are"
 				print "you going to make with less intelligence?\n"
-				time.sleep(9)
+				time.sleep(7)
 				print "We'll hold off for now.\n"
 				
-			print "Okay, you equip the Cloth Cap! Your intelligence is increased by 1!\n"
-			player_int += 1
-			cloth_cap = True
+			else: 
+				print "Okay, you equip the Cloth Cap! Your intelligence is increased by 1!\n"
+				player_int += 1
+				cloth_cap = True
 			
 		elif answer == "Cloth Cap" and cloth_cap == True:
 			
@@ -371,6 +380,7 @@ def equip():
 					
 				else:
 					sword = False
+				
 				current_weapon = "Short Stick"
 			
 			else:
@@ -389,9 +399,10 @@ def equip():
 			if fingerless_gloves or power_mitts:
 				print "Why would you do that? You'd lose dexterity!\n"
 				
-			print "Okay, you equip the Basic Gloves! Your dexterity iss increased by 1!\n"
-			player_dex += 1
-			basic_gloves = True
+			else: 
+				print "Okay, you equip the Basic Gloves! Your dexterity iss increased by 1!\n"
+				player_dex += 1
+				basic_gloves = True
 			
 		elif answer == "Basic Gloves" and basic_gloves == True:
 			
@@ -402,9 +413,10 @@ def equip():
 			if leather_t or leather_jacket:
 				print "Why would you do that? You'd become more defenseless!\n"
 				
-			print "Okay, you equip the Thick Shirt! Your defense bonus is 1!\n"
-			defense_mod = 1
-			thick_shirt = True
+			else: 
+				print "Okay, you equip the Thick Shirt! Your defense bonus is 1!\n"
+				defense_mod = 1
+				thick_shirt = True
 			
 		elif answer == "Thick Shirt" and thick_shirt == True:
 			
@@ -456,6 +468,7 @@ def equip():
 					
 				else:
 					sword = False
+				
 				current_weapon = "Madrona Wand"
 				
 			else: 
@@ -565,6 +578,7 @@ def equip():
 					
 				else:
 					sword = False
+				
 				current_weapon = "Oak Staff"
 				
 			else: 
@@ -649,6 +663,7 @@ def equip():
 					
 				else:
 					sword = False
+				
 				current_weapon = "Sturdy Walking Stick"
 				
 			else: 
@@ -683,6 +698,7 @@ def equip():
 					
 				else:
 					sword = False
+				
 				current_weapon = "Three Foot Pipe"
 				
 			else: 
@@ -717,6 +733,7 @@ def equip():
 					
 				else:
 					madrona_wand = False
+				
 				current_weapon = "Sword"
 				
 			else: 
@@ -764,7 +781,7 @@ def equip():
 			print "You're already wearing the intricate medallion!\n"
 			
 		else: 
-			print "You do not have that item!\n"
+			print "YOU DO NOT HAVE THAT ITEM!\n"
 		
 		another_equip = determine_intent("Would you like to equip something else?")
 		
@@ -839,7 +856,7 @@ def battle(enemy, enemy_name):
 			
 			round_count += 1
 			
-			print "\t### ROUND %d ###\n\n\n" % round_count
+			print "\t###      ROUND %d      ###\n\n\n" % round_count
 			
 			print "\nThe %s attacks!\n" % enemy_name
 			time.sleep(1)
@@ -1051,7 +1068,7 @@ def battle(enemy, enemy_name):
 			
 			round_count += 1
 			
-			print "\t### ROUND %d ###" % round_count
+			print "\t###      ROUND %d      ###\n\n\n" % round_count
 			
 			print "You attack!\n"
 			
@@ -1321,7 +1338,7 @@ def battle(enemy, enemy_name):
 			high_scorer = True
 			print "You've just taken 1st place on the fight count list!\n" 
 			time.sleep(1)
-			high_scorer_fcm = raw_input("Enter your name to go on the scoreboard: ")
+			high_scorer_fcm = determine_intent("Enter your name to go on the scoreboard: ")
 	
 	if fight_count > fight_count_most:
 		fight_count_most = fight_count
@@ -1745,18 +1762,18 @@ def start():
 	
 	build_character()
 	
-	answer = determine_intent("Are you on a quest? Or just hanging out? Or What?")
+	answer = determine_intent("Are you on a quest? Or just hanging out? Or What?\n")
 	
 	if "uest" in answer: 
 		
 		print "Oh, a quest, eh?" 
 		time.sleep(2)
-		print "This labyrinth holds great treasure. And danger. Did I mention danger?"
+		print "This labyrinth holds great treasure. And danger. Did I mention danger?\n"
 		
-		decision = determine_intent("Are you willing to proceed?")
+		decision = determine_intent("Are you willing to proceed?\n\n")
 		
 		if decision == "y": 
-			print "Best luck in there!"
+			print "Best luck in there!\n"
 			came_from = "South"
 			
 			first_intersection()
@@ -1860,19 +1877,18 @@ def build_character():
 		player_xp_cap = 10
 		player_xp = player_xp_cap
 	
-	print "Ahh, %s the %s! Exciting!" % (player_name, player_class)
+	print "Ahh, %s the %s! Exciting!\n" % (player_name, player_class)
 	print "Jeez. I haven't seen a %s in ages..." % player_class
 	time.sleep(2)
 	
 	print "\nActually, I haven't seen anyone in ages."
-	print "You look really good. Seriously, have you looked at yourself lately?"
-	print " "
+	print "You look really good. Seriously, have you looked at yourself lately?\n\n"
 	time.sleep(2)
 	
-	choice2 = determine_intent("Type 'stats' to check yourself out.")
+	choice2 = determine_intent("Type 'stats' to check yourself out or type 'okay' to continue.\n")
 	
 	if choice2 == "n":
-		print "I am not your mother, so I'm not going to force you."
+		print "I am not your mother, so I'm not going to force you.\n"
 
 def first_intersection():
 
@@ -2188,7 +2204,7 @@ def second_intersection():
 				enemy_encounter()
 			first_intersection()
 		
-		elif "inspect" in choice2:
+		elif "nsp" in choice2:
 			
 			secret_room_1()
 	
@@ -2499,7 +2515,7 @@ def first_room():
 					third_intersection()
 				
 			else: 
-				print "You're totally done in this room. Booyah!"
+				print "You're totally done in this room. Booyah!\n
 				third_intersection()
 		
 		elif choice == "7":
