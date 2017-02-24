@@ -2740,11 +2740,9 @@ def fifth_intersection():
 
 		to_do = determine_intent("Do you do something or go back?")
 		
-		if "back" in to_do:
+		came_from = "East"
 			
-			came_from = "East"
-			
-			fifth_intersection()
+		fifth_intersection()
 			
 	elif answer == "w":
 		print "You head West and...\n"
