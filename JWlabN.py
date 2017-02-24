@@ -1948,8 +1948,8 @@ def secret_room_1():
 		
 	print "Interesting. You're curious. I like that.\n"
 		
-	choice3 = determine_intent("""Which one book would you like to inspect?\n"
-		1. Red Book"
+	choice3 = determine_intent("""Which one book would you like to inspect?\n
+		1. Red Book
 		2. Green Book	
 		3. Blue Book\n""")
 			
