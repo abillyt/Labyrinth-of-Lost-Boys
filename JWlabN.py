@@ -198,6 +198,9 @@ def determine_intent(question):
 			Max Hit Points: %d
 			Current Hit Points: %d\n\n""" % (player_name, player_class, player_lvl, player_str,
 			player_dex, player_int, player_hp, player_hp_dmg)
+			
+			answer = raw_input(prompt2)
+			answer = answer.lower()
 		
 		elif answer == "options":
 			print "Each of these commands will do something if typed in when prompted for an answer.\n"
@@ -208,10 +211,16 @@ def determine_intent(question):
 			print "\tequip       <--- Equip an item!"
 			print "\tadvice      <--- Remember advice from one of your parents!\n\n"
 			
+			answer = raw_input(prompt2)
+			answer = answer.lower()
+			
 		elif answer == "inventory":
 		
 			if satchel_contents == []:
 				print "Your satchel is empty!\n\n"
+				
+				answer = raw_input(prompt2)
+				answer = answer.lower()
 			
 			else:
 				print "Here are the current contents of your Satchel: "
@@ -228,6 +237,9 @@ def determine_intent(question):
 						
 				print "Here is what you have equipped: "
 				print "This function is not working properly yet.\n\n" 
+				
+				answer = raw_input(prompt2)
+				answer = answer.lower()
 		
 		elif answer == "scoreboard": 
 		
@@ -238,9 +250,15 @@ def determine_intent(question):
 			\n\n""" % (fight_count_most, high_scorer_fcm, battle_cave_furthest, high_scorer_bcf,
 			       battle_cave_there_and_back, high_scorer_bctb)
 			
+			answer = raw_input(prompt2)
+			answer = answer.lower()
+			
 		elif answer == "equip":
 		
 			equip()
+			
+			answer = raw_input(prompt2)
+			answer = answer.lower()
 		
 		elif answer == "advice":
 			
@@ -251,6 +269,9 @@ def determine_intent(question):
 			else: 
 				print_wisdom("Mom")
 				print "She was an excellent woman.\n\n\n"
+			
+			answer = raw_input(prompt2)
+			answer = answer.lower()
 
 	if answer in yes_list:			
 		answer = "y"
@@ -275,6 +296,12 @@ def determine_intent(question):
 
 	elif answer == "quit":
 		dead("You have quit.") 
+	
+	elif answer == "1" or answer == "2" or answer == "3" or answer == "4":
+		return answer
+	
+	elif answer == "5" or answer == "6" or answer == "7" or answer == "8":
+		return answer
 	
 	else: 
 		print "This shouldn't print, due to the coverage of elifs stated before it.\n\n"
