@@ -146,6 +146,9 @@ equippable_loot = ['Sturdy Walking Stick', 'Cloth Cap', 'Short Stick', 'Basic Gl
 'Fingerless Gloves', 'Leather T-Shirt', 'Big Medallion', 'Sword', 'Wide Brim Hat',
 'Oak Staff', 'Power Mitts', 'Leather Jacket', 'Intricate Medallion']
 
+non_equippable_loot = ['Paper and Pen', 'Spade', 'Roll of String', 'Shovel', 'Jagged Rocks', 
+'Short Rope', 'Balanced Pickaxe', 'Book of Knots', 'Long Rope']
+
 enemies_lvl_1_3 = ['Slime', 'Gnoll', 'Wolf', 'Bat', 'Goblin', 'Cat', 'Flannel Bag',
 'Glowing Top Hat', 'Pair of Round Spectacles']
 
@@ -343,7 +346,11 @@ def equip():
 	
 	while answer in satchel_contents and equip_again == True:
 		
-		if answer == "Cloth Cap" and cloth_cap == False:
+		if answer in non_equippable_loot:
+			
+			print "That item cannot be equipped!\n\n"
+		
+		elif answer == "Cloth Cap" and cloth_cap == False:
 			
 			if sturdy_hat or wide_brim_hat:
 				print "Why would you do that? You'd lose intelligence!\n"
