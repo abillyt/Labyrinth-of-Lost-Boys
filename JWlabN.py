@@ -1306,13 +1306,16 @@ def battle(enemy, enemy_name):
 				loot = loot_lvl_4_6[j]
 			
 			print "It's a %s!\n" % loot
+			time.sleep(1)
 			
 			if loot in satchel_contents:
 				print "You've already got a %s...\n" % loot
+				time.sleep(1)
 			
 			else: 
 				satchel_contents.append(loot)
 				print "You've looted %s from the %s!\n" % (loot, enemy_name)
+				time.sleep(3)
 				
 		else:
 			
@@ -1325,13 +1328,16 @@ def battle(enemy, enemy_name):
 				loot = loot_lvl_7_9[j]
 			
 			print "It's a %s!\n" % loot
+			time.sleep(1)
 			
 			if loot in satchel_contents:
 				print "You've already got a %s...\n" % loot
+				time.sleep(1)
 			
 			else: 
 				satchel_contents.append(loot)
 				print "You've looted %s from the %s!\n" % (loot, enemy_name)
+				time.sleep(3)
 		
 	fight_count += 1  #to tabulate fights won while alive
 	
