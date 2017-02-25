@@ -817,7 +817,7 @@ def equip():
 		else:
 			equip_again = False
 				
-	if answer == "n":
+	if another_equip == "n":
 		
 		print "Okay, good luck on your journey!"
 	
@@ -1872,7 +1872,7 @@ def build_character():
 	global player_name, player_class, player_str, player_dex, player_int, player_hp
 	global player_hp_dmg, player_lvl, player_xp, player_xp_cap
 								
-	player_name = raw_input("What, may I ask, is your name, sweet traveler?")
+	player_name = raw_input("What, may I ask, is your name, sweet traveler?\n->")
 	
 	choice = determine_intent("""And what type of a hero are you, %s? 
 		\t 1. Pro Wizard
@@ -2612,8 +2612,7 @@ def first_chamber():
 				
 			if "ye" in answer2:
 				choice = determine_intent("Excellent! I'm waiting.\n")
-				if (choice == "use Pickaxe" and "Pickaxe" in satchel_contents) or 
-				(choice == "use Jagged Rocks" and "Jagged Rocks" in satchel_contents):
+				if (choice == "use Pickaxe" and "Pickaxe" in satchel_contents) or (choice == "use Jagged Rocks" and "Jagged Rocks" in satchel_contents):
 					if choice == "use Pickaxe":
 						print "You bring the Pickaxe sharply down on the first chain at the floor"
 						print "and it breaks.\n"
@@ -2623,7 +2622,7 @@ def first_chamber():
 						
 						choice2 = determine_intent("What do you do?")
 						
-						if choice2 = "use Paper and Pen" and "Paper and Pen" in satchel_contents:
+						if choice2 == "use Paper and Pen" and "Paper and Pen" in satchel_contents:
 							print "You draw him a map and send him on his way.\n"
 							boys_saved += 1
 							boys_rescued.append("Boy 1")
@@ -2644,7 +2643,7 @@ def first_chamber():
 							dead("You died freeing that boy. You are a noble person.")
 						choice2 = determine_intent("What do you do?")
 						
-						if choice2 = "use Paper and Pen" and "Paper and Pen" in satchel_contents:
+						if choice2 == "use Paper and Pen" and "Paper and Pen" in satchel_contents:
 							print "You draw him a map and send him on his way.\n"
 							boys_saved += 1
 							boys_rescued.append("Boy 1")
@@ -3653,10 +3652,11 @@ def grand_hallway():
 def hidden_chamber_one():
 	
 	global came_from, boys_rescued, satchel_contents, defense_mod, boys_saved, attack_mod #hidden_chamber_one_boy BOOL
+	global defeat_darkness_troll
 	
 	came_from = "Hidden Chamber"
 	
-	if defeat_darkness_troll == True
+	if defeat_darkness_troll == True:
 		print "\nYou unravel the string and wind it between the three wheels.\n\n"
 		time.sleep(2)
 		print "After some testing of the tension, you pull the string hard and the wheels spin.\n"
@@ -3680,10 +3680,10 @@ def hidden_chamber_one():
 				print "I never thought anyone would come down here to save me.\n\n"
 				answer1 = determine_intent("Are you going to save me?\n")
 		
-				if answer1 = "y":
+				if answer1 == "y":
 					answer2 = determine_intent("How? I don't know the way out.\n")
 			
-					if answer2 = "use Paper and Pen" and "Paper and Pen" in satchel_contents:
+					if answer2 == "use Paper and Pen" and "Paper and Pen" in satchel_contents:
 						print "You draw the boy a map to the entrance and he leaves, emboldened.\n\n"
 						boys_saved += 1
 						print "You have saved %d boys!\n\n" % saved_boys
@@ -3792,10 +3792,10 @@ def hidden_chamber_one():
 			print "I never thought anyone would come down here to save me.\n\n"
 			answer1 = determine_intent("Are you going to save me?\n")
 			
-			if answer1 = "y":
+			if answer1 == "y":
 				answer2 = determine_intent("How? I don't know the way out.\n")
 				
-				if answer2 = "use Paper and Pen" and "Paper and Pen" in satchel_contents:
+				if answer2 == "use Paper and Pen" and "Paper and Pen" in satchel_contents:
 					print "You draw the boy a map to the entrance and he leaves, emboldened.\n\n"
 					boys_saved += 1
 					print "You have saved %d boys!\n\n" % boys_saved
