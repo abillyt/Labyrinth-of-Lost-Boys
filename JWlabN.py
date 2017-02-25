@@ -72,36 +72,6 @@ katana = False
 scepter = False
 weapon = False
 
-#use_disc is for marking if the item's use has been discovered.
-walking_stick_use_disc = False
-cloth_cap_use_disc = False
-short_stick_use_disc = False
-basic_gloves_use_disc = False
-spade_use_disc = False
-paper_pen_use_disc = False
-thick_shirt_use_disc = False
-roll_of_string_use_disc = False
-small_medal_use_disc = False
-three_foot_pipe_use_disc = False
-sturdy_hat_use_disc = False
-madrona_wand_use_disc = False
-fingerless_gloves_use_disc = False
-shovel_use_disc = False
-jagged_rocks_use_disc = False
-leather_t_use_disc = False
-short_rope_use_disc = False
-big_medal_use_disc = False
-sword_use_disc = False
-wide_brim_hat_use_disc = False
-oak_staff_use_disc = False
-power_mitts_use_disc = False
-pickaxe_use_disc = False
-book_of_knots_use_disc = False
-leather_jacket_use_disc = False
-long_rope_use_disc = False
-intricate_medal_use_disc = False
-
-
 yes_list = ["yep", "yeppers", "yeah", "uh huh", "well, sure", "absolutely", "amen", "affirmative",
 		"true", "yea", "decent", "beyond a doubt", "certainly", "good enough", "naturally", "of course",
 		"undoubtedly", "unquestionably", "definitely", "you bet", "you betcha", "hell yea i am",
@@ -259,8 +229,8 @@ def determine_intent(question):
 						print "\t<-> " + item
 				print "\n\n"
 						
-				print "Here is what you have equipped: "
-				print "This function is not working properly yet.\n\n" 
+				#print "Here is what you have equipped: "
+				#print "This function is not working properly yet.\n\n" 
 				
 				answer = raw_input(prompt2)
 				answer = answer.lower()
@@ -820,6 +790,10 @@ def equip():
 			equip_again = False
 			print "\n\nOkay, good luck on your journey!"		
 	
+	elif equip_again == False:
+		
+		print "\n"
+	
 	else: 
 		print "You do not have that item!\n"
 	
@@ -1311,13 +1285,16 @@ def battle(enemy, enemy_name):
 			#loot_lvl_1_3.pop(j)
 		
 			print "It's a %s!\n\n" % loot
+			time.sleep(1)
 			
 			if loot in satchel_contents:
 				print "You've already got a %s...\n" % loot
+				time.sleep(1)
 			
 			else: 
 				satchel_contents.append(loot)
 				print "You've looted %s from the %s!\n" % (loot, enemy_name)
+				time.sleep(3)
 		
 		elif player_lvl <= 6:
 			
@@ -1750,8 +1727,13 @@ def level_up():
 
 def start():
 	
-	global first_time_secret_room, first_time_first_room, came_from, player_hp_dmg
-	global player_name, player_class, player_lvl, player_xp, satchel_contents
+	global first_time_secret_room, first_time_first_room, came_from, player_hp_dmg, defense_mod
+	global player_name, player_class, player_lvl, player_xp, satchel_contents, attack_mod
+	global defeat_darkness_troll, defeat_goblin_king, boys_saved, boys_rescued, walking_stick
+	global cloth_cap, short_stick, basic_gloves, thick_shirt, three_ft_pipe, sturdy_hat, madrona_wand
+	global fingerless_gloves, leather_t, sword, wide_brim_hat, oak_staff, power_mitts, leather_jacket
+	global small_medallion, big_medallion, intricate_medallion, wizard_robes, wizard_hat, wizard_staff
+	global imbued_eye_mask, stealth_slippers, katana, armored_tweed_vest, knickers, scepter, weapon
 	
 	player_name = ""
 	player_class = ""
@@ -1762,6 +1744,40 @@ def start():
 	high_scorer_furthest = False
 	high_scorer = False
 	satchel_contents = []
+	attack_mod = 0
+	defense_mod = 0
+	defeat_darkness_troll = False
+	defeat_goblin_king = False
+	boys_saved = 0
+	boys_rescued = []
+	walking_stick = False
+	cloth_cap = False
+	short_stick = False
+	basic_gloves = False
+	thick_shirt = False
+	three_ft_pipe = False
+	sturdy_hat = False
+	madrona_wand = False
+	fingerless_gloves = False
+	leather_t = False
+	sword = False
+	wide_brim_hat = False
+	oak_staff = False
+	power_mitts = False
+	leather_jacket = False
+	small_medallion = False
+	big_medallion = False
+	intricate_medallion = False
+	wizard_robes = False
+	imbued_eye_mask = False
+	armored_tweed_vest = False
+	wizard_hat = False
+	stealth_slippers = False
+	knickers = False
+	wizard_staff = False
+	katana = False
+	scepter = False
+	weapon = False
 	
 	print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 	print "\n\n\t\tLabyrinth of the Lost Sons\n\n\n"
@@ -1871,7 +1887,7 @@ def build_character():
 								
 	player_name = raw_input("What, may I ask, is your name, sweet traveler?\n\n->")
 	
-	choice = determine_intent("""\nAnd what type of a hero are you, %s? 
+	choice = determine_intent("""\nAnd what type of a hero are you, %s?\n
 		\t 1. Pro Wizard
 		\t 2. Master Ninja
 		\t 3. Amatuer Wizard, decent Ninja\n""" % player_name)
@@ -2010,7 +2026,7 @@ def secret_room_1():
 		'Making Friends with Blood Pacts' 
 		by 'Glungoral the Witty' \n
 		You flip through the book, finding it boorish. You put the book back and
-		can now decide to go North or South in the corridor."""
+		can now decide to go North or South in the corridor.\n\n"""
 		came_from = "West"
 		
 		choice = determine_intent("Would you like to go North or South in the corridor?\n")
@@ -2031,7 +2047,7 @@ def secret_room_1():
 		by 'Mungorak the Pleasant'\n
 		You flip through the book and it quickly becomes your favorite, but you've
 		got no time to read, so you put the book back and can now decide to go North 
-		or South in the corridor."""
+		or South in the corridor.\n\n"""
 		came_from = "West"
 		
 		choice = determine_intent("Would you like to go North or South in the corridor?\n")
@@ -2607,7 +2623,7 @@ def first_chamber():
 			print "'Wonderful! My chains are secured to the ground by stone.'"
 			answer2 = determine_intent("Are you able to free me?\n")
 				
-			if "ye" in answer2:
+			if answer2 == "y":
 				choice = determine_intent("Excellent! I'm waiting.\n")
 				if (choice == "use Pickaxe" and "Pickaxe" in satchel_contents) or (choice == "use Jagged Rocks" and "Jagged Rocks" in satchel_contents):
 					if choice == "use Pickaxe":
@@ -2644,15 +2660,21 @@ def first_chamber():
 							print "You draw him a map and send him on his way.\n"
 							boys_saved += 1
 							boys_rescued.append("Boy 1")
-						
+				
+				else: 
+					print "Oh well, come back when you can think of something that works.\n"
+					first_chamber()
+				
 			else:
-				print "'Oh well, maybe later.'"
+				print "Oh well, maybe later.\n"
+				first_chamber()
 		
 		else: 
 			print "That's okay. I kind of like this chair anyway. I do miss"
 			print "the freedom though. I got used to that before I was tied here.\n"
 			time.sleep(2)
-			print "It's fine. I'll be fine. Have fun out there.\n" 
+			print "It's fine. I'll be fine. Have fun out there.\n"
+			first_chamber()
 
 	elif "door" in answer:
 		
@@ -3582,15 +3604,17 @@ def battle_cave():
 		print "You have survived the longest trip into the Battle Cave!\n" 
 		battle_cave_there_and_back = battle_cave_count	
 		high_scorer_bctb = raw_input("Enter your name so it can rest atop the leaderboard: ")
+		print "\n\n"
 		
 	else: 
 		
 		eleventh_intersection()
 	
 	if boy_three == True:
-		print "You've brought the boy back to the entrance of the cave."
-		print "He's tired of sticking with you and wants to get out."
-		choice = determine_input("What do you do?")
+		print "You've brought the boy back to the entrance of the cave.\n"
+		print "He's tired of sticking with you and wants to get out.\n\n"
+		time.sleep(2)
+		choice = determine_intent("What do you do?")
 		if choice == "use Paper and Pen" and "Paper and Pen" in satchel_contents:
 			print "You draw him a map and he heads home to the entrance."
 			boys_saved += 1
