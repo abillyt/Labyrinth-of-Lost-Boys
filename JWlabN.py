@@ -360,6 +360,8 @@ def equip():
 	
 	while answer in satchel_contents and equip_again == True:
 		
+		print "\n\n"
+		
 		if answer in non_equippable_loot:
 			
 			print "That item cannot be equipped!\n\n"
@@ -808,7 +810,7 @@ def equip():
 		else: 
 			print "YOU DO NOT HAVE THAT ITEM!\n"
 		
-		another_equip = determine_intent("Would you like to equip something else?")
+		another_equip = determine_intent("Would you like to equip something else?\n")
 		
 		if another_equip == "y":
 			
@@ -816,10 +818,7 @@ def equip():
 		
 		else:
 			equip_again = False
-				
-	if another_equip == "n":
-		
-		print "Okay, good luck on your journey!"
+			print "\n\nOkay, good luck on your journey!"		
 	
 	else: 
 		print "You do not have that item!\n"
@@ -829,8 +828,6 @@ def equip():
 	#elif player_class == "Ninja":
 	
 	#else:
-
-# def use(): 
 
 def print_enemies_full():
 	
@@ -1872,9 +1869,9 @@ def build_character():
 	global player_name, player_class, player_str, player_dex, player_int, player_hp
 	global player_hp_dmg, player_lvl, player_xp, player_xp_cap
 								
-	player_name = raw_input("What, may I ask, is your name, sweet traveler?\n->")
+	player_name = raw_input("What, may I ask, is your name, sweet traveler?\n\n->")
 	
-	choice = determine_intent("""And what type of a hero are you, %s? 
+	choice = determine_intent("""\nAnd what type of a hero are you, %s? 
 		\t 1. Pro Wizard
 		\t 2. Master Ninja
 		\t 3. Amatuer Wizard, decent Ninja\n""" % player_name)
