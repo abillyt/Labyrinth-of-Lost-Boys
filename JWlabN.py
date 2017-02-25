@@ -1809,7 +1809,7 @@ def start():
 		time.sleep(1)
 		print "Woe is me!! I have the gout.\n"
 		
-		decision = determine_intent("Will you help me?")
+		decision = determine_intent("Will you help me?\n")
 		
 		if decision == "y":
 			print "Oh, thank you! Send them back to me when you've found them.\n\n"
@@ -1833,7 +1833,7 @@ def start():
 		print "There's some pretty sweet loot and basically no danger.\n"
 		time.sleep(1)
 		
-		decision = determine_intent("Are you going to enter the labyrinth?")
+		decision = determine_intent("Are you going to enter the labyrinth?\n")
 		
 		if decision == "y": 
 			print "'Best luck in there, you mysterious %s'\n\n" % player_class
@@ -1849,12 +1849,12 @@ def build_character():
 	global player_name, player_class, player_str, player_dex, player_int, player_hp
 	global player_hp_dmg, player_lvl, player_xp, player_xp_cap
 								
-	player_name = determine_intent("What, may I ask, is your name, sweet traveler?")
+	player_name = raw_input("What, may I ask, is your name, sweet traveler?")
 	
 	choice = determine_intent("""And what type of a hero are you, %s? 
 		\t 1. Pro Wizard
 		\t 2. Master Ninja
-		\t 3. Amatuer Wizard, decent Ninja""" % player_name)
+		\t 3. Amatuer Wizard, decent Ninja\n""" % player_name)
 	
 	if choice == "1":
 		
@@ -1913,7 +1913,7 @@ def first_intersection():
 	print "You may choose to travel North, West, or East."
 	print "You came from the %s.\n" % came_from
 	
-	choice = determine_intent("Which direction do you choose?")
+	choice = determine_intent("Which direction do you choose?\n")
 	
 	if choice == "w":
 		
@@ -1930,7 +1930,7 @@ def first_intersection():
 		print "There is a Red Book, a Green Book, and a Blue Book.\n"
 		time.sleep(1)
 		
-		choice2 = determine_intent("Do you move on or do you inspect a book?")
+		choice2 = determine_intent("Do you move on or do you inspect a book?\n")
 		
 		if "move" in choice2:
 			
@@ -1993,7 +1993,7 @@ def secret_room_1():
 		can now decide to go North or South in the corridor."""
 		came_from = "West"
 		
-		choice = determine_intent("Would you like to go North or South in the corridor?")
+		choice = determine_intent("Would you like to go North or South in the corridor?\n")
 		
 		if choice == "n":
 			second_intersection()
@@ -2014,7 +2014,7 @@ def secret_room_1():
 		or South in the corridor."""
 		came_from = "West"
 		
-		choice = determine_intent("Would you like to go North or South in the corridor?")
+		choice = determine_intent("Would you like to go North or South in the corridor?\n")
 			
 		if choice == "n":
 			print "You go North."
@@ -2035,7 +2035,7 @@ def secret_room_1():
 		revealing a passageway.\n"""
 		time.sleep(3)
 				
-		choice4 = determine_intent("Do you enter the passageway?")
+		choice4 = determine_intent("Do you enter the passageway?\n")
 				
 		if choice4 == "y":
 			came_from = "West"
@@ -2048,7 +2048,7 @@ def secret_room_1():
 				print "You remember the good times you had, then you turn around"
 				print "and leave the room because there's nothing in there anymore.\n" 
 				
-				choice1 = determine_intent("Do you go North or South?")
+				choice1 = determine_intent("Do you go North or South?\n")
 						
 				if choice1 == "n":
 					print "North you go!"
@@ -2080,7 +2080,7 @@ def secret_room_1():
 				print "And it smells so good! You must eat it or leave it."
 				time.sleep(2)
 				
-				choice5 = determine_intent("Do you eat the danish or leave it?")
+				choice5 = determine_intent("Do you eat the danish or leave it?\n")
 					
 				if "eat" in choice5:
 					print "You've never tasted anything so delicious and fresh!\n"
@@ -2094,7 +2094,7 @@ def secret_room_1():
 						time.sleep(3)
 						print "You leave the secret room."
 						
-						choice1 = determine_intent("Do you go North or South?")
+						choice1 = determine_intent("Do you go North or South?\n")
 							
 						if choice1 == "n":
 							print "North you go!"
@@ -2112,7 +2112,7 @@ def secret_room_1():
 						time.sleep(3)
 						print "You leave the secret room."
 						
-						choice1 = determine_intent("Do you go North or South?")
+						choice1 = determine_intent("Do you go North or South?\n")
 							
 						if choice1 == "n":
 							print "North you go!"
@@ -2127,7 +2127,7 @@ def secret_room_1():
 					time.sleep(3)
 					print "Phew! That thing looked too delicious to be of any use!\n"	
 					
-					choice1 = determine_intent("Do you go North or South?")
+					choice1 = determine_intent("Do you go North or South?\n")
 						
 					if choice1 == "n":
 						print "North you go!"
@@ -2147,7 +2147,7 @@ def secret_room_1():
 			can now decide to go North or South in the corridor.\n"""
 			came_from = "West"
 			
-			choice2 = determine_intent("Would you like to go North or South in the corridor?")
+			choice2 = determine_intent("Would you like to go North or South in the corridor?\n")
 			
 			if choice2 == "n":
 				print "You go North.\n"
@@ -2166,9 +2166,7 @@ def secret_room_1():
 	else: 
 		print "I wish I knew what you chose, but... you cryptic!"
 		time.sleep(3)
-		dead("""
-		Standing and waiting, suddenly the floor 
-		opens up and you fall onto some well made spikes.""")
+		dead("Standing and waiting, suddenly the floor opens up and you fall onto some well made spikes.")
 
 def second_intersection():
 
@@ -2179,7 +2177,7 @@ def second_intersection():
 	print "You came from the %s." % came_from
 	time.sleep(1)
 	
-	choice = determine_intent("Which way do you go?")
+	choice = determine_intent("Which way do you go?\n")
 	
 	if choice == "s":
 		print "You move South.\n"
@@ -2207,7 +2205,7 @@ def second_intersection():
 		print "As you walk you see a 6 inch bookcase on your right."
 		print "There is a Red Book, a Green Book, and a Blue Book.\n"
 		
-		choice2 = determine_intent("Do you move on or do you inspect a book?")
+		choice2 = determine_intent("Do you move on or do you inspect a book?\n")
 		
 		if "move" in choice2:
 			print "You go around the corner and come to another intersection.\n"
@@ -2243,7 +2241,7 @@ def third_intersection():
 	print "There is a door along the cleft wall to the South/West.\n"
 	print "You came from %s." % came_from
 	
-	choice = determine_intent("Which way do you go?")
+	choice = determine_intent("Which way do you go?\n")
 			
 	if "door" in choice:
 	
@@ -2570,7 +2568,7 @@ def first_chamber():
 	else: 
 		print "You are alone in the chamber.\n"
 	
-	answer = determine_intent("What would you like to do? Approach the boy or take a door?")
+	answer = determine_intent("What would you like to do? Approach the boy or take a door?\n")
 	
 	if "boy" in answer:
 		
@@ -2583,14 +2581,14 @@ def first_chamber():
 		time.sleep(2)
 		print 
 		
-		answer1 = determine_intent("Are you here to help me?")
+		answer1 = determine_intent("Are you here to help me?\n")
 		
 		if answer1 == "y":
 			print "'Wonderful! My chains are secured to the ground by stone.'"
-			answer2 = determine_intent("Are you able to free me?")
+			answer2 = determine_intent("Are you able to free me?\n")
 				
 			if "ye" in answer2:
-				choice = determine_intent("Excellent! I'm waiting.")
+				choice = determine_intent("Excellent! I'm waiting.\n")
 			
 			else:
 				print "'Oh well, maybe later.'"
@@ -2605,7 +2603,7 @@ def first_chamber():
 		
 		came_from = "Chamber"
 	
-		answer3 = determine_intent("""Which door would you like to take?"
+		answer3 = determine_intent("""Which door would you like to take?\n
 			
 			1. West
 			2. Northwest
@@ -2614,7 +2612,7 @@ def first_chamber():
 			5. East
 			6. Southeast
 			7. South
-			8. Southwest""")
+			8. Southwest\n""")
 		
 		if answer3 == "1":
 			print "You go through the west leading door and arrive shortly"
@@ -2726,7 +2724,7 @@ def fifth_intersection():
 	print "Do you go East or West or South?\n"
 	print "You came from the %s." % came_from
 	
-	answer = determine_intent("Which way do you choose to go?")
+	answer = determine_intent("Which way do you choose to go?\n")
 		
 	if answer == "s":
 		chance = randint(1, 100)
@@ -2752,7 +2750,7 @@ def fifth_intersection():
 		print "The trunk is well above you and in between the path you stand on"
 		print "and the path across the pit.\n"
 
-		to_do = determine_intent("Do you do something or go back?")
+		to_do = determine_intent("Do you do something or go back?\n")
 		
 		came_from = "East"
 			
@@ -2778,7 +2776,7 @@ def sixth_intersection():
 	print "corner heading in the same direction. You can go North, South, or East.\n"
 	print "You came from %s.\n" % came_from
 	
-	answer = determine_intent("Which way do you choose to go?")
+	answer = determine_intent("Which way do you choose to go?\n")
 	
 	if answer == "s":
 		print "You head South, turning the corner to the West.\n" 
@@ -2792,7 +2790,7 @@ def sixth_intersection():
 		print "On your left the wall is blank. On the right there are three"
 		print "protruding circles.\n" 
 		
-		answer1 = determine_intent("You can go North or South or examine the wall.")
+		answer1 = determine_intent("You can go North or South or examine the wall.\n")
 		
 		if answer1 == "examine":
 			print "Looking more closely, you see that the circles move, but you"
@@ -2826,7 +2824,7 @@ def sixth_intersection():
 		print "On your right the wall is blank. On the left there are three"
 		print "protruding circles.\n" 
 
-		answer1 = determine_intent("You can go North or South or examine the wall.")
+		answer1 = determine_intent("You can go North or South or examine the wall.\n")
 		
 		if answer1 == "examine":
 			print "Looking more closely, you see that the circles move, but you"
@@ -2865,7 +2863,7 @@ def seventh_intersection():
 	print "The paths go West or North or Southeast up the stairs.\n"
 	print "You came from the %s.\n" % came_from
 	
-	answer = determine_intent("Which way do you go? West, North, or South?")
+	answer = determine_intent("Which way do you go? West, North, or South?\n")
 	
 	if answer == "w": 
 		chance = randint(1, 100)
@@ -2903,7 +2901,7 @@ def eighth_intersection():
 	print "You can go North, South, East, or West.\n"
 	print "You came from the %s.\n" % came_from
 	
-	answer = determine_intent("Which way do you go?")
+	answer = determine_intent("Which way do you go?\n")
 	
 	if answer == "n":
 		print "You head North.\n"
@@ -2959,7 +2957,7 @@ def ninth_intersection():
 	print "You can go North, South, or East.\n"
 	print "You came from the %s.\n" % came_from
 	
-	answer = determine_intent("Which way do you go?")
+	answer = determine_intent("Which way do you go?\n")
 	
 	if answer == "e":
 		print "You head East and immediately the corridor takes you South.\n"
@@ -3002,12 +3000,12 @@ def eleventh_intersection():
 	print "You stand at an intersection that leads North, East, or South.\n"
 	print "You came from the %s.\n" % came_from
 	
-	answer = determine_intent("Which way do you go?")
+	answer = determine_intent("Which way do you go?\n")
 	
 	if answer == "n":
 		print "You approach the mouth of a cave!\n" 
 
-		answer1 = determine_intent("Do you go into the cave?")
+		answer1 = determine_intent("Do you go into the cave?\n")
 		
 		if answer1 == "y":
 			came_from = "South"
@@ -3054,7 +3052,7 @@ def twelfth_intersection():
 	if chance <= 50:
 		enemy_encounter()
 	
-	answer = determine_intent("Which way do you go?")
+	answer = determine_intent("Which way do you go?\n")
 	
 	if answer == "e":
 		print "You find yourself in the Grand Hallway.\n"
@@ -3123,7 +3121,7 @@ def second_room():
 		if answer == "1":
 			
 			print "Which item would you like to use?"
-			answer2 = determine_intent("Which item would you like to use?")
+			answer2 = determine_intent("Which item would you like to use?\n")
 		
 			if answer2 in satchel_contents:
 			
@@ -3229,7 +3227,7 @@ def vendor():
 	print "Vendor: It's been a long time since I've seen a stranger."
 	print "What can I help you with?\n"
 	
-	selection = determine_intent("1. Trade \t2. Sell \t3. Heal \t4. Enemies \t5. Items")
+	selection = determine_intent("1. Trade \t2. Sell \t3. Heal \t4. Enemies \t5. Items\n")
 	
 	if selection == "1":
 		
@@ -3238,7 +3236,7 @@ def vendor():
 			print "It looks like your satchel is empty. What are you trying to pull?\n" 
 			vendor_room()
 		
-		trade = determine_intent("What would you like to trade?")
+		trade = determine_intent("What would you like to trade?\n")
 		
 		if trade in satchel_contents:
 			for item in satchel_contents:
@@ -3263,7 +3261,7 @@ def vendor():
 				use = "+3 Defense"
 			time.sleep(2)
 		
-			answer = determine_intent("Would you like to trade? Straight up? Mine for yours?")
+			answer = determine_intent("Would you like to trade? Straight up? Mine for yours?\n")
 			
 			if answer == "y":
 			
@@ -3287,7 +3285,7 @@ def vendor():
 			vendor_room()
 		
 		print "What would you like to sell?"
-		trade = determine_intent("What would you like to sell?")
+		trade = determine_intent("What would you like to sell?\n")
 		
 		if trade in satchel_contents:
 			for item in satchel_contents:
@@ -3298,7 +3296,7 @@ def vendor():
 		
 			print "Ahh, you have a %s." % trading_block[0]
 
-			choice2 = determine_intent("I will give you 50 gold for the %s, okay?" % trading_block[0])
+			choice2 = determine_intent("I will give you 50 gold for the %s, okay?\n" % trading_block[0])
 		
 			if choice2 == "y":
 			
@@ -3339,7 +3337,7 @@ def vendor():
 			print "It looks like you don't have any gems. See ya.\n" 
 			vendor_room()
 		
-		choice = determine_intent("Which gem do you want to give me in exchange for full health?")
+		choice = determine_intent("Which gem do you want to give me in exchange for full health?\n")
 		
 		if "uby" in choice: 
 				
@@ -3391,7 +3389,7 @@ def vendor():
 		
 	else: 
 		
-		answer = determine_intent("What item would you like to learn about?")
+		answer = determine_intent("What item would you like to learn about?\n")
 			
 		if answer == "list all items":
 			
@@ -3424,7 +3422,7 @@ def battle_cave():
 	print "It stinks like death and you hear living sounds beyond the darkness.\n"
 	print "You can only see about five feet in front of you.\n\n\n"
 	
-	answer = determine_intent("Do you go forward?")
+	answer = determine_intent("Do you go forward?\n")
 	
 	while answer == "y":
 		print "You move forward.\n"
@@ -3449,7 +3447,7 @@ def battle_cave():
 			print "Would you like to bring him back with you?\n"
 			# hero makes trips back with the sons, to deliver them to mama	
 		
-		answer = determine_intent("Do you go forward?")
+		answer = determine_intent("Do you go forward?\n")
 	
 	while count > 0:
 		print "You move back toward the entrance.\n"
@@ -3481,7 +3479,7 @@ def grand_hallway():
 	print "Do you go West down the corridor or South, or Southeast?"
 	print "You came from the %s.\n" % came_from
 	
-	answer = determine_intent("Which way do you go?")
+	answer = determine_intent("Which way do you go?\n")
 	
 	if answer == "w":
 		print "Going West.\n"
@@ -3507,14 +3505,14 @@ def dead(why):
 	
 	print why
 	
-	quandry = determine_intent("test version. Would you like to reload with all yo stats & lvl?")
+	quandry = determine_intent("test version. Would you like to reload with all yo stats & lvl?\n")
 	
 	if quandry == "y":
 	
 		player_hp_dmg = player_hp
 		first_intersection()
 	
-	answer = determine_intent("Would you like to play again?")
+	answer = determine_intent("Would you like to play again?\n")
 		
 	if answer == "y":
 		start()
