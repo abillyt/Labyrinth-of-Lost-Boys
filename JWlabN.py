@@ -234,13 +234,13 @@ def determine_intent(question):
 				satchel_contents.sort()
 				for item in satchel_contents: 
 					print "\t--" + item + "--"
-					print "\n\n"
+				print "\n\n"
 			
 				print "These are the equippable items in your possession: "
 				for item in satchel_contents:
 					if item in equippable_loot:
 						print "\t<-> " + item
-						print "\n\n"
+				print "\n\n"
 						
 				print "Here is what you have equipped: "
 				print "This function is not working properly yet.\n\n" 
@@ -404,7 +404,7 @@ def equip():
 				print "Why would you do that? You'd lose dexterity!\n"
 				
 			else: 
-				print "Okay, you equip the Basic Gloves! Your dexterity iss increased by 1!\n"
+				print "Okay, you equip the Basic Gloves! Your dexterity is increased by 1!\n"
 				player_dex += 1
 				basic_gloves = True
 			
@@ -796,6 +796,10 @@ def equip():
 		else:
 			equip_again = False
 				
+	if answer == "n":
+		
+		print "Okay, good luck on your journey!"
+	
 	else: 
 		print "You do not have that item!\n"
 	
@@ -1051,13 +1055,13 @@ def battle(enemy, enemy_name):
 				break
 				
 			if small_medallion:
-				print "You feel warmth on your chest, and suddenly become a little healthier."
+				print "You feel warmth on your chest, and suddenly become a little healthier.\n\n"
 				player_hp_dmg += 1
 				if player_hp_dmg > player_hp:
 					player_hp_dmg = player_hp
 			
 			elif big_medallion or intricate_medallion:
-				print "You feel heat all over your body, and suddenly become much healthier."
+				print "You feel heat all over your body, and suddenly become much healthier.\n\n"
 				player_hp_dmg += 2
 				if player_hp_dmg > player_hp:
 					player_hp_dmg = player_hp
@@ -1259,13 +1263,13 @@ def battle(enemy, enemy_name):
 				determine_player_death(player_hp_dmg, enemy_name)
 				
 			if small_medallion:
-				print "You feel warmth on your chest, and suddenly become a little healthier."
+				print "You feel warmth on your chest, and suddenly become a little healthier.\n\n"
 				player_hp_dmg += 1
 				if player_hp_dmg > player_hp:
 					player_hp_dmg = player_hp
 			
 			elif big_medallion or intricate_medallion:
-				print "You feel heat all over your body, and suddenly become much healthier."
+				print "You feel heat all over your body, and suddenly become much healthier.\n\n"
 				player_hp_dmg += 2
 				if player_hp_dmg > player_hp:
 					player_hp_dmg = player_hp
@@ -1288,7 +1292,7 @@ def battle(enemy, enemy_name):
 			loot = loot_lvl_1_3[j]
 			#loot_lvl_1_3.pop(j)
 		
-			print "It's a %s!" % loot
+			print "It's a %s!\n\n" % loot
 			
 			if loot in satchel_contents:
 				print "You've already got a %s...\n" % loot
@@ -1305,7 +1309,7 @@ def battle(enemy, enemy_name):
 			else: 
 				loot = loot_lvl_4_6[j]
 			
-			print "It's a %s!\n" % loot
+			print "It's a %s!\n\n" % loot
 			time.sleep(1)
 			
 			if loot in satchel_contents:
@@ -1327,7 +1331,7 @@ def battle(enemy, enemy_name):
 			else:
 				loot = loot_lvl_7_9[j]
 			
-			print "It's a %s!\n" % loot
+			print "It's a %s!\n\n" % loot
 			time.sleep(1)
 			
 			if loot in satchel_contents:
@@ -3195,7 +3199,7 @@ def vendor_room():
 	
 	print "You enter a triangle shaped room.\n"
 	print "You see an old man sitting behind a wooden shelf in the far corner of"
-	print "the room. He's crotcheting.\n" 
+	print "the room. He's chiseling at a rock.\n" 
 	time.sleep(1)
 
 	answer = determine_intent("Would you like to talk to him?")
@@ -3234,7 +3238,6 @@ def vendor():
 			print "It looks like your satchel is empty. What are you trying to pull?\n" 
 			vendor_room()
 		
-		print "What would you like to trade?"
 		trade = determine_intent("What would you like to trade?")
 		
 		for item in satchel_contents:
