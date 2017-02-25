@@ -177,6 +177,10 @@ def determine_intent(question):
 	prompt2 = question + "\n-> "
 	
 	answer = raw_input(prompt2)
+	
+	if answer in loot_lvl_1_3 or answer in loot_lvl_4_6 or answer in loot_lvl_7_9:
+		return answer
+	
 	answer = answer.lower()
 	print "\n\n"
 	
@@ -2515,7 +2519,7 @@ def first_room():
 					third_intersection()
 				
 			else: 
-				print "You're totally done in this room. Booyah!\n
+				print "You're totally done in this room. Booyah!\n"
 				third_intersection()
 		
 		elif choice == "7":
