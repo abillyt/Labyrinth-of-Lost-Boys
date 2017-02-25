@@ -3240,42 +3240,43 @@ def vendor():
 		
 		trade = determine_intent("What would you like to trade?")
 		
-		for item in satchel_contents:
-			if item == trade:
-				trading_block.append(satchel_contents[count])
-				item_loc = count
-			count += 1
-			
-		print "Ahh, you have a %s." % trading_block[0]
-		print "I have this to trade:\n"
-		if 0 < player_lvl < 4:
-			print "***Thick Shirt***\n"
-			loot = "Thick Shirt"
-			use = "+1 Defense"
-		elif 3 < player_lvl < 7:
-			print "***Leather T-Shirt***\n"
-			loot = "Leather T-Shirt"
-			use = "+2 Defense"
-		elif 6 < player_lvl:
-			print "***Leather Jacket***\n"
-			loot = "Leather Jacket"
-			use = "+3 Defense"
-		time.sleep(2)
-		
-		answer = determine_intent("Would you like to trade? Straight up? Mine for yours?")
-		
-		if answer == "y":
-			
-			print "Ok, good deal!"
-			satchel_contents.pop(item_loc)
-			satchel_contents.append(loot)
-			
-			print "This is what is in your satchel:"
+		if trade in satchel_contents:
 			for item in satchel_contents:
-				print item + " " 
+				if item == trade:
+					trading_block.append(satchel_contents[count])
+					item_loc = count
+				count += 1
+			
+			print "Ahh, you have a %s." % trading_block[0]
+			print "I have this to trade:\n"
+			if 0 < player_lvl < 4:
+				print "***Thick Shirt***\n"
+				loot = "Thick Shirt"
+				use = "+1 Defense"
+			elif 3 < player_lvl < 7:
+				print "***Leather T-Shirt***\n"
+				loot = "Leather T-Shirt"
+				use = "+2 Defense"
+			elif 6 < player_lvl:
+				print "***Leather Jacket***\n"
+				loot = "Leather Jacket"
+				use = "+3 Defense"
+			time.sleep(2)
+		
+			answer = determine_intent("Would you like to trade? Straight up? Mine for yours?")
+			
+			if answer == "y":
+			
+				print "Ok, good deal!"
+				satchel_contents.pop(item_loc)
+				satchel_contents.append(loot)
+			
+				print "This is what is in your satchel now:"
+				for item in satchel_contents:
+					print item + " " 
 			
 		else: 
-			print "Oh well.\n" 
+			print "I do not think you know what you are referring to.\n" 
 			vendor_room()
 	
 	elif selection == "2":
@@ -3288,31 +3289,35 @@ def vendor():
 		print "What would you like to sell?"
 		trade = determine_intent("What would you like to sell?")
 		
-		for item in satchel_contents:
-			if item == trade:
-				trading_block.append(satchel_contents[count])
-				item_loc = count
-			count += 1
+		if trade in satchel_contents:
+			for item in satchel_contents:
+				if item == trade:
+					trading_block.append(satchel_contents[count])
+					item_loc = count
+				count += 1
 		
-		print "Ahh, you have a %s." % trading_block[0]
+			print "Ahh, you have a %s." % trading_block[0]
 
-		choice2 = determine_intent("I will give you 50 gold for the %s, okay?" % trading_block[0])
+			choice2 = determine_intent("I will give you 50 gold for the %s, okay?" % trading_block[0])
 		
-		if choice2 == "y":
+			if choice2 == "y":
 			
-			print "Great!\n"
+				print "Great!\n"
 
-			if trade in satchel_contents:
+				if trade in satchel_contents:
 					
-				satchel_contents.pop(item_loc)
-				print "You received 50 gold!\n"
-				gold += 50
-				print "You have %d gold now." % gold
+					satchel_contents.pop(item_loc)
+					print "You received 50 gold!\n"
+					gold += 50
+					print "You have %d gold now." % gold
 		
-		else: 
+			else: 
 			
-			print "Fine. I didn't want it anyway.\n" 
-			vendor_room()
+				print "Fine. I didn't want it anyway.\n" 
+				vendor_room()
+		
+		else:
+			print "You do not have that item.\n"
 		
 	elif selection == "3": 
 		
