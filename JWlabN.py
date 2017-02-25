@@ -1549,10 +1549,11 @@ def boss_encounter(room, modifier):
 		print "You and the %s fight!\n\n\n" % enemy_name
 		battle(enemy, enemy_name)
 		
-	elif room == "
-	
-	#elif room == "hidden1":
-		#enemy_name = "The Darkness Troll"
+	elif room == "hiddenChamber":
+		
+		enemy_name = "The Darkness Troll"
+		enemy = (148, 13, 45, 18)
+		battle(enemy, enemy_name)
 		
 	#elif room == "hidden2":
 		#enemy_name = "The Deranged Duke"
@@ -3711,7 +3712,7 @@ def hidden_chamber_one():
 		print "The sound is thunderous!!\n\n"
 		print "In the split second you recognize a hulking beast in one corner and a boy in the other..."
 		time.sleep(1)
-		print "The beast snaps awake from the sound and sees you. It charges."
+		print "The beast snaps awake from the sound and sees you. The Darkness Troll charges.\n\n"
 	
 		boss_encounter("hiddenChamber", "none")
 	
