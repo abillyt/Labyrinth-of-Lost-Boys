@@ -2724,7 +2724,7 @@ def fourth_intersection():
 
 def fifth_intersection():
 	
-	global came_from
+	global came_from, player_hp_dmg
 	
 	print "You are at an intersection that branches West and East."
 	print "There is a branch to the South whose end is visible.\n"
@@ -2772,6 +2772,18 @@ def fifth_intersection():
 		print "...you come to another intersection.\n"
 		fourth_intersection()
 		
+	elif answer == "n":
+		
+		print "You ran yo head into the concrete wall.\n"
+		player_hp_dmg -= 1
+		print "You lost a hit point! you now have %d hit points.\n" % player_hp_dmg
+		chance = randint(1, 100)
+		
+		if chance <= 50:
+			enemy_encounter()
+		
+		fifth_intersection()
+	
 	else: 
 		print "should    no     printing"
 
@@ -2834,14 +2846,14 @@ def sixth_intersection():
 		answer1 = determine_intent("You can go North or South or examine the wall.\n")
 		
 		if answer1 == "examine":
-			print "Looking more closely, you see that the circles move, but you"
-			print "you cannot make odds or ends of it.\n"
-			print "You keep walking."
+			print "Looking more closely, you see that the circles move."
+			answer2 = determine_intent("What do you do?")
+			if answer2 == "use Roll of String":
+				hidden_chamber()
 			
-			sixth_intersection()
-		
 		elif answer1 == "s": 
 			print "You go South.\n"
+			came_from = "South"
 			chance = randint(1, 100)
 			if chance <= 50:
 				enemy_encounter()
@@ -2850,10 +2862,23 @@ def sixth_intersection():
 		
 		elif answer1 == "n":
 			print "You go North.\n"
+			came_from = "North"
 			chance = randint(1, 100)
 			if chance <= 50:
 				enemy_encounter()
 				
+			sixth_intersection()
+		
+		elif answer1 == "e" or answer1 == "w":
+			print "Instead, you walk into the wall. Ouch.\n"
+			player_hp_dmg -= 1
+			print "You lost a hit point! you now have %d hit points.\n" % player_hp_dmg
+			chance = randint(1, 100)
+		
+			if chance <= 50:
+				enemy_encounter()
+				
+			print "You walk back to the South and reach a familiar intersection.\n"
 			sixth_intersection()
 		
 		else: 
@@ -2892,13 +2917,16 @@ def seventh_intersection():
 		came_from = "South"
 		eleventh_intersection()
 	
-	elif answer == "s":
+	elif answer == "s" or answer == "e":
 		chance = randint(1, 100)
 		if chance <= 50:
 			enemy_encounter()
 		print "You head up the stairs to the Southeast.\n"
 		came_from = "Northwest"
 		first_chamber()
+		
+	else:
+		print "Shouldn't see me, ever."
 
 def eighth_intersection():
 
@@ -2996,13 +3024,21 @@ def ninth_intersection():
 		eighth_intersection()
 		
 	else: 
-		print "NO THANKS."
+		print "You put your head down and lunge forward into the western wall.\n"
+		player_hp_dmg -= 1
+		print "You lost a hit point! you now have %d hit points.\n" % player_hp_dmg
+		chance = randint(1, 100)
+		
+		if chance <= 50:
+			enemy_encounter()
+			
+		ninth_intersection()
 		
 # incomplete def tenth_intersection():
 
 def eleventh_intersection():
 	
-	global came_from
+	global came_from, player_hp_dmg
 	
 	print "You stand at an intersection that leads North, East, or South.\n"
 	print "You came from the %s.\n" % came_from
@@ -3044,7 +3080,14 @@ def eleventh_intersection():
 		seventh_intersection()
 	
 	else: 
-		print "Dunno why.\n"
+		print "You walk directly into the western wall.\n"
+		player_hp_dmg -= 1
+		print "You lost a hit point! you now have %d hit points.\n" % player_hp_dmg
+		chance = randint(1, 100)
+		
+		if chance <= 50:
+			enemy_encounter()
+			
 		seventh_intersection()
 	
 def twelfth_intersection():
@@ -3479,7 +3522,7 @@ def battle_cave():
 
 def grand_hallway():
 	
-	global came_from
+	global came_from, player_hp_dmg
 	
 	print "There are ornately carved pillars lining the North and South walls"
 	print "and you see an exit at the Southeast end of the Hallway.\n" 
@@ -3499,6 +3542,17 @@ def grand_hallway():
 		came_from = "North"
 		
 		first_chamber()
+	
+	elif answer == "e":
+		print "You ran your head into the eastern wall.\n"
+		player_hp_dmg -= 1
+		print "You lost a hit point! you now have %d hit points.\n" % player_hp_dmg
+		chance = randint(1, 100)
+		
+		if chance <= 50:
+			enemy_encounter()
+		
+		grand_hallway()
 	
 	else:
 		print "You walk to the end of the Grand Hallway and exit to the South.\n"
