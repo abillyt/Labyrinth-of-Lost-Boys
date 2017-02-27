@@ -96,9 +96,10 @@ west_list = ["west", "go west", "head west", "wst", "w", "we", "how about west",
 east_list = ["east", "go east", "head east", "est", "e", "ea", "how about east",
 		"how bout east", "east, i guess"]
 
-fight_list = ["fight", "fiht", "f", "fght", "fite", "figth", "fihtg", "fight!"]
+fight_list = ["fight", "fiht", "f", "fght", "fite", "figth", "fihtg", "fight!", "figh"]
 
-flee_list = ["flee", "fle", "fleee", "fleeee", "fleeeee!", "flee!", "fleee!"]
+flee_list = ["flee", "fle", "fleee", "fleeee", "fleeeee!", "flee!", "fleee!", "run away!", "run away",
+	    "get out of there", "hit the road", "run like hell"]
 
 undecided_list = ["not sure", "which way should i go?", "dunno", "i don\'t know"]
 
@@ -1492,7 +1493,7 @@ def determine_player_death(num, enemy_name):
 def boss_encounter(room, modifier):
 	
 	if room == "room2":
-		enemy_name = "The Goblin King"
+		enemy_name = "Goblin King"
 		
 		if modifier == "Spade":
 			enemy = (99, 9, 32, 12)
@@ -1535,7 +1536,7 @@ def boss_encounter(room, modifier):
 		
 	elif room == "hiddenChamber":
 		
-		enemy_name = "The Darkness Troll"
+		enemy_name = "Darkness Troll"
 		enemy = (148, 13, 45, 18)
 		battle(enemy, enemy_name)
 		
