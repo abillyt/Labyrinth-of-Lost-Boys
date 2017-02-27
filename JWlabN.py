@@ -800,7 +800,7 @@ def equip():
 			equip_again = False
 			print "\n\nOkay, good luck on your journey!"		
 	
-	elif equip_again == False:
+	if equip_again == False:
 		
 		print "\n"
 	
@@ -1318,12 +1318,12 @@ def battle(enemy, enemy_name):
 			time.sleep(1)
 			
 			if loot in satchel_contents:
-				print "You've already got a %s...\n" % loot
+				print "You've already got the %s...\n" % loot
 				time.sleep(1)
 			
 			else: 
 				satchel_contents.append(loot)
-				print "You've looted %s from the %s!\n" % (loot, enemy_name)
+				print "You've looted the %s from the %s!\n" % (loot, enemy_name)
 				time.sleep(3)
 				
 		else:
@@ -1340,12 +1340,12 @@ def battle(enemy, enemy_name):
 			time.sleep(1)
 			
 			if loot in satchel_contents:
-				print "You've already got a %s...\n" % loot
+				print "You've already got the %s...\n" % loot
 				time.sleep(1)
 			
 			else: 
 				satchel_contents.append(loot)
-				print "You've looted %s from the %s!\n" % (loot, enemy_name)
+				print "You've looted the %s from the %s!\n" % (loot, enemy_name)
 				time.sleep(3)
 		
 	fight_count += 1  #to tabulate fights won while alive
@@ -1672,7 +1672,7 @@ def enemy_encounter():
 				print "Somehow you escape!\n\n"
 			
 			else: 
-				print "You fail to escape, and the %s makes you pay!\n"
+				print "You fail to escape, and the %s makes you pay!\n" % enemy_name
 				print "You take 4 damage!\n\n"
 				player_hp_dmg -= 4
 				if player_hp_dmg <= 0:
@@ -1690,7 +1690,7 @@ def enemy_encounter():
 				print "Because of your superior quickness, you escape.\n\n" 
 			
 			else: 
-				print "You fail to escape, and the %s makes you pay!\n"
+				print "You fail to escape, and the %s makes you pay!\n" % enemy_name
 				print "You take 4 damage!\n\n"
 				player_hp_dmg -= 4
 				if player_hp_dmg <= 0:
@@ -1870,8 +1870,10 @@ def start():
 		
 		if decision == "y":
 			print "Oh, thank you! Send them back to me when you've found them.\n\n"
+			time.sleep(2)
 			print "You might need to draw them a map, if you have the materials for it..."
 			print "Just so they know how to get back to me.\n"
+			time.sleep(2)
 			print "Good luck!"
 			came_from = "South"
 			first_intersection()
@@ -2371,8 +2373,6 @@ def first_room():
 	
 	while first_time_first_room:
 	
-		first_time_first_room = False
-	
 		print "You notice a cube of stone in the center of the room and sitting"
 		print "atop the stone are three precious gems.\n"
 		time.sleep(1)
@@ -2404,6 +2404,7 @@ def first_room():
 			
 			print "You pick up the Ruby and put it in your bag.\n"
 			satchel_contents.append("Ruby")
+			first_time_first_room = False
 			
 			choice2 = determine_intent("""Now what do you do?
 				\t1. Take the Emerald.
@@ -2431,6 +2432,7 @@ def first_room():
 				
 				print "You pick up the Sapphire and put it in your bag.\n"
 				satchel_contents.append("Sapphire")
+				first_time_first_room = False
 				
 				choice3 = determine_intent("""Now what do you do?
 					\t1. Take the Emerald.
@@ -2472,6 +2474,7 @@ def first_room():
 			
 			print "You pick up the Sapphire and put it in your bag.\n"
 			satchel_contents.append("Sapphire")
+			first_time_first_room = False
 			
 			choice2 = determine_intent("""Now what do you do?
 				\t1. Take the Emerald.
@@ -2496,6 +2499,7 @@ def first_room():
 				
 				print "You pick up the Ruby and put it in your bag.\n"
 				satchel_contents.append("Ruby")
+				first_time_first_room = False
 				
 				choice3 = determine_intent("""Now what do you do?
 					\t1. Take the Emerald.
@@ -2565,6 +2569,7 @@ def first_room():
 			print "You grab the Ruby and the Sapphire and put them in your bag.\n"
 			satchel_contents.append("Ruby")
 			satchel_contents.append("Sapphire")
+			first_time_first_room = False
 			
 			choice2 = determine_intent("""What do you do now?\n
 				\t1. Take the Emerald.
@@ -2952,11 +2957,15 @@ def sixth_intersection():
 		answer1 = determine_intent("You can go North or South or examine the wall.\n")
 		
 		if answer1 == "examine":
-			print "Looking more closely, you see that the circles move."
-			answer2 = determine_intent("What do you do?")
+			print "Looking more closely, you see that the circles move.\n"
+			answer2 = determine_intent("What do you do?\n")
 			
-			if answer2 == "use Roll of String" and "Roll of String" in satchel_contents:
-				hidden_chamber_one()
+			if answer2 == "use Roll of String":
+				if "Roll of String" in satchel_contents:
+					hidden_chamber_one()
+				else: 
+					print "You do not have the Roll of String.\n"
+					sixth_intersection()
 			else:
 				print "You head south and back to the intersection.\n"
 				sixth_intersection()
@@ -3279,8 +3288,7 @@ def second_room():
 			\t5. Do nothing and leave the room.\n""")
 		
 		if answer == "1":
-			
-			print "Which item would you like to use?"
+		
 			answer2 = determine_intent("Which item would you like to use?\n")
 		
 			if answer2 in satchel_contents:
@@ -3314,7 +3322,6 @@ def second_room():
 		else:
 		
 			print "You back away slowly, touching nothing.\n"
-				
 	
 		print "You exit the room and come to an intersection.\n"
 	
@@ -3639,7 +3646,7 @@ def battle_cave():
 		if choice == "use Paper and Pen" and "Paper and Pen" in satchel_contents:
 			print "You draw him a map and he heads home to the entrance."
 			boys_saved += 1
-			print "You have saved %d boys.\n\n"
+			print "You have saved %d boys.\n\n" % boys_saved
 			boys_rescued.append("Boy 3")
 		else: 
 			print "You tell him you'll be back for him.\n"
