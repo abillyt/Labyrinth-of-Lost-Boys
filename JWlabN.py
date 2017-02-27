@@ -2650,42 +2650,44 @@ def first_chamber():
 			answer2 = determine_intent("Are you able to free me?\n")
 				
 			if answer2 == "y":
-				choice = determine_intent("Excellent! I'm waiting.\n")
-				if (choice == "use Pickaxe" and "Pickaxe" in satchel_contents) or (choice == "use Jagged Rocks" and "Jagged Rocks" in satchel_contents):
-					if choice == "use Pickaxe":
-						print "You bring the Pickaxe sharply down on the first chain at the floor"
-						print "and it breaks.\n"
-						print "You follow it up with the remaining three chains and the boy becomes"
-						print "free.\n"
-						print "How do I get out of here? I'm sure I'll get chained up again if I can't leave now./n"
+				choice = determine_intent("Excellent! What item will you use?\n")
+				if choice == "Balanced Pickaxe" and "Pickaxe" in satchel_contents:
+	
+					print "You bring the Pickaxe sharply down on the first chain at the floor"
+					print "and it breaks.\n"
+					print "You follow it up with the remaining three chains and the boy becomes"
+					print "free.\n"
+					print "How do I get out of here? I'm sure I'll get chained up again if I can't leave now./n"
 						
-						choice2 = determine_intent("What do you do?")
+					choice2 = determine_intent("What item do you use?\n\n")
 						
-						if choice2 == "use Paper and Pen" and "Paper and Pen" in satchel_contents:
+					if choice2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
 							print "You draw him a map and send him on his way.\n"
 							boys_saved += 1
+							print "You have saved %d boys from the Labyrinth!\n\n" % boys_saved
 							boys_rescued.append("Boy 1")
 							
-					else: 
-						print "You bring the Jagged Rock sharply down on the first chain at the floor."
-						print "The rock works well but you hurt yourself in the process."
-						print "You lose 1 hit point.\n\n"
-						player_hp_dmg -= 1
+				elif choice == "Jagged Rocks" and "Jagged Rocks" in satchel_contents: 
+					print "You bring the Jagged Rock sharply down on the first chain at the floor."
+					print "The rock works well but you hurt yourself in the process."
+					print "You lose 1 hit point.\n\n"
+					player_hp_dmg -= 1
 						
-						if player_hp_dmg <= 0:
-							dead("You died trying to save that boy. How noble!")
-						print "You manage to break the other three chains with the other Jagged Rocks"
-						print "without too much more pain. But you still take 1 more hit point of damage.\n\n"
-						player_hp_dmg -= 1
+					if player_hp_dmg <= 0:
+						dead("You died trying to save that boy. How noble!")
+					print "You manage to break the other three chains with the other Jagged Rocks"
+					print "without too much more pain. But you still take 1 more hit point of damage.\n\n"
+					player_hp_dmg -= 1
 						
-						if player_hp_dmg <= 0:
-							dead("You died freeing that boy. You are a noble person.")
-						choice2 = determine_intent("What do you do?")
+					if player_hp_dmg <= 0:
+						dead("You died freeing that boy. You are a noble person.")
+					choice2 = determine_intent("What item do you use?")
 						
-						if choice2 == "use Paper and Pen" and "Paper and Pen" in satchel_contents:
-							print "You draw him a map and send him on his way.\n"
-							boys_saved += 1
-							boys_rescued.append("Boy 1")
+					if choice2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
+						print "You draw him a map and send him on his way.\n"
+						boys_saved += 1
+						print "You have rescued %d boys from the Labyrinth!\n\n" % boys_saved
+						boys_rescued.append("Boy 1")
 				
 				else: 
 					print "Oh well, come back when you can think of something that works.\n"
@@ -2921,12 +2923,20 @@ def sixth_intersection():
 		
 		if answer1 == "examine":
 			print "Looking more closely, you see that the circles move."
-			answer2 = determine_intent("What do you do?")
-			
-			if answer2 == "use Roll of String" and "Roll of String" in satchel_contents:
-				hidden_chamber_one() 
-		
-			sixth_intersection()
+			answer2 = determine_intent("Which item would you like to use?\n")
+				
+			if answer2 == "Roll of String" and "Roll of String" in satchel_contents:
+				
+				hidden_chamber_one()
+				
+			elif answer2 in satchel_contents: 
+					
+				print "That items has no effect here.\n\n"
+				sixth_intersection()
+				
+			else: 
+				print "You find yourself dumbfounded, and move on.\n\n"
+				sixth_intersection()
 		
 		elif answer1 == "s": 
 			print "You go South.\n"
@@ -2940,6 +2950,7 @@ def sixth_intersection():
 			
 		else: 
 			print "DO not KNOW."
+			sixth_intersection()
 			
 	elif answer == "n": 
 		
@@ -2958,16 +2969,19 @@ def sixth_intersection():
 		
 		if answer1 == "examine":
 			print "Looking more closely, you see that the circles move.\n"
-			answer2 = determine_intent("What do you do?\n")
-			
-			if answer2 == "use Roll of String":
-				if "Roll of String" in satchel_contents:
-					hidden_chamber_one()
-				else: 
-					print "You do not have the Roll of String.\n"
-					sixth_intersection()
-			else:
-				print "You head south and back to the intersection.\n"
+			answer2 = determine_intent("Which item would you like to use?\n")
+				
+			if answer2 == "Roll of String" and "Roll of String" in satchel_contents:
+				
+				hidden_chamber_one()
+				
+			elif answer2 in satchel_contents: 
+					
+				print "That items has no effect here.\n\n"
+				sixth_intersection()
+				
+			else: 
+				print "You find yourself dumbfounded, and move on.\n\n"
 				sixth_intersection()
 				
 		elif answer1 == "s": 
@@ -3642,8 +3656,9 @@ def battle_cave():
 		print "You've brought the boy back to the entrance of the cave.\n"
 		print "He's tired of sticking with you and wants to get out.\n\n"
 		time.sleep(2)
-		choice = determine_intent("What do you do?")
-		if choice == "use Paper and Pen" and "Paper and Pen" in satchel_contents:
+		choice = determine_intent("Which item do you use?\n")
+		
+		if choice == "Paper and Pen" and "Paper and Pen" in satchel_contents:
 			print "You draw him a map and he heads home to the entrance."
 			boys_saved += 1
 			print "You have saved %d boys.\n\n" % boys_saved
@@ -3730,9 +3745,10 @@ def hidden_chamber_one():
 				answer1 = determine_intent("Are you going to save me?\n")
 		
 				if answer1 == "y":
-					answer2 = determine_intent("How? I don't know the way out.\n")
+					print "How? I don't know the way out.\n"
+					answer2 = determine_intent("Which item would you like to use?\n\n")
 			
-					if answer2 == "use Paper and Pen" and "Paper and Pen" in satchel_contents:
+					if answer2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
 						print "You draw the boy a map to the entrance and he leaves, emboldened.\n\n"
 						boys_saved += 1
 						print "You have saved %d boys!\n\n" % saved_boys
