@@ -76,13 +76,13 @@ yes_list = ["yep", "yeppers", "yeah", "uh huh", "well, sure", "absolutely", "ame
 		"true", "yea", "decent", "beyond a doubt", "certainly", "good enough", "naturally", "of course",
 		"undoubtedly", "unquestionably", "definitely", "you bet", "you betcha", "hell yea i am",
 		"heck ya", "heck yah", "hell ya", "hell yeah", "hell yah", "without a doubt", "i am",
-		"i am!", "yes", "y", "sure", "okay"]
+		"i am!", "yes", "y", "sure", "okay", "yes!", "yes!!", "yesss", "yesssss", "yesssssssss"]
 
 no_list = ["nope", "no way", "negative", "absolutely not", "not at all", "not by any means", "never",
 		"by no means", "nix", "not", "no", "n"] 
 
-maybe_list = ["perchance", "perhaps", "mayhaps", "can be", "feasible", "imaginably", "i might be", 
-		"i could be", "possibly", "god willing", "god willing", "could be", "maybe"]
+maybe_list = ["perchance", "perhaps", "mayhaps", "can be", "feasible", "imaginably", "i might be", "may be", "m"
+		"i could be", "possibly", "god willing", "god willing", "could be", "maybe", "mby", "mabe"]
 
 north_list = ["north", "go north", "head north", "nrth", "nroth", "nrt", "n", "no",
 		"how about north", "how bout north", "north, i guess"]
@@ -95,6 +95,10 @@ west_list = ["west", "go west", "head west", "wst", "w", "we", "how about west",
 		
 east_list = ["east", "go east", "head east", "est", "e", "ea", "how about east",
 		"how bout east", "east, i guess"]
+
+fight_list = ["fight", "fiht", "f", "fght", "fite", "figth", "fihtg", "fight!"]
+
+flee_list = ["flee", "fle", "fleee", "fleeee", "fleeeee!", "flee!", "fleee!"]
 
 undecided_list = ["not sure", "which way should i go?", "dunno", "i don\'t know"]
 
@@ -291,6 +295,12 @@ def determine_intent(question):
 		
 	elif answer in east_list:		
 		answer = "e"
+		
+	elif answer in fight_list:
+		answer = "fight"
+	
+	elif answer in flee_list:
+		answer = "flee"
 
 	elif answer == "quit":
 		dead("You have quit.") 
@@ -1385,13 +1395,13 @@ def determine_enemy_death(num, enemy_name):
 		print "Clearly dead. No brainer.\n"
 		
 	elif num == -6:
-		print "Were you making that personal?\n"
+		print "Were you making that personal? (hypothetical)\n"
 	
 	elif num == -7:
 		print "Holy Maloly, you freaking crushed it. freaking. crushed. it.\n"
 	
 	elif num == -8:
-		print "Having a good day?\n"
+		print "Having a good day? (hypothetical)\n"
 	
 	elif num == -9:
 		print "Yikes. Not too often I need to look away at a death.\n"
@@ -1462,7 +1472,7 @@ def determine_player_death(num, enemy_name):
 		dead("Holy Maloly, you got freaking crushed. freaking. crushed.\n")
 	
 	elif num == -8:
-		dead("Having a bad day?\n") 
+		dead("Having a bad day? (don't answer that)\n") 
 	
 	elif num == -9:
 		dead("Yikes. Not too often I need to look away at a death.\n")
@@ -1504,14 +1514,14 @@ def boss_encounter(room, modifier):
 			enemy = (99, 15, 32, 12)
 			print "Your pickaxe breaks the empty pot and you hear an enraged roar!\n"
 			time.sleep(2)
-			print "%s bursts into the room and throws his arms above his head, howling"
+			print "%s bursts into the room and throws his arms above his head, howling" % enemy_name
 			print "with rage as he sees his broken pot.\n"
 		
 		elif modifier == "Thief":
 			enemy = (99, 15, 32, 12)
 			print "The moment you touch the pot, you hear a deep scream of anguish!\n"
 			time.sleep(2)
-			print "Charging through the door is %s! He sees you trying to take his pot"
+			print "Charging through the door is %s! He sees you trying to take his pot" % enemy_name
 			print "and he becomes enraged!\n"
 		
 		else:
@@ -1536,6 +1546,8 @@ def boss_encounter(room, modifier):
 		#enemy_name = "The Venomous Queen"
 		
 def enemy_encounter():
+	
+	global player_hp_dmg
 	
 	x = randint(0, 8)
 	loot = ""
@@ -1644,7 +1656,7 @@ def enemy_encounter():
 	
 	choice = determine_intent("Are you going to fight or flee?")
 	
-	if "ight" in choice: 
+	if choice == "fight": 
 	
 		print "You and the %s fight!\n\n\n" % enemy_name
 		battle(enemy, enemy_name)
@@ -1660,8 +1672,12 @@ def enemy_encounter():
 				print "Somehow you escape!\n\n"
 			
 			else: 
-				dead("""Wow, you're slow. As you turn around and expose your neck,
-				the %s attacks and it kills ya.""" % enemy_name) 
+				print "You fail to escape, and the %s makes you pay!\n"
+				print "You take 4 damage!\n\n"
+				player_hp_dmg -= 4
+				if player_hp_dmg <= 0:
+					dead("That was enough to kill ya, sadly enough.")
+				battle(enemy, enemy_name)
 		
 		else:
 			
@@ -1674,7 +1690,12 @@ def enemy_encounter():
 				print "Because of your superior quickness, you escape.\n\n" 
 			
 			else: 
-				dead("Just because you SHOULD BE faster than your enemy, you weren't.")
+				print "You fail to escape, and the %s makes you pay!\n"
+				print "You take 4 damage!\n\n"
+				player_hp_dmg -= 4
+				if player_hp_dmg <= 0:
+					dead("That was enough to kill ya, sadly enough.")
+				battle(enemy, enemy_name)
 
 def level_up():
 	
@@ -3460,7 +3481,7 @@ def vendor():
 		
 		print "You want me to heal yah, huh?"
 		time.sleep(1)
-		print "There was a time a was known as a healer.\n"
+		print "There was a time I was known as a healer.\n"
 		print "I see that you currently have %d hit points." % player_hp_dmg
 		print "That is %d less than your maximum!\n" % (player_hp - player_hp_dmg)
 		
