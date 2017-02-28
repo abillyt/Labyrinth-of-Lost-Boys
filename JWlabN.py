@@ -105,20 +105,21 @@ undecided_list = ["not sure", "which way should i go?", "dunno", "i don\'t know"
 
 door_list = ['enter door', 'open door', 'open', 'door', 'enter room', 'room', 'go into the room']
 		
-loot_dict = {'Sturdy Walking Stick': '+1 attack for Ninja or Hybrid', 'Cloth Cap': '+1 int for Wizard', 
-'Short Stick': '+1 attack for Wizard or Hybrid', 'Basic Gloves': '+1 dex for all classes', 
+loot_dict = {'Sturdy Walking Stick': 'provides +1 attack bonus', 'Cloth Cap': 'provides +1 intelligence', 
+'Short Stick': 'provides +1 attack bonus', 'Basic Gloves': 'provides +1 dexterity for all classes', 
 'Spade': 'a small, handheld digging instrument', 'Paper and Pen': 'Good for explaining stuff!',
-'Thick Shirt': '+1 defense for all classes', 'Roll of String': 'about 100 feet of string',
-'Small Medallion': 'a unique pattern is displayed on the face',
-'Three Foot Pipe': '+2 attack for Ninja or Hybrid', 'Sturdy Hat': '+2 int for Wizard',
-'Madrona Wand': '+2 attack for Wizard or Hybrid', 'Fingerless Gloves': '+2 dexterity for all classes',
+'Thick Shirt': 'provides +1 defense bonus', 'Roll of String': 'a roll of fairly sturdy string',
+'Small Medallion': 'a unique pattern is displayed on the face, and it is warm!',
+'Three Foot Pipe': 'provides +2 attack bonus', 'Sturdy Hat': 'provides +2 intelligence to the wearer',
+'Madrona Wand': 'provies +2 attack bonus', 'Fingerless Gloves': 'provides +2 dexterity for all classes',
 'Shovel': 'a tool you could dig a hole with', 'Jagged Rocks': 'a few rocks, sharp as hell', 
-'Leather T-Shirt': '+2 defense for all classes', 'Short Rope': 'about 12 feet of good rope',
-'Big Medallion': 'a unique pattern is displayed on the face', 'Sword': '+3 attack for Ninja or Hybrid',
-'Wide Brim Hat': '+3 int for Wizard', 'Oak Staff': '+3 attack for Wizard or Hybrid', 
-'Power Mitts': '+3 dex for all classes', 'Balanced Pickaxe': 'a well weighted tool for digging or breaking stone',
-'Book of Knots': 'Learn all sorts of knots!', 'Leather Jacket': '+3 defense for all classes',
-'Long Rope': 'a 30 foot coil of good rope', 'Intricate Medallion': 'a craft of wonder and brilliance'}
+'Leather T-Shirt': 'provides +2 defense for all classes', 'Short Rope': 'about 15 feet of good rope',
+'Big Medallion': 'a unique pattern is displayed on the face and it is warm!', 'Sword': 'provides +3 attack bonus',
+'Wide Brim Hat': 'provides +3 intelligence', 'Oak Staff': 'provides +3 attack bonus', 
+'Power Mitts': 'provies +3 dexterity for all classes', 
+'Balanced Pickaxe': 'a well weighted tool for digging or breaking stone',
+'Book of Knots': 'Learn all sorts of knots!', 'Leather Jacket': 'provides +3 defense for all classes',
+'Long Rope': 'a 30 foot coil of good rope', 'Intricate Medallion': 'a craft of wonder and brilliance, quite warm!'}
 
 loot_lvl_1_3 = ['Sturdy Walking Stick', 'Cloth Cap', 'Short Stick', 'Basic Gloves', 
 'Spade', 'Paper and Pen', 'Thick Shirt', 'Roll of String', 'Small Medallion']
