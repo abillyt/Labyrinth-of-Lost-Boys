@@ -178,10 +178,23 @@ def determine_intent(question):
 	print "\n\n"
 	
 	while len(answer) == 0 or answer in maybe_list or answer in undecided_list:
-		print "Please enter a valid choice.\n"
-		answer = raw_input(prompt2)
-		answer = answer.lower()
-		print "\n\n"
+		if len(answer) == 0:
+			print "Nothin aint no answer I ever heard of.\n"
+			answer = raw_input(prompt2)
+			answer = answer.lower()
+			print "\n\n"
+		
+		elif answer in maybe_list: 
+			print "Perhaps you better decide definitely.\n"
+			answer = raw_input(prompt2)
+			answer = answer.lower()
+			print "\n\n"
+		
+		else: 
+			print "Be decisive.\n"
+			answer = raw_input(prompt2)
+			answer = answer.lower()
+			print "\n\n"
 		
 	while answer == "stats" or answer == "options" or answer == "inventory" or answer == "scoreboard" or answer == "equip" or answer == "advice":
 		
