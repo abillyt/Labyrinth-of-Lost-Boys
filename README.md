@@ -1,4 +1,4 @@
-# Labyrinth-of-Lost-Boys; coded in Python 2.7
+# Labyrinth-of-Lost-Boys ### *coded in Python 2.7
 
 a text-based adventure game.
 
