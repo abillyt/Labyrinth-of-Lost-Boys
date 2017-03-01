@@ -42,6 +42,7 @@ high_scorer_furthest = False
 high_scorer_cave = False
 boys_saved = 0
 boys_rescued = []
+found_treasure1 = False
 
 walking_stick = False
 cloth_cap = False
@@ -1640,7 +1641,7 @@ def enemy_encounter():
 	print "You've run into an enemy!" 
 	print "It's a %s.\n\n" % enemy_name
 	
-	choice = determine_intent("Are you going to fight or flee?")
+	choice = determine_intent("Are you going to fight or flee?\n")
 	
 	if choice == "fight": 
 	
@@ -2647,21 +2648,30 @@ def first_chamber():
 	
 					print "You bring the Pickaxe sharply down on the first chain at the floor"
 					print "and it breaks.\n"
+					time.sleep(2)
 					print "You follow it up with the remaining three chains and the boy becomes"
-					print "free.\n"
+					print "free and stands looking at you.\n"
 					print "How do I get out of here? I'm sure I'll get chained up again if I can't leave now./n"
 						
-					choice2 = determine_intent("What item do you use?\n\n")
+					choice2 = determine_intent("What item do you use?\n")
 						
 					if choice2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
-							print "You draw him a map and send him on his way.\n"
-							boys_saved += 1
-							print "You have saved %d boys from the Labyrinth!\n\n" % boys_saved
-							boys_rescued.append("Boy 1")
+						print "You draw him a map and send him on his way.\n"
+						boys_saved += 1
+						print "You have saved %d boys from the Labyrinth!\n\n" % boys_saved
+						boys_rescued.append("Boy 1")
+						first_time_chamber_one = False
+						first_chamber()
+					
+					else:
+						print "Oh well, maybe next time.\n"
+						first_chamber()
+					
 							
 				elif choice == "Jagged Rocks" and "Jagged Rocks" in satchel_contents: 
-					print "You bring the Jagged Rock sharply down on the first chain at the floor."
-					print "The rock works well but you hurt yourself in the process."
+					print "You bring the Jagged Rock sharply down on the first chain at the floor.\n\n"
+					time.sleep(2)
+					print "The rock works well but you hurt yourself in the process.\n"
 					print "You lose 1 hit point.\n\n"
 					player_hp_dmg -= 1
 						
@@ -2673,13 +2683,23 @@ def first_chamber():
 						
 					if player_hp_dmg <= 0:
 						dead("You died freeing that boy. You are a noble person.")
-					choice2 = determine_intent("What item do you use?")
+						
+					print "The boy stands free, looking at you.\n"
+					print "How do I get out of here? I'm sure I'll get chained up again if I can't leave now./n"
+					
+					choice2 = determine_intent("What item do you use?\n")
 						
 					if choice2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
 						print "You draw him a map and send him on his way.\n"
 						boys_saved += 1
 						print "You have rescued %d boys from the Labyrinth!\n\n" % boys_saved
 						boys_rescued.append("Boy 1")
+						first_time_chamber_one = False
+						first_chamber()
+						
+					else:
+						print "Oh well, perhaps next time.\n"
+						first_chamber()
 				
 				else: 
 					print "Oh well, come back when you can think of something that works.\n"
@@ -3055,7 +3075,7 @@ def seventh_intersection():
 
 def eighth_intersection():
 
-	global came_from, gold
+	global came_from, gold, found_treasure1
 	
 	print "You stand in a four-way intersection."
 	print "You can go North, South, East, or West.\n"
@@ -3107,10 +3127,18 @@ def eighth_intersection():
 			door_graphic("\n\n\n\n\n\n\n\n\n", 6)
 			door_graphic("\n\n\n\n\n\n\n\n\n\n\n", 7)
 			door_graphic("\n\n\n\n\n\n\n\n\n\n\n\n\n", 8)
-			print "You have found incredible treasure!!!\n\n"
-			print "You receive 5000 gold!\n"
-			gold += 5000
-			print "You have %d gold in your satchel!\nWhat a satchel!!!\n\n" % gold
+			if not found_treasure1:
+				print "You have found incredible treasure!!!\n\n"
+				print "You receive 5000 gold!\n"
+				gold += 5000
+				print "You have %d gold in your satchel!\nWhat a satchel!!!\n\n" % gold
+				found_treasure1 = True
+			
+			else:
+				print "You stand looking at the spot where sweet treasure used to be.\n"
+				time.sleep(2)
+				print "What memories!\n\n"
+			
 			came_from = "South"
 			print "You head back."
 			
@@ -3119,7 +3147,7 @@ def eighth_intersection():
 			if chance <= 50:
 				enemy_encounter()
 			
-			eigth_intersection()
+			eighth_intersection()
 			
 		came_from = "South"
 		
@@ -3219,6 +3247,7 @@ def ninth_intersection():
 		time.sleep(2)
 		print "The portrait is of the old woman you saw at the beginning of"
 		print "the labryinth.\n"
+		print "A quick search yields nothing of note, so you go back.\n"
 		came_from = "East"
 		
 		ninth_intersection()
@@ -3229,7 +3258,7 @@ def ninth_intersection():
 		chance = randint(1, 100)
 		if chance <= 50:
 			enemy_encounter()
-		print "You find yourself at the back of a Grand Hallway.\n"
+		print "You find yourself at the back entrance of a Grand Hallway.\n"
 		
 		grand_hallway()
 	
@@ -3763,24 +3792,28 @@ def grand_hallway():
 	
 	global came_from, player_hp_dmg
 	
-	print "There are ornately carved pillars lining the North and South walls"
-	print "and you see an exit at the Southeast end of the Hallway.\n" 
-	print "Do you go West down the corridor or South, or Southeast?"
+	print "There are stone carved pillars lining the North and South walls.\n"
+	print "It looks like a room long past used for banquets and merriment.\n"
+	time.sleep(2)
+	print "Empty now, a breeze sweeps through the room coming from the South.\n"
+	print "There is an exit to the Southeast beyond the farthest pillar.\n" 
+	print "You can walk to intersection on the Western end of the Hallway"
+	print "Or exit the Hallway to the Southeast. So West or Southeast?"
 	print "You came from the %s.\n" % came_from
 	
 	answer = determine_intent("Which way do you go?\n")
 	
 	if answer == "w":
-		print "Going West.\n"
-		came_from = "East"
+		print "You move to the Hallway's entrance.\n"
+		came_from = "Hallway"
 		
-		eleventh_intersection()
+		twelfth_intersection()
 		
 	elif answer == "s":
-		print "Going South.\n"
+		print "You walk to the end of the Grand Hallway and exit to the South.\n"
 		came_from = "North"
 		
-		first_chamber()
+		ninth_intersection()
 	
 	elif answer == "e":
 		print "You ran your head into the eastern wall.\n"
@@ -3794,10 +3827,10 @@ def grand_hallway():
 		grand_hallway()
 	
 	else:
-		print "You walk to the end of the Grand Hallway and exit to the South.\n"
-		came_from = "North"
+		print "You check out the Northern wall and find nothing of note.\n"
+		came_from = "Hallway"
 		
-		ninth_intersection()
+		grand_hallway()
 		
 def hidden_chamber_one():
 	
@@ -3876,6 +3909,7 @@ def hidden_chamber_one():
 			print "It is Wizard Robes of the highest quality!\n"
 			time.sleep(2)
 			satchel_contents.append("Wizard Robes")
+			equippable_loot.append("Wizard Robes")
 			wizard_robes = True
 			print "You put on the Wizard Robes and feel the best you've ever felt.\n\n"
 			if wizard_hat and wizard_staff:
@@ -3896,6 +3930,7 @@ def hidden_chamber_one():
 			print "It is an Imbued Eye Mask!\n\n"
 			time.sleep(2)
 			satchel_contents.append("Imbued Eye Mask")
+			equippable_loot.append("Imbued Eye Mask")
 			imbued_eye_mask = True
 			print "You put on the Imbued Eye Mask and feel the best you've ever felt.\n\n"
 			if katana and stealth_slippers: 
@@ -3916,6 +3951,7 @@ def hidden_chamber_one():
 			print "It is an Armored Tweed Vest!\n\n"
 			time.sleep(2)
 			satchel_contents.append("Armored Tweed Vest.")
+			equippable_loot.appand("Armored Tweed Vest.")
 			armored_tweed_vest = True
 			print "You put on the Armored Tweed Vest and feel the best you've ever felt.\n\n"
 			if scepter and knickers:
