@@ -22,27 +22,26 @@ battle_cave_there_and_back = 36
 high_scorer_fcm = "WFTIV"
 high_scorer_bcf = "WFTIV"
 high_scorer_bctb = "WFTIV"
-attack_mod = 0
-defense_mod = 0
+attack_mod = 0 # modification based on equipped item
+defense_mod = 0 # modification based on equipped item
 current_weapon = "blank"
 
 prompt = "-> "
 
 came_from = "Unknown"
-first_time_first_room = True
-first_time_secret_room = True
-first_time_chamber_one = True
-first_time_second_room = True
+first_time_first_room = True # implemented
+first_time_secret_room = True # implemented
+first_time_chamber_one = True # implemented
 first_time_third_room = True
-first_time_2nd_secret_room = True
+first_time_2nd_secret_room = True 
 defeat_goblin_king = False
 defeat_darkness_troll = False
 high_scorer = False
 high_scorer_furthest = False
-high_scorer_cave = False
-boys_saved = 0
-boys_rescued = []
-found_treasure1 = False
+high_scorer_cave = False 
+boys_saved = 0 # number will increase until 12, which will be the final boy found
+boys_rescued = [] # list will populate with boys as they are found
+found_treasure1 = False # South of intersection 8
 
 walking_stick = False
 cloth_cap = False
@@ -166,7 +165,7 @@ mothers_wisdom = ['Take garlic, son. And raw honey.',
 'Can I look at your blackheads?', 'Let\'s go wash your face.', 'Eucalyptus oil.',
 'Always use protection.', 'Milk baths are healing.']
 
-def determine_intent(question):
+def determine_intent(question): # this is the user input gateway
 	
 	prompt2 = question + "\n-> "
 	
@@ -1528,10 +1527,10 @@ def boss_encounter(room, modifier):
 		battle(enemy, enemy_name)
 		
 	#elif room == "hidden2":
-		#enemy_name = "The Deranged Duke"
+		#enemy_name = "Deranged Duke"
 	
 	#elif room == "hidden3":
-		#enemy_name = "The Venomous Queen"
+		#enemy_name = "Venomous Queen"
 		
 def enemy_encounter():
 	
@@ -2217,7 +2216,7 @@ def secret_room_1():
 			
 	else: 
 		print "I wish I knew what you chose, but... you cryptic!"
-		time.sleep(3)
+		time.sleep(2)
 		dead("Standing and waiting, suddenly the floor opens up and you fall onto some well made spikes.")
 
 def second_intersection():
@@ -2625,15 +2624,7 @@ def first_chamber():
 	else: 
 		print "You are alone in the chamber.\n"
 		
-		answer = determine_intent("""Which door would you like to take?\n
-			1. West
-			2. Northwest
-			3. North
-			4. Northeast
-			5. East
-			6. Southeast
-			7. South
-			8. Southwest\n""")
+		answer = "door"
 	
 	if "boy" in answer:
 		
@@ -2790,9 +2781,7 @@ def first_chamber():
 			print "You're still in the chamber.\n" 
 			
 			first_chamber()
-	
-	else: 
-		first_chamber()
+
 		
 def fourth_intersection():
 
@@ -2849,7 +2838,7 @@ def fourth_intersection():
 
 def fifth_intersection():
 	
-	global came_from, player_hp_dmg
+	global came_from, player_hp_dmg, boys_saved, boys_rescued
 	
 	print "You are at an intersection that branches West and East."
 	print "There is a branch to the South whose end is visible.\n"
@@ -2863,15 +2852,62 @@ def fifth_intersection():
 		if chance <= 50:
 			enemy_encounter()
 		print "You walk to the small dead end. In the floor, centered a few feet"
-		print "from the back wall, stands a small pedestal with a circular top.\n"
+		print "from the back wall, stands a small pedestal with a circular, indented top.\n"
 		time.sleep(2)
-		choice = raw_input(prompt)
+		choice = determine_intent("What item do you use?")
 		
-		print "You cannot find any way to interact with the pedestal so you turn"
-		print "back around.\n"
-		came_from = "South"
+		if choice == "Big Medallion" and "Big Medallion" in satchel_contents:
+			if "Boy 5" in boys_rescued:
+				print "You insert your Big Medallion into the top of the pedestal,"
+				print "and the whole unit raises up a couple inches.\n\n"
+				time.sleep(2)
+				print "A panel of wall to the West opens up, revealing an empty"
+				print "chamber.\n\n"
+				time.sleep(2)
+				print "Done here, you head back to the intersection.\n\n"
+				
+				came_from = "South"
+				fifth_intersection()
+				
+			else: 
+				print "You insert your Big Medallion into the top of the pedestal,"
+				print "and the whole unit raises up a couple inches.\n\n"
+				time.sleep(2)
+				print "A panel of wall to the West opens up, revealing a chamber.\n"
+				time.sleep(2)
+				print "Inside the chamber is a boy, who is tracing his finger along"
+				print "the stone wall and humming a sweet tune to himself.\n"
+				time.sleep(1)
+				print "He notices you, and seems to be oddly disinterested.\n"
+				print "You mention his Mom and he comes to his senses.\n"
+				print "You know my Mom? Well, I can't find my way out of here anyway, so whatever.\n"
+				choice2 = determine_input("What item do you use?")
+				
+				if choice2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
+					print "You take out your Paper and Pen and draw the lad a map.\n\n"
+					print "He's thrilled that he has something new to look at and"
+					print "takes the map and leaves.\n"
+					boys_saved += 1
+					print "You have saved %d boys!\n\n" % boys_saved
+					boys_rescued.append("Boy 5")
+					print "Done here, you head back to the intersection.\n"
+					
+					came_from = "South"
+					fifth_intersection()
+				
+				else:
+					print "He's just going to hang out here until you figure something out.\n\n"
+					
+					came_from = "South"
+					fifth_intersection()
 		
-		fifth_intersection()
+		else: 
+			print "That didn't do anything.\n"
+			print "At a loss for what to do, you move back to the intersection.\n\n"
+		
+			came_from = "South"
+		
+			fifth_intersection()
 	
 	elif answer == "e": 
 		print "You go east and abruptly come upon the edge of a pit.\n" 
@@ -3124,7 +3160,7 @@ def eighth_intersection():
 		print "on a circular form.\n" 
 		answer = determine_intent("Which item will you use?")
 		
-		if answer == "Big Medallion" and "Big Medallion" in satchel_contents: 
+		if answer == "Intricate Medallion" and "Intricate Medallion" in satchel_contents: 
 			
 			time.sleep(2)
 			print "A low rumble shakes the floor. The wall sucks in an inch and"
@@ -3844,8 +3880,8 @@ def grand_hallway():
 		
 def hidden_chamber_one():
 	
-	global came_from, boys_rescued, satchel_contents, defense_mod, boys_saved, attack_mod #hidden_chamber_one_boy BOOL
-	global defeat_darkness_troll
+	global came_from, boys_rescued, satchel_contents, defense_mod, boys_saved, attack_mod 
+	global defeat_darkness_troll, player_hp, player_hp_dmg
 	
 	came_from = "Hidden Chamber"
 	
