@@ -821,12 +821,6 @@ def equip():
 	
 	else: 
 		print "You do not have that item!\n"
-	
-	#if player_class == "Wizard":
-
-	#elif player_class == "Ninja":
-	
-	#else:
 
 def print_enemies_full():
 	
@@ -872,7 +866,6 @@ def battle(enemy, enemy_name):
 	enemy_hp = enemy[0]
 	enemy_attack = 0
 	player_attack = 0
-	v = time.sleep(0.25)
 	round_count = 0
 		
 	if enemy[3] > player_dex:
@@ -894,43 +887,35 @@ def battle(enemy, enemy_name):
 				if precision == 100:
 					result = "Unreal Critical Precision!\n\n" 
 					enemy_attack += 3
-					v
 				
 				else: 
 					result = "Critical Precision!\n\n" 
 					enemy_attack += 2
-					v
 			
 			elif 75 < precision < 90:
 				result = "Precision hit!\n\n" 
 				enemy_attack += 1
-				v
 			
 			elif 30 < precision < 76:
 				result = "Hit!\n\n"
-				v
 			
 			elif 10 < precision < 31:
 				result = "Weak hit!\n\n"
-				enemy_attack -+ 1
-				v
+				enemy_attack -= 1
 			
 			elif 1 <= precision <= 10:
 			
 				if precision == 2:
 					result = "Glancing blow.\n\n" 
 					enemy_attack -= 3
-					v
 				
 				elif precision == 1:
 					result = "Missed!\n\n"
 					enemy_attack = 0
-					v
 				
 				else:
 					result = "Contact.\n\n"
 					enemy_attack -= 2
-					v
 			
 			else:
 				result = "This shouldn't ever print."
@@ -1001,43 +986,35 @@ def battle(enemy, enemy_name):
 				if precision == 100:
 					result = "Unreal Critical Precision!\n\n" 
 					player_attack += 3
-					v
 				
 				else: 
 					result = "Critical Precision!\n\n" 
 					player_attack += 2
-					v
 			
 			elif 75 < precision < 90:
 				result = "Precision hit!\n\n" 
 				player_attack += 1
-				v
 			
 			elif 30 < precision < 76:
 				result = "Hit!\n\n"
-				v
 			
 			elif 10 < precision < 31:
 				result = "Weak hit!\n\n"
-				player_attack -+ 1
-				v
+				player_attack -= 1
 			
 			elif 1 <= precision <= 10:
 			
 				if precision == 2:
 					result = "Glancing blow.\n\n" 
 					player_attack -= 3
-					v
 				
 				elif precision == 1:
 					result = "Miss!\n\n"
 					player_attack = 0
-					v
 				
 				else:
 					result = "Contact.\n\n"
 					player_attack -= 2
-					v
 			
 			else:
 				result = "This shouldn't ever print."
@@ -1131,43 +1108,35 @@ def battle(enemy, enemy_name):
 				if precision == 100:
 					result = "Unreal Critical Precision!\n\n" 
 					player_attack += 3
-					v
-			
+	
 				else: 
 					result = "Critical Precision!\n\n" 
 					player_attack += 2
-					v
-			
+
 			elif 75 < precision < 90:
 				result = "Precision hit!\n\n" 
 				player_attack += 1
-				v
 			
 			elif 30 < precision < 76:
 				result = "Hit!\n\n"
-				v
 			
 			elif 10 < precision < 31:
 				result = "Weak hit!\n\n"
-				player_attack -+ 1
-				v
+				player_attack -= 1
 			
 			elif 1 <= precision <= 10:
 			
 				if precision == 2:
 					result = "Glancing blow.\n\n" 
 					player_attack -= 3
-					v
 			
 				elif precision == 1:
 					result = "Miss!\n\n"
 					player_attack = 0
-					v
 			
 				else:
 					result = "Contact.\n\n"
 					player_attack -= 2
-					v
 			
 			else:
 				result = "This shouldn't ever print."
@@ -1213,43 +1182,35 @@ def battle(enemy, enemy_name):
 				if precision == 100:
 					result = "Unreal Critical Precision!\n\n" 
 					enemy_attack += 3
-					v
 		
 				else: 
 					result = "Critical Precision!\n\n" 
 					enemy_attack += 2
-					v
 		
 			elif 75 < precision < 90:
 				result = "Precision hit!\n\n" 
 				enemy_attack += 1
-				v
 		
 			elif 30 < precision < 76:
 				result = "Hit!\n\n"
-				v
 		
 			elif 10 < precision < 31:
 				result = "Weak hit!\n\n"
-				enemy_attack -+ 1
-				v
+				enemy_attack -= 1
 		
 			elif 1 <= precision <= 10:
 			
 				if precision == 2:
 					result = "Glancing blow.\n\n" 
 					enemy_attack -= 3
-					v
 			
 				elif precision == 1:
 					result = "Miss!\n\n"
 					enemy_attack = 0
-					v
 			
 				else:
 					result = "Contact.\n\n"
 					enemy_attack -= 2
-					v
 			
 			else:
 			
@@ -1307,7 +1268,6 @@ def battle(enemy, enemy_name):
 		if player_lvl <= 3:
 			
 			loot = loot_lvl_1_3[j]
-			#loot_lvl_1_3.pop(j)
 		
 			print "It's a %s!\n\n" % loot
 			time.sleep(1)
@@ -1512,38 +1472,46 @@ def boss_encounter(room, modifier):
 		if modifier == "Spade":
 			enemy = (99, 9, 32, 12)
 			print "You have cleanly re-potted the plant!\n" 
-			print "Suddenly, you hear a grumble in the hallway, and in walks in %s!" % enemy_name
+			time.sleep(1)
+			print "Suddenly, you hear a grumble in the hallway, and in walks the %s!" % enemy_name
 			time.sleep(2)
-			print "Even though he\'s appreciative of you doing the chore he\'d been"
-			print "neglecting, %s is still going to fight you.\n" % enemy_name
+			print "Even though he's appreciative of you doing the chore he'd been"
+			print "neglecting, the %s is still going to fight you.\n\n" % enemy_name
+			time.sleep(3)
 		
 		elif modifier == "Shovel" or modifier == "Hands":
 			enemy = (99, 12, 32, 12)
 			print "You have messily re-potted the plant!\n"
-			print "Suddenly, you hear an angry grunt from the hallway, and in walks in %s!" % enemy_name
+			time.sleep(1)
+			print "Suddenly, you hear an angry grunt from the hallway, and in walks the %s!" % enemy_name
 			time.sleep(2)
-			print "Apparently, he\'s particular about keeping his soil from hitting the stone,"
-			print "and so he\'s frustrated and disappointed with you, and is ready to fight.\n"
+			print "Apparently, he's particular about keeping his soil from hitting the stone,"
+			print "and so he's frustrated and disappointed with you, and is ready to fight.\n"
+			time.sleep(3)
 		
 		elif modifier == "Balanced Pickaxe":
 			enemy = (99, 15, 32, 12)
 			print "Your pickaxe breaks the empty pot and you hear an enraged roar!\n"
 			time.sleep(2)
-			print "%s bursts into the room and throws his arms above his head, howling" % enemy_name
+			print "The %s bursts into the room and throws his arms above his head, howling" % enemy_name
 			print "with rage as he sees his broken pot.\n"
+			print "Obviously, you appear to be in trouble.\n\n"
+			time.sleep(3)
 		
 		elif modifier == "Thief":
 			enemy = (99, 15, 32, 12)
 			print "The moment you touch the pot, you hear a deep scream of anguish!\n"
 			time.sleep(2)
-			print "Charging through the door is %s! He sees you trying to take his pot" % enemy_name
+			print "Charging through the door is the %s! He sees you trying to take his pot" % enemy_name
 			print "and he becomes enraged!\n"
+			time.sleep(3)
 		
 		else:
 			enemy = (99, 12, 32, 12)
 			print "Your bumbling has made a mess and caused a ruckus in the hallway!\n"
 			time.sleep(2)
-			print "%s appears at the door and he's ready to fight!\n" % enemy_name
+			print "The %s appears at the door and he's ready to fight!\n" % enemy_name
+			time.sleep(3)
 	
 		print "You and the %s fight!\n\n\n" % enemy_name
 		battle(enemy, enemy_name)
@@ -1565,7 +1533,6 @@ def enemy_encounter():
 	global player_hp_dmg
 	
 	x = randint(0, 8)
-	loot = ""
 	
 	if 0 < player_lvl <= 3:
 		
@@ -1667,13 +1634,14 @@ def enemy_encounter():
 		return "Did not work!\n"
 	
 	print "You've run into an enemy!" 
-	print "It's a %s\n" % enemy_name
+	print "It's a %s.\n\n" % enemy_name
 	
 	choice = determine_intent("Are you going to fight or flee?")
 	
 	if choice == "fight": 
 	
 		print "You and the %s fight!\n\n\n" % enemy_name
+		time.sleep(1)
 		battle(enemy, enemy_name)
 	
 	else: 
@@ -1689,6 +1657,7 @@ def enemy_encounter():
 			else: 
 				print "You fail to escape, and the %s makes you pay!\n" % enemy_name
 				print "You take 4 damage!\n\n"
+				time.sleep(2)
 				player_hp_dmg -= 4
 				if player_hp_dmg <= 0:
 					dead("That was enough to kill ya, sadly enough.")
@@ -1703,10 +1672,12 @@ def enemy_encounter():
 			if chance <= 50 + diff:
 				
 				print "Because of your superior quickness, you escape.\n\n" 
+				time.sleep(2)
 			
 			else: 
 				print "You fail to escape, and the %s makes you pay!\n" % enemy_name
 				print "You take 4 damage!\n\n"
+				time.sleep(2)
 				player_hp_dmg -= 4
 				if player_hp_dmg <= 0:
 					dead("That was enough to kill ya, sadly enough.")
@@ -1760,6 +1731,8 @@ def level_up():
 	Intelligence: %d
 	Hit Points: %d\n\n""" % (player_lvl, player_str, player_dex, player_int, player_hp)
 	print "___________\n"
+	
+	time.sleep(2)
 
 def start():
 	
@@ -1841,16 +1814,16 @@ def start():
 	
 	print """
 	An old woman sits next to a thin rectangular opening in the concrete. You 
-	approach the woman and she sees you.\n\n\n"""
+	approach the woman and she sees you and speaks.\n\n\n"""
 	time.sleep(3)
 	
-	print "\n\t Old Woman: I see you're awake. You came out of nowhere it seems.\n"
+	print "\n\t I see you're awake. You came out of nowhere it seems.\n"
 	
 	build_character()
 	
 	answer = determine_intent("Are you on a quest? Or just hanging out? Or What?\n")
 	
-	if "uest" in answer: 
+	if "quest" in answer: 
 		
 		print "Oh, a quest, eh?" 
 		time.sleep(2)
