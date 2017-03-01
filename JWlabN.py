@@ -2619,11 +2619,21 @@ def first_chamber():
 		time.sleep(1)
 		print "He is shivering yet not looking weak.\n"
 		time.sleep(1)
+		
+		answer = determine_intent("What would you like to do? Approach the boy or take a door?\n")
 	
 	else: 
 		print "You are alone in the chamber.\n"
-	
-	answer = determine_intent("What would you like to do? Approach the boy or take a door?\n")
+		
+		answer = determine_intent("""Which door would you like to take?\n
+			1. West
+			2. Northwest
+			3. North
+			4. Northeast
+			5. East
+			6. Southeast
+			7. South
+			8. Southwest\n""")
 	
 	if "boy" in answer:
 		
@@ -2685,7 +2695,7 @@ def first_chamber():
 						dead("You died freeing that boy. You are a noble person.")
 						
 					print "The boy stands free, looking at you.\n"
-					print "How do I get out of here? I'm sure I'll get chained up again if I can't leave now./n"
+					print "How do I get out of here? I'm sure I'll get chained up again if I can't leave now.\n"
 					
 					choice2 = determine_intent("What item do you use?\n")
 						
