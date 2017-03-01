@@ -1049,13 +1049,15 @@ def battle(enemy, enemy_name):
 				break
 				
 			if small_medallion:
-				print "You feel warmth on your chest, and suddenly become a little healthier.\n\n"
+				print "Warmth radiates from the medallion,"
+				print "suddenly you become a little healthier.\n\n"
 				player_hp_dmg += 1
 				if player_hp_dmg > player_hp:
 					player_hp_dmg = player_hp
 			
 			elif big_medallion or intricate_medallion:
-				print "You feel heat all over your body, and suddenly become much healthier.\n\n"
+				print "The medallion's heat radiates through your body,"
+				print "and suddenly you become much healthier.\n\n"
 				player_hp_dmg += 2
 				if player_hp_dmg > player_hp:
 					player_hp_dmg = player_hp
@@ -1241,13 +1243,15 @@ def battle(enemy, enemy_name):
 				determine_player_death(player_hp_dmg, enemy_name)
 				
 			if small_medallion:
-				print "You feel warmth on your chest, and suddenly become a little healthier.\n\n"
+				print "Warmth radiates from the medallion,"
+				print "suddenly you become a little healthier.\n\n"
 				player_hp_dmg += 1
 				if player_hp_dmg > player_hp:
 					player_hp_dmg = player_hp
 			
 			elif big_medallion or intricate_medallion:
-				print "You feel heat all over your body, and suddenly become much healthier.\n\n"
+				print "The medallion's heat radiates through your body,"
+				print "and suddenly you become much healthier.\n\n"
 				player_hp_dmg += 2
 				if player_hp_dmg > player_hp:
 					player_hp_dmg = player_hp
@@ -3051,7 +3055,7 @@ def seventh_intersection():
 
 def eighth_intersection():
 
-	global came_from
+	global came_from, gold
 	
 	print "You stand in a four-way intersection."
 	print "You can go North, South, East, or West.\n"
@@ -3068,7 +3072,7 @@ def eighth_intersection():
 		print "You've come to another intersection.\n"
 		came_from = "South"
 		
-		grand_hallway()
+		ninth_intersection()
 	
 	elif answer == "s":
 		print "You head South.\n"
@@ -3083,10 +3087,40 @@ def eighth_intersection():
 		
 		if chance <= 50:
 			enemy_encounter()
-		print "The corridor turns into a dead end. The wall at the end has"
-		print "an intricately carved inlay on the wall, centered by a hollow"
-		print "circular form.\n" 
-		print "You can't seem to do anything, so you turn around and go back.\n"
+		
+		print "The corridor ends at an ornately carved wall.\n"
+		time.sleep(1)
+		print "Its intricacy is somehow familiar and your focus centers"
+		print "on a circular form.\n" 
+		answer = determine_intent("Which item will you use?")
+		
+		if answer == "Big Medallion" and "Big Medallion" in satchel_contents: 
+			
+			time.sleep(2)
+			print "A low rumble shakes the floor. The wall sucks in an inch and"
+			print "abruptly splits at the horizontal center.\n\n"
+			door_graphic(" ", 1)
+			door_graphic("\n", 2)
+			door_graphic("\n\n\n", 3)
+			door_graphic("\n\n\n\n\n", 4)
+			door_graphic("\n\n\n\n\n\n\n", 5)
+			door_graphic("\n\n\n\n\n\n\n\n\n", 6)
+			door_graphic("\n\n\n\n\n\n\n\n\n\n\n", 7)
+			door_graphic("\n\n\n\n\n\n\n\n\n\n\n\n\n", 8)
+			print "You have found incredible treasure!!!\n\n"
+			print "You receive 5000 gold!\n"
+			gold += 5000
+			print "You have %d gold in your satchel!\nWhat a satchel!!!\n\n" % gold
+			came_from = "South"
+			print "You head back."
+			
+			chance = randint(1, 100)
+		
+			if chance <= 50:
+				enemy_encounter()
+			
+			eigth_intersection()
+			
 		came_from = "South"
 		
 		eighth_intersection()
@@ -3104,6 +3138,70 @@ def eighth_intersection():
 		
 	else:
 		print "should not be printing this."
+		
+def door_graphic(openness, topbottom):
+	
+	dr_wid = 20
+	sml_sym = 10
+	md_sym = 6
+	big_sym = 5
+	
+	print "\n\n"
+	print " " + "_" * dr_wid
+	print "|" + " " * dr_wid + "|"
+	print "|" + "_" * dr_wid + "|"
+	if topbottom <= 1: 
+		print "|" + "<>" * sml_sym + "|"
+	if topbottom <= 2:
+		print "|" + "<>" * sml_sym + "|"
+	if topbottom <= 3:
+		print "|" + "-" + "<->" * md_sym + "-" + "|"
+	if topbottom <= 4:
+		print "|" + "-" + "<->" * md_sym + "-" + "|"
+	if topbottom <= 5:
+		print "|" + "~" * dr_wid + "|"
+	if topbottom <= 6: 
+		print "|" + "}{}{" * big_sym + "|"
+	if topbottom <= 7:
+		print "|" + "}{}{" * big_sym + "|"
+	if topbottom <= 8:
+		print "|" + "~" * dr_wid + "|"
+	print "|" + "}{}{" * big_sym + "|"
+	print "|" + "}{}{" * big_sym + "|"
+	print "|" + "~" * dr_wid + "|"
+	print "|" + "-" * 8 + "(" + "=" + ")" + "-" * 9 + "|"
+	print "|" + "-" * 7 + "(" + "---" + ")" + "-" * 8 + "|"
+	print "|" + "_" * dr_wid + "|"
+	if openness != " ":
+			print openness
+		
+	print " " + "_" * dr_wid
+	print "|" + "-" * 7 + "(" + "---" + ")" + "-" * 8 + "|"
+	print "|" + "-" * 8 + "(" + "=" + ")" + "-" * 9 + "|"
+	print "|" + "~" * dr_wid + "|"
+	print "|" + "}{}{" * big_sym + "|"
+	print "|" + "}{}{" * big_sym + "|"
+	if topbottom <= 8:
+		print "|" + "~" * dr_wid + "|"
+	if topbottom <= 7:
+		print "|" + "}{}{" * big_sym + "|"
+	if topbottom <= 6:
+		print "|" + "}{}{" * big_sym + "|"
+	if topbottom <= 5:
+		print "|" + "~" * dr_wid + "|"
+	if topbottom <= 4:
+		print "|" + "-" + "<->" * md_sym + "-" + "|"
+	if topbottom <= 3:
+		print "|" + "-" + "<->" * md_sym + "-" + "|"
+	if topbottom <= 2:
+		print "|" + "<>" * sml_sym + "|"
+	if topbottom <= 1:
+		print "|" + "<>" * sml_sym + "|"
+	print "|" + "_" * dr_wid + "|"
+	print "|" + " " * dr_wid + "|"		
+	print "|" + "_" * dr_wid + "|"
+	
+	time.sleep(1)
 
 def ninth_intersection():
 
