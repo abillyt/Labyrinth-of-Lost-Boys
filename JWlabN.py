@@ -119,7 +119,8 @@ loot_dict = {'Sturdy Walking Stick': 'provides +1 attack bonus', 'Cloth Cap': 'p
 'Power Mitts': 'provies +3 dexterity for all classes', 
 'Balanced Pickaxe': 'a well weighted tool for digging or breaking stone',
 'Book of Knots': 'Learn all sorts of knots!', 'Leather Jacket': 'provides +3 defense for all classes',
-'Long Rope': 'a 30 foot coil of good rope', 'Intricate Medallion': 'a craft of wonder and brilliance, quite warm!'}
+'Long Rope': 'a 30 foot coil of good rope', 'Intricate Medallion': 'a craft of wonder and brilliance, quite warm!',
+'Nothing Equipped': 'no bonus cause no loot'}
 
 loot_lvl_1_3 = ['Sturdy Walking Stick', 'Cloth Cap', 'Short Stick', 'Basic Gloves', 
 'Spade', 'Paper and Pen', 'Thick Shirt', 'Roll of String', 'Small Medallion']
@@ -203,7 +204,7 @@ def determine_intent(question): # this is the user input gateway
 		
 		if answer == "stats":
 			print """Here are your current stats:\n
-			Name: %s  | Class: %s
+			Name: %s  |  Class: %s
 			Level: %d
 			Strength: %d
 			Dexterity: %d
@@ -253,7 +254,7 @@ def determine_intent(question): # this is the user input gateway
 						
 				print "Here is what you have equipped: \n"
 				for key, value in equipped_loot.items():
-					print "\t" + key + " : " + value + loot_dict[value]
+					print "\t" + key + " : " + value + "   ...   " + loot_dict[value]
 				print "\n\n"
 					
 				answer = raw_input(prompt2)
@@ -2823,7 +2824,6 @@ def first_chamber():
 			
 			first_chamber()
 
-		
 def fourth_intersection():
 
 	global came_from, player_hp_dmg
@@ -4091,8 +4091,7 @@ def hidden_chamber_one():
 		
 		print "You exit the hidden chamber and head back to the intersection.\n"
 		sixth_intersection()
-		
-			
+				
 def dead(why):
 	
 	global player_hp_dmg
