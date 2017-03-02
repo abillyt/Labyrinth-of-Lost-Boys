@@ -85,16 +85,16 @@ maybe_list = ["perchance", "perhaps", "mayhaps", "can be", "feasible", "imaginab
 		"i could be", "possibly", "god willing", "god willing", "could be", "maybe", "mby", "mabe"]
 
 north_list = ["north", "go north", "head north", "nrth", "nroth", "nrt", "n", "no",
-		"how about north", "how bout north", "north, i guess"]
+		"how about north", "how bout north", "north, i guess", "northernly", "northerly"]
 
 south_list = ["south", "go south", "head south", "soth", "suoth", "sth", "s", "so",
-		"how about south", "how bout south", "south, i guess"]
+		"how about south", "how bout south", "south, i guess", "southernly", "southerly]
 
 west_list = ["west", "go west", "head west", "wst", "w", "we", "how about west",
-		"how bout west", "west, i guess"]
+		"how bout west", "west, i guess", "westernly", "westerly"]
 		
 east_list = ["east", "go east", "head east", "est", "e", "ea", "how about east",
-		"how bout east", "east, i guess"]
+		"how bout east", "east, i guess", "easterly"]
 
 fight_list = ["fight", "fiht", "f", "fght", "fite", "figth", "fihtg", "fight!", "figh"]
 
@@ -3423,7 +3423,7 @@ def eleventh_intersection():
 		if chance <= 50:
 			enemy_encounter()
 			
-		seventh_intersection()
+		eleventh_intersection()
 	
 def twelfth_intersection():
 
@@ -3957,7 +3957,7 @@ def hidden_chamber_one():
 					if answer2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
 						print "You draw the boy a map to the entrance and he leaves, emboldened.\n\n"
 						boys_saved += 1
-						print "You have saved %d boys!\n\n" % saved_boys
+						print "You have saved %d boys!\n\n" % boys_saved
 						boys_rescued.append("Boy 4")
 						print "Finished here, you head back to the hallway, go south, and back to the intersection.\n\n"
 						sixth_intersection()
@@ -4070,9 +4070,10 @@ def hidden_chamber_one():
 			answer1 = determine_intent("Are you going to save me?\n")
 			
 			if answer1 == "y":
-				answer2 = determine_intent("How? I don't know the way out.\n")
+				print "How? I don't know the way out.\n"
+	      			answer2 = determine_intent("Which item do you use?")
 				
-				if answer2 == "use Paper and Pen" and "Paper and Pen" in satchel_contents:
+				if answer2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
 					print "You draw the boy a map to the entrance and he leaves, emboldened.\n\n"
 					boys_saved += 1
 					print "You have saved %d boys!\n\n" % boys_saved
