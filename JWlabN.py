@@ -13,7 +13,7 @@ player_hp = 11 # hit point capacity
 player_hp_dmg = 11 # current hit points
 player_name = "Unknown"
 player_class = "Unknown"
-satchel_contents = []
+satchel_contents = [] # to be populated with loot
 gold = 0
 fight_count = 0
 fight_count_most = 51
@@ -34,8 +34,8 @@ first_time_secret_room = True # implemented
 first_time_chamber_one = True # implemented
 first_time_third_room = True
 first_time_2nd_secret_room = True 
-defeat_goblin_king = False
-defeat_darkness_troll = False
+defeat_goblin_king = False # implemented
+defeat_darkness_troll = False # implemented
 high_scorer = False
 high_scorer_furthest = False
 high_scorer_cave = False 
@@ -138,6 +138,9 @@ equippable_loot = ['Sturdy Walking Stick', 'Cloth Cap', 'Short Stick', 'Basic Gl
 
 non_equippable_loot = ['Paper and Pen', 'Spade', 'Roll of String', 'Shovel', 'Jagged Rocks', 
 'Short Rope', 'Balanced Pickaxe', 'Book of Knots', 'Long Rope']
+
+equipped_loot = {'Head': 'Nothing Equipped', 'Hands': 'Nothing Equipped', 'Body': 'Nothing Equipped',
+		 'Neck': 'Nothing Equipped', 'Weapon': 'Nothing Equipped'}
 
 enemies_lvl_1_3 = ['Slime', 'Gnoll', 'Wolf', 'Bat', 'Goblin', 'Cat', 'Flannel Bag',
 'Glowing Top Hat', 'Pair of Round Spectacles']
@@ -248,8 +251,9 @@ def determine_intent(question): # this is the user input gateway
 						print "\t<-> " + item
 				print "\n\n"
 						
-				#print "Here is what you have equipped: "
-				#print "This function is not working properly yet.\n\n" 
+				print "Here is what you have equipped: \n"
+				for key, value in equipped_loot.items():
+					print "key" + " : " + "value"
 				
 				answer = raw_input(prompt2)
 				answer = answer.lower()
@@ -376,6 +380,7 @@ def equip():
 				print "Okay, you equip the Cloth Cap! Your intelligence is increased by 1!\n"
 				player_int += 1
 				cloth_cap = True
+				equipped_loot['Head'] = "Cloth Cap"
 			
 		elif answer == "Cloth Cap" and cloth_cap == True:
 			
@@ -388,6 +393,7 @@ def equip():
 				print "Your bonus attack is 1!\n"
 				attack_mod = 1
 				short_stick = True
+				equipped_loot['Weapon'] = "Short Stick"
 				if current_weapon == "Madrona Wand":
 					madrona_wand = False
 				
@@ -411,6 +417,7 @@ def equip():
 				short_stick = True
 				weapon = True
 				current_weapon = "Short Stick"
+				equipped_loot['Weapon'] = "Short Stick"
 			
 		elif answer == "Short Stick" and short_stick == True:
 			
@@ -425,6 +432,7 @@ def equip():
 				print "Okay, you equip the Basic Gloves! Your dexterity is increased by 1!\n"
 				player_dex += 1
 				basic_gloves = True
+				equipped_loot['Hands'] = "Basic Gloves"
 			
 		elif answer == "Basic Gloves" and basic_gloves == True:
 			
@@ -439,6 +447,7 @@ def equip():
 				print "Okay, you equip the Thick Shirt! Your defense bonus is 1!\n"
 				defense_mod = 1
 				thick_shirt = True
+				equipped_loot['Body'] = "Thick Shirt"
 			
 		elif answer == "Thick Shirt" and thick_shirt == True:
 			
@@ -452,6 +461,7 @@ def equip():
 				player_int += 1
 				sturdy_hat = True
 				cloth_cap = False
+				equipped_loot['Head'] = "Sturdy Hat"
 				
 			elif wide_brim_hat:
 				print "Up to you, %s." % player_name
@@ -459,11 +469,13 @@ def equip():
 				player_int -= 1
 				wide_brim_hat = False
 				sturdy_hat = True
+				equipped_loot['Head'] = "Sturdy Hat"
 			
 			else:
 				print "Okay, you equip the Sturdy Hat! Your intelligence is increased by 2!\n"
 				player_int += 2
 				sturdy_hat = True
+				equipped_loot['Head'] = "Sturdy Hat"
 				
 		elif answer == "Sturdy Hat" and sturdy_hat == True:
 			
@@ -476,6 +488,7 @@ def equip():
 				print "Your bonus attack is 2!\n"
 				attack_mod = 2
 				madrona_wand = True
+				equipped_loot['Weapon'] = "Madrona Wand"
 				if current_weapon == "Short Stick":
 					short_stick = False
 				
@@ -499,6 +512,7 @@ def equip():
 				madrona_wand = True
 				weapon = True
 				current_weapon = "Madrona Wand"
+				equipped_loot['Weapon'] = "Madrona Wand"
 				
 		elif answer == "Madrona Wand" and madrona_wand == True:
 			
@@ -512,6 +526,7 @@ def equip():
 				player_dex += 1
 				fingerless_gloves = True
 				basic_gloves = False
+				equipped_loot['Hands'] = "Fingerless Gloves"
 				
 			elif power_mitts:
 				print "Up to you, %s." % player_name
@@ -519,11 +534,13 @@ def equip():
 				player_dex -= 1
 				power_mitts = False
 				fingerless_gloves = True
+				equipped_loot['Hands'] = "Fingerless Gloves"
 			
 			else:
 				print "Okay, you equip the Fingerless Gloves! Your dexterity is increased by 2!\n"
 				player_dex += 2
 				fingerless_gloves = True
+				equipped_loot['Hands'] = "Fingerless Gloves"
 				
 		elif answer == "Fingerless Gloves" and fingerless_gloves == True:
 			
@@ -537,6 +554,7 @@ def equip():
 				defense_mod = 2
 				leather_t = True
 				thick_shirt = False
+				equipped_loot['Body'] = "Thick Shirt"
 				
 			elif leather_jacket:
 				print "Up to you, %s." % player_name
@@ -544,11 +562,13 @@ def equip():
 				defense_mod = 2
 				leather_jacket = False
 				leather_t = True
+				equipped_loot['Body'] = "Thick Shirt"
 			
 			else:
 				print "Okay, you equip the Leather T-Shirt! Your defense bonus is 2!\n"
 				defense_mod = 2
 				leather_t = True
+				equipped_loot['Body'] = "Thick Shirt"
 				
 		elif answer == "Leather T-Shirt" and leather_t == True:
 			
@@ -562,6 +582,7 @@ def equip():
 				player_int += 2
 				wide_brim_hat = True
 				cloth_cap = False
+				equipped_loot['Head'] = "Wide Brim Hat"
 			
 			elif sturdy_hat == True:
 				print "You have removed the Sturdy Hat and equipped the Wide Brim Hat!\n"
@@ -569,11 +590,13 @@ def equip():
 				player_int += 1
 				wide_brim_hat = True
 				sturdy_hat = False
+				equipped_loot['Head'] = "Wide Brim Hat"
 				
 			else: 
 				print "Okay, you equip the Wide Brim Hat! Your intelligence is increased by 3!\n"
 				player_int += 3
 				wide_brim_hat = True
+				equipped_loot['Head'] = "Wide Brim Hat"
 				
 		elif answer == "Wide Brim Hat" and wide_brim_hat == True:
 			
@@ -586,6 +609,7 @@ def equip():
 				print "Your bonus attack is 3!\n"
 				attack_mod = 3
 				oak_staff = True
+				equipped_loot['Weapon'] = "Oak Staff"
 				if current_weapon == "Short Stick":
 					short_stick = False
 				
@@ -609,6 +633,7 @@ def equip():
 				oak_staff = True
 				weapon = True
 				current_weapon = "Oak Staff"
+				equipped_loot['Weapon'] = "Oak Staff"
 				
 		elif answer == "Oak Staff" and oak_staff == True:
 			
@@ -622,6 +647,7 @@ def equip():
 				player_dex += 2
 				power_mitts = True
 				basic_gloves = False
+				equipped_loot['Hands'] = "Power Mitts"
 				
 			elif fingerless_gloves == True:
 				print "You have removed the Fingerless Gloves and equipped the Power Mitts!\n"
@@ -629,11 +655,13 @@ def equip():
 				player_dex += 1
 				power_mitts = True
 				fingerless_gloves = False
+				equipped_loot['Hands'] = "Power Mitts"
 			
 			else:
 				print "Okay, you equip the Power Mitts! Your dexterity is increased by 3!\n"
 				player_dex += 3
 				power_mitts = True
+				equipped_loot['Hands'] = "Power Mitts"
 				
 		elif answer == "Power Mitts" and power_mitts == True:
 			
@@ -647,6 +675,7 @@ def equip():
 				defense_mod = 3
 				leather_jacket = True
 				thick_shirt = False
+				equipped_loot['Body'] = "Leather Jacket"
 				
 			elif leather_t == True:
 				print "You have removed the Leather T-Shirt and equipped the Leather Jacket!\n"
@@ -654,11 +683,13 @@ def equip():
 				defense_mod = 3
 				leather_jacket = True
 				leather_t = False
+				equipped_loot['Body'] = "Leather Jacket"
 			
 			else:
 				print "Okay, you equip the Leather Jacket! Your defense is increased by 3!\n"
 				defense_mod = 3
 				leather_jacket = True
+				equipped_loot['Body'] = "Leather Jacket"
 				
 		elif answer == "Leather Jacket" and leather_jacket == True:
 			
@@ -671,6 +702,7 @@ def equip():
 				print "Your bonus attack is 1!\n"
 				attack_mod = 1
 				walking_stick = True
+				equipped_loot['Weapon'] = "Sturdy Walking Stick"
 				if current_weapon == "Short Stick":
 					short_stick = False
 				
@@ -694,6 +726,7 @@ def equip():
 				walking_stick = True
 				weapon = True
 				current_weapon = "Sturdy Walking Stick"
+				equipped_loot['Weapon'] = "Sturdy Walking Stick"
 			
 		elif answer == "Sturdy Walking Stick" and walking_stick == True:
 			
@@ -706,6 +739,7 @@ def equip():
 				print "Your bonus attack is 2!\n"
 				attack_mod = 2
 				three_ft_pipe = True
+				equipped_loot['Weapon'] = "Three Foot Pipe"
 				if current_weapon == "Short Stick":
 					short_stick = False
 				
@@ -729,6 +763,7 @@ def equip():
 				three_ft_pipe = True
 				weapon = True
 				current_weapon = "Three Foot Pipe"
+				equipped_loot['Weapon'] = "Three Foot Pipe"
 				
 		elif answer == "Three Foot Pipe" and three_ft_pipe == True:
 			
@@ -741,6 +776,7 @@ def equip():
 				print "Your bonus attack is 3!\n"
 				attack_mod = 3
 				madrona_want = True
+				equipped_loot['Weapon'] = "Sword"
 				if current_weapon == "Short Stick":
 					short_stick = False
 				
@@ -764,6 +800,7 @@ def equip():
 				sword = True
 				weapon = True
 				current_weapon = "Sword"
+				equipped_loot['Weapon'] = "Sword"
 				
 		elif answer == "Sword" and sword == True:
 			
@@ -775,6 +812,7 @@ def equip():
 			small_medallion = True
 			big_medallion = False
 			intricate_medallion = False
+			equipped_loot['Neck'] = "Small Medallion"
 			
 		elif answer == "Small Medallion" and small_medallion == True:
 			
@@ -786,6 +824,7 @@ def equip():
 			big_medallion = True
 			small_medallion = False
 			intricate_medallion = False
+			equipped_loot['Neck'] = "Big Medallion"
 			
 		elif answer == "Big Medallion" and big_medallion == True:
 			
@@ -797,6 +836,7 @@ def equip():
 			intricate_medallion = True
 			big_medallion = False
 			small_medallion = False
+			equipped_loot['Neck'] = "Intricate Medallion"
 			
 		elif answer == "Intricate Medallion" and intricate_medallion == True:
 			
@@ -3510,7 +3550,7 @@ def second_room():
 
 def third_room():
 	
-	global came_from
+	global came_from, first_time_third_room
 	
 	print "The door you took leads directly into a small room."
 	print "You came from the %s.\n" % came_from
@@ -3957,6 +3997,7 @@ def hidden_chamber_one():
 			satchel_contents.append("Wizard Robes")
 			equippable_loot.append("Wizard Robes")
 			wizard_robes = True
+			equipped_loot['Body'] = "Wizard Robes"
 			print "You put on the Wizard Robes and feel the best you've ever felt.\n\n"
 			if wizard_hat and wizard_staff:
 				print "You've completed the set!!\n"
@@ -3979,6 +4020,7 @@ def hidden_chamber_one():
 			equippable_loot.append("Imbued Eye Mask")
 			imbued_eye_mask = True
 			print "You put on the Imbued Eye Mask and feel the best you've ever felt.\n\n"
+			equipped_loot['Head'] = "Imbued Eye Mask"
 			if katana and stealth_slippers: 
 				print "You've completed the set!!\n"
 				print "Your Imbued Eye Mask now gives you a defense of 5!"
@@ -3999,6 +4041,7 @@ def hidden_chamber_one():
 			satchel_contents.append("Armored Tweed Vest.")
 			equippable_loot.appand("Armored Tweed Vest.")
 			armored_tweed_vest = True
+			equipped_loot['Body'] = "Armored Tweed Vest"
 			print "You put on the Armored Tweed Vest and feel the best you've ever felt.\n\n"
 			if scepter and knickers:
 				print "You've completed the set!!\n"
@@ -4021,7 +4064,7 @@ def hidden_chamber_one():
 		
 		if answer == "y":
 			print "You say hello and he jumps up.\n"
-			print "Boy: I bet you're here to save me?"
+			print "I bet you're here to save me!?"
 			print "I never thought anyone would come down here to save me.\n\n"
 			answer1 = determine_intent("Are you going to save me?\n")
 			
