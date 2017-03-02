@@ -203,7 +203,7 @@ def determine_intent(question): # this is the user input gateway
 		
 		if answer == "stats":
 			print """Here are your current stats:\n
-			Name: %s Class: %s
+			Name: %s  | Class: %s
 			Level: %d
 			Strength: %d
 			Dexterity: %d
@@ -253,8 +253,9 @@ def determine_intent(question): # this is the user input gateway
 						
 				print "Here is what you have equipped: \n"
 				for key, value in equipped_loot.items():
-					print "key" + " : " + "value"
-				
+					print key + " : " + value
+					print "\n\n"
+					
 				answer = raw_input(prompt2)
 				answer = answer.lower()
 				print "\n\n"
@@ -1842,8 +1843,8 @@ def start():
 	time.sleep(2)
 	
 	print """
-	You awaken. It's cold but you're insulated by layers. It feels like you 
-	shouldn't be here or you're lost. It's a strange feeling.\n"""
+	You awaken. It's cold but you're insulated by a thin layer of fat. It feels 
+	like you shouldn't be here or you're lost. It's a strange feeling.\n"""
 	time.sleep(3)
 	
 	print """
@@ -2168,7 +2169,7 @@ def secret_room_1():
 				print "You don't want to put it in your satchel (messy!).\n"
 				time.sleep(2)
 				
-				print "And it smells so good! You must eat it or leave it."
+				print "And it smells so good! You must eat it or leave it.\n"
 				time.sleep(2)
 				
 				choice5 = determine_intent("Do you eat the danish or leave it?\n")
