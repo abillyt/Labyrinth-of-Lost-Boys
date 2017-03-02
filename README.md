@@ -1,5 +1,5 @@
 # Labyrinth-of-Lost-Boys 
-*coded in Python 2.7*
+*coded in Python 2.7 by abillyt*
 
 a text-based adventure game.
 
@@ -15,4 +15,3 @@ To play:
 Answering questions casually mostly works. Any question asked with a menu of numbers, enter a number rather than the text. 
 When entering any "item" for using or equipping you must use the proper spelling and capitolization.
 
-*coded from scratch by abillyt
