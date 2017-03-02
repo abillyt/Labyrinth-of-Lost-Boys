@@ -253,8 +253,8 @@ def determine_intent(question): # this is the user input gateway
 						
 				print "Here is what you have equipped: \n"
 				for key, value in equipped_loot.items():
-					print key + " : " + value
-					print "\n\n"
+					print "\t" + key + " : " + value + loot_dict[value]
+				print "\n\n"
 					
 				answer = raw_input(prompt2)
 				answer = answer.lower()
@@ -555,7 +555,7 @@ def equip():
 				defense_mod = 2
 				leather_t = True
 				thick_shirt = False
-				equipped_loot['Body'] = "Thick Shirt"
+				equipped_loot['Body'] = "Leather T-Shirt"
 				
 			elif leather_jacket:
 				print "Up to you, %s." % player_name
@@ -563,13 +563,13 @@ def equip():
 				defense_mod = 2
 				leather_jacket = False
 				leather_t = True
-				equipped_loot['Body'] = "Thick Shirt"
+				equipped_loot['Body'] = "Leather T-Shirt"
 			
 			else:
 				print "Okay, you equip the Leather T-Shirt! Your defense bonus is 2!\n"
 				defense_mod = 2
 				leather_t = True
-				equipped_loot['Body'] = "Thick Shirt"
+				equipped_loot['Body'] = "Leather T-Shirt"
 				
 		elif answer == "Leather T-Shirt" and leather_t == True:
 			
@@ -1609,7 +1609,7 @@ def enemy_encounter():
 			enemy = (10, 2, 5, 2) #glowing_top_hat 19
 		
 		else:
-			enemy = (5, 2, 2, 2) #round_spectacles() 11
+			enemy = (4, 2, 2, 2) #round_spectacles() 11
 	
 	elif 3 < player_lvl <= 6:
 		
@@ -2189,11 +2189,11 @@ def secret_room_1():
 						choice1 = determine_intent("Do you go North or South?\n")
 							
 						if choice1 == "n":
-							print "North you go!"
+							print "North you go!\n\n"
 							second_intersection()
 						
 						else: 
-							print "South it is!"
+							print "South it is!\n\n"
 							first_intersection()
 							
 					else:
@@ -2207,11 +2207,11 @@ def secret_room_1():
 						choice1 = determine_intent("Do you go North or South?\n")
 							
 						if choice1 == "n":
-							print "North you go!"
+							print "North you go!\n\n"
 							second_intersection()
 						
 						else: 
-							print "South it is!"
+							print "South it is!\n\n"
 							first_intersection()	
 							
 				else:
@@ -2222,11 +2222,11 @@ def secret_room_1():
 					choice1 = determine_intent("Do you go North or South?\n")
 						
 					if choice1 == "n":
-						print "North you go!"
+						print "North you go!\n\n"
 						second_intersection()
 					
 					elif choice1 == "s":
-						print "South it is!"
+						print "South it is!\n\n"
 						first_intersection()
 						
 					else: 
@@ -2266,7 +2266,7 @@ def second_intersection():
 
 	print "You are at an intersection that has passageways to the South, West, and East."
 	print "There is a dripping sound.\n"
-	print "You came from the %s." % came_from
+	print "You came from the %s.\n" % came_from
 	time.sleep(1)
 	
 	choice = determine_intent("Which way do you go?\n")
@@ -2331,7 +2331,7 @@ def third_intersection():
 	
 	print "You are at an intersection with passageways to the South, West, and East.\n"
 	print "There is a door along the cleft wall to the South/West.\n"
-	print "You came from %s." % came_from
+	print "You came from %s.\n" % came_from
 	
 	choice = determine_intent("Which way do you go?\n")
 			
@@ -2829,9 +2829,9 @@ def fourth_intersection():
 	global came_from, player_hp_dmg
 	
 	print "You are at a mossy intersection that branches West, East, and North.\n"
-	print "You came from the %s." % came_from
+	print "You came from the %s.\n" % came_from
 	
-	answer = determine_intent("Which way do you choose to go?")
+	answer = determine_intent("Which way do you choose to go?\n")
 	
 	if answer == "w":
 		print "You head west and...\n"
@@ -2884,7 +2884,7 @@ def fifth_intersection():
 	print "You are at an intersection that branches West and East."
 	print "There is a branch to the South whose end is visible.\n"
 	print "Do you go East or West or South?\n"
-	print "You came from the %s." % came_from
+	print "You came from the %s.\n" % came_from
 	
 	answer = determine_intent("Which way do you choose to go?\n")
 		
@@ -2922,7 +2922,7 @@ def fifth_intersection():
 				print "He notices you, and seems to be oddly disinterested.\n"
 				print "You mention his Mom and he comes to his senses.\n"
 				print "You know my Mom? Well, I can't find my way out of here anyway, so whatever.\n"
-				choice2 = determine_input("What item do you use?")
+				choice2 = determine_intent("What item do you use?")
 				
 				if choice2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
 					print "You take out your Paper and Pen and draw the lad a map.\n\n"
@@ -3896,7 +3896,7 @@ def grand_hallway():
 		
 		twelfth_intersection()
 		
-	elif answer == "s":
+	elif answer == "s" or answer == "southeast":
 		print "You walk to the end of the Grand Hallway and exit to the South.\n"
 		came_from = "North"
 		
