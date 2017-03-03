@@ -3656,6 +3656,11 @@ def vendor():
 				for item in satchel_contents:
 					print item + " " 
 			
+			else: 
+			  	print "I get it. I don't have much in the way of options.\n"
+			  	print "It's cool. I didn't really want your %s anyway.\n\n" % trading_block[0]
+			  	vendor_room()
+			
 		else: 
 			print "I do not think you know what you are referring to.\n" 
 			vendor_room()
