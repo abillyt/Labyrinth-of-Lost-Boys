@@ -36,6 +36,7 @@ first_time_third_room = True
 first_time_2nd_secret_room = True 
 defeat_goblin_king = False # implemented
 defeat_darkness_troll = False # implemented
+rope_ready = False # 5th intersection, once rope swing is ready
 high_scorer = False
 high_scorer_furthest = False
 high_scorer_cave = False 
@@ -71,6 +72,7 @@ wizard_staff = False
 katana = False
 scepter = False
 weapon = False
+book_of_knots = False
 
 yes_list = ["yep", "yeppers", "yeah", "uh huh", "well, sure", "absolutely", "amen", "affirmative",
 		"true", "yea", "decent", "beyond a doubt", "certainly", "good enough", "naturally", "of course",
@@ -85,16 +87,16 @@ maybe_list = ["perchance", "perhaps", "mayhaps", "can be", "feasible", "imaginab
 		"i could be", "possibly", "god willing", "god willing", "could be", "maybe", "mby", "mabe"]
 
 north_list = ["north", "go north", "head north", "nrth", "nroth", "nrt", "n", "no",
-		"how about north", "how bout north", "north, i guess", "northernly", "northerly"]
+		"how about north", "how bout north", "north, i guess"]
 
 south_list = ["south", "go south", "head south", "soth", "suoth", "sth", "s", "so",
-		"how about south", "how bout south", "south, i guess", "southernly", "southerly]
+		"how about south", "how bout south", "south, i guess"]
 
 west_list = ["west", "go west", "head west", "wst", "w", "we", "how about west",
-		"how bout west", "west, i guess", "westernly", "westerly"]
+		"how bout west", "west, i guess"]
 		
 east_list = ["east", "go east", "head east", "est", "e", "ea", "how about east",
-		"how bout east", "east, i guess", "easterly"]
+		"how bout east", "east, i guess"]
 
 fight_list = ["fight", "fiht", "f", "fght", "fite", "figth", "fihtg", "fight!", "figh"]
 
@@ -2879,7 +2881,7 @@ def fourth_intersection():
 
 def fifth_intersection():
 	
-	global came_from, player_hp_dmg, boys_saved, boys_rescued
+	global came_from, player_hp_dmg, boys_saved, boys_rescued, rope_ready, satchel_contents
 	
 	print "You are at an intersection that branches West and East."
 	print "There is a branch to the South whose end is visible.\n"
@@ -2960,16 +2962,127 @@ def fifth_intersection():
 		print "and the path across the pit.\n"
 		came_from = "East"
 
-		to_do = determine_intent("Do you do something or go back?\n")
+		to_do = determine_intent("What item do you use?\n")
 		
-		if to_do == "use Long Rope" and "Long Rope" in satchel_contents:
+		if to_do == "Long Rope" and "Long Rope" in satchel_contents:
 			print "You pull out your Long Rope and set it at your feet."
 			time.sleep(1)
-			print "End of programming."
-			fifth_intersection()
+			
+			to_do_2 = determine_intent("Now what item do you use?\n")
+			
+			if to_do_2 == "Book of Knots" and "Book of Knots" in satchel_contents:
+				print "You pull out your Book of Knots and read.\n\n"
+				time.sleep(2)
+				print "You learn a knot that can tie the end of your rope to an object"
+				print "to create a sort of small grappling hook.\n\n"
+				book_of_knots = True
+				
+				to_do_3 = determine_intent("What item do you use?\n")
+				
+				if to_do_3 == "Spade" and "Spade" in satchel_contents:
+					print "You attach the Spade to the end of the Long Rope"
+					print "using your newfound knowledge of knots.\n\n"
+					time.sleep(2)
+					print "Using the makeshift grappling hook, you whip it around"
+					print "several times and fling it over the trunk of the fallen"
+					print "tree.\n\n"
+					time.sleep(2)
+					print "It wraps around the trunk and the rope luckily pins the"
+					print "Spade head.\n"
+					print "Your rope is secure around the trunk of the tree."
+					
+					choice = determine_intent("Do you swing across the pit?\n"
+					
+					if choice == "y":
+						print "You swing across the gaping pit like an awkward Tarzan.\n\n"
+						time.sleep(2)
+						print "You land safely on the other side and are able to secure"
+						print "the rope end to a rare sconce on the wall.\n\n"
+						print "ahead of you, the passageway opens up to a room.\n"
+						satchel_contents.remove("Spade")
+						satchel_contents.remove("Long Rope")
+						treasure_room()
+					
+					elif choice == "n":
+						print "All that work and not gonna jump, eh?\n\n"
+						print "Well, to each their own.\n"
+						time.sleep(1)
+						print "You secure the end of the rope to a jut in the wall"
+						print "as to not disrupt the rope's lucky attachment.\n\n"
+						satchel_contents.remove("Spade")
+						satchel_contents.remove("Long Rope")
+						rope_ready = True
+					
+					else: 
+						print "You secure the end of the rope to a jut in the wall"
+						print "as to not disrupt the rope's lucky attachment.\n\n"	
+						satchel_contents.remove("Spade")
+						satchel_contents.remove("Long Rope")	
+						rope_ready = True	
+						
+				else:
+					print "Certainly you will think of something to attach to the"
+					print "end of the rope.\n\n"
+					fifth_intersection()
+			
+			elif book_of_knots:
+				if to_do_2 == "Spade" and "Spade" in satchel_contents:
+					print "You attach the Spade to the end of the Long Rope"
+					print "using your knowledge of knots you learned earlier.\n\n"
+					time.sleep(2)
+					print "Using the makeshift grappling hook, you whip it around"
+					print "several times and fling it over the trunk of the fallen"
+					print "tree.\n\n"
+					time.sleep(2)
+					print "It wraps around the trunk and the rope luckily pins the"
+					print "Spade head.\n"
+					print "Your rope is secure around the trunk of the tree."
+					
+					choice = determine_intent("Do you swing across the pit?\n"
+					
+					if choice == "y":
+						print "You swing across the gaping pit like an awkward Tarzan.\n\n"
+						time.sleep(2)
+						print "You land safely on the other side and are able to secure"
+						print "the rope end to a rare sconce on the wall.\n\n"
+						print "ahead of you, the passageway opens up to a room.\n"
+						satchel_contents.remove("Spade")
+						satchel_contents.remove("Long Rope")
+						treasure_room()
+					
+					elif choice == "n":
+						print "All that work and not gonna jump, eh?\n\n"
+						print "Well, to each their own.\n"
+						time.sleep(1)
+						print "You secure the end of the rope to a jut in the wall"
+						print "as to not disrupt the rope's lucky attachment.\n\n"
+						satchel_contents.remove("Spade")
+						satchel_contents.remove("Long Rope")
+						rope_ready = True
+						came_from = "South"
+						fifth_intersection()
+					
+					else: 
+						print "You secure the end of the rope to a jut in the wall"
+						print "as to not disrupt the rope's lucky attachment.\n\n"	
+						satchel_contents.remove("Spade")
+						satchel_contents.remove("Long Rope")	
+						rope_ready = True
+						came_from = "South"
+						fifth_intersection()
+			
+			else: 
+				
+				print "It may be difficult to use another item without further"
+				print "understanding what you are capable of...\n\n"
+				time.sleep(2)
+				print "ABL. Always be learning.\n"
+				came_from = "South"
+				fifth_intersection()
 		
 		else: 
-			print "Come back when you can think of something that works.\n"		
+			print "Come back when you can think of something that may be useful.\n"		
+			came_from = "South"
 			fifth_intersection()
 			
 	elif answer == "w":
@@ -3121,7 +3234,7 @@ def sixth_intersection():
 
 def seventh_intersection():
 
-	global came_from
+	global came_from, book_of_knots
 	
 	print "You come to a three-way intersection." 
 	print "The paths go West or North or Southeast up the stairs.\n"
@@ -3137,9 +3250,93 @@ def seventh_intersection():
 		print "a normal dead end, because the top of the wall at this dead end"
 		print "is much shorter than the walls surrounding it.\n"
 		time.sleep(3)
-		print "You can't do anything at this time so you go back to the intersection.\n"
-		came_from = "West"
-		seventh_intersection()
+		
+		to_do = determine_intent("What do you use?\n")
+		
+		if to_do == "Short Rope" and "Short Rope" in satchel_contents:
+			print "You swing one end of the short rope over the wall"
+			print "and it slips back to you.\n\n"
+			print "If only the end of the rope had something attached to it.\n"
+			
+			to_do_2 = determine_intent("What do you use now?\n")
+			
+			if to_do_2 == "Book of Knots" and "Book of Knots" in satchel_contents:
+				print "You pull out your Book of Knots and read.\n\n"
+				time.sleep(2)
+				print "You learn a knot that can tie the end of your rope to an object"
+				print "to create a sort of large grappling hook.\n\n"
+				book_of_knots = True
+				
+				to_do_3 = determine_intent("What item would you like to attach to the rope?\n")
+				
+				if to_do_3 == "Shovel" and "Shovel" in satchel_contents:
+					print "You attach your shovel to the end of the Short Rope"
+					print "and heave it over the top of the wall.\n\n"
+					time.sleep(2)
+					print "You feel it hold on the other side of the wall and you"
+					print "test the weight of it.\n"
+					time.sleep(2)
+					print "It seems secure.\n"
+					print "You climb up and over the short wall, making sure to"
+					print "bring your rope with you to the other side.\n\n"
+					secret_room_2()
+				
+				elif to_do_3 == "Balanced Pickaxe" and "Balanced Pickaxe" in satchel_contents:
+					print "You attach your Balanced Pickaxe to the end of the Short Rope"
+					print "and heave it over the top of the wall.\n\n"
+					time.sleep(2)
+					print "You feel it hold on the other side of the wall and you"
+					print "test the weight of it.\n"
+					time.sleep(2)
+					print "It is definitely secure.\n"
+					print "You climb up and over the short wall, making sure to"
+					print "bring your rope with you to the other side.\n\n"
+					secret_room_2()
+				
+				else: 
+					print "Perhaps one day you will think of something that could be used.\n\n"
+					came_from = "West"
+					seventh_intersection()
+				
+			elif book_of_knots:
+				if to_do_2 == "Shovel" and "Shovel" in satchel_contents:
+					print "You attach your shovel to the end of the Short Rope"
+					print "and heave it over the top of the wall.\n\n"
+					time.sleep(2)
+					print "You feel it hold on the other side of the wall and you"
+					print "test the weight of it.\n"
+					time.sleep(2)
+					print "It seems secure.\n"
+					print "You climb up and over the short wall, making sure to"
+					print "bring your rope with you to the other side.\n\n"
+					secret_room_2()
+				
+				elif to_do_3 == "Balanced Pickaxe" and "Balanced Pickaxe" in satchel_contents:
+					print "You attach your Balanced Pickaxe to the end of the Short Rope"
+					print "and heave it over the top of the wall.\n\n"
+					time.sleep(2)
+					print "You feel it hold on the other side of the wall and you"
+					print "test the weight of it.\n"
+					time.sleep(2)
+					print "It is definitely secure.\n"
+					print "You climb up and over the short wall, making sure to"
+					print "bring your rope with you to the other side.\n\n"
+					secret_room_2()
+				
+				else: 
+					print "Perhaps one day you will think of something that could be used.\n\n"
+					came_from = "West"
+					seventh_intersection()
+				
+			else:
+				print "Maybe some other idea will come to you in the future.\n\n"
+				came_from = "West"
+				seventh_intersection()
+		
+		else: 
+			print "Perhaps you will find something that could be of use in the future.\n\n"
+			came_from = "West"
+			seventh_intersection()
 	
 	elif answer == "n":
 		chance = randint(1, 100)
@@ -3423,7 +3620,7 @@ def eleventh_intersection():
 		if chance <= 50:
 			enemy_encounter()
 			
-		eleventh_intersection()
+		seventh_intersection()
 	
 def twelfth_intersection():
 
@@ -3574,6 +3771,27 @@ def fourth_room():
 	
 	eighth_intersection()
 	
+def secret_room_2():
+	
+	global came_from
+	
+	print "You are in the second secret room.\n\n"
+	print "Programming is yet to happen. YOU MAGICALLY JUMP BACK OVER THE WALL."
+	came_from = "Secret Room"
+	seventh_intersection()
+	
+def treasure_room():
+	
+	global came_from
+	
+	print "You have found your way to the TREASURE ROOM.\n\n"
+	print "Unfortunately, it hasn't been coded yet."
+	came_from = "Treasure Room"
+	print "You swing back over the pit and secure your rope again so you"
+	print "can come back when the treasure room is programmed.\n\n"
+	
+	fifth_intersection()
+		
 def vendor_room():
 
 	global came_from
@@ -3655,11 +3873,6 @@ def vendor():
 				print "This is what is in your satchel now:"
 				for item in satchel_contents:
 					print item + " " 
-			
-			else: 
-			  	print "I get it. I don't have much in the way of options.\n"
-			  	print "It's cool. I didn't really want your %s anyway.\n\n" % trading_block[0]
-			  	vendor_room()
 			
 		else: 
 			print "I do not think you know what you are referring to.\n" 
@@ -3962,7 +4175,7 @@ def hidden_chamber_one():
 					if answer2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
 						print "You draw the boy a map to the entrance and he leaves, emboldened.\n\n"
 						boys_saved += 1
-						print "You have saved %d boys!\n\n" % boys_saved
+						print "You have saved %d boys!\n\n" % saved_boys
 						boys_rescued.append("Boy 4")
 						print "Finished here, you head back to the hallway, go south, and back to the intersection.\n\n"
 						sixth_intersection()
@@ -4075,10 +4288,9 @@ def hidden_chamber_one():
 			answer1 = determine_intent("Are you going to save me?\n")
 			
 			if answer1 == "y":
-				print "How? I don't know the way out.\n"
-	      			answer2 = determine_intent("Which item do you use?")
+				answer2 = determine_intent("How? I don't know the way out.\n")
 				
-				if answer2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
+				if answer2 == "use Paper and Pen" and "Paper and Pen" in satchel_contents:
 					print "You draw the boy a map to the entrance and he leaves, emboldened.\n\n"
 					boys_saved += 1
 					print "You have saved %d boys!\n\n" % boys_saved
@@ -4121,4 +4333,3 @@ def dead(why):
 		exit(0)
 
 start()
-
