@@ -153,7 +153,7 @@ enemies_lvl_4_6 = ['Large Slime', 'Pack of Gnolls', 'Alpha Wolf', 'Ancient Bat',
 'Glowing Top Hat w/ Cane', 'Jagged Contacts']
 
 enemies_lvl_7_9 = ['Shiny Mist', 'Floor of Marbles', 'Shrieking Box', 'Wall of Bats',
-'Competetive Eater', 'Donald Trump', 'Mary Poppin\'s Bag of Horrors', 
+'Competitive Eater', 'Donald Trump', 'Mary Poppin\'s Bag of Horrors', 
 'Badass Three Piece Suit w/ Hat & Cane', 'Eye Candy']
 
 fathers_wisdom = ['If it\'s the easy way, it\'s the wrong way.', 
@@ -355,7 +355,7 @@ def equip():
 	global player_str, player_dex, player_int, player_hp, attack_mod, defense_mod, walking_stick
 	global cloth_cap, short_stick, basic_gloves, thick_shirt, three_ft_pipe, sturdy_hat, madrona_wand
 	global fingerless_gloves, leather_t, sword, wide_brim_hat, oak_staff, power_mitts, leather_jacket
-	global small_medallion, big_medallion, intricate_medalion, weapon, current_weapon
+	global small_medallion, big_medallion, intricate_medallion, weapon, current_weapon
 	
 	equip_again = True
 
@@ -1664,7 +1664,7 @@ def enemy_encounter():
 			enemy = (18, 12, 12, 5) #wall_of_bats 41
 		
 		elif x == 4:
-			enemy = (28, 5, 9, 3) #competetive_eater 35
+			enemy = (28, 5, 9, 3) #competitive_eater 35
 		
 		elif x == 5:
 			enemy = (19, 15, 14, 1) #donald_trump 40
@@ -2991,7 +2991,7 @@ def fifth_intersection():
 					print "Spade head.\n"
 					print "Your rope is secure around the trunk of the tree."
 					
-					choice = determine_intent("Do you swing across the pit?\n"
+					choice = determine_intent("Do you swing across the pit?\n")
 					
 					if choice == "y":
 						print "You swing across the gaping pit like an awkward Tarzan.\n\n"
@@ -3038,7 +3038,7 @@ def fifth_intersection():
 					print "Spade head.\n"
 					print "Your rope is secure around the trunk of the tree."
 					
-					choice = determine_intent("Do you swing across the pit?\n"
+					choice = determine_intent("Do you swing across the pit?\n")
 					
 					if choice == "y":
 						print "You swing across the gaping pit like an awkward Tarzan.\n\n"
