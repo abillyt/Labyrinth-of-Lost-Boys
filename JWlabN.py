@@ -836,7 +836,7 @@ def equip():
 			
 		elif answer == "Intricate Medallion" and intricate_medallion == False:
 			
-			print "You put the intricate medallion around your neck.\n"
+			print "You put the Intricate Medallion around your neck.\n"
 			intricate_medallion = True
 			big_medallion = False
 			small_medallion = False
@@ -1835,6 +1835,8 @@ def start():
 	katana = False
 	scepter = False
 	weapon = False
+	book_of_knots = False
+	found_treasure_1 = False
 	
 	print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 	print "\n\n\t\tLabyrinth of the Lost Sons\n\n\n"
@@ -1852,7 +1854,8 @@ def start():
 	
 	print """
 	You get up and look around you. You see snow covered fields and a grey sky. 
-	A light snow falls.\n"""
+	A light snow falls. You look down and see that you're only wearing
+	unders.\n"""
 	time.sleep(3)
 	
 	print """
@@ -2689,7 +2692,7 @@ def first_chamber():
 				
 			if answer2 == "y":
 				choice = determine_intent("Excellent! What item will you use?\n")
-				if choice == "Balanced Pickaxe" and "Pickaxe" in satchel_contents:
+				if choice == "Balanced Pickaxe" and "Balanced Pickaxe" in satchel_contents:
 	
 					print "You bring the Pickaxe sharply down on the first chain at the floor"
 					print "and it breaks.\n"
@@ -2881,7 +2884,7 @@ def fourth_intersection():
 
 def fifth_intersection():
 	
-	global came_from, player_hp_dmg, boys_saved, boys_rescued, rope_ready, satchel_contents
+	global came_from, player_hp_dmg, boys_saved, boys_rescued, rope_ready, satchel_contents, book_of_knots
 	
 	print "You are at an intersection that branches West and East."
 	print "There is a branch to the South whose end is visible.\n"
@@ -3773,10 +3776,29 @@ def fourth_room():
 	
 def secret_room_2():
 	
-	global came_from
+	global came_from, gold
 	
-	print "You are in the second secret room.\n\n"
-	print "Programming is yet to happen. YOU MAGICALLY JUMP BACK OVER THE WALL."
+	print "You drop down from the wall and are in a well lit parlour.\n\n"
+	print "There is a lady with a clear green visor sitting at a table, shuffling cards.\n"
+	print "As you approach her, she looks up and smiles.\n"
+
+	answer = determine_input("Want to play some blackjack?\n")
+	
+	if answer == "y":
+		print "Well, let's play, then!\n"
+		blackjack()
+		print "Thanks for playing! I'm sure I'll see you later.\n"
+		print "You sling your makeshift grappling hook over the wall"
+		print "and climb up and out.\n\n"
+		seventh_intersection()
+		
+	else:
+		print "Oh well. That's okay. Gambling is probably not wise.\n"
+		print "Best luck in your adventures.\n\n"
+		print "You sling your makeshift grappling hook over the wall"
+		print "and climb up and out.\n\n"
+		seventh_intersection()
+	
 	came_from = "Secret Room"
 	seventh_intersection()
 	
