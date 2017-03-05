@@ -2069,6 +2069,8 @@ def first_intersection():
 	
 	else: 
 		print "You've entered something I do not understand."
+		first_intersection()
+		
 
 def secret_room_1():
 
@@ -2101,6 +2103,7 @@ def secret_room_1():
 			
 		else: 
 			print "I do not know what you are trying for."
+			secret_room_1()
 						
 	elif choice3 == "2":
 		print """
@@ -2124,6 +2127,7 @@ def secret_room_1():
 			
 		else:
 			print "I DO NOT UNDERSTAND."
+			secret_room_1()
 			
 	elif choice3 == "3":
 		print """
@@ -2158,6 +2162,8 @@ def secret_room_1():
 					
 				else: 
 					print "No idea what you want from me."
+					second_intersection()
+					
 			
 			while first_time_secret_room:
 				
@@ -2237,6 +2243,7 @@ def secret_room_1():
 						
 					else: 
 						print "I DO NOT KNOW WHY I PRINT."
+						first_intersection()
 			 	
 		elif choice4 == "n":
 			print """
@@ -2257,6 +2264,7 @@ def secret_room_1():
 			
 			else:
 				print "DO NOT KNOW."
+				first_intersection()
 				
 		else: 
 			dead("Standing. Waiting. The floor opens and you fall into eternity.")
@@ -2329,7 +2337,8 @@ def second_intersection():
 		second_intersection()
 	
 	else:
-		print "NO DIRECTION."
+		print "NO DIRECTION. You head South." 
+		first_intersection()
 
 def third_intersection():
 
@@ -2396,7 +2405,8 @@ def third_intersection():
 	
 	else:
 		
-		print "no thAnks."
+		print "no thAnks. BLRGH."
+		third_intersection()
 	
 def first_room():
 	
@@ -2881,6 +2891,7 @@ def fourth_intersection():
 		
 	else: 
 		print "i d o n o t k n o w"
+		first_chamber()
 
 def fifth_intersection():
 	
@@ -3111,6 +3122,7 @@ def fifth_intersection():
 	
 	else: 
 		print "should    no     printing"
+		fifth_intersection()
 
 def sixth_intersection():
 
@@ -3231,6 +3243,7 @@ def sixth_intersection():
 		
 		else: 
 			print "dunno why printing"
+			sixth_intersection()
 			
 	else: 
 		first_chamber()
@@ -3359,6 +3372,7 @@ def seventh_intersection():
 		
 	else:
 		print "Shouldn't see me, ever."
+		first_chamber()
 
 def eighth_intersection():
 
@@ -3453,6 +3467,7 @@ def eighth_intersection():
 		
 	else:
 		print "should not be printing this."
+		first_chamber()
 		
 def door_graphic(openness, topbottom):
 	
@@ -3679,6 +3694,7 @@ def twelfth_intersection():
 		
 	else:
 		print "investigate this printing."
+		twelfth_intersection()
 
 def second_room():
 
@@ -3748,6 +3764,9 @@ def second_room():
 	else: 
 		print "The room looks just like you left it, and will forevermore..."
 		print "since you've destroyed The Goblin King.\n\n"
+		came_from = "West"
+		
+		fourth_intersection()
 
 def third_room():
 	
