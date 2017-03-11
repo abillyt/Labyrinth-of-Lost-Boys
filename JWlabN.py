@@ -177,6 +177,22 @@ def determine_intent(question): # this is the user input gateway
 	
 	answer = raw_input(prompt2)
 	
+	# cheating for playtest
+	if answer == "cheat": 
+		answer2 = raw_input("Do you want to cheat?\n")
+		while answer2 == "y":
+	
+			answer3 = raw_input("Which item would you like to add to your inventory?\n")
+			satchel_contents.append(answer3)
+			answer2 = raw_input("Add another item?\n")
+		
+		player_hp = 999
+		player_hp_dmg = player_hp
+		
+		answer = raw_input(prompt2)
+	
+	
+	
 	if answer in loot_lvl_1_3 or answer in loot_lvl_4_6 or answer in loot_lvl_7_9:
 		return answer
 	
