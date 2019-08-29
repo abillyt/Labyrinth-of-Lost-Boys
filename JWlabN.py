@@ -103,7 +103,7 @@ fight_list = ["fight", "fiht", "f", "fght", "fite", "figth", "fihtg", "fight!", 
 flee_list = ["flee", "fle", "fleee", "fleeee", "fleeeee!", "flee!", "fleee!", "run away!", "run away",
 	    "get out of there", "hit the road", "run like hell"]
 
-undecided_list = ["not sure", "which way should i go?", "dunno", "i don\'t know"]
+undecided_list = ["not sure", "which way should i go?", "dunno", "i don't know"]
 
 door_list = ['enter door', 'open door', 'open', 'door', 'enter room', 'room', 'go into the room']
 		
@@ -156,1169 +156,1328 @@ enemies_lvl_7_9 = ['Shiny Mist', 'Floor of Marbles', 'Shrieking Box', 'Wall of B
 'Competitive Eater', 'Donald Trump', 'Mary Poppin\'s Bag of Horrors', 
 'Badass Three Piece Suit w/ Hat & Cane', 'Eye Candy']
 
-fathers_wisdom = ['If it\'s the easy way, it\'s the wrong way.', 
+fathers_wisdom = ['If it is the easy way, it is the wrong way.', 
 'Make soup, not war.', 'The fastest way to the end of any journey is forward.',
-'Life isn\'t fair.', 'When the going gets tough, stop and think about things.',
+'Life is fair. Not fair, I mean!', 'When the going gets tough, stop and think about things.',
 'Give it a little shake and see what falls out.',
 'Talking is to first be done silently.', 'When talking is silent, silence is golden.',
-'Don\'t forget to drink water.', 'Enunciated vowels produce healthy bowels!', 
-'Club once in awhile, don\'t be a constant clubber.']
+'Do not forget to drink water.', 'Enunciated vowels produce healthy bowels!', 
+'Club once in awhile, do not be a constant clubber.']
 
 mothers_wisdom = ['Take garlic, son. And raw honey.',
-'If you take ill, take raw honey.', 'Don\'t shake hands with a troll',
+'If you take ill, take raw honey.', 'Never shake hands with a troll',
 'Raw garlic. Feel the burn.', 'Soak your bunions.',
 'Never trust a woman with one eye.', 'Always trust a bearded wizard.',
-'Can I look at your blackheads?', 'Let\'s go wash your face.', 'Eucalyptus oil.',
+'Can I look at your blackheads?', 'Go wash your face.', 'Eucalyptus oil.',
 'Always use protection.', 'Milk baths are healing.']
 
 def determine_intent(question): # this is the user input gateway
+
+    prompt2 = question + "\n-> "
 	
-	prompt2 = question + "\n-> "
+    answer = input(prompt2)
 	
-	answer = raw_input(prompt2)
+    # cheating for playtest
+    if answer == "cheat": 
+
+	answer2 = input("Do you want to cheat?\n")
+
+	while answer2 == "y":
 	
-	# cheating for playtest
-	if answer == "cheat": 
-		answer2 = raw_input("Do you want to cheat?\n")
-		while answer2 == "y":
-	
-			answer3 = raw_input("Which item would you like to add to your inventory?\n")
-			satchel_contents.append(answer3)
-			answer2 = raw_input("Add another item?\n")
+	    answer3 = input("Which item would you like to add to your inventory?\n")
+	    satchel_contents.append(answer3)
+	    answer2 = input("Add another item?\n")
 		
-		player_hp = 999
-		player_hp_dmg = player_hp
+	    player_hp = 999
+	    player_hp_dmg = player_hp
 		
-		answer = raw_input(prompt2)
+	    answer = input(prompt2)
 	
 	
 	
-	if answer in loot_lvl_1_3 or answer in loot_lvl_4_6 or answer in loot_lvl_7_9:
-		return answer
+    if answer in loot_lvl_1_3 or answer in loot_lvl_4_6 or answer in loot_lvl_7_9:
+	return answer
 	
-	answer = answer.lower()
-	print "\n\n"
+    answer = answer.lower()
+    print("\n\n")
 	
-	while len(answer) == 0 or answer in maybe_list or answer in undecided_list:
-		if len(answer) == 0:
-			print "Nothin aint no answer I ever heard of.\n"
-			answer = raw_input(prompt2)
-			answer = answer.lower()
-			print "\n\n"
+    while len(answer) == 0 or answer in maybe_list or answer in undecided_list:
+
+	if len(answer) == 0:
+
+	    print("Nothin aint no answer I ever heard of.\n")
+	    answer = input(prompt2)
+	    answer = answer.lower()
+	    print("\n\n")
 		
-		elif answer in maybe_list: 
-			print "Perhaps you better decide definitely.\n"
-			answer = raw_input(prompt2)
-			answer = answer.lower()
-			print "\n\n"
+	elif answer in maybe_list: 
+
+	    print("Perhaps you better decide definitely.\n")
+	    answer = input(prompt2)
+	    answer = answer.lower()
+	    print("\n\n")
 		
-		else: 
-			print "Be decisive.\n"
-			answer = raw_input(prompt2)
-			answer = answer.lower()
-			print "\n\n"
+	else: 
+
+	    print("Be decisive.\n")
+	    answer = input(prompt2)
+	    answer = answer.lower()
+	    print("\n\n")
 		
-	while answer == "stats" or answer == "options" or answer == "inventory" or answer == "scoreboard" or answer == "equip" or answer == "advice":
+    while answer == "stats" or answer == "options" or answer == "inventory" or answer == "scoreboard" or answer == "equip" or answer == "advice":
 		
-		if answer == "stats":
-			print """Here are your current stats:\n
-			Name: %s  |  Class: %s
-			Level: %d
-			Strength: %d
-			Dexterity: %d
-			Intelligence: %d
-			Max Hit Points: %d
-			Current Hit Points: %d\n\n""" % (player_name, player_class, player_lvl, player_str,
-			player_dex, player_int, player_hp, player_hp_dmg)
+	if answer == "stats":
+
+	    print("""Here are your current stats:\n
+	    Name: %s  |  Class: %s
+	    Level: %d
+	    Strength: %d
+	    Dexterity: %d
+	    Intelligence: %d
+	    Max Hit Points: %d
+	    Current Hit Points: %d\n\n""" % player_name, player_class, player_lvl, player_str,
+	    player_dex, player_int, player_hp, player_hp_dmg)
 			
-			answer = raw_input(prompt2)
-			answer = answer.lower()
-			print "\n\n"
+	    answer = input(prompt2)
+	    answer = answer.lower()
+	    print("\n\n")
 		
-		elif answer == "options":
-			print "Each of these commands will do something if typed in when prompted for an answer.\n"
-			print "\toptions       <--- That is this list!"
-			print "\tstats         <--- Player Stats!"
-			print "\tinventory     <--- Contents of your satchel!"
-			print "\tscoreboard    <--- Best scores!"
-			print "\tequip         <--- Equip an item!"
-			print "\tadvice        <--- Remember advice from one of your parents!\n\n"
+	elif answer == "options":
+
+	    print("Each of these commands will do something if typed in when prompted for an answer.\n")
+	    print("\toptions       <--- That is this list!")
+	    print("\tstats         <--- Player Stats!")
+	    print("\tinventory     <--- Contents of your satchel!")
+	    print("\tscoreboard    <--- Best scores!")
+	    print("\tequip         <--- Equip an item!")
+	    print("\tadvice        <--- Remember advice from one of your parents!\n\n")
 			
-			answer = raw_input(prompt2)
-			answer = answer.lower()
-			print "\n\n"
+	    answer = input(prompt2)
+	    answer = answer.lower()
+	    print("\n\n")
 			
-		elif answer == "inventory":
+	elif answer == "inventory":
 		
-			if satchel_contents == []:
-				print "Your satchel is empty!\n\n"
+	    if satchel_contents == []:
+
+		print("Your satchel is empty!\n\n")
 				
-				answer = raw_input(prompt2)
-				answer = answer.lower()
-				print "\n\n"
+		answer = input(prompt2)
+		answer = answer.lower()
+		print("\n\n")
 			
-			else:
-				print "Here are the current contents of your Satchel: "
-				satchel_contents.sort()
-				for item in satchel_contents: 
-					print "\t--" + item + "--"
-				print "\n\n"
-			
-				print "These are the equippable items in your possession: "
-				for item in satchel_contents:
-					if item in equippable_loot:
-						print "\t<-> " + item
-				print "\n\n"
+	    else:
+
+		print("Here are the current contents of your Satchel: \n")
+
+		satchel_contents.sort()
+
+		for item in satchel_contents: 
+
+		    print("\t--" + item + "--")
+		    print("\n\n")
+		    print("These are the equippable items in your possession: \n")
+
+		    for item in satchel_contents:
+
+			if item in equippable_loot:
+			    print("\t<-> " + item)
+			    print("\n\n")
 						
-				print "Here is what you have equipped: \n"
-				for key, value in equipped_loot.items():
-					print "\t" + key + " : " + value + "   ...   " + loot_dict[value]
-				print "\n\n"
+		    print "Here is what you have equipped: \n"
+
+		    for key, value in equipped_loot.items():
+			print("\t" + key + " : " + value + "   ...   " + loot_dict[value])
+			print("\n\n")
 					
-				answer = raw_input(prompt2)
-				answer = answer.lower()
-				print "\n\n"
+			answer = input(prompt2)
+			answer = answer.lower()
+			print("\n\n")
 		
-		elif answer == "scoreboard": 
+	elif answer == "scoreboard": 
 		
-			print """
-			Most fights won before death: %d by %s
-			Most fights won walking into the Battle Cave at one go: %d by %s
-			Most fights won in the Battle Cave and survive: %d by %s
-			\n\n""" % (fight_count_most, high_scorer_fcm, battle_cave_furthest, high_scorer_bcf,
+	    print("""
+		Most fights won before death: %d by %s
+		Most fights won walking into the Battle Cave at one go: %d by %s
+		Most fights won in the Battle Cave and survive: %d by %s
+		\n\n""" % fight_count_most, high_scorer_fcm, battle_cave_furthest, high_scorer_bcf,
 			       battle_cave_there_and_back, high_scorer_bctb)
 			
-			answer = raw_input(prompt2)
-			answer = answer.lower()
-			print "\n\n"
+		answer = input(prompt2)
+		answer = answer.lower()
+		print("\n\n")
 			
-		elif answer == "equip":
+	elif answer == "equip":
 		
-			equip()
+	    equip()
 			
-			answer = raw_input(prompt2)
-			answer = answer.lower()
-			print "\n\n"
+	    answer = input(prompt2)
+	    answer = answer.lower()
+	    print("\n\n")
 		
-		elif answer == "advice":
+	elif answer == "advice":
 			
-			chance = randint(1, 100)
-			if chance <= 50: 
-				print_wisdom("Dad")
-				print "He was a good man.\n\n\n"
-			else: 
-				print_wisdom("Mom")
-				print "She was an excellent woman.\n\n\n"
+	    chance = randint(1, 100)
+
+	    if chance <= 50: 
+		print_wisdom("Dad")
+		print("He was a good man.\n\n\n")
+
+	    else: 
+		print_wisdom("Mom")
+		print("She was an excellent woman.\n\n\n")
 			
-			answer = raw_input(prompt2)
-			answer = answer.lower()
-			print "\n\n"
+		answer = input(prompt2)
+		answer = answer.lower()
+		print("\n\n")
 
-	if answer in yes_list:			
-		answer = "y"
+    if answer in yes_list:			
 
-	elif answer in no_list:		
-		answer = "n"
+	answer = "y"
+
+    elif answer in no_list:		
+
+	answer = "n"
 	
-	elif answer in door_list:
-		answer = "door"
+    elif answer in door_list:
 
-	elif answer in north_list:			
-		answer = "n"
+	answer = "door"
 
-	elif answer in south_list:		
-		answer = "s"
+    elif answer in north_list:			
+
+	answer = "n"
+
+    elif answer in south_list:		
+
+	answer = "s"
 		
-	elif answer in west_list:		
-		answer = "w"
-		
-	elif answer in east_list:		
-		answer = "e"
-		
-	elif answer in fight_list:
-		answer = "fight"
-	
-	elif answer in flee_list:
-		answer = "flee"
+    elif answer in west_list:		
 
-	elif answer == "quit":
-		dead("You have quit.") 
+	answer = "w"
+		
+    elif answer in east_list:		
+
+	answer = "e"
+		
+    elif answer in fight_list:
+
+	answer = "fight"
 	
-	elif answer == "1" or answer == "2" or answer == "3" or answer == "4":
-		return answer
+    elif answer in flee_list:
+
+	answer = "flee"
+
+    elif answer == "quit":
+
+	dead("You have quit.") 
 	
-	elif answer == "5" or answer == "6" or answer == "7" or answer == "8":
-		return answer
+    elif answer in (1, 2, 3, 4, 5, 6, 7, 8): 
 	
 	return answer
 		
+
 def print_wisdom(parent):
 	
-	if parent == "Dad":
-		chance = randint(0, 10)
-		print "\nFrom your Father:\n"
-		print '"' + fathers_wisdom[chance] + '"'
-		print "\n\n"
+    if parent == "Dad":
+
+	chance = randint(0, 10)
+	print("\nYou remember your Father once said,\n")
+	print('"' + fathers_wisdom[chance] + '"')
+	print("\n\n")
 		
-	else: 
-		chance = randint(0, 11)
-		print "\nFrom your Mother:\n"
-		print '"' + mothers_wisdom[chance] + '"'
-		print "\n\n"
+    else: 
+
+	chance = randint(0, 11)
+	print("\nA memory comes to you quite clearly, of your Mother saying,\n")
+	print('"' + mothers_wisdom[chance] + '"')
+	print("\n\n")
 		
 def equip():
 	
-	global player_str, player_dex, player_int, player_hp, attack_mod, defense_mod, walking_stick
-	global cloth_cap, short_stick, basic_gloves, thick_shirt, three_ft_pipe, sturdy_hat, madrona_wand
-	global fingerless_gloves, leather_t, sword, wide_brim_hat, oak_staff, power_mitts, leather_jacket
-	global small_medallion, big_medallion, intricate_medallion, weapon, current_weapon
+    global player_str, player_dex, player_int, player_hp, attack_mod, defense_mod, walking_stick
+    global cloth_cap, short_stick, basic_gloves, thick_shirt, three_ft_pipe, sturdy_hat, madrona_wand
+    global fingerless_gloves, leather_t, sword, wide_brim_hat, oak_staff, power_mitts, leather_jacket
+    global small_medallion, big_medallion, intricate_medallion, weapon, current_weapon
 	
-	equip_again = True
+    equip_again = True
 
-	answer = determine_intent("What would you like to equip?\n")
+    answer = determine_intent("What would you like to equip?\n")
 	
-	while answer in satchel_contents and equip_again == True:
+    while answer in satchel_contents and equip_again:
 		
-		print "\n\n"
+	print("\n\n")
 		
-		if answer in non_equippable_loot:
+	if answer in non_equippable_loot:
 			
-			print "That item cannot be equipped!\n\n"
+        print("That item cannot be equipped!\n\n")
 		
-		elif answer == "Cloth Cap" and cloth_cap == False:
+	elif answer == "Cloth Cap" and not cloth_cap:
 			
-			if sturdy_hat or wide_brim_hat:
-				print "Why would you do that? You'd lose intelligence!\n"
-				time.sleep(2)
-				print "I mean, if you're willing to make this decision with"
-				print "this level of intelligence, what kind of decisions are"
-				print "you going to make with less intelligence?\n"
-				time.sleep(7)
-				print "We'll hold off for now.\n"
-				
-			else: 
-				print "Okay, you equip the Cloth Cap! Your intelligence is increased by 1!\n"
-				player_int += 1
-				cloth_cap = True
-				equipped_loot['Head'] = "Cloth Cap"
-			
-		elif answer == "Cloth Cap" and cloth_cap == True:
-			
-			print "You are already wearing the Cloth Cap!\n"
-			
-		elif answer == "Short Stick" and short_stick == False:
-			
-			if weapon:
-				print "Okay, %s, the Short Stick is replacing your %s!\n" % (player_name, current_weapon)
-				print "Your bonus attack is 1!\n"
-				attack_mod = 1
-				short_stick = True
-				equipped_loot['Weapon'] = "Short Stick"
-				if current_weapon == "Madrona Wand":
-					madrona_wand = False
-				
-				elif current_weapon == "Oak Staff":
-					oak_staff = False
-					
-				elif current_weapon == "Sturdy Walking Stick":
-					walking_stick = False
-					
-				elif current_weapon == "Three Foot Pipe":
-					three_ft_pipe = False
-					
-				else:
-					sword = False
-				
-				current_weapon = "Short Stick"
-			
-			else:
-				print "Okay, you equip the Short Stick! Your bonus attack is 1!\n"
-				attack_mod = 1
-				short_stick = True
-				weapon = True
-				current_weapon = "Short Stick"
-				equipped_loot['Weapon'] = "Short Stick"
-			
-		elif answer == "Short Stick" and short_stick == True:
-			
-			print "You already have the Short Stick equipped!\n"
-			
-		elif answer == "Basic Gloves" and basic_gloves == False:
-			
-			if fingerless_gloves or power_mitts:
-				print "Why would you do that? You'd lose dexterity!\n"
-				
-			else: 
-				print "Okay, you equip the Basic Gloves! Your dexterity is increased by 1!\n"
-				player_dex += 1
-				basic_gloves = True
-				equipped_loot['Hands'] = "Basic Gloves"
-			
-		elif answer == "Basic Gloves" and basic_gloves == True:
-			
-			print "You are already wearing the Basic Gloves!\n"
-			
-		elif answer == "Thick Shirt" and thick_shirt == False:
-				
-			if leather_t or leather_jacket:
-				print "Why would you do that? You'd become more defenseless!\n"
-				
-			else: 
-				print "Okay, you equip the Thick Shirt! Your defense bonus is 1!\n"
-				defense_mod = 1
-				thick_shirt = True
-				equipped_loot['Body'] = "Thick Shirt"
-			
-		elif answer == "Thick Shirt" and thick_shirt == True:
-			
-			print "You are already wearing the Thick Shirt!\n"
-			
-		elif answer == "Sturdy Hat" and sturdy_hat == False:
-			
-			if cloth_cap == True:
-				print "You have removed the Cloth Cap and equipped the Sturdy Hat!\n"
-				print "Your intelligence is increased by 1!\n"
-				player_int += 1
-				sturdy_hat = True
-				cloth_cap = False
-				equipped_loot['Head'] = "Sturdy Hat"
-				
-			elif wide_brim_hat:
-				print "Up to you, %s." % player_name
-				print "Your intelligence is decreased by 1.\n"
-				player_int -= 1
-				wide_brim_hat = False
-				sturdy_hat = True
-				equipped_loot['Head'] = "Sturdy Hat"
-			
-			else:
-				print "Okay, you equip the Sturdy Hat! Your intelligence is increased by 2!\n"
-				player_int += 2
-				sturdy_hat = True
-				equipped_loot['Head'] = "Sturdy Hat"
-				
-		elif answer == "Sturdy Hat" and sturdy_hat == True:
-			
-			print "You're already wearing the Sturdy Hat!\n"
-		
-		elif answer == "Madrona Wand" and madrona_wand == False:
-			
-			if weapon:
-				print "Okay, %s, the Madrona Wand is replacing your %s!\n" % (player_name, current_weapon)
-				print "Your bonus attack is 2!\n"
-				attack_mod = 2
-				madrona_wand = True
-				equipped_loot['Weapon'] = "Madrona Wand"
-				if current_weapon == "Short Stick":
-					short_stick = False
-				
-				elif current_weapon == "Oak Staff":
-					oak_staff = False
-					
-				elif current_weapon == "Sturdy Walking Stick":
-					walking_stick = False
-					
-				elif current_weapon == "Three Foot Pipe":
-					three_ft_pipe = False
-					
-				else:
-					sword = False
-				
-				current_weapon = "Madrona Wand"
-				
-			else: 
-				print "Okay, you equip the Madrona Wand! Your bonus attack is 2!\n"
-				attack_mod = 2
-				madrona_wand = True
-				weapon = True
-				current_weapon = "Madrona Wand"
-				equipped_loot['Weapon'] = "Madrona Wand"
-				
-		elif answer == "Madrona Wand" and madrona_wand == True:
-			
-			print "You've already got the Madrona Wand equipped!\n"
-			
-		elif answer == "Fingerless Gloves" and fingerless_gloves == False:
-			
-			if basic_gloves == True:
-				print "You have removed the Basic Gloves and equipped the Fingerless Gloves!\n"
-				print "You're dexterity is increased by 1!\n"
-				player_dex += 1
-				fingerless_gloves = True
-				basic_gloves = False
-				equipped_loot['Hands'] = "Fingerless Gloves"
-				
-			elif power_mitts:
-				print "Up to you, %s." % player_name
-				print "Your dexterity is decreased by 1.\n"
-				player_dex -= 1
-				power_mitts = False
-				fingerless_gloves = True
-				equipped_loot['Hands'] = "Fingerless Gloves"
-			
-			else:
-				print "Okay, you equip the Fingerless Gloves! Your dexterity is increased by 2!\n"
-				player_dex += 2
-				fingerless_gloves = True
-				equipped_loot['Hands'] = "Fingerless Gloves"
-				
-		elif answer == "Fingerless Gloves" and fingerless_gloves == True:
-			
-			print "You're already wearing the Fingerless Gloves!\n"
-			
-		elif answer == "Leather T-Shirt" and leather_t == False:
-			
-			if thick_shirt == True:
-				print "You have removed the Thick Shirt and equipped the Leather T-Shirt!\n"
-				print "You're defense bonus is 2!\n"
-				defense_mod = 2
-				leather_t = True
-				thick_shirt = False
-				equipped_loot['Body'] = "Leather T-Shirt"
-				
-			elif leather_jacket:
-				print "Up to you, %s." % player_name
-				print "Your defense bonus is 2!\n"
-				defense_mod = 2
-				leather_jacket = False
-				leather_t = True
-				equipped_loot['Body'] = "Leather T-Shirt"
-			
-			else:
-				print "Okay, you equip the Leather T-Shirt! Your defense bonus is 2!\n"
-				defense_mod = 2
-				leather_t = True
-				equipped_loot['Body'] = "Leather T-Shirt"
-				
-		elif answer == "Leather T-Shirt" and leather_t == True:
-			
-			print "You're already wearing the Leather T-Shirt, and I must say it looks dashing!\n"
-			
-		elif answer == "Wide Brim Hat" and wide_brim_hat == False:
-			
-			if cloth_cap == True:
-				print "You have removed the Cloth Cap and equipped the Wide Brim Hat!\n"
-				print "Your intelligence is increased by 2!\n"
-				player_int += 2
-				wide_brim_hat = True
-				cloth_cap = False
-				equipped_loot['Head'] = "Wide Brim Hat"
-			
-			elif sturdy_hat == True:
-				print "You have removed the Sturdy Hat and equipped the Wide Brim Hat!\n"
-				print "Your intelligence is increased by 1!\n"
-				player_int += 1
-				wide_brim_hat = True
-				sturdy_hat = False
-				equipped_loot['Head'] = "Wide Brim Hat"
-				
-			else: 
-				print "Okay, you equip the Wide Brim Hat! Your intelligence is increased by 3!\n"
-				player_int += 3
-				wide_brim_hat = True
-				equipped_loot['Head'] = "Wide Brim Hat"
-				
-		elif answer == "Wide Brim Hat" and wide_brim_hat == True:
-			
-			print "You're already wearing the Wide Brim Hat!\n"
-		
-		elif answer == "Oak Staff" and oak_staff == False:
-			
-			if weapon:
-				print "Okay, %s, the Oak Staff is replacing your %s!\n" % (player_name, current_weapon)
-				print "Your bonus attack is 3!\n"
-				attack_mod = 3
-				oak_staff = True
-				equipped_loot['Weapon'] = "Oak Staff"
-				if current_weapon == "Short Stick":
-					short_stick = False
-				
-				elif current_weapon == "Madrona Wand":
-					madrona_wand = False
-					
-				elif current_weapon == "Sturdy Walking Stick":
-					walking_stick = False
-					
-				elif current_weapon == "Three Foot Pipe":
-					three_ft_pipe = False
-					
-				else:
-					sword = False
-				
-				current_weapon = "Oak Staff"
-				
-			else: 
-				print "Okay, you equip the Oak Staff! Your bonus attack is 3!\n"
-				attack_mod = 3
-				oak_staff = True
-				weapon = True
-				current_weapon = "Oak Staff"
-				equipped_loot['Weapon'] = "Oak Staff"
-				
-		elif answer == "Oak Staff" and oak_staff == True:
-			
-			print "You've already got the Oak Staff equipped!\n"
-			
-		elif answer == "Power Mitts" and power_mitts == False:
-			
-			if basic_gloves == True:
-				print "You have removed the Basic Gloves and equipped the Power Mitts!\n"
-				print "You're dexterity is increased by 2!\n"
-				player_dex += 2
-				power_mitts = True
-				basic_gloves = False
-				equipped_loot['Hands'] = "Power Mitts"
-				
-			elif fingerless_gloves == True:
-				print "You have removed the Fingerless Gloves and equipped the Power Mitts!\n"
-				print "You're dexterity is increased by 1!\n"
-				player_dex += 1
-				power_mitts = True
-				fingerless_gloves = False
-				equipped_loot['Hands'] = "Power Mitts"
-			
-			else:
-				print "Okay, you equip the Power Mitts! Your dexterity is increased by 3!\n"
-				player_dex += 3
-				power_mitts = True
-				equipped_loot['Hands'] = "Power Mitts"
-				
-		elif answer == "Power Mitts" and power_mitts == True:
-			
-			print "You're already wearing the Power Mitts!\n"
-			
-		elif answer == "Leather Jacket" and leather_jacket == False:
-			
-			if thick_shirt == True:
-				print "You have removed the Thick Shirt and equipped the Leather Jacket!\n"
-				print "You're defense bonus is 3!\n"
-				defense_mod = 3
-				leather_jacket = True
-				thick_shirt = False
-				equipped_loot['Body'] = "Leather Jacket"
-				
-			elif leather_t == True:
-				print "You have removed the Leather T-Shirt and equipped the Leather Jacket!\n"
-				print "You're defense bonus is 3!\n"
-				defense_mod = 3
-				leather_jacket = True
-				leather_t = False
-				equipped_loot['Body'] = "Leather Jacket"
-			
-			else:
-				print "Okay, you equip the Leather Jacket! Your defense is increased by 3!\n"
-				defense_mod = 3
-				leather_jacket = True
-				equipped_loot['Body'] = "Leather Jacket"
-				
-		elif answer == "Leather Jacket" and leather_jacket == True:
-			
-			print "You're already wearing the Leather Jacket!\n"
-		
-		elif answer == "Sturdy Walking Stick" and walking_stick == False:
-			
-			if weapon:
-				print "Okay, %s, the Sturdy Walking Stick is replacing your %s!\n" % (player_name, current_weapon)
-				print "Your bonus attack is 1!\n"
-				attack_mod = 1
-				walking_stick = True
-				equipped_loot['Weapon'] = "Sturdy Walking Stick"
-				if current_weapon == "Short Stick":
-					short_stick = False
-				
-				elif current_weapon == "Oak Staff":
-					oak_staff = False
-					
-				elif current_weapon == "Madrona Wand":
-					madrona_wand = False
-					
-				elif current_weapon == "Three Foot Pipe":
-					three_ft_pipe = False
-					
-				else:
-					sword = False
-				
-				current_weapon = "Sturdy Walking Stick"
-				
-			else: 
-				print "Okay, you equip the Sturdy Walking Stick! Your bonus attack is 1!\n"
-				attack_mod = 1
-				walking_stick = True
-				weapon = True
-				current_weapon = "Sturdy Walking Stick"
-				equipped_loot['Weapon'] = "Sturdy Walking Stick"
-			
-		elif answer == "Sturdy Walking Stick" and walking_stick == True:
-			
-			print "You've already got the Sturdy Walking Stick equipped!\n"
+	    if sturdy_hat or wide_brim_hat:
 
-		elif answer == "Three Foot Pipe" and three_ft_pipe == False:
+		print("Why would you do that? You'd lose intelligence!\n")
+		time.sleep(2)
+		print("I mean, if you're willing to make this decision with")
+		print("this level of intelligence, what kind of decisions are")
+		print("you going to make with less intelligence?\n")
+		time.sleep(7)
+		print("We'll hold off for now.\n")
+				
+	    else: 
+
+		print("Okay, you equip the Cloth Cap! Your intelligence is increased by 1!\n")
+		player_int += 1
+		cloth_cap = True
+		equipped_loot['Head'] = "Cloth Cap"
 			
-			if weapon:
-				print "Okay, %s, the Three Foot Pipe is replacing your %s!\n" % (player_name, current_weapon)
-				print "Your bonus attack is 2!\n"
-				attack_mod = 2
-				three_ft_pipe = True
-				equipped_loot['Weapon'] = "Three Foot Pipe"
-				if current_weapon == "Short Stick":
-					short_stick = False
-				
-				elif current_weapon == "Oak Staff":
-					oak_staff = False
-					
-				elif current_weapon == "Sturdy Walking Stick":
-					walking_stick = False
-					
-				elif current_weapon == "Madrona Wand":
-					madrona_wand = False
-					
-				else:
-					sword = False
-				
-				current_weapon = "Three Foot Pipe"
-				
-			else: 
-				print "Okay, you equip the Three Foot Pipe! Your bonus attack is 2!\n"
-				attack_mod = 2
-				three_ft_pipe = True
-				weapon = True
-				current_weapon = "Three Foot Pipe"
-				equipped_loot['Weapon'] = "Three Foot Pipe"
-				
-		elif answer == "Three Foot Pipe" and three_ft_pipe == True:
+	elif answer == "Cloth Cap" and cloth_cap:
 			
-			print "You've already got the Three Foot Pipe equipped!\n"
+	    print("You are already wearing the Cloth Cap!\n")
+			
+	elif answer == "Short Stick" and not short_stick:
+			
+	    if weapon:
+
+		print("Okay, %s, the Short Stick is replacing your %s!\n" % player_name, current_weapon)
+		print("Your bonus attack is 1!\n")
+
+		attack_mod = 1
+		short_stick = True
+		equipped_loot['Weapon'] = "Short Stick"
+
+		if current_weapon == "Madrona Wand":
+
+		    madrona_wand = False
+				
+		elif current_weapon == "Oak Staff":
+
+		    oak_staff = False
+					
+		elif current_weapon == "Sturdy Walking Stick":
+
+		    walking_stick = False
+					
+		elif current_weapon == "Three Foot Pipe":
+
+		    three_ft_pipe = False
+					
+                else:
+
+		    sword = False
+
+		current_weapon = "Short Stick"
+			
+	    else:
+
+		print("Alright, you equip the Short Stick! Your bonus attack is 1!\n")
+		attack_mod = 1
+		short_stick = True
+		weapon = True
+		current_weapon = "Short Stick"
+		equipped_loot['Weapon'] = "Short Stick"
+			
+	elif answer == "Short Stick" and short_stick:
+			
+	    print("You already have the Short Stick equipped!\n")
+			
+	elif answer == "Basic Gloves" and not basic_gloves:
+			
+	    if fingerless_gloves or power_mitts:
+
+		print("Why would you do that? You'd lose dexterity!\n")
+				
+	    else: 
+
+		print("Yay, you equip the Basic Gloves! Your dexterity is increased by 1!\n")
+		player_dex += 1
+		basic_gloves = True
+		equipped_loot['Hands'] = "Basic Gloves"
+			
+	elif answer == "Basic Gloves" and basic_gloves:
+			
+	    print("You are already wearing the Basic Gloves!\n")
+			
+	elif answer == "Thick Shirt" and not thick_shirt:
+				
+	    if leather_t or leather_jacket:
+
+		print("Why would you do that? You'd become more defenseless!\n")
+				
+	    else: 
+
+		print("Okay, you equip the Thick Shirt! Your defense bonus is 1!\n")
+		defense_mod = 1
+		thick_shirt = True
+		equipped_loot['Body'] = "Thick Shirt"
+			
+	elif answer == "Thick Shirt" and thick_shirt:
+			
+	    print("You are already wearing the Thick Shirt!\n")
+			
+	elif answer == "Sturdy Hat" and not sturdy_hat:
+			
+	    if cloth_cap == True:
+
+		print("You have removed the Cloth Cap and equipped the Sturdy Hat!\n")
+		print("Your intelligence is increased by 1!\n")
+		player_int += 1
+		sturdy_hat = True
+		cloth_cap = False
+		equipped_loot['Head'] = "Sturdy Hat"
+				
+	    elif wide_brim_hat:
+
+		print("Up to you, %s." % player_name)
+		print("Your intelligence is decreased by 1.\n")
+		player_int -= 1
+		wide_brim_hat = False
+		sturdy_hat = True
+		equipped_loot['Head'] = "Sturdy Hat"
+			
+	    else:
+
+		print "Okay, you equip the Sturdy Hat! Your intelligence is increased by 2!\n"
+		player_int += 2
+		sturdy_hat = True
+		equipped_loot['Head'] = "Sturdy Hat"
+				
+	elif answer == "Sturdy Hat" and sturdy_hat:
+			
+	    print("You're already wearing the Sturdy Hat!\n")
 		
-		elif answer == "Sword" and sword == False:
+	elif answer == "Madrona Wand" and not madrona_wand:
 			
-			if weapon:
-				print "Okay, %s, the Sword is replacing your %s!\n" % (player_name, current_weapon)
-				print "Your bonus attack is 3!\n"
-				attack_mod = 3
-				madrona_want = True
-				equipped_loot['Weapon'] = "Sword"
-				if current_weapon == "Short Stick":
-					short_stick = False
+	    if weapon:
+
+		print("Okay, %s, the Madrona Wand is replacing your %s!\n" % player_name, current_weapon)
+		print("Your bonus attack is 2!\n")
+		attack_mod = 2
+		madrona_wand = True
+		equipped_loot['Weapon'] = "Madrona Wand"
+
+	        if current_weapon == "Short Stick":
+
+		    short_stick = False
 				
-				elif current_weapon == "Oak Staff":
-					oak_staff = False
+	        elif current_weapon == "Oak Staff":
+
+		    oak_staff = False
 					
-				elif current_weapon == "Sturdy Walking Stick":
-					walking_stick = False
+	        elif current_weapon == "Sturdy Walking Stick":
+
+		    walking_stick = False
 					
-				elif current_weapon == "Three Foot Pipe":
-					three_ft_pipe = False
+	        elif current_weapon == "Three Foot Pipe":
+
+		    three_ft_pipe = False
 					
-				else:
-					madrona_wand = False
+	        else:
+
+		    sword = False
 				
-				current_weapon = "Sword"
+	        current_weapon = "Madrona Wand"
 				
-			else: 
-				print "Okay, you equip the Sword! Your bonus attack is 3!\n"
-				attack_mod = 3
-				sword = True
-				weapon = True
-				current_weapon = "Sword"
-				equipped_loot['Weapon'] = "Sword"
+            else: 
+
+	        print("Okay, you equip the Madrona Wand! Your bonus attack is 2!\n")
+	        attack_mod = 2
+	        madrona_wand = True
+	        weapon = True
+	        current_weapon = "Madrona Wand"
+	        equipped_loot['Weapon'] = "Madrona Wand"
 				
-		elif answer == "Sword" and sword == True:
+        elif answer == "Madrona Wand" and madrona_wand:
 			
-			print "You've already got the Sword equipped!\n"
+	    print("You've already got the Madrona Wand equipped!\n")
 			
-		elif answer == "Small Medallion" and small_medallion == False:
+	elif answer == "Fingerless Gloves" and not fingerless_gloves:
+			
+	    if basic_gloves == True:
+
+		print("You have removed the Basic Gloves and equipped the Fingerless Gloves!\n")
+		print("You're dexterity is increased by 1!\n")
+		player_dex += 1
+		fingerless_gloves = True
+		basic_gloves = False
+		equipped_loot['Hands'] = "Fingerless Gloves"
 				
-			print "You put the Small Medallion around your neck.\n"
-			small_medallion = True
-			big_medallion = False
-			intricate_medallion = False
-			equipped_loot['Neck'] = "Small Medallion"
+	    elif power_mitts:
+
+		print("Up to you, %s." % player_name)
+		print("Your dexterity is decreased by 1.\n")
+		player_dex -= 1
+		power_mitts = False
+		fingerless_gloves = True
+		equipped_loot['Hands'] = "Fingerless Gloves"
 			
-		elif answer == "Small Medallion" and small_medallion == True:
-			
-			print "You're already wearing the Small Medallion!\n"
-			
-		elif answer == "Big Medallion" and big_medallion == False:
+	    else:
+
+		print("Okay, you equip the Fingerless Gloves! Your dexterity is increased by 2!\n")
+		player_dex += 2
+		fingerless_gloves = True
+		equipped_loot['Hands'] = "Fingerless Gloves"
 				
-			print "You put the Big Medallion around your neck.\n"
-			big_medallion = True
-			small_medallion = False
-			intricate_medallion = False
-			equipped_loot['Neck'] = "Big Medallion"
+	elif answer == "Fingerless Gloves" and fingerless_gloves:
 			
-		elif answer == "Big Medallion" and big_medallion == True:
+	    print("You're already wearing the Fingerless Gloves!\n")
 			
-			print "You're already wearing the Big Medallion, and you look sexy!\n"
+	elif answer == "Leather T-Shirt" and not leather_t:
 			
-		elif answer == "Intricate Medallion" and intricate_medallion == False:
+	    if thick_shirt == True:
+
+		print("You have removed the Thick Shirt and equipped the Leather T-Shirt!\n")
+		print("You're defense bonus is 2!\n")
+		defense_mod = 2
+		leather_t = True
+		thick_shirt = False
+		equipped_loot['Body'] = "Leather T-Shirt"
+				
+	    elif leather_jacket:
+
+		print("Up to you, %s." % player_name)
+		print("Your defense bonus is 2!\n")
+		defense_mod = 2
+		leather_jacket = False
+		leather_t = True
+		equipped_loot['Body'] = "Leather T-Shirt"
 			
-			print "You put the Intricate Medallion around your neck.\n"
-			intricate_medallion = True
-			big_medallion = False
-			small_medallion = False
-			equipped_loot['Neck'] = "Intricate Medallion"
+	    else:
+
+		print("Okay, you equip the Leather T-Shirt! Your defense bonus is 2!\n")
+		defense_mod = 2
+		leather_t = True
+		equipped_loot['Body'] = "Leather T-Shirt"
+				
+	elif answer == "Leather T-Shirt" and leather_t:
 			
-		elif answer == "Intricate Medallion" and intricate_medallion == True:
+	    print("You're already wearing the Leather T-Shirt, and I must say it looks dashing!\n")
 			
-			print "You're already wearing the intricate medallion!\n"
+	elif answer == "Wide Brim Hat" and not wide_brim_hat:
+			
+	    if cloth_cap:
+
+		print("You have removed the Cloth Cap and equipped the Wide Brim Hat!\n")
+		print("Your intelligence is increased by 2!\n")
+		player_int += 2
+		wide_brim_hat = True
+		cloth_cap = False
+		equipped_loot['Head'] = "Wide Brim Hat"
+			
+	    elif sturdy_hat:
+
+		print("You have removed the Sturdy Hat and equipped the Wide Brim Hat!\n")
+		print("Your intelligence is increased by 1!\n")
+		player_int += 1
+		wide_brim_hat = True
+		sturdy_hat = False
+		equipped_loot['Head'] = "Wide Brim Hat"
+				
+	    else: 
+
+		print("Okay, you equip the Wide Brim Hat! Your intelligence is increased by 3!\n")
+		player_int += 3
+		wide_brim_hat = True
+	        equipped_loot['Head'] = "Wide Brim Hat"
+				
+	elif answer == "Wide Brim Hat" and wide_brim_hat:
+			
+	    print("You're already wearing the Wide Brim Hat!\n")
 		
-		else: 
-			print "YOU DO NOT HAVE THAT ITEM!\n"
-		
-		another_equip = determine_intent("Would you like to equip something else?\n")
-		
-		if another_equip == "y":
+	elif answer == "Oak Staff" and not oak_staff:
 			
-			answer = determine_intent("What would you like to equip?")
-		
+	    if weapon:
+
+	        print("Okay, %s, the Oak Staff is replacing your %s!\n" % player_name, current_weapon)
+		print("Your bonus attack is 3!\n")
+		attack_mod = 3
+		oak_staff = True
+		equipped_loot['Weapon'] = "Oak Staff"
+
+                if current_weapon == "Short Stick":
+
+		    short_stick = False
+				
+		elif current_weapon == "Madrona Wand":
+
+		    madrona_wand = False
+					
+		elif current_weapon == "Sturdy Walking Stick":
+
+		    walking_stick = False
+					
+		elif current_weapon == "Three Foot Pipe":
+
+		    three_ft_pipe = False
+					
 		else:
-			equip_again = False
-			print "\n\nOkay, good luck on your journey!"		
-	
-	if equip_again == False:
+
+		    sword = False
+				
+		current_weapon = "Oak Staff"
+				
+	    else: 
+
+		print("Okay, you equip the Oak Staff! Your bonus attack is 3!\n")
+		attack_mod = 3
+		oak_staff = True
+		weapon = True
+		current_weapon = "Oak Staff"
+		equipped_loot['Weapon'] = "Oak Staff"
+				
+	elif answer == "Oak Staff" and oak_staff:
+			
+	    print("You've already got the Oak Staff equipped!\n")
+			
+	elif answer == "Power Mitts" and not power_mitts:
+			
+	    if basic_gloves:
+
+		print("You have removed the Basic Gloves and equipped the Power Mitts!\n")
+		print("You're dexterity is increased by 2!\n")
+		player_dex += 2
+		power_mitts = True
+		basic_gloves = False
+		equipped_loot['Hands'] = "Power Mitts"
+				
+	    elif fingerless_gloves:
+
+		print("You have removed the Fingerless Gloves and equipped the Power Mitts!\n")
+		print("You're dexterity is increased by 1!\n")
+		player_dex += 1
+		power_mitts = True
+		fingerless_gloves = False
+		equipped_loot['Hands'] = "Power Mitts"
+			
+	    else:
+
+		print("Okay, you equip the Power Mitts! Your dexterity is increased by 3!\n")
+		player_dex += 3
+		power_mitts = True
+		equipped_loot['Hands'] = "Power Mitts"
+				
+	elif answer == "Power Mitts" and power_mitts:
+			
+	    print("You're already wearing the Power Mitts!\n")
+			
+	elif answer == "Leather Jacket" and not leather_jacket:
+			
+	    if thick_shirt:
+
+		print("You have removed the Thick Shirt and equipped the Leather Jacket!\n")
+		print("You're defense bonus is 3!\n")
+		defense_mod = 3
+		leather_jacket = True
+		thick_shirt = False
+		equipped_loot['Body'] = "Leather Jacket"
+				
+	    elif leather_t:
+
+		print("You have removed the Leather T-Shirt and equipped the Leather Jacket!\n")
+		print("You're defense bonus is 3!\n")
+		defense_mod = 3
+		leather_jacket = True
+		leather_t = False
+		equipped_loot['Body'] = "Leather Jacket"
+			
+	    else:
+
+		print("Okay, you equip the Leather Jacket! Your defense is increased by 3!\n")
+		defense_mod = 3
+		leather_jacket = True
+		equipped_loot['Body'] = "Leather Jacket"
+				
+	elif answer == "Leather Jacket" and leather_jacket:
+			
+	    print("You're already wearing the Leather Jacket!\n")
 		
-		print "\n"
-	
+	elif answer == "Sturdy Walking Stick" and not walking_stick:
+			
+	    if weapon:
+
+		print("Okay, %s, the Sturdy Walking Stick is replacing your %s!\n" % player_name, current_weapon)
+		print("Your bonus attack is 1!\n")
+		attack_mod = 1
+		walking_stick = True
+		equipped_loot['Weapon'] = "Sturdy Walking Stick"
+
+		if current_weapon == "Short Stick":
+
+		    short_stick = False
+				
+		elif current_weapon == "Oak Staff":
+
+		    oak_staff = False
+					
+		elif current_weapon == "Madrona Wand":
+
+		    madrona_wand = False
+					
+		elif current_weapon == "Three Foot Pipe":
+
+		    three_ft_pipe = False
+					
+		else:
+
+		    sword = False
+				
+		current_weapon = "Sturdy Walking Stick"
+				
+	    else: 
+
+		print("Okay, you equip the Sturdy Walking Stick! Your bonus attack is 1!\n")
+		attack_mod = 1
+		walking_stick = True
+		weapon = True
+		current_weapon = "Sturdy Walking Stick"
+		equipped_loot['Weapon'] = "Sturdy Walking Stick"
+			
+	elif answer == "Sturdy Walking Stick" and walking_stick:
+			
+	    print "You've already got the Sturdy Walking Stick equipped!\n"
+
+	elif answer == "Three Foot Pipe" and not three_ft_pipe:
+			
+	    if weapon:
+
+		print("Okay, %s, the Three Foot Pipe is replacing your %s!\n" % player_name, current_weapon)
+		print("Your bonus attack is 2!\n")
+		attack_mod = 2
+		three_ft_pipe = True
+		equipped_loot['Weapon'] = "Three Foot Pipe"
+
+		if current_weapon == "Short Stick":
+
+		    short_stick = False
+				
+		elif current_weapon == "Oak Staff":
+
+		    oak_staff = False
+					
+		elif current_weapon == "Sturdy Walking Stick":
+
+		    walking_stick = False
+					
+		elif current_weapon == "Madrona Wand":
+
+		    madrona_wand = False
+					
+		else:
+
+		    sword = False
+				
+		current_weapon = "Three Foot Pipe"
+				
+	    else: 
+
+		print("Okay, you equip the Three Foot Pipe! Your bonus attack is 2!\n")
+		attack_mod = 2
+		three_ft_pipe = True
+		weapon = True
+		current_weapon = "Three Foot Pipe"
+		equipped_loot['Weapon'] = "Three Foot Pipe"
+				
+	elif answer == "Three Foot Pipe" and three_ft_pipe:
+			
+	    print("You've already got the Three Foot Pipe equipped!\n")
+		
+	elif answer == "Sword" and sword == False:
+			
+	    if weapon:
+
+		print("Okay, %s, the Sword is replacing your %s!\n" % player_name, current_weapon)
+		print("Your bonus attack is 3!\n")
+		attack_mod = 3
+		madrona_want = True
+		equipped_loot['Weapon'] = "Sword"
+
+		if current_weapon == "Short Stick":
+
+		    short_stick = False
+				
+		elif current_weapon == "Oak Staff":
+
+		    oak_staff = False
+					
+		elif current_weapon == "Sturdy Walking Stick":
+
+		    walking_stick = False
+					
+		elif current_weapon == "Three Foot Pipe":
+
+		    three_ft_pipe = False
+					
+		else:
+
+		    madrona_wand = False
+				
+		current_weapon = "Sword"
+				
+	    else: 
+
+		print("Okay, you equip the Sword! Your bonus attack is 3!\n")
+		attack_mod = 3
+		sword = True
+		weapon = True
+		current_weapon = "Sword"
+		equipped_loot['Weapon'] = "Sword"
+				
+	elif answer == "Sword" and sword:
+			
+	    print("You've already got the Sword equipped!\n")
+			
+	elif answer == "Small Medallion" and not small_medallion:
+				
+	    print("You put the Small Medallion around your neck.\n")
+	    small_medallion = True
+	    big_medallion = False
+	    intricate_medallion = False
+	    equipped_loot['Neck'] = "Small Medallion"
+			
+	elif answer == "Small Medallion" and small_medallion:
+			
+	    print("You're already wearing the Small Medallion!\n")
+			
+	elif answer == "Big Medallion" and not big_medallion:
+				
+	    print("You put the Big Medallion around your neck.\n")
+	    big_medallion = True
+	    small_medallion = False
+	    intricate_medallion = False
+	    equipped_loot['Neck'] = "Big Medallion"
+			
+	elif answer == "Big Medallion" and big_medallion:
+			
+	    print("You're already wearing the Big Medallion, and you look sexy!\n")
+			
+	elif answer == "Intricate Medallion" and not intricate_medallion:
+			
+	    print("You put the Intricate Medallion around your neck.\n")
+	    intricate_medallion = True
+	    big_medallion = False
+	    small_medallion = False
+	    equipped_loot['Neck'] = "Intricate Medallion"
+			
+	elif answer == "Intricate Medallion" and intricate_medallion:
+			
+	    print "You're already wearing the intricate medallion!\n"
+		
 	else: 
-		print "You do not have that item!\n"
+
+	    print "YOU DO NOT HAVE THAT ITEM!\n"
+		
+	another_equip = determine_intent("Would you like to equip something else?\n")
+		
+	if another_equip == "y":
+			
+	    answer = determine_intent("What would you like to equip?")
+		
+	else:
+
+	    equip_again = False
+	    print "\n\nOkay, good luck on your journey!"		
+	
+    if not equip_again:
+		
+	print "\n"
+	
+    else: 
+
+	print "You do not have that item!\n"
 
 def print_enemies_full():
 	
-	print "\nEnemies for Adventurers, Level 1 - 3: "
-	for i in range(len(enemies_lvl_1_3)):
-		print enemies_lvl_1_3[i]
-	print '\n'
+    print("\nEnemies for Adventurers, Level 1 - 3: ")
+
+    for i in range(len(enemies_lvl_1_3)):
+
+	print(enemies_lvl_1_3[i])
+
+    print('\n')
+    
+    print("Enemies for Adventurers, Level 4 - 6: ")
+
+    for i in range(len(enemies_lvl_4_6)):
+
+	print(enemies_lvl_4_6[i])
+
+    print('\n')
 	
-	print "Enemies for Adventurers, Level 4 - 6: "
-	for i in range(len(enemies_lvl_4_6)):
-		print enemies_lvl_4_6[i]
-	print '\n'
-	
-	print "Enemies for Adventurers, Level 7 - 9: "
-	for i in range(len(enemies_lvl_7_9)):
-		print enemies_lvl_7_9[i]
+    print("Enemies for Adventurers, Level 7 - 9: ")
+
+    for i in range(len(enemies_lvl_7_9)):
+
+	print(enemies_lvl_7_9[i])
 		
 def print_items_full():
 	
-	print "\nItems for Adventurers, Level 1 - 3: "
-	for i in range(len(loot_lvl_1_3)):
-		print loot_lvl_1_3[i]
-	print '\n'
+    print("\nItems for Adventurers, Level 1 - 3: ")
+
+    for i in range(len(loot_lvl_1_3)):
+
+	print(loot_lvl_1_3[i])
+
+    print '\n'
 	
-	print "Items for Adventurers, Level 4 - 6: "
-	for i in range(len(loot_lvl_4_6)):
-		print loot_lvl_4_6[i]
-	print '\n'
+    print("Items for Adventurers, Level 4 - 6: ")
+
+    for i in range(len(loot_lvl_4_6)):
+
+	print(loot_lvl_4_6[i])
+
+    print('\n')
 	
-	print "Items for Adventurers, Level 7 - 9: "
-	for i in range(len(loot_lvl_7_9)):
-		print loot_lvl_7_9[i]
+    print("Items for Adventurers, Level 7 - 9: ")
+
+    for i in range(len(loot_lvl_7_9)):
+
+	print(loot_lvl_7_9[i])
 
 def battle(enemy, enemy_name):
 	
-	#player list order: Hp, Str, Dex, Int, xp
-	#enemy list order: Hp, MaxAttack, xp given, dex
+    #player list order: Hp, Str, Dex, Int, xp
+    #enemy list order: Hp, MaxAttack, xp given, dex
 		
-	global player_xp, player_hp_dmg, fight_count, fight_count_most
-	global high_scorer, high_scorer_fcm
+    global player_xp, player_hp_dmg, fight_count, fight_count_most
+    global high_scorer, high_scorer_fcm
 	
-	result = "No Hit."
-	enemy_hp = enemy[0]
-	enemy_attack = 0
-	player_attack = 0
-	round_count = 0
+    result = "No Hit."
+    enemy_hp = enemy[0]
+    enemy_attack = 0
+    player_attack = 0
+    round_count = 0
 		
-	if enemy[3] > player_dex:
+    if enemy[3] > player_dex:
 		
-		while player_hp_dmg > 0 and enemy_hp > 0:
+	while player_hp_dmg > 0 and enemy_hp > 0:
 			
-			round_count += 1
+	    round_count += 1
 			
-			print "\t###      ROUND %d      ###\n\n\n" % round_count
+	    print("\t###      ROUND %d      ###\n\n\n" % round_count)
 			
-			print "\nThe %s attacks!\n" % enemy_name
-			time.sleep(1)
+	    print("\nThe %s attacks!\n" % enemy_name)
+	    time.sleep(1)
 			
-			enemy_attack = randint(0, enemy[1])
-			precision = randint(1, 100)
+	    enemy_attack = randint(0, enemy[1])
+	    precision = randint(1, 100)
 		
-			if precision >= 90:
+	    if precision >= 90:
 		
-				if precision == 100:
-					result = "Unreal Critical Precision!\n\n" 
-					enemy_attack += 3
-				
-				else: 
-					result = "Critical Precision!\n\n" 
-					enemy_attack += 2
-			
-			elif 75 < precision < 90:
-				result = "Precision hit!\n\n" 
-				enemy_attack += 1
-			
-			elif 30 < precision < 76:
-				result = "Hit!\n\n"
-			
-			elif 10 < precision < 31:
-				result = "Weak hit!\n\n"
-				enemy_attack -= 1
-			
-			elif 1 <= precision <= 10:
-			
-				if precision == 2:
-					result = "Glancing blow.\n\n" 
-					enemy_attack -= 3
-				
-				elif precision == 1:
-					result = "Missed!\n\n"
-					enemy_attack = 0
-				
-				else:
-					result = "Contact.\n\n"
-					enemy_attack -= 2
-			
-			else:
-				result = "This shouldn't ever print."
-				
-			print result
-			
-			if defense_mod > 0:
-				enemy_attack -= defense_mod
-				print "\n -- Defense Modifier is %d -- \n" % defense_mod
-			
-			if enemy_attack < 0:
-			
-				enemy_attack = 0
-			
-			print "The %s strikes you for: %d damage!\n" % (enemy_name, enemy_attack)
-			time.sleep(1)
-			
-			player_hp_dmg -= enemy_attack
-			
-			print "You now have %s hit points.\n" % player_hp_dmg
-			print "  -------------********-------------  \n\n"
-			time.sleep(1)
-			
-			if player_hp_dmg <= 0:
-				
-				determine_player_death(player_hp_dmg, enemy_name)
-			
-			print "Now it's your turn to attack!\n"
-			time.sleep(1)
-			
-			# First attack algorithm:
-			# player_attack = x + y + j
-			
-			# Second attack algorithm:
-			# modifier = randint(1, 3)
-			# player_attack = (x + y + j) / modifier
-	
-			# updated attack algorithm:
-			x = player_str
-			y = player_dex 
-			j = player_int
-			order = [x, y, j]
-			order.sort()
-			a = order[1] / 3
-			b = order[2]
-			player_attack = a + b
-			
-			balance = randint(1, 3)
-			
-			if balance == 1:
-				print "Perfectly balanced attack!\n"
-			
-			elif balance == 2:
-				print "Well balanced attack!\n"
-				player_attack /= 2
-			
-			elif balance == 3:
-				print "Off balance attack.\n"
-				player_attack /= 3
-			
-			else:
-				print "This should not ever print. Ever."
-			
-			precision = randint(1, 100)
-			
-			if precision >= 90:
-			
-				if precision == 100:
-					result = "Unreal Critical Precision!\n\n" 
-					player_attack += 3
-				
-				else: 
-					result = "Critical Precision!\n\n" 
-					player_attack += 2
-			
-			elif 75 < precision < 90:
-				result = "Precision hit!\n\n" 
-				player_attack += 1
-			
-			elif 30 < precision < 76:
-				result = "Hit!\n\n"
-			
-			elif 10 < precision < 31:
-				result = "Weak hit!\n\n"
-				player_attack -= 1
-			
-			elif 1 <= precision <= 10:
-			
-				if precision == 2:
-					result = "Glancing blow.\n\n" 
-					player_attack -= 3
-				
-				elif precision == 1:
-					result = "Miss!\n\n"
-					player_attack = 0
-				
-				else:
-					result = "Contact.\n\n"
-					player_attack -= 2
-			
-			else:
-				result = "This shouldn't ever print."
-				
-			print result
-			
-			if attack_mod > 0:
-				player_attack += attack_mod
-				print "\n -- Attack Modifier is %d -- \n" % attack_mod
-			
-			if player_attack < 0:
-				
-				player_attack = 0
-			
-			elif result == "Miss!\n\n":
-				
-				player_attack = 0
-			
-			print "You strike the %s for: %d damage!\n" % (enemy_name, player_attack)
-			time.sleep(1)
-			
-			enemy_hp -= player_attack
-			
-			print "The %s now has %d hit points.\n" % (enemy_name, enemy_hp)
-			print "  -------------********-------------  \n\n"
-			time.sleep(1)
-			
-			if enemy_hp <= 0:
-				
-				determine_enemy_death(enemy_hp, enemy_name)
-				time.sleep(3)
-				break
-				
-			if small_medallion:
-				print "Warmth radiates from the medallion,"
-				print "suddenly you become a little healthier.\n\n"
-				player_hp_dmg += 1
-				if player_hp_dmg > player_hp:
-					player_hp_dmg = player_hp
-			
-			elif big_medallion or intricate_medallion:
-				print "The medallion's heat radiates through your body,"
-				print "and suddenly you become much healthier.\n\n"
-				player_hp_dmg += 2
-				if player_hp_dmg > player_hp:
-					player_hp_dmg = player_hp
-			
-		if player_hp_dmg <= 0:
-			
-			determine_player_death(player_hp_dmg, enemy_name)
-	
-	else:
-		
-		while player_hp_dmg > 0 and enemy_hp > 0:
-			
-			round_count += 1
-			
-			print "\t###      ROUND %d      ###\n\n\n" % round_count
-			
-			print "You attack!\n"
-			
-			time.sleep(1)
-		
-			x = player_str
-			y = player_dex 
-			j = player_int
-			order = [x, y, j]
-			order.sort()
-			a = order[1] / 3
-			b = order[2]
-			player_attack = a + b
-			
-			balance = randint(1, 3)
-			
-			if balance == 1:
-				print "Perfectly balanced attack!\n"
-			
-			elif balance == 2:
-				print "Well balanced attack!\n"
-				player_attack /= 2
-			
-			elif balance == 3:
-				print "Off balance attack.\n"
-				player_attack /= 3
-			
-			else:
-				print "This should not ever print. Ever."
-			
-			precision = randint(1, 100)
-			
-			if precision >= 90:
-			
-				if precision == 100:
-					result = "Unreal Critical Precision!\n\n" 
-					player_attack += 3
-	
-				else: 
-					result = "Critical Precision!\n\n" 
-					player_attack += 2
+		if precision == 100:
 
-			elif 75 < precision < 90:
-				result = "Precision hit!\n\n" 
-				player_attack += 1
-			
-			elif 30 < precision < 76:
-				result = "Hit!\n\n"
-			
-			elif 10 < precision < 31:
-				result = "Weak hit!\n\n"
-				player_attack -= 1
-			
-			elif 1 <= precision <= 10:
-			
-				if precision == 2:
-					result = "Glancing blow.\n\n" 
-					player_attack -= 3
-			
-				elif precision == 1:
-					result = "Miss!\n\n"
-					player_attack = 0
-			
-				else:
-					result = "Contact.\n\n"
-					player_attack -= 2
-			
-			else:
-				result = "This shouldn't ever print."
+		    result = "Unreal Critical Precision!\n\n" 
+		    enemy_attack += 3
 				
-			print result
+		else: 
+
+		    result = "Critical Precision!\n\n" 
+		    enemy_attack += 2
 			
-			if attack_mod > 0:
-				player_attack += attack_mod
-				print "\n -- Attack Modifier is %d -- \n" % attack_mod
+	    elif 75 < precision < 90:
+
+	        result = "Precision hit!\n\n" 
+		enemy_attack += 1
 			
-			if player_attack < 0:
+	    elif 30 < precision < 76:
+
+		result = "Hit!\n\n"
+			
+	    elif 10 < precision < 31:
+
+		result = "Weak hit!\n\n"
+		enemy_attack -= 1
+			
+	    elif 1 <= precision <= 10:
+			
+		if precision == 2:
+
+		    result = "Glancing blow.\n\n" 
+		    enemy_attack -= 3
 				
-				player_attack = 0
-			
-			elif result == "Miss!\n\n":
+		elif precision == 1:
+
+		    result = "Missed!\n\n"
+		    enemy_attack = 0
 				
-				player_attack = 0
+	    else:
+
+		result = "Contact.\n\n"
+		enemy_attack -= 2
 				
-			print "You strike the %s for: %d damage!\n" % (enemy_name, player_attack)
-			time.sleep(1)
+	    print(result)
 			
-			enemy_hp -= player_attack
+	    if defense_mod > 0:
+
+		enemy_attack -= defense_mod
+		print("\n -- Defense Modifier is %d -- \n" % defense_mod)
 			
-			print "The %s now has %d hit points.\n" % (enemy_name, enemy_hp)
-			print "  -------------********-------------  \n\n"
+		if enemy_attack < 0:
 			
-			time.sleep(1)
+		    enemy_attack = 0
 			
-			if enemy_hp <= 0:
+	    print("The %s strikes you for: %d damage!\n" % enemy_name, enemy_attack)
+	    time.sleep(1)
 			
-				determine_enemy_death(enemy_hp, enemy_name)
-				time.sleep(3)
-				break 
+	    player_hp_dmg -= enemy_attack
+			
+	    print("You now have %s hit points.\n" % player_hp_dmg)
+	    print("  -------------********-------------  \n\n")
+	    time.sleep(1)
+			
+	    if player_hp_dmg <= 0:
 				
-			print "Now it's the %s\'s turn!\n" % enemy_name			
-			time.sleep(1)
+		determine_player_death(player_hp_dmg, enemy_name)
 			
-			enemy_attack = randint(0, enemy[1])
-			precision = randint(1, 100)
+	    print("Now it's your turn to attack!\n")
+
+	    time.sleep(1)
+			
+	    # First attack algorithm:
+	    # player_attack = x + y + j
+			
+	    # Second attack algorithm:
+	    # modifier = randint(1, 3)
+	    # player_attack = (x + y + j) / modifier
+	
+	    # updated attack algorithm:
+
+	    x = player_str
+	    y = player_dex 
+	    j = player_int
+	    order = [x, y, j]
+	    order.sort()
+	    a = order[1] / 3
+	    b = order[2]
+	    player_attack = a + b
+			
+	    balance = randint(1, 3)
+			
+	    if balance == 1:
+
+		print("Perfectly balanced attack!\n")
+			
+	    elif balance == 2:
+
+		print("Well balanced attack!\n")
+		player_attack /= 2
+			
+	    elif balance == 3:
+
+		print("Off balance attack.\n")
+	        player_attack /= 3
+			
+	    else:
+
+		print("This should not ever print. Ever.")
+			
+	    precision = randint(1, 100)
+			
+	    if precision >= 90:
+			
+		if precision == 100:
+
+		    result = "Unreal Critical Precision!\n\n" 
+		    player_attack += 3
+				
+		else: 
+
+		    result = "Critical Precision!\n\n" 
+		    player_attack += 2
+			
+	    elif 75 < precision < 90:
+
+		result = "Precision hit!\n\n" 
+		player_attack += 1
+			
+	    elif 30 < precision < 76:
+
+		result = "Hit!\n\n"
+			
+	    elif 10 < precision < 31:
+
+		result = "Weak hit!\n\n"
+		player_attack -= 1
+			
+	    elif 1 <= precision <= 10:
+			
+		if precision == 2:
+
+		    result = "Glancing blow.\n\n" 
+		    player_attack -= 3
+				
+		elif precision == 1:
+
+		    result = "Miss!\n\n"
+		    player_attack = 0
+				
+		else:
+
+		    result = "Contact.\n\n"
+		    player_attack -= 2
+				
+	    print result
+			
+	    if attack_mod > 0:
+
+		player_attack += attack_mod
+		print("\n -- Attack Modifier is %d -- \n" % attack_mod)
+			
+	    if player_attack < 0:
+				
+		player_attack = 0
+			
+	    elif result == "Miss!\n\n":
+				
+		player_attack = 0
+			
+	    print("You strike the %s for: %d damage!\n" % enemy_name, player_attack)
+	    time.sleep(1)
+			
+	    enemy_hp -= player_attack
+			
+	    print("The %s now has %d hit points.\n" % enemy_name, enemy_hp)
+	    print("  -------------********-------------  \n\n")
+	    time.sleep(1)
+			
+	    if enemy_hp <= 0:
+				
+		determine_enemy_death(enemy_hp, enemy_name)
+		time.sleep(3)
+		break
+				
+	    if small_medallion:
+
+		print("Warmth radiates from the medallion,")
+		print("suddenly you become a little healthier.\n\n")
+		player_hp_dmg += 1
+
+	        if player_hp_dmg > player_hp:
+
+		    player_hp_dmg = player_hp
+			
+	    elif big_medallion or intricate_medallion:
+
+	        print("The medallion's heat radiates through your body,")
+		print("and suddenly you become much healthier.\n\n")
+		player_hp_dmg += 2
+
+		if player_hp_dmg > player_hp:
+
+		    player_hp_dmg = player_hp
+	
+    else:
 		
-			if precision >= 90:
-		
-				if precision == 100:
-					result = "Unreal Critical Precision!\n\n" 
-					enemy_attack += 3
-		
-				else: 
-					result = "Critical Precision!\n\n" 
-					enemy_attack += 2
-		
-			elif 75 < precision < 90:
-				result = "Precision hit!\n\n" 
-				enemy_attack += 1
-		
-			elif 30 < precision < 76:
-				result = "Hit!\n\n"
-		
-			elif 10 < precision < 31:
-				result = "Weak hit!\n\n"
-				enemy_attack -= 1
-		
-			elif 1 <= precision <= 10:
+	while player_hp_dmg > 0 and enemy_hp > 0:
 			
-				if precision == 2:
-					result = "Glancing blow.\n\n" 
-					enemy_attack -= 3
+	    round_count += 1
 			
-				elif precision == 1:
-					result = "Miss!\n\n"
-					enemy_attack = 0
+	    print("\t###      ROUND %d      ###\n\n\n" % round_count)
 			
-				else:
-					result = "Contact.\n\n"
-					enemy_attack -= 2
+	    print("You attack!\n")
 			
-			else:
+	    time.sleep(1)
+		
+	    x = player_str
+	    y = player_dex 
+	    j = player_int
+	    order = [x, y, j]
+	    order.sort()
+	    a = order[1] / 3
+	    b = order[2]
+	    player_attack = a + b
 			
-				result = "This shouldn't ever print."
+	    balance = randint(1, 3)
+			
+	    if balance == 1:
+
+		print("Perfectly balanced attack!\n")
+			
+	    elif balance == 2:
+
+		print "Well balanced attack!\n"
+		player_attack /= 2
+			
+	    elif balance == 3:
+
+		print "Off balance attack.\n"
+		player_attack /= 3
+	
+			
+	    precision = randint(1, 100)
+			
+	    if precision >= 90:
+			
+		if precision == 100:
+
+		    result = "Unreal Critical Precision!\n\n" 
+		    player_attack += 3
+	
+		else: 
+
+		    result = "Critical Precision!\n\n" 
+		    player_attack += 2
+
+	    elif 75 < precision < 90:
+
+		result = "Precision hit!\n\n" 
+		player_attack += 1
+			
+	    elif 30 < precision < 76:
+
+		result = "Hit!\n\n"
+			
+	    elif 10 < precision < 31:
+
+		result = "Weak hit!\n\n"
+		player_attack -= 1
+			
+	    elif 1 <= precision <= 10:
+			
+		if precision == 2:
+
+		    result = "Glancing blow.\n\n" 
+		    player_attack -= 3
+			
+		elif precision == 1:
+
+		    result = "Miss!\n\n"
+		    player_attack = 0
+			
+		else:
+
+		    result = "Contact.\n\n"
+		    player_attack -= 2
+			
 				
-			print result
+	    print(result)
 			
-			if defense_mod > 0:
-				enemy_attack -= defense_mod
-				print "\n -- Defense Modifier is %d -- \n" % defense_mod
+	    if attack_mod > 0:
+
+	        player_attack += attack_mod
+		print("\n -- Attack Modifier is %d -- \n" % attack_mod)
 			
-			if enemy_attack < 0:
-			
-				enemy_attack = 0
-			
-			print "The %s strikes you for: %d damage!\n" % (enemy_name, enemy_attack)
-			time.sleep(1)
-			
-			player_hp_dmg -= enemy_attack
-			
-			print "You now have %s hit points.\n" % player_hp_dmg
-			print "  -------------********-------------  \n\n"
-			
-			time.sleep(1)		
-			
-			if player_hp_dmg <= 0:
+	    if player_attack < 0:
 				
-				determine_player_death(player_hp_dmg, enemy_name)
+		player_attack = 0
+			
+	    elif result == "Miss!\n\n":
 				
-			if small_medallion:
-				print "Warmth radiates from the medallion,"
-				print "suddenly you become a little healthier.\n\n"
-				player_hp_dmg += 1
-				if player_hp_dmg > player_hp:
-					player_hp_dmg = player_hp
+		player_attack = 0
+				
+	    print("You strike the %s for: %d damage!\n" % enemy_name, player_attack)
+	    time.sleep(1)
 			
-			elif big_medallion or intricate_medallion:
-				print "The medallion's heat radiates through your body,"
-				print "and suddenly you become much healthier.\n\n"
-				player_hp_dmg += 2
-				if player_hp_dmg > player_hp:
-					player_hp_dmg = player_hp
+	    enemy_hp -= player_attack
 			
-		if player_hp_dmg <= 0:
+	    print("The %s now has %d hit points.\n" % enemy_name, enemy_hp)
+	    print("  -------------********-------------  \n\n")
 			
-			determine_player_death(player_hp_dmg, enemy_name)
+	    time.sleep(1)
+			
+	    if enemy_hp <= 0:
+			
+		determine_enemy_death(enemy_hp, enemy_name)
+		time.sleep(3)
+		break 
+				
+	    print("Now it's the %s\'s turn!\n" % enemy_name)			
+
+	    time.sleep(1)
+			
+	    enemy_attack = randint(0, enemy[1])
+	    precision = randint(1, 100)
+		
+	    if precision >= 90:
+		
+		if precision == 100:
+
+		    result = "Unreal Critical Precision!\n\n" 
+		    enemy_attack += 3
+		
+		else: 
+
+		    result = "Critical Precision!\n\n" 
+		    enemy_attack += 2
+		
+	    elif 75 < precision < 90:
+
+		result = "Precision hit!\n\n" 
+		enemy_attack += 1
+		
+	    elif 30 < precision < 76:
+
+		result = "Hit!\n\n"
+		
+	    elif 10 < precision < 31:
+
+		result = "Weak hit!\n\n"
+		enemy_attack -= 1
+		
+	    elif 1 <= precision <= 10:
+			
+		if precision == 2:
+
+		    result = "Glancing blow.\n\n" 
+		    enemy_attack -= 3
+			
+		elif precision == 1:
+
+		    result = "Miss!\n\n"
+		    enemy_attack = 0
+			
+		else:
+
+		    result = "Contact.\n\n"
+		    enemy_attack -= 2
+	
+				
+	    print(result)
+			
+	    if defense_mod > 0:
+
+		enemy_attack -= defense_mod
+		print("\n -- Defense Modifier is %d -- \n" % defense_mod)
+			
+	    if enemy_attack < 0:
+			
+		enemy_attack = 0
+			
+	    print("The %s strikes you for: %d damage!\n" % enemy_name, enemy_attack)
+	    time.sleep(1)
+			
+	    player_hp_dmg -= enemy_attack
+			
+	    print("You now have %s hit points.\n" % player_hp_dmg)
+	    print("  -------------********-------------  \n\n")
+			
+	    time.sleep(1)		
+			
+	    if player_hp_dmg <= 0:
+				
+		determine_player_death(player_hp_dmg, enemy_name)
+				
+	    if small_medallion:
+
+		print("Warmth radiates from the medallion,")
+		print("suddenly you become a little healthier.\n\n")
+		player_hp_dmg += 1
+
+		if player_hp_dmg > player_hp:
+
+		    player_hp_dmg = player_hp
+			
+	    elif big_medallion or intricate_medallion:
+
+		print "The medallion's heat radiates through your body,"
+		print "and suddenly you become much healthier.\n\n"
+		player_hp_dmg += 2
+
+		if player_hp_dmg > player_hp:
+
+		    player_hp_dmg = player_hp
+			
+	    if player_hp_dmg <= 0:
+			
+		determine_player_death(player_hp_dmg, enemy_name)
 			
 	
 	print "You win!\n"
