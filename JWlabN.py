@@ -1110,9 +1110,9 @@ def battle(enemy, enemy_name):
 		enemy_attack -= defense_mod
 		print("\n -- Defense Modifier is %d -- \n" % defense_mod)
 			
-		if enemy_attack < 0:
+	    if enemy_attack < 0:
 			
-		    enemy_attack = 0
+		enemy_attack = 0
 			
 	    print("The %s strikes you for: %d damage!\n" % enemy_name, enemy_attack)
 	    time.sleep(1)
@@ -1126,6 +1126,7 @@ def battle(enemy, enemy_name):
 	    if player_hp_dmg <= 0:
 				
 		determine_player_death(player_hp_dmg, enemy_name)
+		break
 			
 	    print("Now it's your turn to attack!\n")
 
@@ -1486,258 +1487,369 @@ def battle(enemy, enemy_name):
 	chance = randint(1, 100)
 	if chance > 40: 
 		
-		print "The %s dropped loot!\n" % enemy_name
-		j = randint(0, 8)
-		if player_lvl <= 3:
+	    print("The %s dropped loot!\n" % enemy_name)
+	    j = randint(0, 8)
+
+	    if player_lvl <= 3:
 			
-			loot = loot_lvl_1_3[j]
+		loot = loot_lvl_1_3[j]
 		
-			print "It's a %s!\n\n" % loot
+		print("It's a %s!\n\n" % loot)
+		time.sleep(1)
+			
+		if loot in satchel_contents:
+
+		    print("You've already got a %s...\n" % loot)
+		    time.sleep(1)
+			
+		else: 
+
+		    satchel_contents.append(loot)
+		    print("You've looted %s from the %s!\n" % loot, enemy_name)
+		    time.sleep(3)
+		
+	    elif player_lvl <= 6:
+			
+		chance = randint(1, 50)
+
+		if chance < 20:
+
+		    loot = loot_lvl_1_3[j]
+
+		    print("It's a %s!\n\n" % loot)
+                    time.sleep(1)
+			
+                    if loot in satchel_contents:
+
+                        print("You've already got a %s...\n" % loot)
+                        time.sleep(1)
+			
+                    else: 
+
+                        satchel_contents.append(loot)
+                        print("You've looted %s from the %s!\n" % loot, enemy_name)
+                        time.sleep(3)
+
+		else: 
+
+		    loot = loot_lvl_4_6[j]
+			
+		    print("It's a %s!\n\n" % loot)
+		    time.sleep(1)
+			
+		    if loot in satchel_contents:
+
+			print("You've already got the %s...\n" % loot)
 			time.sleep(1)
 			
-			if loot in satchel_contents:
-				print "You've already got a %s...\n" % loot
-				time.sleep(1)
-			
-			else: 
-				satchel_contents.append(loot)
-				print "You've looted %s from the %s!\n" % (loot, enemy_name)
-				time.sleep(3)
-		
-		elif player_lvl <= 6:
-			
-			chance = randint(1, 50)
-			if chance < 20:
-				loot = loot_lvl_1_3[j]
-			else: 
-				loot = loot_lvl_4_6[j]
-			
-			print "It's a %s!\n\n" % loot
-			time.sleep(1)
-			
-			if loot in satchel_contents:
-				print "You've already got the %s...\n" % loot
-				time.sleep(1)
-			
-			else: 
-				satchel_contents.append(loot)
-				print "You've looted the %s from the %s!\n" % (loot, enemy_name)
-				time.sleep(3)
+		    else: 
+
+			satchel_contents.append(loot)
+			print("You've looted the %s from the %s!\n" % loot, enemy_name)
+			time.sleep(3)
 				
-		else:
+	    else:
 			
-			chance = randint(1, 60)
-			if chance < 10:
-				loot = loot_lvl_1_3[j]
-			elif chance < 25:
-				loot = loot_lvl_4_6[j]
-			else:
-				loot = loot_lvl_7_9[j]
+		chance = randint(1, 60)
+
+		if chance < 10:
+
+		    loot = loot_lvl_1_3[j]
+
+		    print("It's a %s!\n\n" % loot)
+		    time.sleep(1)
 			
-			print "It's a %s!\n\n" % loot
+		    if loot in satchel_contents:
+
+			print("You've already got the %s...\n" % loot)
 			time.sleep(1)
 			
-			if loot in satchel_contents:
-				print "You've already got the %s...\n" % loot
-				time.sleep(1)
+		    else: 
+
+			satchel_contents.append(loot)
+			print("You've looted the %s from the %s!\n" % loot, enemy_name)
+			time.sleep(3)
+
+		elif chance < 25:
+
+		    loot = loot_lvl_4_6[j]
+
+		    print("It's a %s!\n\n" % loot)
+		    time.sleep(1)
 			
-			else: 
-				satchel_contents.append(loot)
-				print "You've looted the %s from the %s!\n" % (loot, enemy_name)
-				time.sleep(3)
+		    if loot in satchel_contents:
+
+			print("You've already got the %s...\n" % loot)
+			time.sleep(1)
+			
+		    else: 
+
+			satchel_contents.append(loot)
+			print("You've looted the %s from the %s!\n" % loot, enemy_name)
+			time.sleep(3)
+
+		else:
+
+		    loot = loot_lvl_7_9[j]
+			
+		    print("It's a %s!\n\n" % loot)
+		    time.sleep(1)
+			
+		    if loot in satchel_contents:
+
+			print("You've already got the %s...\n" % loot)
+			time.sleep(1)
+			
+		    else: 
+
+			satchel_contents.append(loot)
+			print("You've looted the %s from the %s!\n" % loot, enemy_name)
+			time.sleep(3)
 		
 	fight_count += 1  #to tabulate fights won while alive
 	
 	if high_scorer == False:
 		
-		if fight_count > fight_count_most: 
+	    if fight_count > fight_count_most: 
 			
-			high_scorer = True
-			print "You've just taken 1st place on the fight count list!\n" 
-			time.sleep(1)
-			high_scorer_fcm = determine_intent("Enter your name to go on the scoreboard: ")
+		high_scorer = True
+		print("You've just taken 1st place on the fight count list!\n")
+		time.sleep(1)
+		high_scorer_fcm = determine_intent("Enter your name to go on the scoreboard: ")
 	
 	if fight_count > fight_count_most:
+
 		fight_count_most = fight_count
 	
-	print "You've gained %d experience points!\n" % enemy[2]
+	print("You've gained %d experience points!\n" % enemy[2])
 	
 	time.sleep(1)
 	
 	player_xp -= enemy[2]
 	
 	if player_xp <= 0:
-		level_up()
-		player_xp = player_xp_cap
+
+	    level_up()
+	    player_xp = player_xp_cap
 	
-	print "You have %d experience points to gain before you level up.\n" % player_xp
+	print("You have %d experience points to gain before you level up.\n" % player_xp)
+
 
 def determine_enemy_death(num, enemy_name):
 
-	if num == 0:
-		print "You barely defeated the %s!\n" % enemy_name
+    if num == 0:
+
+	print("You barely defeated the %s!\n" % enemy_name)
+	    
+    elif num == -1:
+
+	print("The %s juuuuust rolls over!\n" % enemy_name)
 		
-	elif num == -1:
-		print "The %s juuuuust rolls over!\n" % enemy_name
+    elif num == -2:
+
+	print("The %s falls with little glory.\n" % enemy_name)
 		
-	elif num == -2:
-		print "The %s falls with little glory.\n" % enemy_name
+    elif num == -3:
+
+	print("You thwacked the %s.\n" % enemy_name)
 		
-	elif num == -3:
-		print "You thwacked the %s.\n" % enemy_name
-		
-	elif num == -4:
-		print "Solidly dead. Nice work.\n"
+    elif num == -4:
+
+        print("Solidly dead. Nice work.\n")
 	
-	elif num == -5:
-		print "Clearly dead. No brainer.\n"
+    elif num == -5:
+
+	print("Clearly dead. No brainer.\n")
 		
-	elif num == -6:
-		print "Were you making that personal? (hypothetical)\n"
+    elif num == -6:
+
+	print("Were you making that personal? (hypothetical)\n")
 	
-	elif num == -7:
-		print "Holy Maloly, you freaking crushed it. freaking. crushed. it.\n"
+    elif num == -7:
+
+	print("Holy Maloly, you freaking crushed it. freaking. crushed. it.\n")
 	
-	elif num == -8:
-		print "Having a good day? (hypothetical)\n"
+    elif num == -8:
+
+	print("Having a good day? (hypothetical)\n")
 	
-	elif num == -9:
-		print "Yikes. Not too often I need to look away at a death.\n"
+    elif num == -9:
+
+	print("Yikes. Not too often I need to look away at a death.\n")
 		
-	elif num == -10:
-		print "You might need to change your clothes after that shelacking!\n"
+    elif num == -10:
+
+	print("You might need to change your clothes after that shelacking!\n")
 		
-	elif num == -11:
-		print "Foooooeey! Cosmic strike!\n"
+    elif num == -11:
+
+	print("Foooooeey! Cosmic strike!\n")
 		
-	elif num == -12:
-		print "The %s explodes!\n" % enemy_name
+    elif num == -12:
+
+	print("The %s explodes!\n" % enemy_name)
 	
-	elif num == -13:
-		print "The %s basically died 5 minutes ago from that hit.\n" % enemy_name
+    elif num == -13:
+
+	print("The %s basically died 5 minutes ago from that hit.\n" % enemy_name)
 	
-	elif num == -14:
-		print "-14, really? Holy Fuggin Heckfire!\n"
+    elif num == -14:
+
+	print("-14, really? Holy Fuggin Heckfire!\n")
 		
-	elif num == -15:
-		print "Hit so hard it's been forgotten.\n"
+    elif num == -15:
+
+	print("Hit so hard it's been forgotten.\n")
 	
-	elif num == -16:
-		print "I'm not sure it could get any more dead.\n"
+    elif num == -16:
+
+	print("I'm not sure it could get any more dead.\n")
 		
-	elif num == -17:
-		print "Flat out flattened!\n"
+    elif num == -17:
+
+	print("Flat out flattened!\n")
 	
-	elif num == -18:
-		print "Undeniably destroyed!\n"
+    elif num == -18:
+
+	print("Undeniably destroyed!\n")
 		
-	elif num == -19:
-		print "It's like three of them died with that blow.\n"
+    elif num == -19:
+
+	print("It's like three of them died with that blow.\n")
 	
-	elif num == -20:
-		print "A strike like that should not be possible.\n"
+    elif num == -20:
+
+	print("A strike like that should not be possible.\n")
 	
-	elif num <= -21:
-		print "Bravo! Hall of Fame Death!\n"
+    elif num <= -21:
+
+	print("Bravo! Hall of Fame Death!\n")
 	
-	else:
-		print "This should never ever ever print.\n\n"
+    else:
+
+	print("This should never ever ever print.\n\n")
 		
+
 def determine_player_death(num, enemy_name):
 
-	if num == 0:
-		dead("The %s has barely defeated you!\n" % enemy_name)
+    if num == 0:
+
+	dead("The %s has barely defeated you!\n" % enemy_name)
 		
-	elif num == -1:
-		dead("The %s juuuuust defeated you!\n" % enemy_name)
+    elif num == -1:
+
+	dead("The %s juuuuust defeated you!\n" % enemy_name)
 		
-	elif num == -2:
-		dead("You got beaten by the %s.\n" % enemy_name)
+    elif num == -2:
+
+	dead("You got beaten by the %s.\n" % enemy_name)
 		
-	elif num == -3:
-		dead("You got thwacked by the %s.\n" % enemy_name)
+    elif num == -3:
+
+	dead("You got thwacked by the %s.\n" % enemy_name)
 		
-	elif num == -4:
-		dead("Well, solidly dead, I'd say.\n")
+    elif num == -4:
+
+	dead("Well, solidly dead, I'd say.\n")
 	
-	elif num == -5:
-		dead("Clearly dead. No doubter.\n") 
+    elif num == -5:
+
+	dead("Clearly dead. No doubter.\n") 
 		
-	elif num == -6:
-		dead("That was not nice and frankly, I think it was personal.\n")
+    elif num == -6:
+
+	dead("That was not nice and frankly, I think it was personal.\n")
 	
-	elif num == -7:
-		dead("Holy Maloly, you got freaking crushed. freaking. crushed.\n")
+    elif num == -7:
+
+	dead("Holy Maloly, you got freaking crushed. freaking. crushed.\n")
 	
-	elif num == -8:
-		dead("Having a bad day? (don't answer that)\n") 
+    elif num == -8:
+
+	dead("Having a bad day? (don't answer that)\n") 
 	
-	elif num == -9:
-		dead("Yikes. Not too often I need to look away at a death.\n")
+    elif num == -9:
+
+	dead("Yikes. Not too often I need to look away at a death.\n")
 		
-	elif num == -10:
-		dead("May need to check the corners for limbs because you got torn apart!\n")
+    elif num == -10:
+
+        dead("May need to check the corners for limbs because you got torn apart!\n")
 		
-	elif num == -11:
-		dead("I'm not sure you can get this dead.\n")
+    elif num == -11:
+
+	dead("I'm not sure you can get this dead.\n")
 		
-	elif num <= -12:
-		dead("Bravo! Hall of Fame Death!\n")
+    elif num <= -12:
+
+	dead("Bravo! Hall of Fame Death!\n")
 	
-	else:
-		dead("this should never print\n")
+    else:
+
+	dead("this should never print\n")
+
 
 def boss_encounter(room, modifier):
 	
-	if room == "room2":
-		enemy_name = "Goblin King"
+    if room == "room2":
+
+	enemy_name = "Goblin King"
 		
-		if modifier == "Spade":
-			enemy = (99, 9, 32, 12)
-			print "You have cleanly re-potted the plant!\n" 
-			time.sleep(1)
-			print "Suddenly, you hear a grumble in the hallway, and in walks the %s!" % enemy_name
-			time.sleep(2)
-			print "Even though he's appreciative of you doing the chore he'd been"
-			print "neglecting, the %s is still going to fight you.\n\n" % enemy_name
-			time.sleep(3)
+	if modifier == "Spade":
+
+	    enemy = (99, 9, 32, 12)
+
+	    print("You have cleanly re-potted the plant!\n")
+	    time.sleep(1)
+	    print("Suddenly, you hear a grumble in the hallway, and in walks the %s!" % enemy_name)
+	    time.sleep(2)
+	    print("Even though he's appreciative of you doing the chore he'd been")
+	    print("neglecting, the %s is still going to fight you.\n\n" % enemy_name)
+	    time.sleep(3)
 		
-		elif modifier == "Shovel" or modifier == "Hands":
-			enemy = (99, 12, 32, 12)
-			print "You have messily re-potted the plant!\n"
-			time.sleep(1)
-			print "Suddenly, you hear an angry grunt from the hallway, and in walks the %s!" % enemy_name
-			time.sleep(2)
-			print "Apparently, he's particular about keeping his soil from hitting the stone,"
-			print "and so he's frustrated and disappointed with you, and is ready to fight.\n"
-			time.sleep(3)
+	elif modifier == "Shovel" or modifier == "Hands":
+
+	    enemy = (99, 12, 32, 12)
+
+	    print("You have messily re-potted the plant!\n")
+	    time.sleep(1)
+	    print("Suddenly, you hear an angry grunt from the hallway, and in walks the %s!" % enemy_name)
+	    time.sleep(2)
+	    print("Apparently, he's particular about keeping his soil from hitting the stone,")
+	    print("and so he's frustrated and disappointed with you, and is ready to fight.\n")
+	    time.sleep(3)
 		
-		elif modifier == "Balanced Pickaxe":
-			enemy = (99, 15, 32, 12)
-			print "Your pickaxe breaks the empty pot and you hear an enraged roar!\n"
-			time.sleep(2)
-			print "The %s bursts into the room and throws his arms above his head, howling" % enemy_name
-			print "with rage as he sees his broken pot.\n"
-			print "Obviously, you appear to be in trouble.\n\n"
-			time.sleep(3)
+	elif modifier == "Balanced Pickaxe":
+
+	    enemy = (99, 15, 32, 12)
+
+	    print("Your pickaxe breaks the empty pot and you hear an enraged roar!\n")
+	    time.sleep(2)
+	    print("The %s bursts into the room and throws his arms above his head, howling" % enemy_name)
+	    print("with rage as he sees his broken pot.\n")
+	    print("Obviously, you appear to be in trouble.\n\n")
+	    time.sleep(3)
 		
-		elif modifier == "Thief":
-			enemy = (99, 15, 32, 12)
-			print "The moment you touch the pot, you hear a deep scream of anguish!\n"
-			time.sleep(2)
-			print "Charging through the door is the %s! He sees you trying to take his pot" % enemy_name
-			print "and he becomes enraged!\n"
-			time.sleep(3)
+	elif modifier == "Thief":
+
+	    enemy = (99, 15, 32, 12)
+
+	    print("The moment you touch the pot, you hear a deep scream of anguish!\n")
+	    time.sleep(2)
+	    print("Charging through the door is the %s! He sees you trying to take his pot" % enemy_name)
+	    print("and he becomes enraged!\n")
+	    time.sleep(3)
 		
-		else:
-			enemy = (99, 12, 32, 12)
-			print "Your bumbling has made a mess and caused a ruckus in the hallway!\n"
-			time.sleep(2)
-			print "The %s appears at the door and he's ready to fight!\n" % enemy_name
-			time.sleep(3)
-	
-		print "You and the %s fight!\n\n\n" % enemy_name
-		battle(enemy, enemy_name)
+	else:
+
+	    enemy = (99, 12, 32, 12)
+	    print("Your bumbling has made a mess and caused a ruckus in the hallway!\n")
+	    time.sleep(2)
+	    print("The %s appears at the door and he's ready to fight!\n" % enemy_name)
+	    time.sleep(3)
+	    print("You and the %s fight!\n\n\n" % enemy_name)
+
+	battle(enemy, enemy_name)
 		
 	elif room == "hiddenChamber":
 		
@@ -1750,432 +1862,496 @@ def boss_encounter(room, modifier):
 	
 	#elif room == "hidden3":
 		#enemy_name = "Venomous Queen"
+
 		
 def enemy_encounter():
 	
-	global player_hp_dmg
+    global player_hp_dmg
 	
-	x = randint(0, 8)
+    x = randint(0, 8)
 	
-	if 0 < player_lvl <= 3:
+    if 0 < player_lvl <= 3:
 		
-		enemy = enemies_lvl_1_3[x]
-		enemy_name = enemy
-		#Enemy form: (hp, max_attack, gives_xp, dex)
-		if x == 0:
-			enemy = (6, 3, 4, 1) #slime 14
+	enemy = enemies_lvl_1_3[x]
+
+	enemy_name = enemy
+
+	#Enemy form: (hp, max_attack, gives_xp, dex)
+
+	if x == 0:
+
+	    enemy = (6, 3, 4, 1) #slime 14
 		
-		elif x == 1:
-			enemy = (6, 3, 4, 5) #gnoll 18
+	elif x == 1:
+
+	    enemy = (6, 3, 4, 5) #gnoll 18
 		
-		elif x == 2:
-			enemy = (6, 4, 5, 6) #wolf 21
+	elif x == 2:
+
+	    enemy = (6, 4, 5, 6) #wolf 21
 		
-		elif x == 3: 
-			enemy = (5, 3, 5, 10) #bat 23
+	elif x == 3: 
+
+	    enemy = (5, 3, 5, 10) #bat 23
 		
-		elif x == 4:
-			enemy = (6, 3, 4, 6) #goblin 19
+	elif x == 4:
+
+	    enemy = (6, 3, 4, 6) #goblin 19
 		
-		elif x == 5:
-			enemy = (3, 2, 3, 8) #cat 16
+	elif x == 5:
+
+	    enemy = (3, 2, 3, 8) #cat 16
 		
-		elif x == 6:
-			enemy = (6, 2, 3, 1) #flannel_bag 12
+	elif x == 6:
+
+	    enemy = (6, 2, 3, 1) #flannel_bag 12
 		
-		elif x == 7:
-			enemy = (10, 2, 5, 2) #glowing_top_hat 19
+	elif x == 7:
+
+	    enemy = (10, 2, 5, 2) #glowing_top_hat 19
 		
-		else:
-			enemy = (4, 2, 2, 2) #round_spectacles() 11
-	
-	elif 3 < player_lvl <= 6:
-		
-		enemy = enemies_lvl_4_6[x]
-		enemy_name = enemy
-		
-		if x == 0:
-			enemy = (12, 5, 7, 2) #lg_slime 22
-		
-		elif x == 1:
-			enemy = (14, 10, 9, 8) #gnoll_pack 37
-		
-		elif x == 2:
-			enemy = (11, 7, 8, 7) #alpha_wolf 31
-		
-		elif x == 3: 
-			enemy = (8, 8, 9, 12) #ancient_bat 35
-		
-		elif x == 4:
-			enemy = (6, 10, 7, 6) #desperate_goblin 27
-		
-		elif x == 5:
-			enemy = (10, 6, 7, 10) #mountain_cat 31
-		
-		elif x == 6:
-			enemy = (7, 10, 7, 3) #self_closing_flannel_bag 25
-		
-		elif x == 7:
-			enemy = (12, 8, 9, 2) #glowing_top_hat_w_cane 29
-		
-		else:
-			enemy = (8, 8, 6, 3) #jagged_contacts 23
-	
-	elif 6 < player_lvl <= 9:
-		
-		enemy = enemies_lvl_7_9[x]
-		enemy_name = enemy
-	
-		if x == 0:
-			enemy = (16, 15, 12, 8) #shiny_mist 47
-		
-		elif x == 1:
-			enemy = (17, 2, 9, 18) #floor_of_marbles 43
-		
-		elif x == 2:
-			enemy = (14, 14, 10, 5) #shrieking_box 36
-		
-		elif x == 3: 
-			enemy = (18, 12, 12, 5) #wall_of_bats 41
-		
-		elif x == 4:
-			enemy = (28, 5, 9, 3) #competitive_eater 35
-		
-		elif x == 5:
-			enemy = (19, 15, 14, 1) #donald_trump 40
-		
-		elif x == 6:
-			enemy = (25, 18, 14, 4) #mary_poppins_bag_of_horrors 51
-		
-		elif x == 7:
-			enemy = (19, 13, 14, 11) #badass_3_suit_hat_cane 50
-		
-		else:
-			enemy = (1, 20, 15, 20) #eye_candy 56
-	
 	else:
-		return "Did not work!\n"
+
+	    enemy = (4, 2, 2, 2) #round_spectacles() 11
 	
-	print "You've run into an enemy!" 
-	print "It's a %s.\n\n" % enemy_name
-	
-	choice = determine_intent("Are you going to fight or flee?\n")
-	
-	if choice == "fight": 
-	
-		print "You and the %s fight!\n\n\n" % enemy_name
-		time.sleep(1)
-		battle(enemy, enemy_name)
-	
-	else: 
-	
-		if enemy[3] > player_dex:
-			
-			diff = (enemy[3] - player_dex) * 10
-			chance = randint(1, 100)
-			if chance >= 50 + diff:
-				
-				print "Somehow you escape!\n\n"
-			
-			else: 
-				print "You fail to escape, and the %s makes you pay!\n" % enemy_name
-				print "You take 4 damage!\n\n"
-				time.sleep(2)
-				player_hp_dmg -= 4
-				if player_hp_dmg <= 0:
-					dead("That was enough to kill ya, sadly enough.")
-				battle(enemy, enemy_name)
+    elif 3 < player_lvl <= 6:
 		
-		else:
+	enemy = enemies_lvl_4_6[x]
+
+	enemy_name = enemy
+		
+	if x == 0:
+
+	    enemy = (12, 5, 7, 2) #lg_slime 22
+		
+	elif x == 1:
+
+	    enemy = (14, 10, 9, 8) #gnoll_pack 37
+		
+	elif x == 2:
+
+	    enemy = (11, 7, 8, 7) #alpha_wolf 31
+		
+	elif x == 3: 
+
+	    enemy = (8, 8, 9, 12) #ancient_bat 35
+		
+	elif x == 4:
+
+	    enemy = (6, 10, 7, 6) #desperate_goblin 27
+		
+	elif x == 5:
+
+	    enemy = (10, 6, 7, 10) #mountain_cat 31
+		
+	elif x == 6:
+
+	    enemy = (7, 10, 7, 3) #self_closing_flannel_bag 25
+		
+	elif x == 7:
+
+	    enemy = (12, 8, 9, 2) #glowing_top_hat_w_cane 29
+		
+	else:
+
+	    enemy = (8, 8, 6, 3) #jagged_contacts 23
+	
+    elif 6 < player_lvl <= 9:
+		
+	enemy = enemies_lvl_7_9[x]
+
+	enemy_name = enemy
+	
+	if x == 0:
+
+	    enemy = (16, 15, 12, 8) #shiny_mist 47
+		
+	elif x == 1:
+
+	    enemy = (17, 2, 9, 18) #floor_of_marbles 43
+		
+	elif x == 2:
+
+	    enemy = (14, 14, 10, 5) #shrieking_box 36
+		
+	elif x == 3: 
+
+	    enemy = (18, 12, 12, 5) #wall_of_bats 41
+		
+	elif x == 4:
+
+	    enemy = (28, 5, 9, 3) #competitive_eater 35
+		
+	elif x == 5:
+
+	    enemy = (19, 15, 14, 1) #donald_trump 40
+		
+	elif x == 6:
+
+	    enemy = (25, 18, 14, 4) #mary_poppins_bag_of_horrors 51
+		
+	elif x == 7:
+
+	    enemy = (19, 13, 14, 11) #badass_3_suit_hat_cane 50
+		
+	else:
+
+	    enemy = (1, 20, 15, 20) #eye_candy 56
+	
+    else:
+
+	return("Did not work!\n")
+	
+    print("You've run into an enemy!\n")
+    time.sleep(3)
+    print("It's a %s.\n\n" % enemy_name)
+	
+    choice = determine_intent("Are you going to fight or flee?\n")
+	
+    if choice == "fight": 
+	
+	print("You and the %s fight!\n\n\n" % enemy_name)
+	time.sleep(1)
+	battle(enemy, enemy_name)
+	
+    else: 
+	
+	if enemy[3] > player_dex:
 			
-			diff = (player_dex - enemy[3]) * 10
-			if diff > 40:
-				diff = 40
-			chance = randint(1, 100)
-			if chance <= 50 + diff:
+	    diff = (enemy[3] - player_dex) * 10
+	    chance = randint(1, 100)
+
+	    if chance >= 50 + diff:
 				
-				print "Because of your superior quickness, you escape.\n\n" 
-				time.sleep(2)
+		print("Somehow you escape!\n\n")
+		break
 			
-			else: 
-				print "You fail to escape, and the %s makes you pay!\n" % enemy_name
-				print "You take 4 damage!\n\n"
-				time.sleep(2)
-				player_hp_dmg -= 4
-				if player_hp_dmg <= 0:
-					dead("That was enough to kill ya, sadly enough.")
-				battle(enemy, enemy_name)
+	    else: 
+
+		print("You fail to escape, and the %s makes you pay!\n" % enemy_name)
+		print("You take 4 damage!\n\n")
+		time.sleep(2)
+		player_hp_dmg -= 4
+
+		if player_hp_dmg <= 0:
+
+		    dead("That was enough to kill ya, sadly enough.")
+
+		battle(enemy, enemy_name)
+		
+	else:
+			
+	    diff = (player_dex - enemy[3]) * 10
+
+	    if diff > 40:
+
+		diff = 40
+		chance = randint(1, 100)
+
+		if chance <= 50 + diff:
+				
+		    print("Because of your superior quickness, you escape.\n\n")
+		    time.sleep(2)
+			
+		else: 
+
+		    print("You fail to escape, and the %s makes you pay!\n" % enemy_name)
+		    print("You take 4 damage!\n\n")
+		    time.sleep(2)
+		    player_hp_dmg -= 4
+
+		    if player_hp_dmg <= 0:
+
+			dead("That was enough to kill ya, sadly enough.")
+
+		    battle(enemy, enemy_name)
+
 
 def level_up():
 	
-	global player_lvl, player_xp_cap, player_str, player_dex, player_int, player_hp
-	global player_hp_dmg, player_xp
+    global player_lvl, player_xp_cap, player_str, player_dex, player_int, player_hp
+    global player_hp_dmg, player_xp
 	
-	print "You've leveled up! Congrats, that's awesome!\n\n" 
-	time.sleep(2)
+    print("You've leveled up! Congrats, that's awesome!\n\n")
+    time.sleep(2)
 	
-	print """These are your old stats:
+    print("""These are your old stats:
+        Level: %d
+        Strength: %d
+        Dexterity: %d
+	Intelligence: %d
+	Hit Points: %d\n""" % player_lvl, player_str, player_dex, player_int, player_hp)
+    print("_____________\n")
+	
+    player_lvl += 1
+    player_xp_cap *= 2
+    player_xp = player_xp_cap
+	
+    if player_class == "Wizard":
+		
+	player_str += randint(0, 1)
+	player_dex += randint(0, 1)
+	player_int += randint(2, 4)
+	
+    elif player_class == "Ninja":
+		
+	player_str += randint(0, 1)
+	player_dex += randint(2, 4)
+	player_int += randint(0, 1)
+	
+    else:
+
+	player_str += randint(0, 3)
+	player_dex += randint(0, 3)
+	player_int += randint(0, 3)
+	
+    player_hp += randint(2, 5)
+    player_hp_dmg = player_hp
+    time.sleep(2)
+	
+    print("""These are your new stats: 
 	Level: %d
 	Strength: %d
 	Dexterity: %d
 	Intelligence: %d
-	Hit Points: %d\n""" % (player_lvl, player_str, player_dex, player_int, player_hp)
-	print "_____________\n"
+	Hit Points: %d\n\n""" % player_lvl, player_str, player_dex, player_int, player_hp)
+    print("___________\n")
 	
-	player_lvl += 1
-	player_xp_cap *= 2
-	player_xp = player_xp_cap
-	
-	if player_class == "Wizard":
-		
-		player_str += randint(0, 1)
-		player_dex += randint(0, 1)
-		player_int += randint(2, 4)
-	
-	elif player_class == "Ninja":
-		
-		player_str += randint(0, 1)
-		player_dex += randint(2, 4)
-		player_int += randint(0, 1)
-	
-	else:
-		player_str += randint(0, 3)
-		player_dex += randint(0, 3)
-		player_int += randint(0, 3)
-	
-	player_hp += randint(2, 5)
-	player_hp_dmg = player_hp
-	time.sleep(2)
-	
-	print """These are your new stats: 
-	Level: %d
-	Strength: %d
-	Dexterity: %d
-	Intelligence: %d
-	Hit Points: %d\n\n""" % (player_lvl, player_str, player_dex, player_int, player_hp)
-	print "___________\n"
-	
-	time.sleep(2)
+    time.sleep(2)
+
 
 def start():
 	
-	global first_time_secret_room, first_time_first_room, came_from, player_hp_dmg, defense_mod
-	global player_name, player_class, player_lvl, player_xp, satchel_contents, attack_mod
-	global defeat_darkness_troll, defeat_goblin_king, boys_saved, boys_rescued, walking_stick
-	global cloth_cap, short_stick, basic_gloves, thick_shirt, three_ft_pipe, sturdy_hat, madrona_wand
-	global fingerless_gloves, leather_t, sword, wide_brim_hat, oak_staff, power_mitts, leather_jacket
-	global small_medallion, big_medallion, intricate_medallion, wizard_robes, wizard_hat, wizard_staff
-	global imbued_eye_mask, stealth_slippers, katana, armored_tweed_vest, knickers, scepter, weapon
+    global first_time_secret_room, first_time_first_room, came_from, player_hp_dmg, defense_mod
+    global player_name, player_class, player_lvl, player_xp, satchel_contents, attack_mod
+    global defeat_darkness_troll, defeat_goblin_king, boys_saved, boys_rescued, walking_stick
+    global cloth_cap, short_stick, basic_gloves, thick_shirt, three_ft_pipe, sturdy_hat, madrona_wand
+    global fingerless_gloves, leather_t, sword, wide_brim_hat, oak_staff, power_mitts, leather_jacket
+    global small_medallion, big_medallion, intricate_medallion, wizard_robes, wizard_hat, wizard_staff
+    global imbued_eye_mask, stealth_slippers, katana, armored_tweed_vest, knickers, scepter, weapon
 	
-	player_name = ""
-	player_class = ""
-	player_lvl = 1
-	first_time_secret_room = True
-	first_time_first_room = True
-	high_scorer_cave = False
-	high_scorer_furthest = False
-	high_scorer = False
-	satchel_contents = []
-	attack_mod = 0
-	defense_mod = 0
-	defeat_darkness_troll = False
-	defeat_goblin_king = False
-	boys_saved = 0
-	boys_rescued = []
-	walking_stick = False
-	cloth_cap = False
-	short_stick = False
-	basic_gloves = False
-	thick_shirt = False
-	three_ft_pipe = False
-	sturdy_hat = False
-	madrona_wand = False
-	fingerless_gloves = False
-	leather_t = False
-	sword = False
-	wide_brim_hat = False
-	oak_staff = False
-	power_mitts = False
-	leather_jacket = False
-	small_medallion = False
-	big_medallion = False
-	intricate_medallion = False
-	wizard_robes = False
-	imbued_eye_mask = False
-	armored_tweed_vest = False
-	wizard_hat = False
-	stealth_slippers = False
-	knickers = False
-	wizard_staff = False
-	katana = False
-	scepter = False
-	weapon = False
-	book_of_knots = False
-	found_treasure_1 = False
+    player_name = ""
+    player_class = ""
+    player_lvl = 1
+    first_time_secret_room = True
+    first_time_first_room = True
+    high_scorer_cave = False
+    high_scorer_furthest = False
+    high_scorer = False
+    satchel_contents = []
+    attack_mod = 0
+    defense_mod = 0
+    defeat_darkness_troll = False
+    defeat_goblin_king = False
+    boys_saved = 0
+    boys_rescued = []
+    walking_stick = False
+    cloth_cap = False
+    short_stick = False
+    basic_gloves = False
+    thick_shirt = False
+    three_ft_pipe = False
+    sturdy_hat = False
+    madrona_wand = False
+    fingerless_gloves = False
+    leather_t = False
+    sword = False
+    wide_brim_hat = False
+    oak_staff = False
+    power_mitts = False
+    leather_jacket = False
+    small_medallion = False
+    big_medallion = False
+    intricate_medallion = False
+    wizard_robes = False
+    imbued_eye_mask = False
+    armored_tweed_vest = False
+    wizard_hat = False
+    stealth_slippers = False
+    knickers = False
+    wizard_staff = False
+    katana = False
+    scepter = False
+    weapon = False
+    book_of_knots = False
+    found_treasure_1 = False
 	
-	print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-	print "\n\n\t\tLabyrinth of the Lost Sons\n\n\n"
+    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+    print("\n\n\t\tLabyrinth of the Lost Sons\n\n\n")
 	
-	time.sleep(2)
-	print "Thanks for playing.\n"
-	print "At any time type 'options' to view your in-game commands."
-	print "\n\n\n"
-	time.sleep(2)
+    time.sleep(2)
+    print("Thanks for playing.\n")
+    print("At any time type 'options' to view your in-game commands.")
+    print("\n\n\n")
+    time.sleep(2)
 	
-	print """
+    print("""
 	You awaken. It's cold but you're insulated by a thin layer of fat. It feels 
-	like you shouldn't be here or you're lost. It's a strange feeling.\n"""
-	time.sleep(3)
+	like you shouldn't be here or you're lost. It's a strange feeling.\n""")
+    time.sleep(3)
 	
-	print """
+    print("""
 	You get up and look around you. You see snow covered fields and a grey sky. 
 	A light snow falls. You look down and see that you're only wearing
-	unders.\n"""
-	time.sleep(3)
+	unders.\n""")
+    time.sleep(3)
 	
-	print """
+    print("""
 	You turn around and there is a high concrete wall stretching far 
-	in both directions extensively, going on and on for, at most, forever.\n"""
-	time.sleep(3)
+	in both directions extensively, going on and on for, at most, forever.\n""")
+    time.sleep(3)
 	
-	print """
+    print("""
 	An old woman sits next to a thin rectangular opening in the concrete. You 
-	approach the woman and she sees you and speaks.\n\n\n"""
-	time.sleep(3)
+	approach the woman and she sees you and speaks.\n\n\n""")
+    time.sleep(3)
 	
-	print "\n\t I see you're awake. You came out of nowhere it seems.\n"
+    print("\n\t I see you're awake. You came out of nowhere it seems.\n")
 	
-	build_character()
+    build_character()
 	
-	answer = determine_intent("Are you on a quest? Or just hanging out? Or What?\n")
+    answer = determine_intent("Are you on a quest? Or just hanging out? Or What?\n")
 	
-	if "quest" in answer: 
+    if "quest" in answer: 
 		
-		print "Oh, a quest, eh?" 
-		time.sleep(2)
-		print "This labyrinth holds great treasure. And danger. Did I mention danger?\n"
+	print("Oh, a quest, eh?" )
+	time.sleep(2)
+	print("This labyrinth holds great treasure. And danger. Did I mention danger?\n")
 		
-		decision = determine_intent("Are you willing to proceed?\n\n")
+	decision = determine_intent("Are you willing to proceed?\n\n")
 		
-		if decision == "y": 
-			print "Best luck in there!\n"
-			came_from = "South"
+	if decision == "y": 
+
+	    print("Best luck in there!\n")
+	    came_from = "South"
 			
-			first_intersection()
+	    first_intersection()
 		
-		else:
-			dead("The old woman rises up in a fury and one-punch kills you.")
+	else:
+
+	    dead("The old woman rises up in a fury and one-punch kills you.")
 	
-	elif "hang" in answer:
+    elif "hang" in answer:
 		
-		print "You're so cool. I wish any one of my twelve sons were as cool"
-		print "as you are. Are you single?\n"
-		time.sleep(1)
+	print("You're so cool. I wish any one of my twelve sons were as cool")
+	print("as you are. Are you single?\n")
+	time.sleep(1)
 		
-		print "Just kidding. It's fine. I didn't mean it anyway.\n"
+	print("Just kidding. It's fine. I didn't mean it anyway.\n")
 		
-		time.sleep(2)
-		print "Speaking of my kids... I lost them. They're in the labyrinth"
-		print "and I'm certain they're being held prisoner or lost somewhere...\n\n"
-		time.sleep(1)
-		print "Woe is me!! I have the gout.\n"
+	time.sleep(2)
+	print("Speaking of my kids... I lost them. They're in the labyrinth")
+	print("and I'm certain they're being held prisoner or lost somewhere...\n\n")
+	time.sleep(1)
+	print("Woe is me!! I have the gout.\n")
 		
-		decision = determine_intent("Will you help me?\n")
+	decision = determine_intent("Will you help me?\n")
 		
-		if decision == "y":
-			print "Oh, thank you! Send them back to me when you've found them.\n\n"
-			time.sleep(2)
-			print "You might need to draw them a map, if you have the materials for it..."
-			print "Just so they know how to get back to me.\n"
-			time.sleep(2)
-			print "Good luck!"
-			came_from = "South"
-			first_intersection()
+        if decision == "y":
+
+	    print("Oh, thank you! Send them back to me when you've found them.\n\n")
+	    time.sleep(2)
+	    print("You might need to draw them a map, if you have the materials for it...")
+	    print("Just so they know how to get back to me.\n")
+	    time.sleep(2)
+	    print("Good luck!")
+	    came_from = "South"
+
+	    first_intersection()
 		
-		else: 
-			print "I curse you then! May death be upon your door!\n\n\n.\n..\n..."
-			print "You walk awkwardly past the woman and into the labyrinth."
-			print "The wall of the labyrinth breaks for no apparent reason.\n"
-			time.sleep(1)
-			dead("The wall falls on you and the woman laughs as you perish.")
-	
 	else: 
-		print "That doesn't suprise me.\n"
-		time.sleep(1)
-		print "I think whatever you're looking for is in this labyrinth.\n\n"
-		print "There's some pretty sweet loot and basically no danger.\n"
-		time.sleep(1)
+
+	    print("I curse you then! May death be upon your door!\n\n\n.\n..\n...")
+	    print("You walk awkwardly past the woman and into the labyrinth.")
+	    print("The wall of the labyrinth breaks for no apparent reason.\n")
+	    time.sleep(1)
+
+	    dead("The wall falls on you and the woman laughs as you perish.")
+	
+    else: 
+
+	print("That doesn't suprise me.\n")
+	time.sleep(1)
+	print("I think whatever you're looking for is in this labyrinth.\n\n")
+	print("There's some pretty sweet loot and basically no danger.\n")
+	time.sleep(1)
 		
-		decision = determine_intent("Are you going to enter the labyrinth?\n")
+        decision = determine_intent("Are you going to enter the labyrinth?\n")
 		
-		if decision == "y": 
-			print "'Best luck in there, you mysterious %s'\n\n" % player_class
-			came_from = "South"
+	if decision == "y": 
+
+	    print("'Best luck in there, you mysterious %s'\n\n" % player_class)
+	    came_from = "South"
 			
-			first_intersection()
+	    first_intersection()
 		
-		else:
-			dead("The old woman starts to sing and suddenly your head explodes.")
+	else:
+
+	    dead("The old woman starts to sing and suddenly your head explodes.")
+
 
 def build_character():
 
-	global player_name, player_class, player_str, player_dex, player_int, player_hp
-	global player_hp_dmg, player_lvl, player_xp, player_xp_cap
+    global player_name, player_class, player_str, player_dex, player_int, player_hp
+    global player_hp_dmg, player_lvl, player_xp, player_xp_cap
 								
-	player_name = raw_input("What, may I ask, is your name, sweet traveler?\n\n->")
+    player_name = raw_input("What, may I ask, is your name, sweet traveler?\n\n->")
 	
-	choice = determine_intent("""\nAnd what type of a hero are you, %s?\n
-		\t 1. Pro Wizard
-		\t 2. Master Ninja
-		\t 3. Amatuer Wizard, decent Ninja\n""" % player_name)
+    choice = determine_intent("""\nAnd what type of a hero are you, %s?\n
+		            \t 1. Pro Wizard
+		            \t 2. Master Ninja
+		            \t 3. Amatuer Wizard, decent Ninja\n""" % player_name)
 	
-	if choice == "1":
+    if choice == "1":
 		
-		player_class = "Wizard"
-		player_lvl = 1
-		player_str = 1
-		player_dex = 2
-		player_int = 6
-		player_hp = 11
-		player_hp_dmg = player_hp
-		player_xp_cap = 10
-		player_xp = player_xp_cap
+	player_class = "Wizard"
+	player_lvl = 1
+	player_str = 1
+	player_dex = 2
+	player_int = 6
+	player_hp = 11
+	player_hp_dmg = player_hp
+	player_xp_cap = 10
+	player_xp = player_xp_cap
 	
-	elif choice == "2":
+    elif choice == "2":
 		
-		player_class = "Ninja"
-		player_lvl = 1
-		player_str = 3
-		player_dex = 4
-		player_int = 2
-		player_hp = 13
-		player_hp_dmg = player_hp
-		player_xp_cap = 10
-		player_xp = player_xp_cap
+	player_class = "Ninja"
+	player_lvl = 1
+	player_str = 3
+	player_dex = 4
+	player_int = 2
+	player_hp = 13
+	player_hp_dmg = player_hp
+	player_xp_cap = 10
+	player_xp = player_xp_cap
 	
-	else:
-		player_class = "Wizard/Ninja"
-		player_lvl = 1
-		player_str = 3
-		player_dex = 3
-		player_int = 3
-		player_hp = 12
-		player_hp_dmg = player_hp
-		player_xp_cap = 10
-		player_xp = player_xp_cap
+    else:
+
+	player_class = "Wizard/Ninja"
+	player_lvl = 1
+	player_str = 3
+	player_dex = 3
+	player_int = 3
+	player_hp = 12
+	player_hp_dmg = player_hp
+	player_xp_cap = 10
+	player_xp = player_xp_cap
 	
-	print "Ahh, %s the %s! Exciting!\n" % (player_name, player_class)
-	print "Jeez. I haven't seen a %s in ages..." % player_class
-	time.sleep(2)
+    print("Ahh, %s the %s! Exciting!\n" % player_name, player_class)
+    print("Jeez. I haven't seen a %s in ages..." % player_class)
+    time.sleep(2)
 	
-	print "\nActually, I haven't seen anyone in ages."
-	print "You look really good. Seriously, have you looked at yourself lately?\n\n"
-	time.sleep(2)
+    print("\nActually, I haven't seen anyone in ages.")
+    print("You look really good. Seriously, have you looked at yourself lately?\n\n")
+    time.sleep(2)
 	
-	choice2 = determine_intent("Type 'stats' to check yourself out or type 'okay' to continue.\n")
+    choice2 = determine_intent("Type 'stats' to check yourself out or type 'okay' to continue.\n")
 	
-	if choice2 == "n":
-		print "I am not your mother, so I'm not going to force you.\n"
+    if choice2 == "n":
+
+	print("I am not your mother, so I'm not going to force you.\n")
+
 
 def first_intersection():
 
