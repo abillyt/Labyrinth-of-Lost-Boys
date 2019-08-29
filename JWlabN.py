@@ -536,7 +536,7 @@ def equip():
 			
 	    else:
 
-		print "Okay, you equip the Sturdy Hat! Your intelligence is increased by 2!\n"
+		print("Okay, you equip the Sturdy Hat! Your intelligence is increased by 2!\n")
 		player_int += 2
 		sturdy_hat = True
 		equipped_loot['Head'] = "Sturdy Hat"
@@ -833,7 +833,7 @@ def equip():
 			
 	elif answer == "Sturdy Walking Stick" and walking_stick:
 			
-	    print "You've already got the Sturdy Walking Stick equipped!\n"
+	    print("You've already got the Sturdy Walking Stick equipped!\n")
 
 	elif answer == "Three Foot Pipe" and not three_ft_pipe:
 			
@@ -959,11 +959,11 @@ def equip():
 			
 	elif answer == "Intricate Medallion" and intricate_medallion:
 			
-	    print "You're already wearing the intricate medallion!\n"
+	    print("You're already wearing the intricate medallion!\n")
 		
 	else: 
 
-	    print "YOU DO NOT HAVE THAT ITEM!\n"
+	    print("YOU DO NOT HAVE THAT ITEM!\n")
 		
 	another_equip = determine_intent("Would you like to equip something else?\n")
 		
@@ -974,15 +974,16 @@ def equip():
 	else:
 
 	    equip_again = False
-	    print "\n\nOkay, good luck on your journey!"		
+	    print("\n\nOkay, good luck on your journey!")		
 	
     if not equip_again:
 		
-	print "\n"
+	print("\n")
 	
     else: 
 
-	print "You do not have that item!\n"
+	print("You do not have that item!\n")
+
 
 def print_enemies_full():
 	
@@ -1016,7 +1017,7 @@ def print_items_full():
 
 	print(loot_lvl_1_3[i])
 
-    print '\n'
+    print('\n')
 	
     print("Items for Adventurers, Level 4 - 6: ")
 
@@ -1031,6 +1032,7 @@ def print_items_full():
     for i in range(len(loot_lvl_7_9)):
 
 	print(loot_lvl_7_9[i])
+
 
 def battle(enemy, enemy_name):
 	
@@ -1294,12 +1296,12 @@ def battle(enemy, enemy_name):
 			
 	    elif balance == 2:
 
-		print "Well balanced attack!\n"
+		print("Well balanced attack!\n")
 		player_attack /= 2
 			
 	    elif balance == 3:
 
-		print "Off balance attack.\n"
+		print("Off balance attack.\n")
 		player_attack /= 3
 	
 			
@@ -1468,8 +1470,8 @@ def battle(enemy, enemy_name):
 			
 	    elif big_medallion or intricate_medallion:
 
-		print "The medallion's heat radiates through your body,"
-		print "and suddenly you become much healthier.\n\n"
+		print("The medallion's heat radiates through your body,")
+		print("and suddenly you become much healthier.\n\n")
 		player_hp_dmg += 2
 
 		if player_hp_dmg > player_hp:
@@ -1481,7 +1483,7 @@ def battle(enemy, enemy_name):
 		determine_player_death(player_hp_dmg, enemy_name)
 			
 	
-	print "You win!\n"
+	print("You win!\n")
 	
 	#LOOT CODE
 	chance = randint(1, 100)
@@ -2355,430 +2357,540 @@ def build_character():
 
 def first_intersection():
 
-	global came_from
+    global came_from
 	
-	print "\nThe hallway is dark but enough light is present to see around.\n" 
+    print("\nThe hallway is dark but enough light is present to see around.\n") 
+    time.sleep(1)
+    print("You may choose to travel North, West, or East.")
+    print("You came from the %s.\n" % came_from)
+	
+    choice = determine_intent("Which direction do you choose?\n")
+	
+    if choice == "w":
+		
+	print("You go West and come to an elbow leading North.\n")
+	time.sleep(2)
+		
+	print("You follow the elbow and are in a corridor that smells like dust")
+	print("and decay.\n")
+
+	chance = randint(1, 100)
+
+	if chance <= 50:
+
+	    enemy_encounter()
+
+	time.sleep(2)
+	print("As you walk you see a 6 inch bookcase on your left.")
+	print("There is a Red Book, a Green Book, and a Blue Book.\n")
 	time.sleep(1)
-	print "You may choose to travel North, West, or East."
-	print "You came from the %s.\n" % came_from
-	
-	choice = determine_intent("Which direction do you choose?\n")
-	
-	if choice == "w":
 		
-		print "You go West and come to an elbow leading North.\n"
-		time.sleep(2)
+	choice2 = determine_intent("Do you move on or do you inspect a book?\n")
 		
-		print "You follow the elbow and are in a corridor that smells like dust"
-		print "and decay.\n"
-		chance = randint(1, 100)
-		if chance <= 50:
-			enemy_encounter()
-		time.sleep(2)
-		print "As you walk you see a 6 inch bookcase on your left."
-		print "There is a Red Book, a Green Book, and a Blue Book.\n"
-		time.sleep(1)
-		
-		choice2 = determine_intent("Do you move on or do you inspect a book?\n")
-		
-		if "move" in choice2:
+	if "move" in choice2:
 			
-			print "You go around the corner and come to another intersection.\n"
-			came_from = "West"
-			chance = randint(1, 100)
+	    print("You go around the corner and come to another intersection.\n")
+	    came_from = "West"
+
+	    chance = randint(1, 100)
 			
-			if chance <= 60:
-				enemy_encounter()
-			second_intersection()
+	    if chance <= 60:
+
+		enemy_encounter()
+
+	    second_intersection()
 		
-		elif "nsp" in choice2:
+	elif "nsp" in choice2:
 			
-			secret_room_1()
+	    secret_room_1()
 		
-		else: 
-			print "I wish I was human! Then I could understand you!"
-			dead("A wave of sound comes and crushes your skull.")
-							
-	elif choice == "e":
-		
-		print "You follow the path East, which comes to an elbow that heads"
-		print "North. You follow that path and come to another intersection.\n"
-		came_from = "South"
-		chance = randint(1, 100)
-		
-		if chance <= 50:
-			enemy_encounter()
-		third_intersection()
-		
-	elif choice == "n": 
-		print "You head North and come to a T intersection, branching West and East.\n"
-		came_from = "South"
-		chance = randint(1, 100)
-		if chance <= 50:
-			enemy_encounter()
-		second_intersection()
-	
 	else: 
-		print "You've entered something I do not understand."
-		first_intersection()
+
+	    print("I wish I was human! Then I could understand you!")
+	    dead("A wave of sound comes and crushes your skull.")
+							
+    elif choice == "e":
+		
+	print("You follow the path East, which comes to an elbow that heads")
+	print("North. You follow that path and come to another intersection.\n")
+	came_from = "South"
+
+	chance = randint(1, 100)
+		
+	if chance <= 50:
+
+	    enemy_encounter()
+
+	third_intersection()
+		
+    elif choice == "n": 
+
+	print("You head North and come to a T intersection, branching West and East.\n")
+	came_from = "South"
+	chance = randint(1, 100)
+
+	if chance <= 50:
+
+	    enemy_encounter()
+
+	second_intersection()
+	
+    else: 
+
+	print("You've entered something I do not understand.")
+
+	first_intersection()
 		
 
 def secret_room_1():
 
-	global came_from, player_int, player_dex, first_time_secret_room
+    global came_from, player_int, player_dex, first_time_secret_room
 		
-	print "Interesting. You're curious. I like that.\n"
+    print("Interesting. You're curious. I like that.\n")
 		
-	choice3 = determine_intent("""Which one book would you like to inspect?\n
+    choice3 = determine_intent("""Which one book would you like to inspect?\n
 		1. Red Book
 		2. Green Book	
 		3. Blue Book\n""")
 			
-	if choice3 == "1":
+    if choice3 == "1" or choice3 in "Red Book":
 		
-		print """
-		You take the Red Book off the shelf and read the title;\n
-		'Making Friends with Blood Pacts' 
-		by 'Glungoral the Witty' \n
-		You flip through the book, finding it boorish. You put the book back and
-		can now decide to go North or South in the corridor.\n\n"""
-		came_from = "West"
+	print("""
+	    You take the Red Book off the shelf and read the title;\n
+	    'Making Friends with Blood Pacts' 
+	    by 'Glungoral the Witty' \n
+	    You flip through the book, finding it boorish. You put the book back and
+	    can now decide to go North or South in the corridor.\n\n""")
+	came_from = "West"
 		
-		choice = determine_intent("Would you like to go North or South in the corridor?\n")
+	choice = determine_intent("Would you like to go North or South in the corridor?\n")
 		
-		if choice == "n":
-			second_intersection()
+	if choice == "n":
+
+            print("You go North.\n")
+
+	    second_intersection()
 		
-		elif choice == "s":
-			first_intersection()
-			
-		else: 
-			print "I do not know what you are trying for."
-			secret_room_1()
-						
-	elif choice3 == "2":
-		print """
-		You take the Green book off the shelf and read the title; \n
-		'Pushing Past Your Own Insecurities for Fun and Profit!' 
-		by 'Mungorak the Pleasant'\n
-		You flip through the book and it quickly becomes your favorite, but you've
-		got no time to read, so you put the book back and can now decide to go North 
-		or South in the corridor.\n\n"""
-		came_from = "West"
-		
-		choice = determine_intent("Would you like to go North or South in the corridor?\n")
-			
-		if choice == "n":
-			print "You go North."
-			second_intersection()
-		
-		elif choice == "s":
-			print "You go South."
-			first_intersection()
-			
-		else:
-			print "I DO NOT UNDERSTAND."
-			secret_room_1()
-			
-	elif choice3 == "3":
-		print """
-		As you attempt to take the Blue Book off the shelf, you feel it
-		stick and then click mechanically into place as it comes forward. The book 
-		gets sucked back onto the shelf and a panel in the wall moves aside,
-		revealing a passageway.\n"""
-		time.sleep(3)
-				
-		choice4 = determine_intent("Do you enter the passageway?\n")
-				
-		if choice4 == "y":
-			came_from = "West"
-			
-			print "The passageway is short and leads to a secret room!\n"
-			
-			if not first_time_secret_room:
-				print "You're standing in the secret room you hung out in earlier.\n"
-				time.sleep(2)
-				print "You remember the good times you had, then you turn around"
-				print "and leave the room because there's nothing in there anymore.\n" 
-				
-				choice1 = determine_intent("Do you go North or South?\n")
-						
-				if choice1 == "n":
-					print "North you go!"
-					second_intersection()
-				
-				elif choice1 == "s": 
-					print "South it is!"
-					first_intersection()
-					
-				else: 
-					print "No idea what you want from me."
-					second_intersection()
-					
-			
-			while first_time_secret_room:
-				
-				first_time_secret_room = False
-				enemy_encounter()
-				
-				print "Now that you stand victorious, you notice there is a shaft"
-				print "of light highlighting a sweet looking chocolate danish on a"
-				print "narrow pedestal.\n\n"
-				time.sleep(2)
-				
-				print "\nYou examine it closely.\n\n"
-				time.sleep(2)
-				
-				print "You don't want to put it in your satchel (messy!).\n"
-				time.sleep(2)
-				
-				print "And it smells so good! You must eat it or leave it.\n"
-				time.sleep(2)
-				
-				choice5 = determine_intent("Do you eat the danish or leave it?\n")
-					
-				if "eat" in choice5:
-					print "You've never tasted anything so delicious and fresh!\n"
-					time.sleep(1)
-					
-					if player_class == "Wizard":
-						
-						player_int += 1
-						print "The danish expands your brain by five percent."
-						print "Your intelligence has grown by one. It is now %d.\n" % player_int
-						time.sleep(3)
-						print "You leave the secret room."
-						
-						choice1 = determine_intent("Do you go North or South?\n")
-							
-						if choice1 == "n":
-							print "North you go!\n\n"
-							second_intersection()
-						
-						else: 
-							print "South it is!\n\n"
-							first_intersection()
-							
-					else:
-						
-						player_dex += 1
-						print "The danish hones your muscles and heightens your quickness."
-						print "Your dexterity has grown by one. It is now %d.\n" % player_dex
-						time.sleep(3)
-						print "You leave the secret room."
-						
-						choice1 = determine_intent("Do you go North or South?\n")
-							
-						if choice1 == "n":
-							print "North you go!\n\n"
-							second_intersection()
-						
-						else: 
-							print "South it is!\n\n"
-							first_intersection()	
-							
-				else:
-					print "You back away from the danish... slowly back away.\n"
-					time.sleep(3)
-					print "Phew! That thing looked too delicious to be of any use!\n"	
-					
-					choice1 = determine_intent("Do you go North or South?\n")
-						
-					if choice1 == "n":
-						print "North you go!\n\n"
-						second_intersection()
-					
-					elif choice1 == "s":
-						print "South it is!\n\n"
-						first_intersection()
-						
-					else: 
-						print "I DO NOT KNOW WHY I PRINT."
-						first_intersection()
-			 	
-		elif choice4 == "n":
-			print """
-			Yeah, who in their right mind would go in there!? It's probably 
-			haunted or something. Definitely worth avoiding. You leave the panel and
-			can now decide to go North or South in the corridor.\n"""
-			came_from = "West"
-			
-			choice2 = determine_intent("Would you like to go North or South in the corridor?\n")
-			
-			if choice2 == "n":
-				print "You go North.\n"
-				second_intersection()
-			
-			elif choice2 == "s":
-				print "You go South.\n"
-				first_intersection()
-			
-			else:
-				print "DO NOT KNOW."
-				first_intersection()
-				
-		else: 
-			dead("Standing. Waiting. The floor opens and you fall into eternity.")
+	elif choice == "s":
+
+            print("You go South.\n")
+
+	    first_intersection()
 			
 	else: 
-		print "I wish I knew what you chose, but... you cryptic!"
+
+	    print("You stay put.")
+	    secret_room_1()
+						
+    elif choice3 == "2" or choice3 in "Green Book":
+
+	print("""
+	    You take the Green book off the shelf and read the title; \n
+	    'Pushing Past Your Own Insecurities for Fun and Profit!' 
+	    by 'Mungorak the Pleasant'\n
+	    You flip through the book and it quickly becomes your favorite, but you've
+	    got no time to read, so you put the book back and can now decide to go North 
+	    or South in the corridor.\n\n""")
+	came_from = "West"
+		
+	choice = determine_intent("Would you like to go North or South in the corridor?\n")
+			
+	if choice == "n":
+
+	    print("You go North.\n")
+
+	    second_intersection()
+		
+	elif choice == "s":
+
+	    print("You go South.\n")
+
+	    first_intersection()
+			
+	else:
+
+	    print("I DO NOT UNDERSTAND.\n\n")
+
+	    secret_room_1()
+			
+    elif choice3 == "3" or choice3 in "Blue Book":
+
+	print("""
+	    As you attempt to take the Blue Book off the shelf, you feel it
+	    stick and then click mechanically into place as it comes forward. The book 
+	    gets sucked back onto the shelf and a panel in the wall moves aside,
+	    revealing a passageway.\n""")
+	time.sleep(3)
+				
+	choice4 = determine_intent("Do you enter the passageway?\n")
+				
+	if choice4 == "y":
+
+	    came_from = "West"
+			
+	    print("The passageway is short and leads to a secret room!\n")
+			
+	    if not first_time_secret_room:
+
+	        print("You're standing in the secret room you hung out in earlier.\n")
 		time.sleep(2)
-		dead("Standing and waiting, suddenly the floor opens up and you fall onto some well made spikes.")
+		print("You remember the good times you had, then you turn around")
+		print("and leave the room because there's nothing in there anymore.\n") 
+				
+		choice1 = determine_intent("Do you go North or South?\n")
+						
+		if choice1 == "n":
+
+		    print("North you go!\n")
+
+		    second_intersection()
+				
+		elif choice1 == "s": 
+
+		    print("South it is!\n")
+
+		    first_intersection()
+					
+		else: 
+
+		    print("No idea what you want from me. You go North.\n")
+
+		    second_intersection()
+					
+			
+	    if first_time_secret_room:
+				
+		first_time_secret_room = False
+
+		    enemy_encounter()
+				
+		    print("Now that you stand victorious, you notice there is a shaft")
+		    print("of light highlighting a sweet looking chocolate danish on a")
+		    print("narrow pedestal.\n\n")
+		    time.sleep(2)
+				
+		    print("\nYou examine it closely.\n\n")
+		    time.sleep(2)
+				
+		    print("You don't want to put it in your satchel (messy!).\n")
+		    time.sleep(2)
+				
+		    print("And it smells so good! You must eat it or leave it.\n")
+		    time.sleep(2)
+				
+		    choice5 = determine_intent("Do you eat the danish or leave it?\n")
+					
+		    if "eat" in choice5:
+
+			print("You've never tasted anything so delicious and fresh!\n")
+			time.sleep(1)
+					
+			if player_class == "Wizard":
+						
+			    player_int += 1
+			    print("The danish expands your brain by approximately five percent.")
+			    print("Your intelligence has grown by one. It is now %d.\n" % player_int)
+			    time.sleep(3)
+			    print("You leave the secret room.")
+						
+			    choice1 = determine_intent("Do you go North or South?\n")
+							
+			    if choice1 == "n":
+
+				print("North you go!\n\n")
+
+				second_intersection()
+						
+			    else: 
+
+				print("South it is!\n\n")
+
+				first_intersection()
+							
+			else:
+						
+			    player_dex += 1
+			    print("The danish hones your muscles and heightens your quickness.")
+			    print("Your dexterity has grown by one. It is now %d.\n" % player_dex)
+			    time.sleep(3)
+			    print("You leave the secret room.")
+						
+			    choice1 = determine_intent("Do you go North or South?\n")
+							
+			    if choice1 == "n":
+
+				print("North you go!\n\n")
+
+				second_intersection()
+						
+			    else: 
+
+				print("South it is!\n\n")
+
+				first_intersection()	
+							
+		    else:
+
+			print("You back away from the danish... slowly back away.\n")
+		        time.sleep(3)
+			print("Phew! That thing looked too delicious to be of any use!\n")	
+					
+			choice1 = determine_intent("Do you go North or South?\n")
+						
+			if choice1 == "n":
+
+			    print("North you go!\n\n")
+
+			    second_intersection()
+					
+			elif choice1 == "s":
+
+			    print("South it is!\n\n")
+
+			    first_intersection()
+						
+		        else: 
+
+			    print("I DO NOT KNOW WHY I PRINT.")
+
+			    first_intersection()
+			 	
+	elif choice4 == "n":
+                    
+	    print("""
+		Yeah, who in their right mind would go in there!? It's probably 
+		haunted or something. Definitely worth avoiding. You leave the panel and
+		can now decide to go North or South in the corridor.\n""")
+	    came_from = "West"
+			
+	    choice2 = determine_intent("Would you like to go North or South in the corridor?\n")
+			
+	    if choice2 == "n":
+
+		print("You go North.\n")
+
+		second_intersection()
+			
+	    elif choice2 == "s":
+
+		print("You go South.\n")
+
+		first_intersection()
+			
+	    else:
+
+		print("DO NOT KNOW.")
+
+		first_intersection()
+				
+	else: 
+
+	    dead("Standing. Waiting. The floor opens and you fall into eternity.")
+			
+    else: 
+
+	print "I wish I knew what you chose, but... you cryptic!"
+	time.sleep(2)
+
+	dead("Standing and waiting, suddenly the floor opens up and you fall onto some well made spikes.")
+
 
 def second_intersection():
 
-	global came_from, player_hp_dmg
+    global came_from, player_hp_dmg
 
-	print "You are at an intersection that has passageways to the South, West, and East."
-	print "There is a dripping sound.\n"
-	print "You came from the %s.\n" % came_from
-	time.sleep(1)
+    print("You are at an intersection that has passageways to the South, West, and East.")
+    print("There is a dripping sound.\n")
+    print("You came from the %s.\n" % came_from)
+    time.sleep(1)
 	
-	choice = determine_intent("Which way do you go?\n")
+    choice = determine_intent("Which way do you go?\n")
 	
-	if choice == "s":
-		print "You move South.\n"
-		came_from = "North"
-		chance = randint(1, 100)
+    if choice == "s":
+
+        print("You move South.\n")
+	came_from = "North"
+
+	chance = randint(1, 100)
 		
-		if chance <= 50:
-			enemy_encounter()
-		first_intersection()
+	if chance <= 50:
+
+	    enemy_encounter()
+
+	first_intersection()
+    
+    elif choice == "e":
+
+	print("You move East\n")
+
+	came_from = "West"
+
+	chance = randint(1, 100)
+		
+	if chance <= 50:
+
+	    enemy_encounter()
+
+	third_intersection()
 	
-	elif choice == "e":
-		print "You move East\n"
-		came_from = "West"
-		chance = randint(1, 100)
+    elif choice == "w":
+
+	print("You go West and come to an elbow leading South.\n")
+	time.sleep(2)
+	print("You follow the elbow and are in a corridor that smells like dust and decay.\n")
+	time.sleep(2)
+	print("As you walk you see a 6 inch bookcase on your right.")
+	print("There is a Red Book, a Green Book, and a Blue Book.\n")
 		
-		if chance <= 50:
-			enemy_encounter()
-		third_intersection()
-	
-	elif choice == "w":
-		print "You go West and come to an elbow leading South.\n"
-		time.sleep(2)
-		print "You follow the elbow and are in a corridor that smells like dust and decay.\n"
-		time.sleep(2)
-		print "As you walk you see a 6 inch bookcase on your right."
-		print "There is a Red Book, a Green Book, and a Blue Book.\n"
+	choice2 = determine_intent("Do you move on or do you inspect a book?\n")
 		
-		choice2 = determine_intent("Do you move on or do you inspect a book?\n")
-		
-		if "move" in choice2:
-			print "You go around the corner and come to another intersection.\n"
-			came_from = "West"
-			chance = randint(1, 100)
+	if "move" in choice2:
+
+	    print("You go around the corner and come to another intersection.\n")
+	    came_from = "West"
+	    chance = randint(1, 100)
 			
-			if chance <= 50:
-				enemy_encounter()
-			first_intersection()
+	    if chance <= 50:
+
+		enemy_encounter()
+
+	    first_intersection()
 		
-		elif "nsp" in choice2:
+	elif "nsp" in choice2:
 			
-			secret_room_1()
+	    secret_room_1()
 	
 	elif choice == "n":
-		print "You try to head North, but run into the concrete wall.\n"
-		player_hp_dmg -= 1
-		print "You lost a hit point! you now have %d hit points.\n" % player_hp_dmg
-		chance = randint(1, 100)
+
+	    print("You try to head North, but run into the concrete wall.\n")
+	    player_hp_dmg -= 1
+	    print("You lost a hit point! you now have %d hit points.\n" % player_hp_dmg)
+
+	    if player_hp_dmg <= 0:
+
+                dead("You died on impact.")
+
+	    chance = randint(1, 100)
 	
-		if chance <= 50:
-			enemy_encounter()
-		second_intersection()
+	    if chance <= 50:
+
+		enemy_encounter()
+
+	    second_intersection()
 	
 	else:
-		print "NO DIRECTION. You head South." 
-		first_intersection()
+
+	    print("NO DIRECTION. You head South.")
+
+	    first_intersection()
+
 
 def third_intersection():
 
-	global came_from, player_hp_dmg
+    global came_from, player_hp_dmg
 	
-	print "You are at an intersection with passageways to the South, West, and East.\n"
-	print "There is a door along the cleft wall to the South/West.\n"
-	print "You came from %s.\n" % came_from
+    print("You are at an intersection with passageways to the South, West, and East.\n")
+    print("There is a door along the cleft wall to the South/West.\n")
+    print("You came from %s.\n" % came_from)
 	
-	choice = determine_intent("Which way do you go?\n")
+    choice = determine_intent("Which way do you go?\n")
 			
-	if "door" in choice:
+    if "door" in choice:
 	
-		first_room()
+	first_room()
 	
-	elif choice == "s":
-		print "You head South and hang a right, heading West, and"
-		print "come to another intersection.\n"
-		came_from = "East"
-		chance = randint(1, 100)
+    elif choice == "s":
+
+	print("You head South and hang a right, heading West, and")
+	print("come to another intersection.\n")
+	came_from = "East"
+
+	chance = randint(1, 100)
 		
-		if chance <= 50:
-			enemy_encounter()
+	if chance <= 50:
+
+	    enemy_encounter()
 		
-		first_intersection()
+	first_intersection()
 	
-	elif choice == "w":
-		print "You head West and shortly come to another intersection.\n"
-		came_from = "East"
-		chance = randint(1, 100)
+    elif choice == "w":
+
+	print("You head West and shortly come to another intersection.\n")
+	came_from = "East"
+
+	chance = randint(1, 100)
 		
-		if chance <= 50:
-			enemy_encounter()
+	if chance <= 50:
+
+	    enemy_encounter()
 		
-		second_intersection()
+	second_intersection()
 	
-	elif choice == "e":
-		print "You head East... and the hallway turns slightly.\n"
-		time.sleep(1)
-		print "Following the turn you head up stone stairs.\n"
-		time.sleep(1)
+    elif choice == "e":
+
+	print("You head East... and the hallway turns slightly.\n")
+	time.sleep(1)
+	print("Following the turn you head up stone stairs.\n")
+	time.sleep(1)
 		
-		chance = randint(1, 100)
+	chance = randint(1, 100)
 		
-		if chance <= 70:
-			enemy_encounter()
+	if chance <= 70:
+
+	    enemy_encounter()
 			
-		print "Upon reaching the top of the stairs, a great chamber comes into view!\n\n"
-		came_from = "Southwest"
+	print("Upon reaching the top of the stairs, a great chamber comes into view!\n\n")
+	came_from = "Southwest"
 		
-		first_chamber()
+	first_chamber()
 	
-	elif choice == "n":
+    elif choice == "n":
 		
-		print "You try to head North, but run into the concrete wall.\n"
-		player_hp_dmg -= 1
-		print "You lost a hit point! you now have %d hit points.\n" % player_hp_dmg
-		chance = randint(1, 100)
+	print("You try to head North, but run into the concrete wall.\n")
+	player_hp_dmg -= 1
+	print("You lost a hit point! you now have %d hit points.\n" % player_hp_dmg)
+
+	if player_hp_dmg <= 0:
+
+            dead("You died on impact. Impact with the wall.")
+
+	chance = randint(1, 100)
 		
-		if chance <= 50:
-			enemy_encounter()
+	if chance <= 50:
+
+	    enemy_encounter()
 		
-		third_intersection()
+	third_intersection()
 	
-	else:
+    else:
 		
-		print "no thAnks. BLRGH."
-		third_intersection()
+	print("no thAnks. BLRGH.")
+
+	third_intersection()
+
 	
 def first_room():
 	
-	global satchel_contents, came_from, first_time_first_room, player_hp_dmg
-	came_from = "The Room"
+    global satchel_contents, came_from, first_time_first_room, player_hp_dmg
+    came_from = "The Room"
 	
-	print "You open the door and step into a stark, dark room!\n\n"
+    print("You open the door and step into a stark, dark room!\n\n")
+    time.sleep(1)
+	
+    chance = randint(1, 100)
+
+    if chance <= 70:
+
+	enemy_encounter()
+	
+    if first_time_first_room:
+	
+        print("You notice a cube of stone in the center of the room and sitting")
+        print("atop the stone are three precious gems.\n")
 	time.sleep(1)
+	print("There is an Emerald, a Ruby, and a Sapphire.\n\n")
 	
-	chance = randint(1, 100)
-	if chance <= 70:
-		enemy_encounter()
-	
-	while first_time_first_room:
-	
-		print "You notice a cube of stone in the center of the room and sitting"
-		print "atop the stone are three precious gems.\n"
-		time.sleep(1)
-		print "There is an Emerald, a Ruby, and a Sapphire.\n\n"
-	
-		choice = determine_intent("""What do you do?\n
+	choice = determine_intent("""What do you do?\n
 			\t1. Take the Emerald.
 			\t2. Take the Ruby.
 			\t3. Take the Sapphire.
@@ -2788,348 +2900,438 @@ def first_room():
 			\t7. Take all 3 stones.
 			\t8. Take nothing and leave the room.\n""")
 				
-		if choice == "1":
+	if choice == "1":
 			
-			print "You grab the Emerald.\n"
-			time.sleep(2)
-			print "You feel intense burning that travels up your arm to your chest!\n\n"
-			print "You lose 5 hit points!\n"
-			player_hp_dmg -= 5
-			if player_hp_dmg <= 0:
-				dead("Looks like grabbing that Emerald kilt ya.")
-			else: 
-				first_time_first_room = True
+	    print("You grab the Emerald.\n")
+	    time.sleep(2)
+	    print("You feel intense burning that travels up your arm to your chest!\n\n")
+	    print("You lose 5 hit points!\n")
+	    player_hp_dmg -= 5
+
+	    if player_hp_dmg <= 0:
+
+		dead("Looks like grabbing that Emerald kilt ya.")
+
+	    else:
+
+                print("That sucked.\n")
+
+                third_intersection()
 			
-		elif choice == "2":
+	elif choice == "2":
 			
-			print "You pick up the Ruby and put it in your bag.\n"
-			satchel_contents.append("Ruby")
-			first_time_first_room = False
+	    print("You pick up the Ruby and put it in your bag.\n")
+	    satchel_contents.append("Ruby")
+
+	    first_time_first_room = False
 			
-			choice2 = determine_intent("""Now what do you do?
+	    choice2 = determine_intent("""Now what do you do?
 				\t1. Take the Emerald.
 				\t2. Take the Sapphire.
 				\t3. Take the Emerald & Sapphire.
 				\t4. Take nothing more and leave the room.\n""")
 		
-			while choice2 == "1":
+	    if choice2 == "1":
 				
-				print "You grab the Emerald.\n"
-				time.sleep(2)
-				print "You feel intense burning that travels up your arm to your chest!\n\n"
-				print "You lose 5 hit points!\n"
-				player_hp_dmg -= 5
-				if player_hp_dmg <= 0:
-					dead("Looks like grabbing that Emerald kilt ya.")
-				else: 
-					choice2 = determine_input("""Now what do you do?
-						\t1. Take the Emerald.
-						\t2. Take the Sapphire.
-						\t3. Take the Emerald & Sapphire.
-						\t4. Take nothing more and leave the room.\n""")
+		print("You grab the Emerald.\n")
+		time.sleep(2)
+		print("You feel intense burning that travels up your arm to your chest!\n\n")
+		print("You lose 5 hit points!\n")
+		player_hp_dmg -= 5
+
+		if player_hp_dmg <= 0:
+
+		    dead("Looks like grabbing that Emerald kilt ya.")
+
+		else:
+
+                    print("That wasn't cool.\n")
+
+                    third_intersection()
 				
-			if choice2 == "2":
+	    elif choice2 == "2":
 				
-				print "You pick up the Sapphire and put it in your bag.\n"
-				satchel_contents.append("Sapphire")
-				first_time_first_room = False
+		print("You pick up the Sapphire and put it in your bag.\n")
+		satchel_contents.append("Sapphire")
+
+		first_time_first_room = False
 				
-				choice3 = determine_intent("""Now what do you do?
+		choice3 = determine_intent("""Now what do you do?
 					\t1. Take the Emerald.
 					\t2. Take nothing more and leave the room.\n""")
 					
-				if choice3 == "1":
+		if choice3 == "1":
 					
-					print "You grab the Emerald.\n"
-					time.sleep(2)
-					print "You feel intense burning that travels up your arm to your chest!\n\n"
-					print "You lose 5 hit points!\n"
-					player_hp_dmg -= 5
-					if player_hp_dmg <= 0:
-						dead("Looks like grabbing that Emerald kilt ya.")
-					else:
-						third_intersection()
-					
-				else: 
-					third_intersection()
-					
-			elif choice2 == "3":
-				
-				print "You grab the Sapphire & Emerald.\n"
-				time.sleep(2)
-				print "You feel intense burning that travels up your arm to your chest!\n\n"
-				print "You lose 5 hit points!\n"
-				player_hp_dmg -= 5
-				if player_hp_dmg <= 0:
-					dead("Looks like grabbing that Emerald kilt ya.")
-				else:
-					print "You are finished in this room."
-					third_intersection()
-				
-			else: 
-				print "You're finished in this room." 
-				third_intersection()
+		    print("You grab the Emerald.\n")
+		    time.sleep(2)
+		    print("You feel intense burning that travels up your arm to your chest!\n\n")
+		    print("You lose 5 hit points!\n")
+		    player_hp_dmg -= 5
+
+		    if player_hp_dmg <= 0:
+
+			dead("Looks like grabbing that Emerald kilt ya.")
 		
-		elif choice == "3":
+		    else:
+
+                        print("That hurt.\n")
+
+		        third_intersection()
+
+		else:
+
+                    print("You are finished in this room.\n")
+
+		    third_intersection()
+					
+	    elif choice2 == "3":
+				
+		print("You grab the Sapphire & Emerald.\n")
+		time.sleep(2)
+		print("You feel intense burning that travels up your arm to your chest!\n\n")
+		print("You lose 5 hit points!\n")
+		player_hp_dmg -= 5
+
+		if player_hp_dmg <= 0:
+
+		    dead("Looks like grabbing that Sapphire or that Emerald kilt ya.")
+
+                else:
+
+                    print("Ouch.\n")
+
+                    third_intersection()
+
+    	    else:
+
+                print("You are finished in this room.\n")
+
+                third_intersection()
+                
+	elif choice == "3":
 			
-			print "You pick up the Sapphire and put it in your bag.\n"
-			satchel_contents.append("Sapphire")
-			first_time_first_room = False
+	    print("You pick up the Sapphire and put it in your bag.\n")
+	    satchel_contents.append("Sapphire")
+
+	    first_time_first_room = False
 			
-			choice2 = determine_intent("""Now what do you do?
+	    choice2 = determine_intent("""Now what do you do?
 				\t1. Take the Emerald.
 				\t2. Take the Ruby.
 				\t3. Take the Emerald & Ruby.
 				\t4. Take nothing more and leave the room.\n""")
 				
-			if choice2 == "1":
+	    if choice2 == "1":
 				
-				print "You grab the Emerald.\n"
-				time.sleep(2)
-				print "You feel intense burning that travels up your arm to your chest!\n\n"
-				print "You lose 5 hit points!\n"
-				player_hp_dmg -= 5
-				if player_hp_dmg <= 0:
-					dead("Looks like grabbing that Emerald kilt ya.")
-				else: 
-					print "You left the room."
-					third_intersection()
+		print("You grab the Emerald.\n")
+		time.sleep(2)
+		print("You feel intense burning that travels up your arm to your chest!\n\n")
+		print("You lose 5 hit points!\n")
+		player_hp_dmg -= 5
+
+		if player_hp_dmg <= 0:
+
+		    dead("Looks like grabbing that Emerald kilt ya.")
+
+		else: 
+
+		    print("That hurts bad!\n")
+
+		    third_intersection()
 				
-			elif choice2 == "2":
+	    elif choice2 == "2":
 				
-				print "You pick up the Ruby and put it in your bag.\n"
-				satchel_contents.append("Ruby")
-				first_time_first_room = False
+		print("You pick up the Ruby and put it in your bag.\n")
+		satchel_contents.append("Ruby")
+
+		first_time_first_room = False
 				
-				choice3 = determine_intent("""Now what do you do?
+		choice3 = determine_intent("""Now what do you do?
 					\t1. Take the Emerald.
 					\t2. Take nothing more and leave the room.\n""")
 					
-				if choice3 == "1":
+		if choice3 == "1":
 					
-					print "You grab the Emerald.\n"
-					time.sleep(2)
-					print "You feel intense burning that travels up your arm to your chest!\n\n"
-					print "You lose 5 hit points!\n"
-					player_hp_dmg -= 5
-					if player_hp_dmg <= 0:
-						dead("Looks like grabbing that Emerald kilt ya.")
-					else:
-						print "You are finished in that room.\n"
-						third_intersection()
+		    print("You grab the Emerald.\n")
+		    time.sleep(2)
+		    print("You feel intense burning that travels up your arm to your chest!\n\n")
+		    print("You lose 5 hit points!\n")
+		    player_hp_dmg -= 5
+
+		    if player_hp_dmg <= 0:
+
+			dead("Looks like grabbing that Emerald kilt ya.")
+
+		    else:
+
+			print("Geez. Hurt much?\n")
+
+			third_intersection()
 					
-				else: 
-					third_intersection()
+		else:
+
+                    print("You are finished in this room.\n")
+
+		    third_intersection()
 					
-			elif choice2 == "3":
+	    elif choice2 == "3":
 				
-				print "You grab the Ruby & Emerald.\n"
-				time.sleep(2)
-				print "You feel intense burning that travels up your arm to your chest!\n\n"
-				print "You lose 5 hit points!\n"
-				player_hp_dmg -= 5
-				if player_hp_dmg <= 0:
-					dead("Looks like grabbing that Emerald kilt ya.")
-				else: 
-					print "You are fond of leaving that room now.\n"
-					third_intersection()
+		print("You grab the Ruby & Emerald.\n")
+		time.sleep(2)
+		print("You feel intense burning that travels up your arm to your chest!\n\n")
+		print("You lose 5 hit points!\n")
+		player_hp_dmg -= 5
+
+		if player_hp_dmg <= 0:
+
+		    dead("Looks like grabbing that Emerald kilt ya.")
+
+		else: 
+
+		    print("Painful to say the least.\n")
+
+		    third_intersection()
 				
-			else: 
-				print "You're finished in this room.\n" 
-				third_intersection()
+	    else: 
+
+		print("You're finished in this room.\n")
+
+		third_intersection()
 				
-		elif choice == "4":
+	elif choice == "4":
 			
-			print "You grab the Ruby and the Emerald.\n"
-			time.sleep(2)
-			print "You feel intense burning that travels up your arm to your chest!\n\n"
-			print "You lose 5 hit points!\n"
-			player_hp_dmg -= 5
-			if player_hp_dmg <= 0:
-				dead("Looks like grabbing that Emerald kilt ya.")
-			else: 
-				print "You are leaving that room now.\n"
-				third_intersection()
+	    print("You grab the Ruby and the Emerald.\n")
+	    time.sleep(2)
+	    print("You feel intense burning that travels up your arm to your chest!\n\n")
+	    print("You lose 5 hit points!\n")
+	    player_hp_dmg -= 5
+	    if player_hp_dmg <= 0:
+
+		dead("Looks like grabbing that Emerald kilt ya.")
+
+	    else: 
+
+		print("Owie zowie.\n")
+
+		third_intersection()
 			
-		elif choice == "5":
+	elif choice == "5":
 			
-			print "You grab the Sapphire and the Emerald.\n"
-			time.sleep(2)
-			print "You feel intense burning that travels up your arm to your chest!\n\n"
-			print "You lose 5 hit points!\n"
-			player_hp_dmg -= 5
-			if player_hp_dmg <= 0:
-				dead("Looks like grabbing that Emerald kilt ya.")
-			else: 
-				print "You leave the room now.\n"
-				third_intersection()
+	    print("You grab the Sapphire and the Emerald.\n")
+	    time.sleep(2)
+	    print("You feel intense burning that travels up your arm to your chest!\n\n")
+	    print("You lose 5 hit points!\n")
+	    player_hp_dmg -= 5
+
+	    if player_hp_dmg <= 0:
+
+		dead("Looks like grabbing that Emerald kilt ya.")
+
+	    else: 
+
+		print("Gall darn, that hurt!\n")
+
+		third_intersection()
+		    
+	elif choice == "6":
 			
-		elif choice == "6":
+	    print("You grab the Ruby and the Sapphire and put them in your bag.\n")
+	    satchel_contents.append("Ruby")
+	    satchel_contents.append("Sapphire")
+
+	    first_time_first_room = False
 			
-			print "You grab the Ruby and the Sapphire and put them in your bag.\n"
-			satchel_contents.append("Ruby")
-			satchel_contents.append("Sapphire")
-			first_time_first_room = False
-			
-			choice2 = determine_intent("""What do you do now?\n
+	    choice2 = determine_intent("""What do you do now?\n
 				\t1. Take the Emerald.
 				\t2. Take nothing more and leave the room.\n""")
 			
-			if choice2 == "1":
+	    if choice2 == "1":
 				
-				print "You grab the Emerald.\n"
-				time.sleep(2)
-				print "You feel intense burning that travels up your arm to your chest!\n\n"
-				print "You lose 5 hit points!\n"
-				player_hp_dmg -= 5
-				if player_hp_dmg <= 0:
-					dead("Looks like grabbing that Emerald kilt ya.")
-				else: 
-					print "You are fond of leaving that room now.\n"
-					third_intersection()
-				
-			else: 
-				print "You're totally done in this room. Booyah!\n"
-				third_intersection()
-		
-		elif choice == "7":
-			
-			print "You take the stones, Sapphire, Ruby, and Emerald.\n"
-			time.sleep(2)
-			dead("Was it your greed?! Something seared into you and you disintigrate on the spot.")
-			
+		print("You grab the Emerald.\n")
+		time.sleep(2)
+		print("You feel intense burning that travels up your arm to your chest!\n\n")
+		print("You lose 5 hit points!\n")
+		player_hp_dmg -= 5
+
+		if player_hp_dmg <= 0:
+
+		    dead("Looks like grabbing that Emerald kilt ya.")
+
 		else: 
-			print "Yeah, who needs those stones anyway? I'm sure they're worthless in here...\n"
-			third_intersection()
+
+		    print("You cry a little bit to yourself because of the pain.\n")
+
+		    third_intersection()
+				
+	    else: 
+
+		print("You're totally done in this room. Booyah!\n")
+
+		third_intersection()
+		
+	elif choice == "7":
+			
+	    print("You take the stones: Sapphire, Ruby, and Emerald.\n")
+	    time.sleep(2)
+	    first_time_first_room = False
+	    
+	    dead("Was it your greed?! Something seared into you and you disintigrate on the spot.")
+			
+	else: 
+
+	    print("Yeah, who needs those stones anyway? I'm sure they're worthless in this labyrinth...\n")
+
+	    third_intersection()
 					
-	print "You stand in the familiar doorway. All of the gems have vanished.\n"
-	time.sleep(3)
-	print "You sniff and cry a little, then you get over it and get back to the hallway.\n"
+    else:
+
+        print("You stand in the familiar doorway. All of the gems have vanished.\n")
+        time.sleep(3)
+	print("You sniff and cry a little, then you get over it and get back to the hallway.\n")
 	
 	third_intersection()
 
+
 def first_chamber():
 
-	global came_from, first_time_chamber_one, player_hp_dmg, boys_saved, boys_rescued
+    global came_from, first_time_chamber_one, player_hp_dmg, boys_saved, boys_rescued
 	
-	print "The chamber before you is a grand open chamber.\n"
+    print("The chamber before you is a grand open chamber.\n")
+    time.sleep(1)
+    print("There are doors exiting the chamber in all directions,")
+    print("and the grass floor has a slight covering of snow.\n")
+    time.sleep(2)
+    print("Great slabs of concrete act as a sort of Stonehenge")
+    print("circling the chamber.\n\n" )
+    print("You came from the %s.\n" % came_from)
+	
+    if first_time_chamber_one:
+
+	print("You see an older boy chained to a chair in the middle of the chamber.")
 	time.sleep(1)
-	print "There are doors exiting the chamber in all directions,"
-	print "and the grass floor has a slight covering of snow.\n"
-	time.sleep(2)
-	print "Great slabs of concrete act as a sort of Stonehenge"
-	print "circling the chamber.\n\n" 
-	print "You came from the %s.\n" % came_from
-	
-	if first_time_chamber_one:
-		print "You see an older boy chained to a chair in the middle of the chamber."
-		time.sleep(1)
-		print "He is shivering yet not looking weak.\n"
-		time.sleep(1)
+	print("He is shivering yet not looking weak.\n")
+	time.sleep(1)
 		
-		answer = determine_intent("What would you like to do? Approach the boy or take a door?\n")
-	
-	else: 
-		print "You are alone in the chamber.\n"
-		
-		answer = "door"
+	answer = determine_intent("What would you like to do? Approach the boy or take a door?\n")
 	
 	if "boy" in answer:
 		
-		print "You approach the boy."
-		time.sleep(1)
-		print "He looks up at hearing your footsteps.\n"
-		time.sleep(1)
-		print "Hello there! I haven't seen anyone in so long, I don't even"
-		print "know how I'm still alive.\n"
-		time.sleep(2)
-		print 
+	    print("You approach the boy.")
+	    time.sleep(1)
+	    print("He looks up at hearing your footsteps.\n")
+	    time.sleep(1)
+	    print("Hello there! I haven't seen anyone in so long, I don't even")
+	    print("know how I'm still alive.\n")
+	    time.sleep(2)
+	    
+	    answer1 = determine_intent("Are you here to help me?\n")
 		
-		answer1 = determine_intent("Are you here to help me?\n")
-		
-		if answer1 == "y":
-			print "'Wonderful! My chains are secured to the ground by stone.'"
-			answer2 = determine_intent("Are you able to free me?\n")
+	    if answer1 == "y":
+
+		print("'Wonderful! My chains are secured to the ground by stone.'")
+		answer2 = determine_intent("Are you able to free me?\n")
 				
-			if answer2 == "y":
-				choice = determine_intent("Excellent! What item will you use?\n")
-				if choice == "Balanced Pickaxe" and "Balanced Pickaxe" in satchel_contents:
+		if answer2 == "y":
+
+		choice = determine_intent("Excellent! What item will you use?\n")
+
+		if choice == "Balanced Pickaxe" and "Balanced Pickaxe" in satchel_contents:
 	
-					print "You bring the Pickaxe sharply down on the first chain at the floor"
-					print "and it breaks.\n"
-					time.sleep(2)
-					print "You follow it up with the remaining three chains and the boy becomes"
-					print "free and stands looking at you.\n"
-					print "How do I get out of here? I'm sure I'll get chained up again if I can't leave now./n"
+		    print("You bring the Pickaxe sharply down on the first chain at the floor")
+		    print("and it breaks.\n")
+		    time.sleep(2)
+		    print("You follow it up with the remaining three chains and the boy becomes")
+		    print("free and stands looking at you.\n")
+		    print("How do I get out of here? I'm sure I'll get chained up again if I can't leave now./n")
 						
-					choice2 = determine_intent("What item do you use?\n")
+		    choice2 = determine_intent("What item do you use?\n")
 						
-					if choice2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
-						print "You draw him a map and send him on his way.\n"
-						boys_saved += 1
-						print "You have saved %d boys from the Labyrinth!\n\n" % boys_saved
-						boys_rescued.append("Boy 1")
-						first_time_chamber_one = False
-						first_chamber()
+		    if choice2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
+
+			print("You draw him a map and send him on his way.\n")
+			boys_saved += 1
+			print("You have saved %d boys from the Labyrinth!\n\n" % boys_saved)
+			boys_rescued.append("Boy 1")
+
+			first_time_chamber_one = False
+
+			first_chamber()
 					
-					else:
-						print "Oh well, maybe next time.\n"
-						first_chamber()
+		    else:
+
+			print("Oh well, maybe next time.\n")
+
+			first_chamber()
 					
 							
-				elif choice == "Jagged Rocks" and "Jagged Rocks" in satchel_contents: 
-					print "You bring the Jagged Rock sharply down on the first chain at the floor.\n\n"
-					time.sleep(2)
-					print "The rock works well but you hurt yourself in the process.\n"
-					print "You lose 1 hit point.\n\n"
-					player_hp_dmg -= 1
-						
-					if player_hp_dmg <= 0:
-						dead("You died trying to save that boy. How noble!")
-					print "You manage to break the other three chains with the other Jagged Rocks"
-					print "without too much more pain. But you still take 1 more hit point of damage.\n\n"
-					player_hp_dmg -= 1
-						
-					if player_hp_dmg <= 0:
-						dead("You died freeing that boy. You are a noble person.")
-						
-					print "The boy stands free, looking at you.\n"
-					print "How do I get out of here? I'm sure I'll get chained up again if I can't leave now.\n"
-					
-					choice2 = determine_intent("What item do you use?\n")
-						
-					if choice2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
-						print "You draw him a map and send him on his way.\n"
-						boys_saved += 1
-						print "You have rescued %d boys from the Labyrinth!\n\n" % boys_saved
-						boys_rescued.append("Boy 1")
-						first_time_chamber_one = False
-						first_chamber()
-						
-					else:
-						print "Oh well, perhaps next time.\n"
-						first_chamber()
-				
-				else: 
-					print "Oh well, come back when you can think of something that works.\n"
-					first_chamber()
-				
-			else:
-				print "Oh well, maybe later.\n"
-				first_chamber()
-		
-		else: 
-			print "That's okay. I kind of like this chair anyway. I do miss"
-			print "the freedom though. I got used to that before I was tied here.\n"
-			time.sleep(2)
-			print "It's fine. I'll be fine. Have fun out there.\n"
-			first_chamber()
+		elif choice == "Jagged Rocks" and "Jagged Rocks" in satchel_contents: 
 
-	elif "door" in answer:
+		    print("You bring the Jagged Rock sharply down on the first chain at the floor.\n\n")
+		    time.sleep(2)
+		    print("The rock works well but you hurt yourself in the process.\n")
+		    print("You lose 1 hit point.\n\n")
+		    player_hp_dmg -= 1
+						
+		    if player_hp_dmg <= 0:
+
+			dead("You died trying to save that boy. How noble!")
+
+		    print("You manage to break the other three chains with the other Jagged Rocks")
+		    print("without too much more pain. But you still take 1 more hit point of damage.\n\n")
+		    player_hp_dmg -= 1
+						
+		    if player_hp_dmg <= 0:
+
+			dead("You died freeing that boy. You are a noble person.")
+						
+		    print("The boy stands free, looking at you.\n")
+		    print("How do I get out of here? I'm sure I'll get chained up again if I can't leave now.\n")
+					
+		    choice2 = determine_intent("What item do you use?\n")
+						
+		    if choice2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
+
+			print("You draw him a map and send him on his way.\n")
+			boys_saved += 1
+			print("You have rescued %d boys from the Labyrinth!\n\n" % boys_saved)
+			boys_rescued.append("Boy 1")
+
+		        first_time_chamber_one = False
+
+			first_chamber()
+						
+		    else:
+
+		    	print("Oh well, perhaps next time.\n")
+
+			first_chamber()
+				
+		else: 
+
+		    print("Oh well, come back when you can think of something that works.\n")
+
+		    first_chamber()
+				
+	    else:
+
+		print("Oh well, maybe later.\n")
+
+		first_chamber()
 		
-		came_from = "Chamber"
+	else: 
+
+	    print("That's okay. I kind of like this chair anyway. I do miss")
+	    print("the freedom though. I got used to that before I was tied here.\n")
+	    time.sleep(2)
+	    print("It's fine. I'll be fine. Have fun out there.\n")
+
+	    first_chamber()
+
+    elif "door" in answer:
+		
+        came_from = "Chamber"
 	
-		answer3 = determine_intent("""Which door would you like to take?\n
+	answer3 = determine_intent("""Which door would you like to take?\n
 			
 			1. West
 			2. Northwest
@@ -3140,55 +3342,65 @@ def first_chamber():
 			7. South
 			8. Southwest\n""")
 		
-		if answer3 == "1":
-			print "You go through the west leading door and arrive shortly"
-			print "at a T-intersection.\n"
+	if answer3 == "1" or answer3 =="w":
+
+	    print("You go through the west leading door and arrive shortly")
+	    print("at a T-intersection.\n")
 			
-			sixth_intersection()
+	    sixth_intersection()
 		
-		elif answer3 == "2":
-			print "You go through the northwest leading door."
-			print "It leads you down a stone stairway.\n"
+	elif answer3 == "2" or answer3 == "northwest":
+
+	    print("You go through the northwest leading door.")
+	    print("It leads you down a stone stairway.\n")
 			
-			seventh_intersection()
+	    seventh_intersection()
 		
-		elif answer3 == "3":
-			print "You go through the north leading door.\n"
+	elif answer3 == "3" or answer3 == "n":
+
+	    print("You go through the north leading door.\n")
 			
-			twelfth_intersection()
+	    twelfth_intersection()
 		
-		elif answer3 == "4":
-			print "You go through the northeast leading door.\n"
+	elif answer3 == "4" or answer3 == "northeast":
+
+	    print("You go through the northeast leading door.\n")
 			
-			vendor_room()
+	    vendor_room()
 		
-		elif answer3 == "5":
-			print "You go through the east leading door and arrive at a four way"
-			print "intersection.\n"
+	elif answer3 == "5" or answer3 == "e":
+
+	    print("You go through the east leading door and arrive at a four way")
+	    print("intersection.\n")
 			
-			eighth_intersection()
+	    eighth_intersection()
 		
-		elif answer3 == "6":
-			print "You go through the southeast leading door.\n"
+	elif answer3 == "6" or answer3 == "southeast":
+
+	    print("You go through the southeast leading door.\n")
 			
-			third_room()
+	    third_room()
 		
-		elif answer3 == "7":
-			print "You go through the south leading door and come to a"
-			print "T-intersection.\n"
+	elif answer3 == "7" or answer3 == "s":
+
+	    print("You go through the south leading door and come to a")
+	    print("T-intersection.\n")
 			
-			fourth_intersection()
+	    fourth_intersection()
 		
-		elif answer3 == "8":
-			print "You go through the southwest leading door and walk down some"
-			print "stone steps.\n"
+	elif answer3 == "8" or answer3 == "southwest":
+
+	    print("You go through the southwest leading door and walk down some")
+	    print("stone steps.\n")
 			
-			third_intersection()
+	    third_intersection()
 		
-		else: 
-			print "You're still in the chamber.\n" 
+	else: 
+
+	    print("You're still in the chamber.\n")
 			
-			first_chamber()
+	    first_chamber()
+
 
 def fourth_intersection():
 
