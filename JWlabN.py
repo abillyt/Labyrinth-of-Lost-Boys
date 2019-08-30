@@ -180,7 +180,7 @@ def determine_intent(question): # this is the user input gateway
     # cheating for playtest
     if answer == "cheat": 
 
-	answer2 = input("Do you want to cheat?\n")
+        answer2 = input("Do you want to cheat?\n")
 
 	while answer2 == "y":
 	
@@ -4463,679 +4463,791 @@ def twelfth_intersection():
 
 def second_room():
 
-	global came_from, defeat_goblin_king
-	came_from = "East"
+    global came_from, defeat_goblin_king
+    came_from = "East"
 	
-	print "You enter a large room, its walls covered in stone carved flowers.\n\n\n" 
-	print "You came from the %s.\n" % came_from
+    print("You enter a large room, its walls covered in stone carved flowers.\n\n\n")
+    print("You came from the %s.\n" % came_from)
 	
-	enemy_encounter()
+    enemy_encounter()
 	
-	if defeat_goblin_king == False:
-		print "\n\nAn eerie silence falls upon the room after your battle.\n"
-		print "There is a plant in a pot on a stone slab in the middle of the room."
-		print "Beside this pot is another pot, though empty.\n"
-		print "On the ground, there is a container of what looks like fresh potting soil.\n"
+    if defeat_goblin_king == False:
+
+	print("\n\nAn eerie silence falls upon the room after your battle.\n")
+	print("There is a plant in a pot on a stone slab in the middle of the room.")
+	print("Beside this pot is another pot, though empty.\n")
+	print("On the ground, there is a container of what looks like fresh potting soil.\n")
 	
-		answer = determine_intent("""What do you do?\n
+	answer = determine_intent("""What do you do?\n
 			\t1. Use an item.
 			\t2. Take the empty pot.
 			\t3. Take the potted plant.
 			\t4. Put the new soil in the empty pot with your hands and re-pot the plant.
 			\t5. Do nothing and leave the room.\n""")
 		
-		if answer == "1":
+	if answer == "1":
 		
-			answer2 = determine_intent("Which item would you like to use?\n")
+	    answer2 = determine_intent("Which item would you like to use?\n")
 		
-			if answer2 in satchel_contents:
+	    if answer2 in satchel_contents:
 			
-				if answer2 == "Spade":
-					boss_encounter("room2", "Spade")
-					defeat_goblin_king = True
+		if answer2 == "Spade":
+
+		    boss_encounter("room2", "Spade")
+		    defeat_goblin_king = True
 			
-				elif answer2 == "Shovel":
-					boss_encounter("room2", "Shovel")
-					defeat_goblin_king = True
+		elif answer2 == "Shovel":
+
+		    boss_encounter("room2", "Shovel")
+		    defeat_goblin_king = True
 			
-				elif answer2 == "Balanced Pickaxe":
-					boss_encounter("room2", "Balanced Pickaxe")
-					defeat_goblin_king = True
+		elif answer2 == "Balanced Pickaxe":
+
+		    boss_encounter("room2", "Balanced Pickaxe")
+		    defeat_goblin_king = True
 				
-				else: 
-					boss_encounter("room2", answer2)
-					defeat_goblin_king = True
+		else: 
+
+		    boss_encounter("room2", answer2)
+		    defeat_goblin_king = True
 	
-		elif answer == "2" or answer == "3":
+	elif answer == "2" or answer == "3":
 		
-			boss_encounter("room2", "Thief")
-			defeat_goblin_king = True
+	    boss_encounter("room2", "Thief")
+	    defeat_goblin_king = True
 		
-		elif answer == "4":
+	elif answer == "4":
 		
-			boss_encounter("room2", "Hands")
-			defeat_goblin_king = True
+	    boss_encounter("room2", "Hands")
+	    defeat_goblin_king = True
 	
-		else:
+	else:
 		
-			print "You back away slowly, touching nothing.\n"
+	    print("You back away slowly, touching nothing.\n")
 	
-		print "You exit the room and come to an intersection.\n"
+	    print("You exit the room and come to an intersection.\n")
 	
-		came_from = "West"
+	    came_from = "West"
 	
-		fourth_intersection()
+	    fourth_intersection()
 	
-	else: 
-		print "The room looks just like you left it, and will forevermore..."
-		print "since you've destroyed The Goblin King.\n\n"
-		came_from = "West"
+    else: 
+
+	print("The room looks just like you left it, and will forevermore...")
+	print("since you've destroyed The Goblin King.\n\n")
+	came_from = "West"
 		
-		fourth_intersection()
+	fourth_intersection()
 
 def third_room():
 	
-	global came_from, first_time_third_room
+    global came_from, first_time_third_room
 	
-	print "The door you took leads directly into a small room."
-	print "You came from the %s.\n" % came_from
+    print("The door you took leads directly into a small room.")
+    print("You came from the %s.\n" % came_from)
 	
-	enemy_encounter()
+    enemy_encounter()
 	
-	print "There is some sweet art in this room. Dang. Good stuff.\n"
-	time.sleep(2)
-	print "You head back to the chamber."
+    print("There is some sweet art in this room. Dang. Good stuff.\n")
+    time.sleep(2)
+    print("You head back to the chamber.")
 	
-	came_from = "Southeast"
+    came_from = "Southeast"
 	
-	first_chamber()
-	
+    first_chamber()
+
+
 def fourth_room():
 	
-	print "In the fourth room.\n"
-	time.sleep(2)
-	print "Now leaving. Room incomplete.\n"
+    print("In the fourth room.\n")
+    time.sleep(2)
+    print("Now leaving. Room incomplete.\n")
 	
-	eighth_intersection()
+    eighth_intersection()
+
 	
 def secret_room_2():
 	
-	global came_from, gold
+    global came_from, gold
 	
-	print "You drop down from the wall and are in a well lit parlour.\n\n"
-	print "There is a lady with a clear green visor sitting at a table, shuffling cards.\n"
-	print "As you approach her, she looks up and smiles.\n"
+    print("You drop down from the wall and are in a well lit parlour.\n\n")
+    print("There is a lady with a clear green visor sitting at a table, shuffling cards.\n")
+    print("As you approach her, she looks up and smiles.\n")
 
-	answer = determine_input("Want to play some blackjack?\n")
+    answer = determine_input("Want to play a guessing game?\n")
 	
-	if answer == "y":
-		print "Well, let's play, then!\n"
-		blackjack()
-		print "Thanks for playing! I'm sure I'll see you later.\n"
-		print "You sling your makeshift grappling hook over the wall"
-		print "and climb up and out.\n\n"
-		seventh_intersection()
-		
-	else:
-		print "Oh well. That's okay. Gambling is probably not wise.\n"
-		print "Best luck in your adventures.\n\n"
-		print "You sling your makeshift grappling hook over the wall"
-		print "and climb up and out.\n\n"
-		seventh_intersection()
-	
+    if answer == "y":
+
+	print("Well, let's play, then!\n")
+	guessGame()
+	print("Thanks for playing! I'm sure I'll see you later.\n")
+	print("You sling your makeshift grappling hook over the wall")
+	print("and climb up and out.\n\n")
+
 	came_from = "Secret Room"
+
 	seventh_intersection()
+		
+    else:
+
+	print("Oh well. That's okay. Gambling is probably not wise.\n")
+	print("Best luck in your adventures.\n\n")
+	print("You sling your makeshift grappling hook over the wall")
+	print("and climb up and out.\n\n")
+
+	came_from = "Secret Room"
+
+	seventh_intersection()
+
 	
 def treasure_room():
 	
-	global came_from
+    global came_from
 	
-	print "You have found your way to the TREASURE ROOM.\n\n"
-	print "Unfortunately, it hasn't been coded yet."
+	print("You have found your way to the TREASURE ROOM.\n\n")
+	print("Unfortunately, it hasn't been coded yet.")
 	came_from = "Treasure Room"
-	print "You swing back over the pit and secure your rope again so you"
-	print "can come back when the treasure room is programmed.\n\n"
+	print("You swing back over the pit and secure your rope again so you")
+	print("can come back when the treasure room is programmed.\n\n")
 	
 	fifth_intersection()
+
 		
 def vendor_room():
 
-	global came_from
+    global came_from
 	
-	print "You enter a triangle shaped room.\n"
-	print "You see an old man sitting behind a wooden shelf in the far corner of"
-	print "the room. He's chiseling at a rock.\n" 
-	time.sleep(1)
+    print("You enter a triangle shaped room.\n")
+    print("You see an old man sitting behind a wooden shelf in the far corner of")
+    print("the room. He's chiseling at a rock.\n")
+    time.sleep(1)
 
-	answer = determine_intent("Would you like to talk to him?")
+    answer = determine_intent("Would you like to talk to him?")
 	
-	if answer == "y": 
+    if answer == "y": 
 	
-		print "You step forward to talk to him.\n" 
-		vendor()
+	print("You step forward to talk to him.\n")
+	vendor()
+
+        came_from = "Northeast"
+
+        first_chamber()
 	
-	else:
-		print "You go back to the Chamber.\n" 
-		came_from = "Northeast"
-		first_chamber()
+    else:
+
+	print("You go back to the Chamber.\n")
+	came_from = "Northeast"
+
+	first_chamber()
+
 	
 def vendor():
 	
-	global satchel_contents, player_hp_dmg, gold
+    global satchel_contents, player_hp_dmg, gold
 	
-	trading_block = []
-	use = "blank"
-	loot = "blank"
-	count = 0
-	item_loc = 0
+    trading_block = []
+    use = "blank"
+    loot = "blank"
+    count = 0
+    item_loc = 0
 	
-	print "The vendor looks up from his chiseling and looks you in the eye.\n"
+    print("The vendor looks up from his chiseling and looks you in the eye.\n")
+    time.sleep(1)
+    print("Vendor: It's been a long time since I've seen a stranger.")
+    print("What can I help you with?\n")
+	
+    selection = determine_intent("1. Trade \t2. Sell \t3. Heal \t4. Enemies \t5. Items\n")
+	
+    if selection == "1" or selection == "trade":
+		
+	if satchel_contents == []:
+			
+	    print("It looks like your satchel is empty. What are you trying to pull?\n")
+
+	    vendor_room()
+		
+	trade = determine_intent("What would you like to trade?\n")
+		
+	    if trade in satchel_contents:
+
+		for item in satchel_contents:
+
+		    if item == trade:
+
+			trading_block.append(satchel_contents[count])
+			item_loc = count
+			count += 1
+			
+		print("Ahh, you have a %s." % trading_block[0])
+		print("I have this to trade:\n")
+
+		if 0 < player_lvl < 4:
+
+		    print("***Thick Shirt***\n")
+		    loot = "Thick Shirt"
+		    use = "+1 Defense"
+
+		elif 3 < player_lvl < 7:
+
+		    print("***Leather T-Shirt***\n")
+		    loot = "Leather T-Shirt"
+		    use = "+2 Defense"
+
+		elif 6 < player_lvl:
+
+		    print("***Leather Jacket***\n")
+		    loot = "Leather Jacket"
+		    use = "+3 Defense"
+		    time.sleep(2)
+		
+		answer = determine_intent("Would you like to trade? Straight up? Mine for yours?\n")
+			
+		if answer == "y":
+			
+		    print("Ok, good deal!")
+		    satchel_contents.pop(item_loc)
+		    satchel_contents.append(loot)
+			
+		    print("This is what is in your satchel now:")
+
+		    for item in satchel_contents:
+
+			print item + " " 
+			
+		else: 
+
+		    print("I do not think you know what you are referring to.\n") 
+		    vendor_room()
+	
+    elif selection == "2":
+		
+	if satchel_contents == []:
+			
+	    print("It looks like your satchel is empty. What are you trying to pull?\n")
+	    vendor_room()
+		
+	print("What would you like to sell?")
+
+	trade = determine_intent("What would you like to sell?\n")
+		
+	if trade in satchel_contents:
+
+	    for item in satchel_contents:
+
+		if item == trade:
+
+		    trading_block.append(satchel_contents[count])
+		    item_loc = count
+		    count += 1
+		
+	    print("Ahh, you have a %s." % trading_block[0])
+
+	    choice2 = determine_intent("I will give you 50 gold for the %s, okay?\n" % trading_block[0])
+		
+	    if choice2 == "y":
+			
+	        print("Great!\n")
+
+		if trade in satchel_contents:
+					
+		    satchel_contents.pop(item_loc)
+		    print("You received 50 gold!\n")
+		    gold += 50
+		    print "You have %d gold now." % gold
+		
+		else: 
+			
+		    print("Fine. I didn't want it anyway.\n")
+		    vendor_room()
+		
+	    else:
+
+		print("You do not have that item.\n")
+		
+    elif selection == "3": 
+		
+	print("You want me to heal yah, huh?")
 	time.sleep(1)
-	print "Vendor: It's been a long time since I've seen a stranger."
-	print "What can I help you with?\n"
-	
-	selection = determine_intent("1. Trade \t2. Sell \t3. Heal \t4. Enemies \t5. Items\n")
-	
-	if selection == "1":
+	print("There was a time I was known as a healer.\n")
+	print("I see that you currently have %d hit points." % player_hp_dmg)
+	print("That is %d less than your maximum!\n" % player_hp - player_hp_dmg)
 		
-		if satchel_contents == []:
-			
-			print "It looks like your satchel is empty. What are you trying to pull?\n" 
-			vendor_room()
-		
-		trade = determine_intent("What would you like to trade?\n")
-		
-		if trade in satchel_contents:
-			for item in satchel_contents:
-				if item == trade:
-					trading_block.append(satchel_contents[count])
-					item_loc = count
-				count += 1
-			
-			print "Ahh, you have a %s." % trading_block[0]
-			print "I have this to trade:\n"
-			if 0 < player_lvl < 4:
-				print "***Thick Shirt***\n"
-				loot = "Thick Shirt"
-				use = "+1 Defense"
-			elif 3 < player_lvl < 7:
-				print "***Leather T-Shirt***\n"
-				loot = "Leather T-Shirt"
-				use = "+2 Defense"
-			elif 6 < player_lvl:
-				print "***Leather Jacket***\n"
-				loot = "Leather Jacket"
-				use = "+3 Defense"
-			time.sleep(2)
-		
-			answer = determine_intent("Would you like to trade? Straight up? Mine for yours?\n")
-			
-			if answer == "y":
-			
-				print "Ok, good deal!"
-				satchel_contents.pop(item_loc)
-				satchel_contents.append(loot)
-			
-				print "This is what is in your satchel now:"
-				for item in satchel_contents:
-					print item + " " 
-			
-		else: 
-			print "I do not think you know what you are referring to.\n" 
-			vendor_room()
-	
-	elif selection == "2":
-		
-		if satchel_contents == []:
-			
-			print "It looks like your satchel is empty. What are you trying to pull?\n" 
-			vendor_room()
-		
-		print "What would you like to sell?"
-		trade = determine_intent("What would you like to sell?\n")
-		
-		if trade in satchel_contents:
-			for item in satchel_contents:
-				if item == trade:
-					trading_block.append(satchel_contents[count])
-					item_loc = count
-				count += 1
-		
-			print "Ahh, you have a %s." % trading_block[0]
+	if player_hp_dmg <= 2:
 
-			choice2 = determine_intent("I will give you 50 gold for the %s, okay?\n" % trading_block[0])
+	    print("I can hardly believe you're still alive.\n")
 		
-			if choice2 == "y":
-			
-				print "Great!\n"
+	print("\nI s'pose I could do that. For a price.")
+	time.sleep(2)
+	print("It'll cost you a rare gem to heal yourself.\n\n")
+	print("I know that's a valuable item, but they're probably just laying around somewhere to find.")
 
-				if trade in satchel_contents:
-					
-					satchel_contents.pop(item_loc)
-					print "You received 50 gold!\n"
-					gold += 50
-					print "You have %d gold now." % gold
-		
-			else: 
+	if satchel_contents == []:
 			
-				print "Fine. I didn't want it anyway.\n" 
-				vendor_room()
+	    print("It looks like you don't have any gems. See ya.\n")
+	    vendor_room()
 		
-		else:
-			print "You do not have that item.\n"
+	choice = determine_intent("Which gem do you want to give me in exchange for full health?\n")
 		
-	elif selection == "3": 
-		
-		print "You want me to heal yah, huh?"
-		time.sleep(1)
-		print "There was a time I was known as a healer.\n"
-		print "I see that you currently have %d hit points." % player_hp_dmg
-		print "That is %d less than your maximum!\n" % (player_hp - player_hp_dmg)
-		
-		if player_hp_dmg <= 2:
-			print "I can hardly believe you're still alive.\n"
-		
-		print "\nI s'pose I could do that. For a price." 
+	if "uby" in choice: 
+				
+	    if "Ruby" in satchel_contents:
+				
+		satchel_contents.remove("Ruby")
+		print("Okay, looks good. I took your Ruby.\n")
 		time.sleep(2)
-		print "It'll cost you a rare gem to heal yourself.\n\n"
-		print "I know that's a valuable item, but they're probably just laying around somewhere to find." 
-		if satchel_contents == []:
-			
-			print "It looks like you don't have any gems. See ya.\n" 
-			vendor_room()
-		
-		choice = determine_intent("Which gem do you want to give me in exchange for full health?\n")
-		
-		if "uby" in choice: 
-				
-			if "Ruby" in satchel_contents:
-				
-				satchel_contents.remove("Ruby")
-				print "Okay, looks good. I took your Ruby.\n"
-				time.sleep(2)
-				print "I will now perform a miracle of healing!!"
-				time.sleep(4)
-				print "\n\nYou have been healed!" 
-				player_hp_dmg = player_hp
-				print "You now have %d hit points.\n" % player_hp_dmg
-				vendor_room()
-					
-			else: 
-				print "You don't have a Ruby.\n" 
-				vendor_room()
-				
-		elif "hire" in choice:
-			
-			if "Sapphire" in satchel_contents:
-				
-				satchel_contents.remove("Sapphire")
-				print "Okay, looks good. I took your Sapphire.\n"
-				time.sleep(2)
-				print "I will now perform a miracle of healing!!"
-				time.sleep(4)
-				print "\n\nYou have been healed!" 
-				player_hp_dmg = player_hp
-				print "You now have %d hit points.\n" % player_hp_dmg
-				vendor_room()
-					
-			else: 
-				print "You don't have a Sapphire.\n" 
-				vendor_room()
-			
-		else: 
-			print "I'm glad, tbh. It means I can conserve my energy.\n\n" 
-			vendor_room()	
-			
-	elif selection == "4":
-		
-		print "You want to learn about the enemies of this dungeon, do yah?\n"
-		print "Well, because we're in a beta version, I can do that for you." 
-		print_enemies_full()
+		print("I will now perform a miracle of healing!!")
 		time.sleep(4)
+		print("\n\nYou have been healed!")
+
+	        player_hp_dmg = player_hp
+
+		print("You now have %d hit points.\n" % player_hp_dmg)
 		vendor_room()
-		
+					
+	    else: 
+
+		print "You don't have a Ruby.\n" 
+		vendor_room()
+				
+	elif "hire" in choice:
+			
+	    if "Sapphire" in satchel_contents:
+				
+		satchel_contents.remove("Sapphire")
+		print("Okay, looks good. I took your Sapphire.\n")
+		time.sleep(2)
+		print("I will now perform a miracle of healing!!")
+		time.sleep(4)
+		print("\n\nYou have been healed!")
+		player_hp_dmg = player_hp
+		print("You now have %d hit points.\n" % player_hp_dmg)
+		vendor_room()
+					
+	    else: 
+
+		print("You don't have a Sapphire.\n")
+		vendor_room()
+			
 	else: 
+
+	    print("I'm glad, tbh. It means I can conserve my energy.\n\n")
+	    vendor_room()	
+			
+    elif selection == "4":
 		
-		answer = determine_intent("What item would you like to learn about?\n")
-			
-		if answer == "list all items":
-			
-			print_items_full()
-			time.sleep(4)
-			vendor_room()
+	print("You want to learn about the enemies of this dungeon, do yah?\n")
+	print("Well, because we're in a beta version, I can do that for you." )
+	print_enemies_full()
+	time.sleep(4)
+	vendor_room()
 		
-		elif answer in satchel_contents:
-			
-			print "Ah, yes, the %s!\n" % answer
-			time.sleep(2)
-			print "As far as I'm aware, this is what the %s does:\n" % answer
-			print loot_dict[answer]
-			vendor_room()
+    else: 
 		
-		else:
+	answer = determine_intent("What item would you like to learn about?\n")
 			
-			print "I don't know what you're talking about.\n"
-			vendor_room()
+	if answer == "list all items":
+			
+	    print_items_full()
+	    time.sleep(4)
+	    vendor_room()
+		
+	elif answer in satchel_contents:
+			
+	    print("Ah, yes, the %s!\n" % answer)
+	    time.sleep(2)
+	    print("As far as I'm aware, this is what the %s does:\n" % answer)
+	    print loot_dict[answer]
+
+	    vendor_room()
+		
+	else:
+			
+	    print("I don't know what you're talking about.\n")
+
+	    vendor_room()
+
 	
 def battle_cave():
 	
-	global came_from, battle_cave_furthest, battle_cave_there_and_back, high_scorer_bcf
-	global high_scorer_bctb, high_scorer_cave, high_scorer_furthest, boys_rescued, boys_saved
+    global came_from, battle_cave_furthest, battle_cave_there_and_back, high_scorer_bcf
+    global high_scorer_bctb, high_scorer_cave, high_scorer_furthest, boys_rescued, boys_saved
 	
-	count = 0
-	battle_cave_count = 0
-	boy_three = False
+    count = 0
+    battle_cave_count = 0
+    boy_three = False
 	
-	print "You enter the cave.\n" 
-	print "It stinks like death and you hear living sounds beyond the darkness.\n"
-	print "You can only see about five feet in front of you.\n\n\n"
+    print("You enter the cave.\n")
+    print("It stinks like death and you hear living sounds beyond the darkness.\n")
+    print("You can only see about five feet in front of you.\n\n\n")
 	
+    answer = determine_intent("Do you go forward?\n")
+	
+    while answer == "y":
+
+	print("You move forward.\n")
+	enemy_encounter()
+	count += 1
+	battle_cave_count += 1
+		
+	if battle_cave_count > battle_cave_furthest:
+				
+	    high_scorer_furthest = True
+	    print("You have gone the furthest of any Battle Cave Explorer!\n")
+    	    battle_cave_furthest = battle_cave_count
+	    high_scorer_bcf = raw_input("Enter your name so it can rest atop the leaderboard: ")
+
+	    battle_cave_furthest = battle_cave_count
+		
+	if count == 20 and "Boy 3" not in boys_rescued:
+
+	    print("You have come across one of the Old Woman's Sons!\n")
+	    choice = determine_intent("Would you like to bring him back with you?\n")
+
+	    if choice == "y":
+
+		boy_three = True
+		print("Okay, he'll stick close, but won't jump into the fighting.\n\n")
+
+	    else:
+
+		print("Oh, well. Maybe next time.\n\n")
+		
 	answer = determine_intent("Do you go forward?\n")
 	
-	while answer == "y":
-		print "You move forward.\n"
-		enemy_encounter()
-		count += 1
-		battle_cave_count += 1
-		if high_scorer_furthest == False: 
-			
-			if battle_cave_count > battle_cave_furthest:
-				
-				high_scorer_furthest = True
-				print "You have gone the furthest of any Battle Cave Explorer!\n" 
-				battle_cave_furthest = battle_cave_count
-				high_scorer_bcf = raw_input("Enter your name so it can rest atop the leaderboard: ")
-		
-		if battle_cave_count > battle_cave_furthest:
-				
-			battle_cave_furthest = battle_cave_count
-		
-		if count == 20 and "Boy 3" not in boys_rescued:
-			print "You have come across one of the Old Woman's Sons!\n"
-			choice = determine_intent("Would you like to bring him back with you?\n")
-			if choice == "y":
-				boy_three = True
-				print "Okay, he'll stick close, but won't jump into the fighting.\n\n"
-			else:
-				print "Oh, well. Maybe next time.\n\n"
-		
-		answer = determine_intent("Do you go forward?\n")
-	
 	while count > 0:
-		print "You move back toward the entrance.\n"
-		enemy_encounter()
-		count -= 1
-		battle_cave_count += 1
+
+	    print("You move back toward the entrance.\n")
+	    enemy_encounter()
+            count -= 1
+	    battle_cave_count += 1
 			
 	if battle_cave_count > battle_cave_there_and_back:
 				
-		print "You have survived the longest trip into the Battle Cave!\n" 
-		battle_cave_there_and_back = battle_cave_count	
-		high_scorer_bctb = raw_input("Enter your name so it can rest atop the leaderboard: ")
-		print "\n\n"
-		
-	else: 
-		
-		eleventh_intersection()
+	    print("You have survived the longest trip into the Battle Cave!\n")
+	    battle_cave_there_and_back = battle_cave_count	
+	    high_scorer_bctb = input("Enter your name so it can rest atop the leaderboard: ")
+	    print("\n\n")
 	
 	if boy_three == True:
-		print "You've brought the boy back to the entrance of the cave.\n"
-		print "He's tired of sticking with you and wants to get out.\n\n"
-		time.sleep(2)
-		choice = determine_intent("Which item do you use?\n")
+
+	    print("You've brought the boy back to the entrance of the cave.\n")
+	    print("He's tired of sticking with you and wants to get out.\n\n")
+	    time.sleep(2)
+	    choice = determine_intent("Which item do you use?\n")
 		
-		if choice == "Paper and Pen" and "Paper and Pen" in satchel_contents:
-			print "You draw him a map and he heads home to the entrance."
-			boys_saved += 1
-			print "You have saved %d boys.\n\n" % boys_saved
-			boys_rescued.append("Boy 3")
-		else: 
-			print "You tell him you'll be back for him.\n"
-			print "You can tell he's listening, but there's something about his mannerisms"
-			print "that let you know that he may go wandering back into the cave.\n\n"
+	    if choice == "Paper and Pen" and "Paper and Pen" in satchel_contents:
+
+		print("You draw him a map and he heads home to the entrance.")
+		boys_saved += 1
+		print("You have saved %d boys.\n\n" % boys_saved)
+		boys_rescued.append("Boy 3")
+
+	    else: 
+
+		print("You tell him you'll be back for him.\n")
+		print("You can tell he's listening, but there's something about his mannerisms")
+		print("that let you know that he may go wandering back into the cave.\n\n")
 		
 	came_from = "The Cave"
+
 	eleventh_intersection()
+
+
 
 # incomplete ritual_room()
 
+
+
 def grand_hallway():
 	
-	global came_from, player_hp_dmg
+    global came_from, player_hp_dmg
 	
-	print "There are stone carved pillars lining the North and South walls.\n"
-	print "It looks like a room long past used for banquets and merriment.\n"
-	time.sleep(2)
-	print "Empty now, a breeze sweeps through the room coming from the South.\n"
-	print "There is an exit to the Southeast beyond the farthest pillar.\n" 
-	print "You can walk to intersection on the Western end of the Hallway"
-	print "Or exit the Hallway to the Southeast. So West or Southeast?"
-	print "You came from the %s.\n" % came_from
+    print("There are stone carved pillars lining the North and South walls.\n")
+    print("It looks like a room long past used for banquets and merriment.\n")
+    time.sleep(2)
+    print("Empty now, a breeze sweeps through the room coming from the South.\n")
+    print("There is an exit to the Southeast beyond the farthest pillar.\n")
+    print("You can walk to intersection on the Western end of the Hallway")
+    print("Or exit the Hallway to the Southeast. So West or Southeast?")
+    print("You came from the %s.\n" % came_from)
 	
-	answer = determine_intent("Which way do you go?\n")
+    answer = determine_intent("Which way do you go?\n")
 	
-	if answer == "w":
-		print "You move to the Hallway's entrance.\n"
-		came_from = "Hallway"
+    if answer == "w":
+
+	print("You move to the Hallway's entrance.\n")
+	came_from = "Hallway"
 		
-		twelfth_intersection()
+	twelfth_intersection()
 		
-	elif answer == "s" or answer == "southeast":
-		print "You walk to the end of the Grand Hallway and exit to the South.\n"
-		came_from = "North"
+    elif answer == "s" or answer == "southeast":
+
+	print("You walk to the end of the Grand Hallway and exit to the South.\n")
+	came_from = "North"
 		
-		ninth_intersection()
+	ninth_intersection()
 	
-	elif answer == "e":
-		print "You ran your head into the eastern wall.\n"
-		player_hp_dmg -= 1
-		print "You lost a hit point! you now have %d hit points.\n" % player_hp_dmg
-		chance = randint(1, 100)
+    elif answer == "e":
+
+	print("You ran your head into the eastern wall.\n")
+	player_hp_dmg -= 1
+
+	if player_hp_dmg <= 0:
+
+            dead("The head wound was serious. So serious... you DIED!")
+
+	print("You lost a hit point! you now have %d hit points.\n" % player_hp_dmg)
+
+	chance = randint(1, 100)
 		
-		if chance <= 50:
-			enemy_encounter()
+	if chance <= 50:
+
+	    enemy_encounter()
 		
-		grand_hallway()
+	grand_hallway()
 	
-	else:
-		print "You check out the Northern wall and find nothing of note.\n"
-		came_from = "Hallway"
+    else:
+
+	print("You check out the Northern wall and find nothing of note.\n")
+	came_from = "Hallway"
 		
-		grand_hallway()
+	grand_hallway()
+
 		
 def hidden_chamber_one():
 	
-	global came_from, boys_rescued, satchel_contents, defense_mod, boys_saved, attack_mod 
-	global defeat_darkness_troll, player_hp, player_hp_dmg
+    global came_from, boys_rescued, satchel_contents, defense_mod, boys_saved, attack_mod 
+    global defeat_darkness_troll, player_hp, player_hp_dmg
 	
-	came_from = "Hidden Chamber"
+    came_from = "Hidden Chamber"
 	
-	if defeat_darkness_troll == True:
-		print "\nYou unravel the string and wind it between the three wheels.\n\n"
-		time.sleep(2)
-		print "After some testing of the tension, you pull the string hard and the wheels spin.\n"
-		time.sleep(1)
-		print "The panel of wall in front of your falls away from you and down to the ground!\n\n"
-		print "The sound is thunderous!!\n\n"
+    if defeat_darkness_troll == True:
+
+	print("\nYou unravel the string and wind it between the three wheels.\n\n")
+	time.sleep(2)
+	print("After some testing of the tension, you pull the string hard and the wheels spin.\n")
+	time.sleep(1)
+	print("The panel of wall in front of your falls away from you and down to the ground!\n\n")
+	print("The sound is thunderous!!\n\n")
 		
-		if "Boy 4" in boys_rescued:
-			print "The room is empty.\n"
-			print "You turn go south and back to the intersection.\n"
+	if "Boy 4" in boys_rescued:
+
+	    print("The room is empty.\n")
+	    print("You turn go south and back to the intersection.\n")
 		
-		else:  
-			print "You notice there is a boy huddled in the corner, who watched you dress.\n\n"
-			print "He notices you noticing him and he sorta defers to you, in status.\n"
+	else:  
+
+	    print("You notice there is a boy huddled in the corner, who watched you dress.\n\n")
+	    print("He notices you noticing him and he sorta defers to you, in status.\n")
 	
-			answer = determine_intent("Do you want to talk to him?\n")
+	    answer = determine_intent("Do you want to talk to him?\n")
 	
-			if answer == "y":
-				print "You say hello and he jumps up.\n"
-				print "Boy: I bet you're here to save me?"
-				print "I never thought anyone would come down here to save me.\n\n"
-				answer1 = determine_intent("Are you going to save me?\n")
+	    if answer == "y":
+
+		print("You say hello and he jumps up.\n")
+		print("Boy: I bet you're here to save me?")
+		print("I never thought anyone would come down here to save me.\n\n")
+
+		answer1 = determine_intent("Are you going to save me?\n")
 		
-				if answer1 == "y":
-					print "How? I don't know the way out.\n"
-					answer2 = determine_intent("Which item would you like to use?\n\n")
+		if answer1 == "y":
+
+		    print("How? I don't know the way out.\n")
+		    answer2 = determine_intent("Which item would you like to use?\n\n")
 			
-					if answer2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
-						print "You draw the boy a map to the entrance and he leaves, emboldened.\n\n"
-						boys_saved += 1
-						print "You have saved %d boys!\n\n" % saved_boys
-						boys_rescued.append("Boy 4")
-						print "Finished here, you head back to the hallway, go south, and back to the intersection.\n\n"
-						sixth_intersection()
-						
-					else: 
-						print "Well, I'll wait here until you think of something that works.\n\n"
-		
-				else: 
-					print "Well, that sucks, but I understand. It's not so bad in here.\n\n"
-	
-			else: 
-				print "That's disappointing. Okay, no worries, I'll be fine. I guess I'll eat this guy.\n\n"
-	
-			print "You exit the hidden chamber go north back to the intersection.\n"
+		    if answer2 == "Paper and Pen" and "Paper and Pen" in satchel_contents:
+
+			print("You draw the boy a map to the entrance and he leaves, emboldened.\n\n")
+			boys_saved += 1
+			print("You have saved %d boys!\n\n" % saved_boys)
+			boys_rescued.append("Boy 4")
+			print("Finished here, you head back to the hallway, go south, and back to the intersection.\n\n")
+
 			sixth_intersection()
-	else: 
-	
-		print "\nYou unravel the string and wind it between the three wheels.\n\n"
-		time.sleep(2)
-		print "After some testing of the tension, you pull the string hard and the wheels spin.\n"
-		time.sleep(1)
-		print "The panel of wall in front of your falls away from you and down to the ground!\n\n"
-		print "The sound is thunderous!!\n\n"
-		print "In the split second you recognize a hulking beast in one corner and a boy in the other..."
-		time.sleep(1)
-		print "The beast snaps awake from the sound and sees you. The Darkness Troll charges.\n\n"
-	
-		boss_encounter("hiddenChamber", "none")
-	
-		defeat_darkness_troll = True
-		print "You stand after your bloody battle and look at your foe!\n\n" 
-		time.sleep(1)
-		print "You notice something poking out from his bag.\n\n"
-		print "Upon closer inspection...\n"
-		if player_class == "Wizard":
-			print "It is Wizard Robes of the highest quality!\n"
-			time.sleep(2)
-			satchel_contents.append("Wizard Robes")
-			equippable_loot.append("Wizard Robes")
-			wizard_robes = True
-			equipped_loot['Body'] = "Wizard Robes"
-			print "You put on the Wizard Robes and feel the best you've ever felt.\n\n"
-			if wizard_hat and wizard_staff:
-				print "You've completed the set!!\n"
-				print "Your Wizard Robes now give you a defense bonus of 5!"
-				print "Your Wizard Hat adds 3 to your health, permanently!"
-				print "Your Wizard Staff now gives you an attack bonus of 5!\n\n"
-				defense_mod = 5
-				attack_mod = 5
-				player_hp += 3
-				player_hp_dmg += 3
-			
-			else:
-				print "Your defense bonus is 4!!!"
-				defense_mod = 4
+						
+		    else: 
+
+			print("Well, I'll wait here until you think of something that works.\n\n")
 		
-		elif player_class == "Ninja":
-			print "It is an Imbued Eye Mask!\n\n"
-			time.sleep(2)
-			satchel_contents.append("Imbued Eye Mask")
-			equippable_loot.append("Imbued Eye Mask")
-			imbued_eye_mask = True
-			print "You put on the Imbued Eye Mask and feel the best you've ever felt.\n\n"
-			equipped_loot['Head'] = "Imbued Eye Mask"
-			if katana and stealth_slippers: 
-				print "You've completed the set!!\n"
-				print "Your Imbued Eye Mask now gives you a defense of 5!"
-				print "Your Stealth Slippers add 3 to your health, permanently!"
-				print "Your Katana now gives you an attack bonus of 5!\n\n"
-				defense_mod = 5
-				attack_mod = 5
-				player_hp += 3
-				player_hp_dmg += 3
+		else: 
+
+		    print("Well, that sucks, but I understand. It's not so bad in here.\n\n")
+	
+	    else: 
+
+		print("That's disappointing. Okay, no worries, I'll be fine. I guess I'll eat this guy.\n\n")
+	
+	        print("You exit the hidden chamber go north back to the intersection.\n")
+
+	        sixth_intersection()
+
+    else: 
+	
+        print("\nYou unravel the string and wind it between the three wheels.\n\n")
+	time.sleep(2)
+	print("After some testing of the tension, you pull the string hard and the wheels spin.\n")
+	time.sleep(1)
+        print("The panel of wall in front of your falls away from you and down to the ground!\n\n")
+        print("The sound is thunderous!!\n\n"
+        print("In the split second you recognize a hulking beast in one corner and a boy in the other...")
+	time.sleep(1)
+	print("The beast snaps awake from the sound and sees you. The Darkness Troll charges.\n\n")
+	
+	boss_encounter("hiddenChamber", "none")
+	
+	defeat_darkness_troll = True
+
+	print("You stand after your bloody battle and look at your foe!\n\n")
+	time.sleep(1)
+	print("You notice something poking out from his bag.\n\n")
+	print("Upon closer inspection...\n")
+
+	if player_class == "Wizard":
+
+	    print("It is Wizard Robes of the highest quality!\n")
+	    time.sleep(2)
+	    satchel_contents.append("Wizard Robes")
+	    equippable_loot.append("Wizard Robes")
+	    wizard_robes = True
+	    equipped_loot['Body'] = "Wizard Robes"
+	    print("You put on the Wizard Robes and feel the best you've ever felt.\n\n")
+
+	    if wizard_hat and wizard_staff:
+
+		print("You've completed the set!!\n")
+		print("Your Wizard Robes now give you a defense bonus of 5!")
+		print("Your Wizard Hat adds 3 to your health, permanently!")
+		print("Your Wizard Staff now gives you an attack bonus of 5!\n\n")
+		defense_mod = 5
+		attack_mod = 5
+		player_hp += 3
+		player_hp_dmg += 3
 			
-			else:
-				print "Your defense bonus is 4!"
-				defense_mod = 4
+	    else:
+
+		print("Your defense bonus is 4!!!")
+		defense_mod = 4
 		
-		else:
-			print "It is an Armored Tweed Vest!\n\n"
-			time.sleep(2)
-			satchel_contents.append("Armored Tweed Vest.")
-			equippable_loot.appand("Armored Tweed Vest.")
-			armored_tweed_vest = True
-			equipped_loot['Body'] = "Armored Tweed Vest"
-			print "You put on the Armored Tweed Vest and feel the best you've ever felt.\n\n"
-			if scepter and knickers:
-				print "You've completed the set!!\n"
-				print "Your Armored Tweed Vest now gives you a defense of 5!"
-				print "Your Knickers add 3 to your health, permanently!"
-				print "Your Scepter now gives you an attack bonus of 5!\n\n"
-				defense_mod = 5
-				attack_mod = 5
-				player_hp += 3
-				player_hp_dmg += 3
+	elif player_class == "Ninja":
+
+	    print("It is an Imbued Eye Mask!\n\n")
+	    time.sleep(2)
+	    satchel_contents.append("Imbued Eye Mask")
+	    equippable_loot.append("Imbued Eye Mask")
+	    imbued_eye_mask = True
+	    print("You put on the Imbued Eye Mask and feel the best you've ever felt.\n\n")
+	    equipped_loot['Head'] = "Imbued Eye Mask"
+
+	    if katana and stealth_slippers: 
+
+	        print("You've completed the set!!\n")
+	        print("Your Imbued Eye Mask now gives you a defense of 5!")
+	        print("Your Stealth Slippers add 3 to your health, permanently!")
+	        print("Your Katana now gives you an attack bonus of 5!\n\n")
+	        defense_mod = 5
+	        attack_mod = 5
+	        player_hp += 3
+	        player_hp_dmg += 3
 			
-			else:
-				print "Your defense bonus is 4!"
-				defense_mod = 4				
+	    else:
+
+		print("Your defense bonus is 4!")
+		defense_mod = 4
 		
-		print "You notice there is a boy huddled in the corner, who watched you dress.\n\n"
-		print "He notices you noticing him and he sorta defers to you, in status.\n"
+	else:
+
+	    print("It is an Armored Tweed Vest!\n\n")
+	    time.sleep(2)
+	    satchel_contents.append("Armored Tweed Vest.")
+	    equippable_loot.appand("Armored Tweed Vest.")
+	    armored_tweed_vest = True
+	    equipped_loot['Body'] = "Armored Tweed Vest"
+	    print("You put on the Armored Tweed Vest and feel the best you've ever felt.\n\n")
+
+	    if scepter and knickers:
+
+		print("You've completed the set!!\n")
+		print("Your Armored Tweed Vest now gives you a defense of 5!")
+		print("Your Knickers add 3 to your health, permanently!")
+		print("Your Scepter now gives you an attack bonus of 5!\n\n")
+		defense_mod = 5
+		attack_mod = 5
+		player_hp += 3
+		player_hp_dmg += 3
+			
+	    else:
+
+		print("Your defense bonus is 4!")
+		defense_mod = 4				
+		
+		print("You notice there is a boy huddled in the corner, who watched you dress.\n\n")
+		print("He notices you noticing him and he sorta defers to you, in status.\n")
 		
 		answer = determine_intent("Do you want to talk to him?\n")
 		
 		if answer == "y":
-			print "You say hello and he jumps up.\n"
-			print "I bet you're here to save me!?"
-			print "I never thought anyone would come down here to save me.\n\n"
-			answer1 = determine_intent("Are you going to save me?\n")
+
+		    print("You say hello and he jumps up.\n")
+		    print("I bet you're here to save me!?")
+		    print("I never thought anyone would come down here to save me.\n\n")
+
+		    answer1 = determine_intent("Are you going to save me?\n")
 			
-			if answer1 == "y":
-				answer2 = determine_intent("How? I don't know the way out.\n")
+		    if answer1 == "y":
+
+		        answer2 = determine_intent("How? I don't know the way out.\n")
 				
-				if answer2 == "use Paper and Pen" and "Paper and Pen" in satchel_contents:
-					print "You draw the boy a map to the entrance and he leaves, emboldened.\n\n"
-					boys_saved += 1
-					print "You have saved %d boys!\n\n" % boys_saved
-					boys_rescued.append("Boy 4")
-					print "Finished here, you head back to the hallway, go south, and back to the intersection.\n\n"
-					sixth_intersection()
+		        if answer2 == "use Paper and Pen" and "Paper and Pen" in satchel_contents:
+
+			    print("You draw the boy a map to the entrance and he leaves, emboldened.\n\n")
+			    boys_saved += 1
+			    print("You have saved %d boys!\n\n" % boys_saved)
+			    boys_rescued.append("Boy 4")
+			    print("Finished here, you head back to the hallway, go south, and back to the intersection.\n\n")
+
+			    sixth_intersection()
 				
-				else: 
-					print "Well, I'll wait here until you think of something that works.\n\n"
-			
 			else: 
-				print "Well, that sucks, but I understand. It's not so bad in here.\n\n"
+
+			    print("Well, I'll wait here until you think of something that works.\n\n")
+			
+		    else: 
+
+			print("Well, that sucks, but I understand. It's not so bad in here.\n\n")
 		
 		else: 
-			print "That's disappointing. Okay, no worries, I'll be fine. I guess I'll eat this guy.\n\n"
+
+		    print("That's disappointing. Okay, no worries, I'll be fine. I guess I'll eat this guy.\n\n")
+
 		
-		print "You exit the hidden chamber and head back to the intersection.\n"
-		sixth_intersection()
+	print("You exit the hidden chamber and head back to the intersection.\n")
+
+	sixth_intersection()
+
 				
 def dead(why):
 	
-	global player_hp_dmg
+    global player_hp_dmg
 	
-	print why
+    print why
 	
-	quandry = determine_intent("test version. Would you like to reload with all yo stats & lvl?\n")
+    quandry = determine_intent("test version. Would you like to reload with all yo stats & lvl?\n")
 	
-	if quandry == "y":
+    if quandry == "y":
 	
-		player_hp_dmg = player_hp
-		first_intersection()
+	player_hp_dmg = player_hp
+
+	first_intersection()
 	
-	answer = determine_intent("Would you like to play again?\n")
+    answer = determine_intent("Would you like to play again?\n")
 		
-	if answer == "y":
-		start()
+    if answer == "y":
+
+	start()
 	
-	else: 
-		print "Thank you for playing!\n"
-		exit(0)
+    else: 
+
+	print("Thank you for playing!\n")
+	exit(0)
 
 start()
