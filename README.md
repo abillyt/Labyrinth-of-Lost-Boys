@@ -1,5 +1,5 @@
 # Labyrinth-of-Lost-Boys 
-*coded in Python 2.7 by abillyt*
+*coded in Python 3.7 by abillyt*
 
 a text-based adventure game.
 
