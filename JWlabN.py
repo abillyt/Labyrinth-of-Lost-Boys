@@ -1,6 +1,5 @@
 # this is a labyrinth text based adventure game. 
 
-
 from random import randint
 import time
 
@@ -284,11 +283,6 @@ def determine_intent(question): # this is the user input gateway
             if satchel_contents == []:
 
                 print("Your satchel is empty!\n\n")
-                
-            answer = input(prompt2)
-            answer = answer.lower()
-            print("\n\n")
-            
 
             print("Here are the current contents of your Satchel: \n")
 
@@ -298,24 +292,26 @@ def determine_intent(question): # this is the user input gateway
 
                 print("\t--" + item + "--")
                 print("\n\n")
-                print("These are the equippable items in your possession: \n")
 
-                for item in satchel_contents:
+            print("These are the equippable items in your possession: \n")
 
-                    if item in equippable_loot:
-                        print("\t<-> " + item)
-                        print("\n\n")
+            for item in satchel_contents:
+
+                if item in equippable_loot:
+
+                    print("\t<-> " + item)
+                    print("\n\n")
                         
-                print("Here is what you have equipped: \n")
+            print("Here is what you have equipped: \n")
 
-                for key, value in equipped_loot.items():
+            for key, value in equipped_loot.items():
 
-                    print("\t" + key + " : " + value + "   ...   " + loot_dict[value])
-                    print("\n\n")
+                print("\t" + key + " : " + value + "   ...   " + loot_dict[value])
+                print("\n\n")
                     
-                    answer = input(prompt2)
-                    answer = answer.lower()
-                    print("\n\n")
+            answer = input(prompt2)
+            answer = answer.lower()
+            print("\n\n")
         
         elif answer == "scoreboard": 
         
@@ -1020,7 +1016,7 @@ def print_enemies_full():
 
         print('\n')
     
-        print("Enemies for Adventurers, Level 4 - 6: ")
+    print("Enemies for Adventurers, Level 4 - 6: ")
 
     for i in range(len(enemies_lvl_4_6)):
 
@@ -1028,7 +1024,7 @@ def print_enemies_full():
 
         print('\n')
     
-        print("Enemies for Adventurers, Level 7 - 9: ")
+    print("Enemies for Adventurers, Level 7 - 9: ")
 
     for i in range(len(enemies_lvl_7_9)):
 
@@ -1045,7 +1041,7 @@ def print_items_full():
 
         print('\n')
     
-        print("Items for Adventurers, Level 4 - 6: ")
+    print("Items for Adventurers, Level 4 - 6: ")
 
     for i in range(len(loot_lvl_4_6)):
 
@@ -1053,7 +1049,7 @@ def print_items_full():
 
         print('\n')
     
-        print("Items for Adventurers, Level 7 - 9: ")
+    print("Items for Adventurers, Level 7 - 9: ")
 
     for i in range(len(loot_lvl_7_9)):
 
@@ -1148,13 +1144,13 @@ def battle(enemy, enemy_name):
             
             player_hp_dmg -= enemy_attack
             
-            print(f"You now have {player_hp_dmg} hit points.\n")
-            print("  -------------********-------------  \n\n")
-            time.sleep(1)
-            
             if player_hp_dmg <= 0:
                 
                 determine_player_death(player_hp_dmg, enemy_name)
+
+            print(f"You now have {player_hp_dmg} hit points.\n")
+            print("  -------------********-------------  \n\n")
+            time.sleep(1)
             
             print("Now it's your turn to attack!\n")
 
@@ -1401,6 +1397,7 @@ def battle(enemy, enemy_name):
             if enemy_hp <= 0:
             
                 determine_enemy_death(enemy_hp, enemy_name)
+                continue
 
             time.sleep(3) 
                 
@@ -1444,12 +1441,12 @@ def battle(enemy, enemy_name):
                     result = "Glancing blow.\n\n" 
                     enemy_attack -= 3
             
-            elif precision == 1:
+                elif precision == 1:
 
                     result = "Miss!\n\n"
                     enemy_attack = 0
             
-            else:
+                else:
 
                     result = "Contact.\n\n"
                     enemy_attack -= 2
@@ -1470,15 +1467,15 @@ def battle(enemy, enemy_name):
             time.sleep(1)
             
             player_hp_dmg -= enemy_attack
+
+            if player_hp_dmg <= 0:
+                
+                determine_player_death(player_hp_dmg, enemy_name)
             
             print(f"You now have {player_hp_dmg} hit points.\n")
             print("  -------------********-------------  \n\n")
             
-            time.sleep(1)       
-            
-            if player_hp_dmg <= 0:
-                
-                determine_player_death(player_hp_dmg, enemy_name)
+            time.sleep(1)   
                 
             if small_medallion:
 
@@ -1570,8 +1567,9 @@ def battle(enemy, enemy_name):
     else:
             
         chance = randint(1, 60)
+        j = randint(0, 8)
 
-        if chance < 10:
+        if chance < 30:
 
             loot = loot_lvl_1_3[j]
 
@@ -1589,7 +1587,7 @@ def battle(enemy, enemy_name):
                 print(f"You've looted the {loot!s} from the {enemy_name!s}!\n")
                 time.sleep(3)
 
-        elif chance < 25:
+        elif chance < 47:
 
             loot = loot_lvl_4_6[j]
 
@@ -3321,27 +3319,21 @@ def first_chamber():
                     print("Oh well, come back when you can think of something that works.\n")
     
                     first_chamber()
-                
-            else:
+        
+            else: 
 
-                print("Oh well, maybe later.\n")
+                print("That's okay. I kind of like this chair anyway. I do miss")
+                print("the freedom though. I got used to that before I was tied here.\n")
+                time.sleep(2)
+                print("It's fine. I'll be fine. Have fun out there.\n")
 
                 first_chamber()
+
+        elif answer == "door":
         
-        else: 
-
-            print("That's okay. I kind of like this chair anyway. I do miss")
-            print("the freedom though. I got used to that before I was tied here.\n")
-            time.sleep(2)
-            print("It's fine. I'll be fine. Have fun out there.\n")
-
-            first_chamber()
-
-    elif answer == "door":
-        
-        came_from = "Chamber"
+            came_from = "Chamber"
     
-        answer3 = determine_intent("""Which door would you like to take?\n
+            answer3 = determine_intent("""Which door would you like to take?\n
             
             1. West
             2. Northwest
@@ -3352,58 +3344,58 @@ def first_chamber():
             7. South
             8. Southwest\n""")
         
-        if answer3 == "1" or answer3 =="w":
+            if answer3 == "1" or answer3 =="w":
 
-            print("You go through the west leading door and arrive shortly")
-            print("at a T-intersection.\n")
+                print("You go through the west leading door and arrive shortly")
+                print("at a T-intersection.\n")
             
-            sixth_intersection()
+                sixth_intersection()
         
-        elif answer3 == "2" or answer3 == "northwest":
+            elif answer3 == "2" or answer3 == "northwest":
 
-            print("You go through the northwest leading door.")
-            print("It leads you down a stone stairway.\n")
+                print("You go through the northwest leading door.")
+                print("It leads you down a stone stairway.\n")
             
-            seventh_intersection()
+                seventh_intersection()
         
-        elif answer3 == "3" or answer3 == "n":
+            elif answer3 == "3" or answer3 == "n":
 
-            print("You go through the north leading door.\n")
+                print("You go through the north leading door.\n")
             
-            twelfth_intersection()
+                twelfth_intersection()
         
-        elif answer3 == "4" or answer3 == "northeast":
+            elif answer3 == "4" or answer3 == "northeast":
 
-            print("You go through the northeast leading door.\n")
+                print("You go through the northeast leading door.\n")
             
-            vendor_room()
+                vendor_room()
         
-        elif answer3 == "5" or answer3 == "e":
+            elif answer3 == "5" or answer3 == "e":
     
-            print("You go through the east leading door and arrive at a four way")
-            print("intersection.\n")
+                print("You go through the east leading door and arrive at a four way")
+                print("intersection.\n")
             
-            eighth_intersection()
+                eighth_intersection()
         
-        elif answer3 == "6" or answer3 == "southeast":
+            elif answer3 == "6" or answer3 == "southeast":
 
-            print("You go through the southeast leading door.\n")
+                print("You go through the southeast leading door.\n")
             
-            third_room()
+                third_room()
         
-        elif answer3 == "7" or answer3 == "s":
+            elif answer3 == "7" or answer3 == "s":
 
-            print("You go through the south leading door and come to a")
-            print("T-intersection.\n")
+                print("You go through the south leading door and come to a")
+                print("T-intersection.\n")
             
-            fourth_intersection()
+                fourth_intersection()
         
-        elif answer3 == "8" or answer3 == "southwest":
+            elif answer3 == "8" or answer3 == "southwest":
 
-            print("You go through the southwest leading door and walk down some")
-            print("stone steps.\n")
+                print("You go through the southwest leading door and walk down some")
+                print("stone steps.\n")
             
-            third_intersection()
+                third_intersection()
         
         else: 
 
