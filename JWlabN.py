@@ -194,8 +194,7 @@ mothers_wisdom = ['Take garlic, son. And raw honey.', 'If you take ill, take raw
 
 def determine_intent(question): # this is the user input gateway
 
-    global player_name, player_class, player_str, player_dex, player_int, player_hp
-    global player_hp_dmg, player_lvl, player_xp, player_xp_cap
+    global player_hp, player_hp_dmg, player_lvl
 
     prompt2 = question + "\n-> "
     
@@ -286,28 +285,30 @@ def determine_intent(question): # this is the user input gateway
 
             print("Here are the current contents of your Satchel: \n")
 
-            satchel_contents.sort()
+            else:
+                
+                satchel_contents.sort()
 
-            for item in satchel_contents: 
+                for item in satchel_contents: 
 
-                print("\t--" + item + "--")
-                print("\n\n")
-
-            print("These are the equippable items in your possession: \n")
-
-            for item in satchel_contents:
-
-                if item in equippable_loot:
-
-                    print("\t<-> " + item)
+                    print("\t--" + item + "--")
                     print("\n\n")
+
+                print("These are the equippable items in your possession: \n")
+
+                for item in satchel_contents:
+
+                    if item in equippable_loot:
+
+                        print("\t<-> " + item)
+                        print("\n\n")
                         
-            print("Here is what you have equipped: \n")
+                print("Here is what you have equipped: \n")
 
-            for key, value in equipped_loot.items():
+                for key, value in equipped_loot.items():
 
-                print("\t" + key + " : " + value + "   ...   " + loot_dict[value])
-                print("\n\n")
+                    print("\t" + key + " : " + value + "   ...   " + loot_dict[value])
+                    print("\n\n")
                     
             answer = input(prompt2)
             answer = answer.lower()
@@ -315,10 +316,9 @@ def determine_intent(question): # this is the user input gateway
         
         elif answer == "scoreboard": 
         
-            print(f""" Most fights won before death: {fight_count_most} by {high_scorer_fcm}
-                Most fights won walking into the Battle Cave at one go: {battle_cave_furthest} by {high_scorer_bcf}
-                Most fights won in the Battle Cave and survive: {battle_cave_there_and_back} by {high_scorer_bctb}
-                \n\n""")
+            print(f"Most fights won before death: {fight_count_most} by {high_scorer_fcm}.")
+            print(f"Most fights won walking into the Battle Cave at one go: {battle_cave_furthest} by {high_scorer_bcf}.")
+            print(f"Most fights won in the Battle Cave and survive: {battle_cave_there_and_back} by {high_scorer_bctb}.")
             
             answer = input(prompt2)
             answer = answer.lower()
@@ -413,6 +413,7 @@ def print_wisdom(parent):
         print('"' + mothers_wisdom[chance] + '"')
         print("\n\n")
         
+        
 def equip():
     
     global player_str, player_dex, player_int, player_hp, attack_mod, defense_mod, walking_stick
@@ -441,12 +442,12 @@ def equip():
                 print("I mean, if you're willing to make this decision with")
                 print("this level of intelligence, what kind of decisions are")
                 print("you going to make with less intelligence?\n")
-                time.sleep(7)
+                time.sleep(4)
                 print("We'll hold off for now.\n")
                 
             else: 
 
-                print("Okay, you equip the Cloth Cap! Your intelligence is increased by 1!\n")
+                print("You equip the Cloth Cap! Your intelligence is increased by 1!\n")
                 player_int += 1
                 cloth_cap = True
                 equipped_loot['Head'] = "Cloth Cap"
@@ -459,7 +460,7 @@ def equip():
             
             if weapon:
 
-                print(f"Okay, {player_name!s}, the Short Stick is replacing your {current_weapon!s}!\n")
+                print(f"The Short Stick is replacing your {current_weapon!s}!\n")
                 print("Your bonus attack is 1!\n")
 
                 attack_mod = 1
@@ -506,10 +507,14 @@ def equip():
             if fingerless_gloves or power_mitts:
 
                 print("Why would you do that? You'd lose dexterity!\n")
+                time.sleep(2)
+                print("It can't be for the looks...")
+                time.sleep(1)
+                print("We'll hold off for now.")
                 
             else: 
 
-                print("Yay, you equip the Basic Gloves! Your dexterity is increased by 1!\n")
+                print("Yes, you equip the Basic Gloves! Your dexterity is increased by 1!\n")
                 player_dex += 1
                 basic_gloves = True
                 equipped_loot['Hands'] = "Basic Gloves"
@@ -522,11 +527,14 @@ def equip():
                 
             if leather_t or leather_jacket:
 
-                print("Why would you do that? You'd become more defenseless!\n")
+                print("Why would you do that? You'd become less defensive!\n")
+                print("Plus, the Thick Shirt just doesn't look cool.")
+                time.sleep(2)
+                print("We'll just hold off for now.")
                 
             else: 
 
-                print("Okay, you equip the Thick Shirt! Your defense bonus is 1!\n")
+                print("Alright, you equip the Thick Shirt! Your defense bonus is 1!\n")
                 defense_mod = 1
                 thick_shirt = True
                 equipped_loot['Body'] = "Thick Shirt"
@@ -548,7 +556,7 @@ def equip():
                 
             elif wide_brim_hat:
 
-                print(f"Up to you, {player_name!s}.")
+                print(f"Up to you, {player_name!s}...")
                 print("Your intelligence is decreased by 1.\n")
                 player_int -= 1
                 wide_brim_hat = False
@@ -557,7 +565,7 @@ def equip():
             
             else:
 
-                print("Okay, you equip the Sturdy Hat! Your intelligence is increased by 2!\n")
+                print("Cool, you equip the Sturdy Hat! Your intelligence is increased by 2!\n")
                 player_int += 2
                 sturdy_hat = True
                 equipped_loot['Head'] = "Sturdy Hat"
@@ -600,7 +608,7 @@ def equip():
                 
             else: 
 
-                print("Okay, you equip the Madrona Wand! Your bonus attack is 2!\n")
+                print("Nice! You equip the Madrona Wand. Your bonus attack is 2!\n")
                 attack_mod = 2
                 madrona_wand = True
                 weapon = True
@@ -624,7 +632,7 @@ def equip():
                 
             elif power_mitts:
 
-                print(f"Up to you, {player_name!s}.")
+                print(f"Up to you, {player_name!s}...")
                 print("Your dexterity is decreased by 1.\n")
                 player_dex -= 1
                 power_mitts = False
@@ -633,7 +641,9 @@ def equip():
             
             else:
 
-                print("Okay, you equip the Fingerless Gloves! Your dexterity is increased by 2!\n")
+                print("You equip the Fingerless Gloves! Your dexterity is increased by 2!\n")
+                time.sleep(1)
+                print("And you look cool.")
                 player_dex += 2
                 fingerless_gloves = True
                 equipped_loot['Hands'] = "Fingerless Gloves"
@@ -655,8 +665,8 @@ def equip():
                 
             elif leather_jacket:
 
-                print(f"Up to you, {player_name!s}.")
-                print("Your defense bonus is 2!\n")
+                print(f"Up to you, {player_name!s}...")
+                print("Your defense bonus goes down by 1, and is now 2!\n")
                 defense_mod = 2
                 leather_jacket = False
                 leather_t = True
@@ -664,7 +674,7 @@ def equip():
             
             else:
 
-                print("Okay, you equip the Leather T-Shirt! Your defense bonus is 2!\n")
+                print("You equip the Leather T-Shirt! Your defense bonus is 2!\n")
                 defense_mod = 2
                 leather_t = True
                 equipped_loot['Body'] = "Leather T-Shirt"
@@ -695,20 +705,20 @@ def equip():
                 
             else: 
 
-                print("Okay, you equip the Wide Brim Hat! Your intelligence is increased by 3!\n")
+                print("Wow, nice! You equip the Wide Brim Hat. Your intelligence is increased by 3!\n")
                 player_int += 3
                 wide_brim_hat = True
                 equipped_loot['Head'] = "Wide Brim Hat"
                 
         elif answer == "Wide Brim Hat" and wide_brim_hat:
             
-            print("You're already wearing the Wide Brim Hat!\n")
+            print("You're already wearing the Wide Brim Hat - and you look really good!\n")
         
         elif answer == "Oak Staff" and not oak_staff:
             
             if weapon:
 
-                print(f"Okay, {player_name!s}, the Oak Staff is replacing your {current_weapon!s}!\n")
+                print(f"The Oak Staff is replacing your {current_weapon!s}!\n")
                 print("Your bonus attack is 3!\n")
                 attack_mod = 3
                 oak_staff = True
@@ -738,7 +748,7 @@ def equip():
                 
             else: 
 
-                print("Okay, you equip the Oak Staff! Your bonus attack is 3!\n")
+                print("You equip the Oak Staff! Your bonus attack is 3!\n")
                 attack_mod = 3
                 oak_staff = True
                 weapon = True
@@ -771,21 +781,21 @@ def equip():
             
             else:
 
-                print("Okay, you equip the Power Mitts! Your dexterity is increased by 3!\n")
+                print("YES!! You equip the Power Mitts! Your dexterity is increased by 3!\n")
                 player_dex += 3
                 power_mitts = True
                 equipped_loot['Hands'] = "Power Mitts"
                 
         elif answer == "Power Mitts" and power_mitts:
             
-            print("You're already wearing the Power Mitts!\n")
+            print("Look at your hands, you're already wearing the Power Mitts!\n")
             
         elif answer == "Leather Jacket" and not leather_jacket:
             
             if thick_shirt:
 
                 print("You have removed the Thick Shirt and equipped the Leather Jacket!\n")
-                print("You're defense bonus is 3!\n")
+                print("You're defense bonus is now 3!\n")
                 defense_mod = 3
                 leather_jacket = True
                 thick_shirt = False
@@ -794,7 +804,7 @@ def equip():
             elif leather_t:
 
                 print("You have removed the Leather T-Shirt and equipped the Leather Jacket!\n")
-                print("You're defense bonus is 3!\n")
+                print("You're defense bonus is now 3!\n")
                 defense_mod = 3
                 leather_jacket = True
                 leather_t = False
@@ -815,8 +825,10 @@ def equip():
             
             if weapon:
 
-                print(f"Okay, {player_name!s}, the Sturdy Walking Stick is replacing your {current_weapon!s}!\n")
+                print(f"Well, {player_name!s}, the Sturdy Walking Stick is replacing your {current_weapon!s}!\n")
                 print("Your bonus attack is 1!\n")
+                time.sleep(1)
+                print("At least now you can walk around with more confidence in your footing.")
                 attack_mod = 1
                 walking_stick = True
                 equipped_loot['Weapon'] = "Sturdy Walking Stick"
@@ -845,7 +857,7 @@ def equip():
                 
             else: 
 
-                print("Okay, you equip the Sturdy Walking Stick! Your bonus attack is 1!\n")
+                print("You equip the Sturdy Walking Stick! Your bonus attack is 1!\n")
                 attack_mod = 1
                 walking_stick = True
                 weapon = True
@@ -854,13 +866,13 @@ def equip():
             
         elif answer == "Sturdy Walking Stick" and walking_stick:
             
-            print("You've already got the Sturdy Walking Stick equipped!\n")
+            print("You have the Sturdy Walking Stick equipped!\n")
 
         elif answer == "Three Foot Pipe" and not three_ft_pipe:
             
             if weapon:
 
-                print(f"Okay, {player_name!s}, the Three Foot Pipe is replacing your {current_weapon!s}!\n")
+                print(f"Nice, {player_name!s}, the Three Foot Pipe is replacing your {current_weapon!s}!\n")
                 print("Your bonus attack is 2!\n")
                 attack_mod = 2
                 three_ft_pipe = True
@@ -890,7 +902,7 @@ def equip():
                 
             else: 
 
-                print("Okay, you equip the Three Foot Pipe! Your bonus attack is 2!\n")
+                print("You equip the Three Foot Pipe! Your bonus attack is 2!\n")
                 attack_mod = 2
                 three_ft_pipe = True
                 weapon = True
@@ -899,13 +911,13 @@ def equip():
                 
         elif answer == "Three Foot Pipe" and three_ft_pipe:
             
-            print("You've already got the Three Foot Pipe equipped!\n")
+            print("You are already holding the Three Foot Pipe!\n")
         
         elif answer == "Sword" and sword == False:
             
             if weapon:
 
-                print(f"Okay, {player_name!s}, the Sword is replacing your {current_weapon!s}!\n")
+                print(f"Very cool, {player_name!s}, the Sword is replacing your {current_weapon!s}!\n")
                 print("Your bonus attack is 3!\n")
                 attack_mod = 3
                 madrona_want = True
@@ -935,7 +947,7 @@ def equip():
                 
             else: 
 
-                print("Okay, you equip the Sword! Your bonus attack is 3!\n")
+                print("Wow, you equip the Sword! Your bonus attack is 3!\n")
                 attack_mod = 3
                 sword = True
                 weapon = True
@@ -944,7 +956,7 @@ def equip():
                 
         elif answer == "Sword" and sword:
             
-            print("You've already got the Sword equipped!\n")
+            print(f"Look down at your hip, {player_name!s}, you've got the Sword equipped!\n")
             
         elif answer == "Small Medallion" and not small_medallion:
                 
@@ -1079,9 +1091,9 @@ def battle(enemy, enemy_name):
             print(f"\t###      ROUND {round_count}      ###\n\n\n")
             
             print(f"\nThe {enemy_name!s} attacks!\n")
-            time.sleep(1)
+            time.sleep(2)
             
-            enemy_attack = randint(0, enemy[1])
+            enemy_attack = randint(1, enemy[1])
             precision = randint(1, 100)
         
             if precision >= 90:
@@ -1089,19 +1101,24 @@ def battle(enemy, enemy_name):
                 if precision == 100:
 
                     result = "Unreal Critical Precision!\n\n" 
-                    enemy_attack += 3
+                    enemy_attack += 4
                 
                 else: 
 
                     result = "Critical Precision!\n\n" 
-                    enemy_attack += 2
+                    enemy_attack += 3
             
             elif 75 < precision < 90:
 
                 result = "Precision hit!\n\n" 
+                enemy_attack += 2
+            
+            elif 50 < precision < 76:
+                
+                result = "Good hit!\n\n")
                 enemy_attack += 1
             
-            elif 30 < precision < 76:
+            elif 30 < precision < 51:
 
                 result = "Hit!\n\n"
             
@@ -1112,19 +1129,19 @@ def battle(enemy, enemy_name):
                 
             elif 1 <= precision <= 10:
             
-                if precision == 2:
+                if precision == 3 or precision == 4:
 
                     result = "Glancing blow.\n\n" 
                     enemy_attack -= 3
                 
-                elif precision == 1:
+                elif precision == 1 or precision == 2:
 
                     result = "Missed!\n\n"
                     enemy_attack = 0
                 
                 else:
 
-                    result = "Contact.\n\n"
+                    result = "Made Contact.\n\n"
                     enemy_attack -= 2
                 
             print(result)
@@ -1140,7 +1157,7 @@ def battle(enemy, enemy_name):
                 enemy_attack = 0
             
             print(f"The {enemy_name!s} strikes you for: {enemy_attack} damage!\n")
-            time.sleep(1)
+            time.sleep(2)
             
             player_hp_dmg -= enemy_attack
             
@@ -1150,18 +1167,18 @@ def battle(enemy, enemy_name):
 
             print(f"You now have {player_hp_dmg} hit points.\n")
             print("  -------------********-------------  \n\n")
-            time.sleep(1)
+            time.sleep(2)
             
             print("Now it's your turn to attack!\n")
 
-            time.sleep(1)
+            time.sleep(2)
             
             # First attack algorithm:
             # player_attack = x + y + j
             
             # Second attack algorithm:
             # modifier = randint(1, 3)
-            # player_attack = (x + y + j) / modifier
+            # player_attack = (x + y + j) // modifier
     
             # updated attack algorithm:
 
@@ -1170,9 +1187,10 @@ def battle(enemy, enemy_name):
             j = player_int
             order = [x, y, j]
             order.sort()
-            a = order[1] // 3
-            b = order[2]
-            player_attack = a + b
+            a = order[0] // 3
+            b = order[1] // 2
+            c = order[2] 
+            player_attack = a + b + c
             
             balance = randint(1, 3)
             
@@ -1198,23 +1216,28 @@ def battle(enemy, enemy_name):
             
             if precision >= 90:
             
-                if precision == 100:
+                if precision == 99 or precision == 100:
 
                     result = "Unreal Critical Precision!\n\n" 
-                    player_attack += 3
+                    player_attack += 4
                 
                 else: 
 
                     result = "Critical Precision!\n\n" 
-                    player_attack += 2
+                    player_attack += 3
             
             elif 75 < precision < 90:
 
                 result = "Precision hit!\n\n" 
-                player_attack += 1
+                player_attack += 2
             
-            elif 30 < precision < 76:
+            elif 50 < precision < 76:
 
+                result = "Good Hit!\n\n"
+                player_attack += 1
+                
+            elif 30 < precision < 51:
+                
                 result = "Hit!\n\n"
             
             elif 10 < precision < 31:
@@ -1224,19 +1247,19 @@ def battle(enemy, enemy_name):
             
             elif 1 <= precision <= 10:
             
-                if precision == 2:
+                if precision == 3 or precision == 4:
 
                     result = "Glancing blow.\n\n" 
                     player_attack -= 3
                 
-                elif precision == 1:
+                elif precision == 1 or precision == 2:
 
                     result = "Miss!\n\n"
                     player_attack = 0
                 
                 else:
 
-                    result = "Contact.\n\n"
+                    result = "Made Contact.\n\n"
                     player_attack -= 2
                 
             print(result)
@@ -1255,33 +1278,37 @@ def battle(enemy, enemy_name):
                 player_attack = 0
             
             print(f"You strike the {enemy_name!s} for: {player_attack} damage!\n")
-            time.sleep(1)
+            time.sleep(2)
             
             enemy_hp -= player_attack
-            
-            print(f"The {enemy_name!s} now has {enemy_hp} hit points.\n")
-            print("  -------------********-------------  \n\n")
-            time.sleep(1)
             
             if enemy_hp <= 0:
                 
                 determine_enemy_death(enemy_hp, enemy_name)
                 time.sleep(3)
+            
+            print(f"The {enemy_name!s} now has {enemy_hp} hit points.\n")
+            print("  -------------********-------------  \n\n")
+            time.sleep(1)
                 
-            if small_medallion:
+            if small_medallion and round_count % 2 == 0:
 
                 print("Warmth radiates from the medallion,")
-                print("suddenly you become a little healthier.\n\n")
+                print("suddenly you heal a little bit.")
+                time.sleep(1)
+                print("You gain 1 hit point!\n\n")
                 player_hp_dmg += 1
     
                 if player_hp_dmg > player_hp:
 
                     player_hp_dmg = player_hp
             
-            elif big_medallion or intricate_medallion:
+            elif big_medallion or intricate_medallion and round_count % 2 == 0:
 
                 print("The medallion's heat radiates through your body,")
-                print("and suddenly you become much healthier.\n\n")
+                print("and suddenly you see a wound close up.")
+                time.sleep(1)
+                print("You gain 2 hit points!\n\n")
                 player_hp_dmg += 2
 
                 if player_hp_dmg > player_hp:
@@ -1305,9 +1332,10 @@ def battle(enemy, enemy_name):
             j = player_int
             order = [x, y, j]
             order.sort()
-            a = order[1] // 3
-            b = order[2]
-            player_attack = a + b
+            a = order[0] // 3
+            b = order[1] // 2
+            c = order[2] 
+            player_attack = a + b + c
             
             balance = randint(1, 3)
             
@@ -1324,29 +1352,37 @@ def battle(enemy, enemy_name):
 
                 print("Off balance attack.\n")
                 player_attack //= 3
-    
+            
+            else:
+
+                print("This should not ever print. Ever.")
             
             precision = randint(1, 100)
             
             if precision >= 90:
             
-                if precision == 100:
+                if precision == 99 or precision == 100:
 
                     result = "Unreal Critical Precision!\n\n" 
-                    player_attack += 3
-    
+                    player_attack += 4
+                
                 else: 
 
                     result = "Critical Precision!\n\n" 
-                    player_attack += 2
-
+                    player_attack += 3
+            
             elif 75 < precision < 90:
 
                 result = "Precision hit!\n\n" 
-                player_attack += 1
+                player_attack += 2
             
-            elif 30 < precision < 76:
+            elif 50 < precision < 76:
 
+                result = "Good Hit!\n\n"
+                player_attack += 1
+                
+            elif 30 < precision < 51:
+                
                 result = "Hit!\n\n"
             
             elif 10 < precision < 31:
@@ -1356,99 +1392,103 @@ def battle(enemy, enemy_name):
             
             elif 1 <= precision <= 10:
             
-                if precision == 2:
+                if precision == 3 or precision == 4:
 
                     result = "Glancing blow.\n\n" 
                     player_attack -= 3
-            
-                elif precision == 1:
+                
+                elif precision == 1 or precision == 2:
 
                     result = "Miss!\n\n"
                     player_attack = 0
-            
+                
                 else:
 
-                    result = "Contact.\n\n"
+                    result = "Made Contact.\n\n"
                     player_attack -= 2
-            
                 
             print(result)
             
             if attack_mod > 0:
 
                 player_attack += attack_mod
-
-            print(f"\n -- Attack Modifier is {attack_mod} -- \n")
+                print(f"\n -- Attack Modifier is {attack_mod} -- \n")
             
-            if player_attack < 0 or result == "Miss!\n\n":
+            if player_attack < 0:
+                
+                player_attack = 0
+            
+            elif result == "Miss!\n\n":
                 
                 player_attack = 0
             
             print(f"You strike the {enemy_name!s} for: {player_attack} damage!\n")
-            time.sleep(1)
+            time.sleep(2)
             
             enemy_hp -= player_attack
             
-            print(f"The {enemy_name!s} now has {enemy_hp} hit points.\n")
-            print("  -------------********-------------  \n\n")
-            
-            time.sleep(1)
-            
             if enemy_hp <= 0:
-            
+                
                 determine_enemy_death(enemy_hp, enemy_name)
                 continue
-
-            time.sleep(3) 
+            
+            print(f"The {enemy_name!s} now has {enemy_hp} hit points.\n")
+            print("  -------------********-------------  \n\n")
+            time.sleep(2)
                 
             print(f"Now it's the {enemy_name!s}\'s turn!\n")            
 
-            time.sleep(1)
+            time.sleep(2)
             
-            enemy_attack = randint(0, enemy[1])
+            enemy_attack = randint(1, enemy[1])
             precision = randint(1, 100)
         
             if precision >= 90:
         
-                if precision == 100:
+                if precision == 99 or precision == 100:
 
                     result = "Unreal Critical Precision!\n\n" 
-                    enemy_attack += 3
-        
+                    enemy_attack += 4
+                
                 else: 
 
                     result = "Critical Precision!\n\n" 
-                    enemy_attack += 2
-        
+                    enemy_attack += 3
+            
             elif 75 < precision < 90:
 
                 result = "Precision hit!\n\n" 
+                enemy_attack += 2
+                
+            elif 50 < precision < 76:
+                
+                result = "Good hit!\n\n"
                 enemy_attack += 1
-        
-            elif 30 < precision < 76:
+            
+            elif 30 < precision < 51:
 
                 result = "Hit!\n\n"
-        
+            
             elif 10 < precision < 31:
 
                 result = "Weak hit!\n\n"
                 enemy_attack -= 1
-            
+                
             elif 1 <= precision <= 10:
             
-                if precision == 2:
+                if precision == 3 or precision == 4:
 
                     result = "Glancing blow.\n\n" 
                     enemy_attack -= 3
-            
-                elif precision == 1:
+                
+                elif precision == 1 or precision == 2:
 
-                    result = "Miss!\n\n"
+                    result = "Missed!\n\n"
                     enemy_attack = 0
-            
+                
                 else:
 
-                    result = "Contact.\n\n"
+                    result = "Made Contact.\n\n"
                     enemy_attack -= 2
                 
             print(result)
@@ -1464,40 +1504,44 @@ def battle(enemy, enemy_name):
                 enemy_attack = 0
             
             print(f"The {enemy_name!s} strikes you for: {enemy_attack} damage!\n")
-            time.sleep(1)
+            time.sleep(2)
             
             player_hp_dmg -= enemy_attack
-
+            
             if player_hp_dmg <= 0:
                 
                 determine_player_death(player_hp_dmg, enemy_name)
-            
+
             print(f"You now have {player_hp_dmg} hit points.\n")
             print("  -------------********-------------  \n\n")
-            
-            time.sleep(1)   
+            time.sleep(2)
                 
-            if small_medallion:
+            if small_medallion and round_count % 2 == 0:
 
                 print("Warmth radiates from the medallion,")
-                print("suddenly you become a little healthier.\n\n")
+                print("suddenly you heal a little bit.")
+                time.sleep(1)
+                print("You gain 1 hit point!\n\n")
                 player_hp_dmg += 1
+    
+                if player_hp_dmg > player_hp:
 
-            if player_hp_dmg > player_hp:
-
-                player_hp_dmg = player_hp
+                    player_hp_dmg = player_hp
             
-            elif big_medallion or intricate_medallion:
+            elif big_medallion or intricate_medallion and round_count % 2 == 0:
 
                 print("The medallion's heat radiates through your body,")
-                print("and suddenly you become much healthier.\n\n")
+                print("and suddenly you see a wound close up.")
+                time.sleep(1)
+                print("You gain 2 hit points!\n\n")
                 player_hp_dmg += 2
 
-            if player_hp_dmg > player_hp:
+                if player_hp_dmg > player_hp:
 
-                player_hp_dmg = player_hp
+                    player_hp_dmg = player_hp
     
         print("You win!\n")
+        time.sleep(2)
     
     #LOOT CODE
     chance = randint(1, 100)
@@ -1632,7 +1676,7 @@ def battle(enemy, enemy_name):
             high_scorer = True
             print("You've just taken 1st place on the fight count list!\n")
             time.sleep(1)
-            high_scorer_fcm = determine_intent("Enter your name to go on the scoreboard: ")
+            high_scorer_fcm = input("Enter your name to go on the scoreboard: ")
     
     if fight_count > fight_count_most:
 
@@ -1668,7 +1712,7 @@ def determine_enemy_death(num, enemy_name):
         
     elif num == -3:
 
-        print(f"You thwacked the {enemy_name!s}.\n")
+        print(f"You thumped the {enemy_name!s}.\n")
         
     elif num == -4:
 
@@ -1688,7 +1732,7 @@ def determine_enemy_death(num, enemy_name):
     
     elif num == -8:
 
-        print("Having a good day? (hypothetical)\n")
+        print(f"Wow, that {enemy_name!s} died a lot.\n")
     
     elif num == -9:
 
@@ -1724,15 +1768,15 @@ def determine_enemy_death(num, enemy_name):
         
     elif num == -17:
 
-        print("Flat out flattened!\n")
+        print("Flat out destroyed!\n")
     
     elif num == -18:
 
-        print("Undeniably destroyed!\n")
+        print("Undeniably, inarguably, destroyed!\n")
         
     elif num == -19:
 
-        print("It's like three of them died with that blow.\n")
+        print(f"That blow may have killed three {enemy_name!s}s.\n")
     
     elif num == -20:
 
@@ -1763,11 +1807,11 @@ def determine_player_death(num, enemy_name):
         
     elif num == -3:
 
-        dead(f"You got thwacked by the {enemy_name!s}.\n")
+        dead(f"You got thwumped by the {enemy_name!s}.\n")
         
     elif num == -4:
 
-        dead("Well, solidly dead, I'd say.\n")
+        dead("Well, you are solidly dead, I'd say.\n")
     
     elif num == -5:
 
@@ -1775,7 +1819,7 @@ def determine_player_death(num, enemy_name):
         
     elif num == -6:
 
-        dead("That was not nice and frankly, I think it was personal.\n")
+        dead("That was not nice and frankly, it looked a little personal.\n")
     
     elif num == -7:
 
@@ -1787,7 +1831,7 @@ def determine_player_death(num, enemy_name):
     
     elif num == -9:
 
-        dead("Yikes. Not too often I need to look away at a death.\n")
+        dead("Yikes. Not too often a monster looks away at a death.\n")
         
     elif num == -10:
 
@@ -1795,7 +1839,7 @@ def determine_player_death(num, enemy_name):
         
     elif num == -11:
 
-        dead("I'm not sure you can get this dead.\n")
+        dead("I was not sure someone could get this dead.\n")
         
     elif num <= -12:
 
