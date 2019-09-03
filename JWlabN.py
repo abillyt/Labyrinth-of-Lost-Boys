@@ -36,7 +36,7 @@ first_time_third_room = True
 first_time_2nd_secret_room = True 
 defeat_goblin_king = False # implemented
 defeat_darkness_troll = False # implemented
-rope_ready = False # 5th intersection, once rope swing is ready
+rope_ready = False # 5th intersection, implemented
 high_scorer = False
 high_scorer_furthest = False
 high_scorer_cave = False 
@@ -1602,7 +1602,7 @@ def battle(enemy, enemy_name):
 
                 satchel_contents.append(loot)
                 print(f"You've looted {loot!s} from the {enemy_name!s}!\n")
-                time.sleep(3)
+                time.sleep(2)
         
         elif player_lvl <= 6:
             
@@ -1624,32 +1624,93 @@ def battle(enemy, enemy_name):
 
                     satchel_contents.append(loot)
                     print(f"You've looted {loot!s} from the {enemy_name!s}!\n")
-                    time.sleep(3)
+                    time.sleep(2)
 
-        else: 
+            else:
 
-            loot = loot_lvl_4_6[j]
+                loot = loot_lvl_4_6[j]
+
+                print(f"It's a {loot!s}!\n\n")
+
+                if loot in satchel_contents:
+
+                    print(f"You've already got a {loot!s}...\n")
+                    time.sleep(1)
             
-            print(f"It's a {loot!s}!\n\n")
-            time.sleep(1)
-            
-            if loot in satchel_contents:
+                else: 
 
-                print(f"You've already got the {loot!s}...\n")
+                    satchel_contents.append(loot)
+                    print(f"You've looted {loot!s} from the {enemy_name!s}!\n")
+                    time.sleep(2)
+
+        else:
+
+            chance = randint(1, 50)
+
+            if chance < 10:
+
+                loot = loot_lvl_1_3[j]
+
+                print(f"It's a {loot!s}!\n\n")
                 time.sleep(1)
             
-            else: 
+                if loot in satchel_contents:
 
-                satchel_contents.append(loot)
-                print(f"You've looted the {loot!s} from the {enemy_name!s}!\n")
-                time.sleep(3)
-                
+                    print(f"You've already got a {loot!s}...\n")
+                    time.sleep(1)
+            
+                else: 
+
+                    satchel_contents.append(loot)
+                    print(f"You've looted {loot!s} from the {enemy_name!s}!\n")
+                    time.sleep(2)
+
+            elif chance < 25:
+
+                loot = loot_lvl_4_6[j]
+
+                print(f"It's a {loot!s}!\n\n")
+
+                if loot in satchel_contents:
+
+                    print(f"You've already got a {loot!s}...\n")
+                    time.sleep(1)
+            
+                else: 
+
+                    satchel_contents.append(loot)
+                    print(f"You've looted {loot!s} from the {enemy_name!s}!\n")
+                    time.sleep(2)
+
+            else:
+
+                loot = loot_lvl_7_9[j]
+            
+                print(f"It's a {loot!s}!\n\n")
+                time.sleep(1)
+            
+                if loot in satchel_contents:
+
+                    print(f"You've already got the {loot!s}...\n")
+                    time.sleep(1)
+            
+                else: 
+
+                    satchel_contents.append(loot)
+                    print(f"You've looted the {loot!s} from the {enemy_name!s}!\n")
+                    time.sleep(2)
+
+    elif chance == 99 or chance == 100:
+
+        print(f"Nothing on this {enemy_name!s} except guts.\n\n")
+
     else:
             
         chance = randint(1, 60)
+        print(f"The {enemy_name!s} dropped loot!\n")
         j = randint(0, 8)
 
-        if chance < 30:
+        if chance < 32:
 
             loot = loot_lvl_1_3[j]
 
@@ -1665,7 +1726,7 @@ def battle(enemy, enemy_name):
 
                 satchel_contents.append(loot)
                 print(f"You've looted the {loot!s} from the {enemy_name!s}!\n")
-                time.sleep(3)
+                time.sleep(2)
 
         elif chance < 47:
 
@@ -1683,7 +1744,7 @@ def battle(enemy, enemy_name):
 
                 satchel_contents.append(loot)
                 print(f"You've looted the {loot!s} from the {enemy_name!s}!\n")
-                time.sleep(3)
+                time.sleep(2)
 
         else:
 
@@ -1701,7 +1762,7 @@ def battle(enemy, enemy_name):
 
                 satchel_contents.append(loot)
                 print(f"You've looted the {loot!s} from the {enemy_name!s}!\n")
-                time.sleep(3)
+                time.sleep(2)
         
     fight_count += 1  #to tabulate fights won while alive
     
@@ -2523,7 +2584,7 @@ def first_intersection():
         
         choice2 = determine_intent("Do you move on or do you inspect a book?\n")
         
-        if choice2 == "move":
+        if "move" in choice2:
             
             print("You go around the corner and come to another intersection.\n")
             came_from = "West"
@@ -2536,7 +2597,7 @@ def first_intersection():
 
             second_intersection()
         
-        elif choice2 == "inspect":
+        elif "nspec" in choice2:
             
             secret_room_1()
         
