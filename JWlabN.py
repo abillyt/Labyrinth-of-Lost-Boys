@@ -283,9 +283,9 @@ def determine_intent(question): # this is the user input gateway
 
                 print("Your satchel is empty!\n\n")
 
-            print("Here are the current contents of your Satchel: \n")
-
             else:
+
+                print("Here are the current contents of your Satchel: \n")
                 
                 satchel_contents.sort()
 
@@ -316,9 +316,9 @@ def determine_intent(question): # this is the user input gateway
         
         elif answer == "scoreboard": 
         
-            print(f"Most fights won before death: {fight_count_most} by {high_scorer_fcm}.")
-            print(f"Most fights won walking into the Battle Cave at one go: {battle_cave_furthest} by {high_scorer_bcf}.")
-            print(f"Most fights won in the Battle Cave and survive: {battle_cave_there_and_back} by {high_scorer_bctb}.")
+            print(f"\t\tMost fights won before death: {fight_count_most} by {high_scorer_fcm}.")
+            print(f"\t\tMost fights won walking into the Battle Cave at one go: {battle_cave_furthest} by {high_scorer_bcf}.")
+            print(f"\t\tMost fights won in the Battle Cave and survive: {battle_cave_there_and_back} by {high_scorer_bctb}.")
             
             answer = input(prompt2)
             answer = answer.lower()
@@ -1071,7 +1071,7 @@ def print_items_full():
 def battle(enemy, enemy_name):
     
     #player list order: Hp, Str, Dex, Int, xp
-    #enemy list order: Hp, MaxAttack, xp given, dex
+    #enemy list order: Hp, MaxAttack, xp given, dex   ------- want to add a defense modifier
         
     global player_xp, player_hp_dmg, fight_count, fight_count_most
     global high_scorer, high_scorer_fcm
@@ -1115,7 +1115,7 @@ def battle(enemy, enemy_name):
             
             elif 50 < precision < 76:
                 
-                result = "Good hit!\n\n")
+                result = "Good hit!\n\n"
                 enemy_attack += 1
             
             elif 30 < precision < 51:
@@ -1285,13 +1285,13 @@ def battle(enemy, enemy_name):
             if enemy_hp <= 0:
                 
                 determine_enemy_death(enemy_hp, enemy_name)
-                time.sleep(3)
+                continue
             
             print(f"The {enemy_name!s} now has {enemy_hp} hit points.\n")
             print("  -------------********-------------  \n\n")
             time.sleep(1)
                 
-            if small_medallion and round_count % 2 == 0:
+            if small_medallion and round_count % 2 == 1:
 
                 print("Warmth radiates from the medallion,")
                 print("suddenly you heal a little bit.")
@@ -1303,7 +1303,19 @@ def battle(enemy, enemy_name):
 
                     player_hp_dmg = player_hp
             
-            elif big_medallion or intricate_medallion and round_count % 2 == 0:
+            elif big_medallion and round_count % 2 == 1:
+
+                print("The medallion's heat radiates through your body,")
+                print("and suddenly you see a wound close up.")
+                time.sleep(1)
+                print("You gain 2 hit points!\n\n")
+                player_hp_dmg += 2
+
+                if player_hp_dmg > player_hp:
+
+                    player_hp_dmg = player_hp
+
+            elif intricate_medallion and round_count % 2 == 1:
 
                 print("The medallion's heat radiates through your body,")
                 print("and suddenly you see a wound close up.")
@@ -1516,7 +1528,7 @@ def battle(enemy, enemy_name):
             print("  -------------********-------------  \n\n")
             time.sleep(2)
                 
-            if small_medallion and round_count % 2 == 0:
+            if small_medallion and round_count % 2 == 1:
 
                 print("Warmth radiates from the medallion,")
                 print("suddenly you heal a little bit.")
@@ -1528,7 +1540,19 @@ def battle(enemy, enemy_name):
 
                     player_hp_dmg = player_hp
             
-            elif big_medallion or intricate_medallion and round_count % 2 == 0:
+            elif big_medallion and round_count % 2 == 1:
+
+                print("The medallion's heat radiates through your body,")
+                print("and suddenly you see a wound close up.")
+                time.sleep(1)
+                print("You gain 2 hit points!\n\n")
+                player_hp_dmg += 2
+
+                if player_hp_dmg > player_hp:
+
+                    player_hp_dmg = player_hp
+
+            elif intricate_medallion and round_count % 2 == 1:
 
                 print("The medallion's heat radiates through your body,")
                 print("and suddenly you see a wound close up.")
@@ -1728,7 +1752,7 @@ def determine_enemy_death(num, enemy_name):
     
     elif num == -7:
 
-        print("Holy Maloly, you freaking crushed it. freaking. crushed. it.\n")
+        print("Holy Moly, you freaking crushed it. freaking. crushed. it.\n")
     
     elif num == -8:
 
@@ -1823,7 +1847,7 @@ def determine_player_death(num, enemy_name):
     
     elif num == -7:
 
-        dead("Holy Maloly, you got freaking crushed. freaking. crushed.\n")
+        dead("Holy Maolly, you got freaking crushed. freaking. crushed.\n")
     
     elif num == -8:
 
@@ -1945,11 +1969,11 @@ def enemy_encounter():
         
         elif x == 1:
 
-            enemy = (6, 3, 4, 5) #gnoll 18
+            enemy = (7, 4, 4, 5) #gnoll 18
         
         elif x == 2:
 
-            enemy = (6, 4, 5, 6) #wolf 21
+            enemy = (8, 5, 5, 6) #wolf 21
         
         elif x == 3: 
 
@@ -1957,23 +1981,23 @@ def enemy_encounter():
         
         elif x == 4:
 
-            enemy = (6, 3, 4, 6) #goblin 19
+            enemy = (7, 3, 4, 6) #goblin 19
         
         elif x == 5:
 
-            enemy = (3, 2, 3, 8) #cat 16
+            enemy = (4, 3, 3, 8) #cat 16
         
         elif x == 6:
 
-            enemy = (6, 2, 3, 1) #flannel_bag 12
+            enemy = (6, 3, 3, 2) #flannel_bag 12
         
         elif x == 7:
 
-            enemy = (10, 2, 5, 2) #glowing_top_hat 19
+            enemy = (10, 3, 5, 2) #glowing_top_hat 19
         
         else:
 
-            enemy = (4, 2, 2, 2) #round_spectacles() 11
+            enemy = (4, 3, 2, 2) #round_spectacles() 11
     
     elif 3 < player_lvl <= 6:
         
@@ -1987,7 +2011,7 @@ def enemy_encounter():
         
         elif x == 1:
     
-            enemy = (14, 10, 9, 8) #gnoll_pack 37
+            enemy = (14, 10, 10, 12) #gnoll_pack 37
         
         elif x == 2:
 
@@ -1999,11 +2023,11 @@ def enemy_encounter():
         
         elif x == 4:
 
-            enemy = (6, 10, 7, 6) #desperate_goblin 27
+            enemy = (7, 10, 7, 6) #desperate_goblin 27
         
         elif x == 5:
 
-            enemy = (10, 6, 7, 10) #mountain_cat 31
+            enemy = (10, 7, 7, 10) #mountain_cat 31
         
         elif x == 6:
 
@@ -2064,7 +2088,7 @@ def enemy_encounter():
         return("Did not work!\n")
     
     print("You've run into an enemy!\n")
-    time.sleep(3)
+    time.sleep(1)
     print(f"It's a {enemy_name!s}.\n\n")
     
     choice = determine_intent("Are you going to fight or flee?\n")
@@ -2272,7 +2296,7 @@ def start():
     
     answer = determine_intent("Are you on a quest? Or just hanging out? Or What?\n")
     
-    if answer == "quest": 
+    if "quest" in answer: 
         
         print("Oh, a quest, eh?" )
         time.sleep(2)
@@ -2291,7 +2315,7 @@ def start():
 
             dead("The old woman rises up in a fury and one-punch kills you.")
     
-    elif answer == "hanging":
+    elif "hang" in answer:
         
         print("You're so cool. I wish any one of my twelve sons were as cool")
         print("as you are. Are you single?\n")
@@ -2402,7 +2426,7 @@ def build_character():
     print(f"Jeez. I haven't seen a {player_class!s} in ages...")
     time.sleep(2)
     
-    print("\nActually, I haven't seen anyone in ages.")
+    print("\nActually, I haven't seen anyone in ages.\n")
     print("You look really good. Seriously, have you looked at yourself lately?\n\n")
     time.sleep(2)
     
@@ -3266,7 +3290,7 @@ def first_chamber():
         
         answer = determine_intent("What would you like to do? Approach the boy or take a door?\n")
     
-        if answer == "approach":
+        if "boy" in answer or "approach" in answer:
         
             print("You approach the boy.")
             time.sleep(1)
@@ -3373,7 +3397,7 @@ def first_chamber():
 
                 first_chamber()
 
-        elif answer == "door":
+        elif "door" in answer:
         
             came_from = "Chamber"
     
@@ -3466,7 +3490,6 @@ def fourth_intersection():
 
             enemy_encounter()
         
-        print("...you come to a large room!\n")
         came_from = "East"
         
         second_room()
@@ -3480,7 +3503,6 @@ def fourth_intersection():
 
             enemy_encounter()
         
-        print("...you come to another intersection.\n")
         came_from = "West"
         
         fifth_intersection()
@@ -3494,7 +3516,6 @@ def fourth_intersection():
 
             enemy_encounter()
         
-        print("... you enter the chamber.\n")
         came_from = "South"
         
         first_chamber()
@@ -3524,7 +3545,7 @@ def fifth_intersection():
     print("You are at an intersection that branches West and East.")
     print("There is a branch to the South whose end is visible.\n")
     print("Do you go East or West or South?\n")
-    print(f"You came from the %s.\n")
+    print(f"You came from the {came_from!s}.\n")
     
     answer = determine_intent("Which way do you choose to go?\n")
         
@@ -3532,9 +3553,9 @@ def fifth_intersection():
 
         chance = randint(1, 100)
 
-    if chance <= 50:
+        if chance <= 50:
 
-        enemy_encounter()
+            enemy_encounter()
 
         print("You walk to the small dead end. In the floor, centered a few feet")
         print("from the back wall, stands a small pedestal with a circular, indented top.\n")
@@ -4956,12 +4977,15 @@ def battle_cave():
         count += 1
         battle_cave_count += 1
         
-        if battle_cave_count > battle_cave_furthest:
+        if battle_cave_count > battle_cave_furthest and high_scorer_furthest == False:
                 
             high_scorer_furthest = True
             print("You have gone the furthest of any Battle Cave Explorer!\n")
             battle_cave_furthest = battle_cave_count
             high_scorer_bcf = input("Enter your name so it can rest atop the leaderboard: ")
+
+
+        if battle_cave_count > battle_cave_furthest:
 
             battle_cave_furthest = battle_cave_count
         
@@ -4987,15 +5011,8 @@ def battle_cave():
         enemy_encounter()
         count -= 1
         battle_cave_count += 1
-            
-        if battle_cave_count > battle_cave_there_and_back:
-                
-            print("You have survived the longest trip into the Battle Cave!\n")
-            battle_cave_there_and_back = battle_cave_count  
-            high_scorer_bctb = input("Enter your name so it can rest atop the leaderboard: ")
-            print("\n\n")
     
-        if boy_three == True:
+        if boy_three and count == 0:
 
             print("You've brought the boy back to the entrance of the cave.\n")
             print("He's tired of sticking with you and wants to get out.\n\n")
@@ -5015,9 +5032,16 @@ def battle_cave():
                 print("You can tell he's listening, but there's something about his mannerisms")
                 print("that let you know that he may go wandering back into the cave.\n\n")
         
-        came_from = "The Cave"
+    came_from = "The Cave"
 
-        eleventh_intersection()
+    if battle_cave_count > battle_cave_there_and_back:
+                
+        print("You have survived the longest trip into the Battle Cave!\n")
+        battle_cave_there_and_back = battle_cave_count  
+        high_scorer_bctb = input("Enter your name so it can rest atop the leaderboard: ")
+        print("\n\n")
+
+    eleventh_intersection()
 
 
 
