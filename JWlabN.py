@@ -163,16 +163,20 @@ equipped_loot = {'Head': 'Nothing Equipped', 'Hands': 'Nothing Equipped',
                  'Body': 'Nothing Equipped', 'Neck': 'Nothing Equipped',
                  'Weapon': 'Nothing Equipped'}
 
-enemies_lvl_1_3 = ['Slime', 'Gnoll', 'Wolf', 'Bat', 'Goblin', 'Cat', 'Flannel Bag',
+enemies_lvl_1_2 = ['Slime', 'Gnoll', 'Wolf', 'Bat', 'Goblin', 'Cat', 'Flannel Bag',
                    'Glowing Top Hat', 'Pair of Round Spectacles']
 
-enemies_lvl_4_6 = ['Large Slime', 'Pack of Gnolls', 'Alpha Wolf', 'Ancient Bat',
+enemies_lvl_3_4 = ['Large Slime', 'Pack of Gnolls', 'Alpha Wolf', 'Ancient Bat',
                    'Desperate Goblin', 'Mountain Cat', 'Self Closing Flannel Bag',
                    'Glowing Top Hat w/ Cane', 'Jagged Contacts']
 
-enemies_lvl_7_9 = ['Shiny Mist', 'Floor of Marbles', 'Shrieking Box', 'Wall of Bats',
+enemies_lvl_5_6 = ['Shiny Mist', 'Floor of Marbles', 'Ancient Wolf', 'Wall of Bats',
                    'Competitive Eater', 'Donald Trump', 'Mary Poppin\'s Bag of Horrors',
                    'Badass Three Piece Suit w/ Hat & Cane', 'Eye Candy']
+
+enemies_lvl_7_8 = ['Wall of Goo', 'Marble Maniac', 'Wolf Pack', 'Giant Bat',
+                   'Jaws of Doom', 'Enraged Lion', 'Automated Sack of Death',
+                   'Thrift Store Monster', 'Ball of Vipers']
 
 fathers_wisdom = ['If it is the easy way, it is the wrong way.', 'Make soup, not war.',
                   'The fastest way to the end of any journey is forward.',
@@ -1020,27 +1024,35 @@ def equip():
 
 def print_enemies_full():
     
-    print("\nEnemies for Adventurers, Level 1 - 3: ")
+    print("\nEnemies for Adventurers, Level 1 - 2: ")
 
-    for i in range(len(enemies_lvl_1_3)):
+    for i in range(len(enemies_lvl_1_2)):
 
-        print(enemies_lvl_1_3[i])
-
-        print('\n')
-    
-    print("Enemies for Adventurers, Level 4 - 6: ")
-
-    for i in range(len(enemies_lvl_4_6)):
-
-        print(enemies_lvl_4_6[i])
+        print(enemies_lvl_1_2[i])
 
         print('\n')
     
-    print("Enemies for Adventurers, Level 7 - 9: ")
+    print("Enemies for Adventurers, Level 3 - 4: ")
 
-    for i in range(len(enemies_lvl_7_9)):
+    for i in range(len(enemies_lvl_3_4)):
 
-        print(enemies_lvl_7_9[i])
+        print(enemies_lvl_3_4[i])
+
+        print('\n')
+
+    print("Enemies for Adventurers, Level 5 - 6: ")
+
+    for i in range(len(enemies_lvl_5_6)):
+
+        print(enemies_lvl_5_6[i])
+
+        print('\n')
+    
+    print("Enemies for Adventurers, Level 7 - 8: ")
+
+    for i in range(len(enemies_lvl_7_8)):
+
+        print(enemies_lvl_7_8[i])
 
         
 def print_items_full():
@@ -1955,9 +1967,9 @@ def enemy_encounter():
     
     x = randint(0, 8)
     
-    if 0 < player_lvl <= 3:
+    if 0 < player_lvl <= 2:
         
-        enemy = enemies_lvl_1_3[x]
+        enemy = enemies_lvl_1_2[x]
 
         enemy_name = enemy
 
@@ -1998,10 +2010,10 @@ def enemy_encounter():
         else:
 
             enemy = (4, 3, 2, 2) #round_spectacles() 11
-    
-    elif 3 < player_lvl <= 6:
+
+    elif 2 < player_lvl <= 4:
         
-        enemy = enemies_lvl_4_6[x]
+        enemy = enemies_lvl_3_4[x]
 
         enemy_name = enemy
         
@@ -2041,9 +2053,9 @@ def enemy_encounter():
 
             enemy = (8, 8, 6, 3) #jagged_contacts 23
     
-    elif 6 < player_lvl <= 9:
+    elif 4 < player_lvl <= 6:
         
-        enemy = enemies_lvl_7_9[x]
+        enemy = enemies_lvl_5_6[x]
 
         enemy_name = enemy
     
@@ -2057,7 +2069,7 @@ def enemy_encounter():
         
         elif x == 2:
 
-            enemy = (14, 14, 10, 5) #shrieking_box 36
+            enemy = (14, 14, 10, 5) #ancient_wolf 36
         
         elif x == 3: 
 
@@ -2082,6 +2094,48 @@ def enemy_encounter():
         else:
 
             enemy = (1, 20, 15, 20) #eye_candy 56
+
+    elif 6 < player_lvl:
+        
+        enemy = enemies_lvl_4_6[x]
+
+        enemy_name = enemy
+        
+        if x == 0:
+
+            enemy = (31, 19, 15, 5) #wall_of_goo
+        
+        elif x == 1:
+    
+            enemy = (25, 21, 14, 16) #marble_maniac
+        
+        elif x == 2:
+
+            enemy = (45, 24, 20, 20) #wolf_pack
+        
+        elif x == 3: 
+
+            enemy = (29, 18, 14, 24) #giant_bat
+        
+        elif x == 4:
+
+            enemy = (40, 21, 17, 6) #jaws_of_doom
+        
+        elif x == 5:
+
+            enemy = (38, 25, 18, 14) #enraged_lion
+        
+        elif x == 6:
+
+            enemy = (50, 14, 14, 8) #automated_sack_of_death
+        
+        elif x == 7:
+
+            enemy = (43, 16, 16, 12) #thrift_store_monster
+            
+        else:
+
+            enemy = (31, 26, 16, 19) #ball_of_vipers
     
     else:
 
