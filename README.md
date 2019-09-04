@@ -6,7 +6,7 @@ A text-based adventure game.
 
 ### What does the current version include?
 
-The current version of Labyrinth of Lost Boys  includes character creation, fighting, looting, equipping, leveling up, some environment interaction, healing, inventory. 
+The current version of Labyrinth of Lost Boys includes character creation, fighting, looting, equipping, leveling up, some environment interaction, healing, inventory. 
 
 #### Notes:
 
@@ -17,6 +17,9 @@ Since this is essentially a "running" version there will be the option on death 
 The map is still incomplete, but shouldn't crash the game if you get to an uncoded portion. 
 
 Type "options", "inventory", "stats", "equip", "scoreboard", or "quit" at any time. 
+
+Well coded areas of the game: looting, battling, equipping, stats, menus, navigating the labyrinth
+Iffy/untested areas of the game: vendor interaction, using items correctly, boss fights, elite loots
 
 #### To play: 
 Answering questions casually mostly works. Any question asked with a menu of numbers, enter a number rather than the text. 
